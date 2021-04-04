@@ -40,7 +40,7 @@
     <div class="sub-main-wrap">
         <div class="lnb-wrap">
             <div class="lnb-top-cont">
-                <h1><a href="#" title="홈으로가기"><img src="img/common/logo.png" alt="홈바로가기"></a></h1>
+                <h1><a href="/" title="홈으로가기"><img src="img/common/logo.png" alt="홈바로가기"></a></h1>
                 <a href="#" title="메뉴" class="menu-btn menubar"></a>
             </div>
             <div class="lnb-menu">
@@ -48,9 +48,9 @@
                     <li>
                         <a href="#" title="사이트 소개" class="lnb-dep1">사이트 소개</a>
                         <ul class="lnb-dep2">
-                            <li><a href="#" title="사이트 기능 소개" class="">사이트 기능 소개</a></li>
-                            <li><a href="#" title="관리자 소개" class="">관리자 소개</a></li>
-                            <li><a href="#" title="CI 소개" class="">CI 소개</a></li>
+                            <li><a href="/siteFuncIntro" title="사이트 기능 소개" class="">사이트 기능 소개</a></li>
+                            <li><a href="/adminIntro" title="관리자 소개" class="">관리자 소개</a></li>
+                            <li><a href="/ciIntro" title="CI 소개" class="">CI 소개</a></li>
                         </ul>
                     </li>
                     <li>

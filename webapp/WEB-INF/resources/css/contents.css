@@ -79,7 +79,8 @@ section .section-tit h3{font-size: 18px; font-weight: 800;}
 
 .lnb-top-cont{display: flex; justify-content: space-between; padding: 14px 14px 13px 14px; border-bottom: 1px solid #dcdcdc;}
 .lnb-top-cont .menu-btn{background: url("../img/common/menu-btn.png")no-repeat; width: 18px; height: 17px; display: inline-block;margin-top: 6px;}
-/*.middle-content-wrap{padding: 16px 16px 0px 25px;}*/
+.middle-content-wrap2{padding: 16px 16px 0px 25px;}
+.middle-content-wrap2{flex: 1;}
 .header-wrap{width: 100%; height: 60px; background: #e3e5ed; display: flex; padding: 12px 34px 0px 25px; display: flex; justify-content: space-between;}
 .header-wrap .header-title h1{font-size: 22px; font-weight: 700; padding-top: 4px;}
 .header-wrap .header-title h1::before{content: ""; display: inline-block; background: url("../img/common/ico-home.png")no-repeat; width: 16px; height: 17px; margin-right: 20px;}
@@ -233,7 +234,18 @@ section .section-tit h3{font-size: 18px; font-weight: 800;}
 .regdate{font-size: 13px;}
 .select-btn{ background : #00a2ff; color:#fff; font-weight: 900;}
 
+/*사이트기능소개 페이지 CSS*/
+.top-title{margin-bottom: 12px;}
+.top-title > h1{font-size: 26px; color: #333;}
+.listBefore{width: 15px; height:15px; background: #00a2ff; display: inline-block; vertical-align: middle; margin-right: 8px; border-radius: 10px;}
 
+
+/*CI 소개 페이지 CSS*/
+.ciIntro .color-intro > ul li{margin-bottom: 12px;}
+.ciIntro .color-intro > ul li span{width: 200px; height:60px; display:inline-block; color:#fff; text-align: center; padding:20px;}
+.ciIntro .color-intro > ul li .color-box1{background: #00a2ff;}
+.ciIntro .color-intro > ul li .color-box2{background: #1eda69;}
+.color-intro{margin-top: 32px;}
 
 @media (max-width:1700px) { 
     
