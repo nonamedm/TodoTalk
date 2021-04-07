@@ -13,23 +13,6 @@
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/script.js"></script>
     <script src="/js/TweenMax.min.js"></script>
-    <script>
-        $(function() {
-            $(".sub_pop1").css({"background":"#00a2ff", "color":"#fff", "font-weight":"900"});
-            $("#menu1").on('click',function(){
-                $("#sub_pa_pop_1").show();
-                $("#sub_pa_pop_2").hide();
-                $(".sub_pop1").css({"background":"#00a2ff", "color":"#fff", "font-weight":"900"});
-                $(".sub_pop2").css({"background":"#fff", "color":"#333", "font-weight":"500"});
-            });
-            
-            $("#menu2").on('click',function(){
-                $("#sub_pa_pop_2").show();
-                $("#sub_pa_pop_1").hide();
-                $(".sub_pop2").css({"background":"#00a2ff", "color":"#fff", "font-weight":"900"});
-                $(".sub_pop1").css({"background":"#fff", "color":"#333", "font-weight":"500"});
-            });
-        })
-    </script>
+    <script src="/js/common.js"></script>
 </head>
 <body>
