@@ -26,7 +26,7 @@
                     <li>
                         <a href="#" title="멘토링" class="lnb-dep1">멘토링</a>
                         <ul class="lnb-dep2">
-                            <li class="on"><a href="#" title="멘토,멘티 검색/등록">멘토,멘티 검색/등록</a></li>
+                            <li class="on"><a href="/mentorMenteeSearch" title="멘토,멘티 검색/등록">멘토,멘티 검색/등록</a></li>
                         </ul>
                     </li>
                     <li>

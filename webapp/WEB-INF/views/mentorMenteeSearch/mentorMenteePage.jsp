@@ -5,12 +5,9 @@
         <%@include file="../layout/leftMenu.jsp"%>
         <div class="sub-container-wrap">
             <%@include file="../layout/allSearchHeader.jsp"%>
-            <div class="middle-content-wrap2 adminIntro">
+            <div class="middle-content-wrap2 ">
                 <!--여기부터 컨텐츠내용 작업시작-->
-                <div class="top-title">
-					<h1><span class="listBefore"></span>관리자 소개</h1>
-                </div>
-                준비중
+               	
             </div>
             <footer>
                 <div class="sub-footer">
