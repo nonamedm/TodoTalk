@@ -247,6 +247,11 @@ section .section-tit h3{font-size: 18px; font-weight: 800;}
 .ciIntro .color-intro > ul li .color-box2{background: #1eda69;}
 .color-intro{margin-top: 32px;}
 
+/* 멘토링 페이지 CSS */
+.mentorMenteePage .search-box{width: 100%; text-align: center; }
+.mentorMenteePage .search-box .mentor-search{width: 50%; height:60px; border-radius:50px; padding: 20px; font-size: 16px; position: relative;}
+.mentorMenteePage .search-box .btn-search3{display: inline-block; background: url(../img/common/btn-search.png) no-repeat; width: 18px; height: 18px; margin-right: 10px; position: relative; top: -4px; left: -50px;}
+
 @media (max-width:1700px) { 
     
 }
