@@ -18,22 +18,29 @@
 	<property name="suffix" value=".jsp" />
 	</bean>
 	
-	<bean id="dataSource"
-		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
-		<property name="username" value="SSP_DB"></property>
-		<property name="password" value="1234"></property>
-	</bean>
+<!-- 	<bean id="dataSource" -->
+<!-- 		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> -->
+<!-- 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property> -->
+<!-- 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property> -->
+<!-- 		<property name="username" value="SSP_DB"></property> -->
+<!-- 		<property name="password" value="1234"></property> -->
+<!-- 	</bean> -->
 	
 	<!-- mysql  url /username/password 수정요망 -->
-	<bean id="dataSource1"
-		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="com.mysql.OracleDriver"></property>
-		<property name="url" value="jdbc:mysql://localhost:3306/"></property>
-		<property name="username" value="eee"></property>
-		<property name="password" value="1111"></property>
-	</bean>
+<!-- 	<bean id="dataSource1" -->
+<!-- 		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> -->
+<!-- 		<property name="driverClassName" value="com.mysql.OracleDriver"></property> -->
+<!-- 		<property name="url" value="jdbc:mysql://my8001.gabiadb.com:3306/"></property> -->
+<!-- 		<property name="username" value="eee"></property> -->
+<!-- 		<property name="password" value="1111"></property> -->
+<!-- 	</bean> -->
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+       <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+       <property name="url" value="jdbc:mysql://my8001.gabiadb.com:3306/todotalk?serverTimezone=UTC"/>
+       <property name="username" value="sjls"/>
+        <property name="password" value="sjlssjls1123"/>
+    </bean>
 	
 	<!-- MyBatis와 Spring 연결을 위한 SqlSessionFactory 객체 사용
      	 DB연결 및 sql명령 실행을 담당-->
