@@ -29,5 +29,13 @@ public class TutoringDaoImpl implements TutoringDao {
 		return writingList;
 	}
 
+	@Override
+	public List<TuboVo> getQuestion1List(HashMap<String, Object> map) {
+	
+		List <TuboVo> question1List = sqlSession.selectList("tutoring.Question1List", map);
+		
+		return question1List;
+	}
+
 
 }

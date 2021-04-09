@@ -29,7 +29,7 @@
 	<h1>Daily Practice</h1>
 ​
 	<div class="grid-container">
-	  <div class="grid-item"><a href="#">Question1</a></div>
+	  <div class="grid-item"><a href="/question1">Question1</a></div>
 	  <div class="grid-item"><a href="#">Question2</a></div>
 	  <div class="grid-item"><a href="#">Question3</a></div>  
 	  <div class="grid-item"><a href="#">Question4</a></div>
@@ -60,7 +60,21 @@
 						      <td><input type="text" name="user_id"  id="user_id"
 						        value="tutor01" readonly /> <!-- 로그인된 유저아이디  -->
 						      </td>
-						    </tr> 
+						    </tr>
+						    <tr>
+						    	<div class="question-select" style="width:200px;">
+						    		<select name="tubo_title" id="tubo_title" style="width:200px;">
+						    			<option value="0"> 주제를 선택하세요 </option>
+						    			<option value="1"> Question1 </option>
+						    			<option value="2"> Question2 </option>
+						    			<option value="3"> Question3 </option>
+						    			<option value="4"> Question4 </option>
+						    			<option value="5"> Question5 </option>
+						    			<option value="6"> Question6 </option>
+						    			<option value="7"> 자유 </option>
+						    		</select>
+						    	</div>
+						    </tr>
 						    <tr>
 						      <td><textarea name="tubo_cont" id="tubo_cont" placeholder="이거 보고계신분, 이거 크기좀 늘려주십쇼"></textarea></td>
 						    </tr> 

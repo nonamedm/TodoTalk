@@ -29,6 +29,14 @@ public class TutoringServiceImpl implements TutoringService {
 		
 		return writingList;
 	}
+
+	@Override
+	public List<TuboVo> getQuestion1List(HashMap<String, Object> map) {
+		
+		List<TuboVo> question1List = mentoringDao.getQuestion1List(map);
+		
+		return question1List;
+	}
 	
 
 }

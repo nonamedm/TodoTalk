@@ -4,11 +4,14 @@
 <mapper namespace="tutoring">
  
 	 <insert id="InsertWriting">
-       INSERT INTO TUTOR_BOARD (TUBO_CONT, USER_IDX, USER_ID)
-        VALUES (#{tubo_cont}, #{user_idx}, #{user_id})
+       INSERT INTO TUTOR_BOARD (TUBO_TITLE, TUBO_CONT, USER_IDX, USER_ID)
+        VALUES (#{tubo_title}, #{tubo_cont}, #{user_idx}, #{user_id})
     </insert>
     <select id="TutoringList" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TuboVo">
-    	SELECT	* FROM TUTOR_BOARD
+    	SELECT	* FROM TUTOR_BOARD ORDER BY TUBO_REGDATE DESC;
+    </select>
+    <select id="Question1List" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TuboVo">
+    	SELECT	* FROM TUTOR_BOARD WHERE #{tubo_title} = #{Question1}
     </select>
 
 

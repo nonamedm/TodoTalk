@@ -44,4 +44,18 @@ public class TutoringController {
 		return "redirect:/tutoringwrite";
 	}
 	
+	//튜터링 첫번째 게시판에서 첫번째 질문 클릭했을때
+	@RequestMapping(value="/question1", method=RequestMethod.GET)
+	public ModelAndView question1(
+			@RequestParam HashMap<String, Object> map) {
+		
+		List <TuboVo> tuboListOfQuestion1 = mentoringService.getQuestion1List(map);
+		
+		ModelAndView mav = new ModelAndView();
+		//HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		mav.addObject("tuboListOfQuestion1", tuboListOfQuestion1);
+		mav.setViewName("/tutoring/question1");
+		return mav; 
+	}
 }
