@@ -31,7 +31,7 @@ public class TutoringController {
 		//HashMap<String, Object> map = new HashMap<String, Object>();
 		mav.addObject("tuboList", tuboList);
 		mav.setViewName("/tutoring/letswrite");
-		return mav;
+		return mav; 
 	}
 	
 	//튜터링 첫번째 게시판에서 글썼을때

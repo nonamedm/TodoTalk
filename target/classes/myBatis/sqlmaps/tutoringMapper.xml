@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="tutoring">
-
+ 
 	 <insert id="InsertWriting">
        INSERT INTO TUTOR_BOARD (TUBO_CONT, USER_IDX, USER_ID)
         VALUES (#{tubo_cont}, #{user_idx}, #{user_id})

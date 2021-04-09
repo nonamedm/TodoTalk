@@ -13,7 +13,7 @@ import sjls.todotalk.user.vo.TuboVo;
 @Service
 public class TutoringServiceImpl implements TutoringService {
 	
-	@Autowired
+	@Autowired 
 	private TutoringDao mentoringDao;
 
 	@Override

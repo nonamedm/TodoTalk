@@ -16,7 +16,7 @@ public class TutoringDaoImpl implements TutoringDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	@Override
+	@Override 
 	public void insertWriting(TuboVo vo) {
 		sqlSession.insert("tutoring.InsertWriting", vo);
 	}

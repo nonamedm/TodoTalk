@@ -45,7 +45,7 @@
 		      <div class="fakeimg" style="height:200px;">Image</div>
 		      <p>${tuboVo.tubo_cont}</p>
 		     
-		    </div>
+		    </div> 
   		</div><!-- <div class="leftcolumn"> -->
   		
 	  <div class="rightcolumn">

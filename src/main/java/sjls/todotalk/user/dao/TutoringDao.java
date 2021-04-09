@@ -8,6 +8,6 @@ import sjls.todotalk.user.vo.TuboVo;
 public interface TutoringDao {
 	
 	void insertWriting(TuboVo vo);
-
+ 
 	List<TuboVo> getWritingList(HashMap<String, Object> map);
 }
