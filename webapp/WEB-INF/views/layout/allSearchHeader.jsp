@@ -3,14 +3,23 @@
 <script>
 	$(function () {
 		$('#btn-search2').on('click',function(){
-			var searchText = $('#search2-Text').val();
-			searchText1 = encodeURI(searchText);	// 한글 인코딩
-			//alert(searchText); //검색값+버튼액션 확인
-			var url = '/AllSearch?query='+searchText1;
-			$(location).attr('href',url);
+			allSearch();
 		});
 		
+		//인풋창에서 Enter치면 mentorSearch 메소드 실행
+		$("#search2-Text").keydown(function(key){
+			if(key.keyCode == 13){
+				allSearch();
+			}
+		});
 	});
+	function allSearch () {
+		var searchText = $('#search2-Text').val();
+		searchText1 = encodeURI(searchText);	// 한글 인코딩
+		//alert(searchText); //검색값+버튼액션 확인
+		var url = '/AllSearch?query='+searchText1;
+		$(location).attr('href',url);
+	}
 </script>
 <div class="header-wrap">
                 <div class="header-title">

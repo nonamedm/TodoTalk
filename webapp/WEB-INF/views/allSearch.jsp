@@ -16,7 +16,7 @@
                 	<div>
                 	튜터 : ${ tutorVo.user_name } <br>
                 	이메일 : ${ tutorVo.user_mail } <br>
-                	국적 : ${ tutorVo.country }　　좋아요수 ${ tutorVo.recommend }
+                	국적 : ${ tutorVo.country }　　좋아요 ${ tutorVo.recommend }
                 	</div>
                 <br>
                 </c:forEach>
@@ -47,9 +47,8 @@
                 	<div>
                 	분류 : ${ boardAllSearch.BOARD_NAME }   작성자 : ${ boardAllSearch.USER_ID }<br>
                 	<a href="#">${ boardAllSearch.TITLE }</a> <br>
-                	${ boardAllSearch.CONT }
-                	
-                	
+                	${ boardAllSearch.CONT } <br>
+                	${ boardAllSearch.REGDATE }
                 	</div>
                 <br>
                 </c:forEach> 
