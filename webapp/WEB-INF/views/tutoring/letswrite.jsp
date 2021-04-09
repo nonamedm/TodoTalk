@@ -36,22 +36,15 @@
 	  <div class="grid-item"><a href="#">Question5</a></div>
 	  <div class="grid-item"><a href="#">Question6</a></div>  
 	</div>
-
+	
+	<c:forEach var="tuboVo"  items="${ tuboList }">
 	<div class="row">
  		 <div class="leftcolumn">
 		    <div class="card">
-		      <h2>4월 1주차 학습내용</h2>
-		      <h5>${sessionScope.login.userid} April 7, 2021</h5>
+		      <h5>${tuboVo.user_id}, ${tuboVo.tubo_regdate}</h5>
 		      <div class="fakeimg" style="height:200px;">Image</div>
-		      <p>(회원들 글)Bonjour, chaсun! Je parle le russe et l'anglais et j'apprends francais (B2) et l'allemagne (B1). Je cherche les gens avec lesquels je pourrais parler cette langue magnifique a laquelle j'ecris cette message. Je voudrais aussi aider les gens qui apprennent le russe. J'ai experience d'expliquer des themes difficiles de mon langue et je suis sur et certain qu'on pourrait travailler ensemble:)</p>
+		      <p>${tuboVo.tubo_cont}</p>
 		     
-		    </div>
-		    <div class="card">
-		      <h2>TITLE HEADING</h2>
-		      <h5>${sessionScope.login.userid} Sep 2, 2017</h5>
-		      <div class="fakeimg" style="height:200px;">Image</div>
-		      <p>Some text..</p>
-		      
 		    </div>
   		</div><!-- <div class="leftcolumn"> -->
   		
@@ -92,6 +85,7 @@
 			</div><!-- <div class="form-popup" id="myForm"> -->
 		</div><!-- <div class="rightcolumn"> -->
   	</div><!-- <div class="row"> -->
+	</c:forEach>
 
 
 <!-- 		여기까지가 보으니가 쓴거 -->

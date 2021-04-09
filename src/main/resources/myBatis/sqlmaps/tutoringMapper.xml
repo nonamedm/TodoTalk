@@ -7,6 +7,9 @@
        INSERT INTO TUTOR_BOARD (TUBO_CONT, USER_IDX, USER_ID)
         VALUES (#{tubo_cont}, #{user_idx}, #{user_id})
     </insert>
+    <select id="TutoringList" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TuboVo">
+    	SELECT	* FROM TUTOR_BOARD
+    </select>
 
 
 </mapper>
