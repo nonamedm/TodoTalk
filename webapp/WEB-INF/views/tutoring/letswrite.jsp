@@ -65,7 +65,7 @@
 				      </td>
 				    </tr> 
 				    <tr>
-				      <td><textarea name="cont" id="cont" placeholder="자유롭게 글을 써주세요."></textarea></td>
+				      <td><textarea name="cont" id="cont" placeholder="이거 보고계신분, 이거 크기좀 늘려주십쇼"></textarea></td>
 				    </tr> 
 					<!--     <tr>
 					      <td>파일</td>
