@@ -2,10 +2,11 @@ package sjls.todotalk.user.vo;
 
 public class UserVo {
 	private String user_id, user_name, user_pwd, user_phone, user_mail, country, address, regdate, introduce;
+	private int user_idx, register, recommend;
 	public UserVo() {}
 	public UserVo(String user_id, String user_name, String user_pwd, String user_phone, String user_mail,
-			String country, String address, String regdate, String introduce) {
-		super();
+			String country, String address, String regdate, String introduce, int user_idx, int register,
+			int recommend) {
 		this.user_id = user_id;
 		this.user_name = user_name;
 		this.user_pwd = user_pwd;
@@ -15,6 +16,9 @@ public class UserVo {
 		this.address = address;
 		this.regdate = regdate;
 		this.introduce = introduce;
+		this.user_idx = user_idx;
+		this.register = register;
+		this.recommend = recommend;
 	}
 	public String getUser_id() {
 		return user_id;
@@ -70,10 +74,29 @@ public class UserVo {
 	public void setIntroduce(String introduce) {
 		this.introduce = introduce;
 	}
+	public int getUser_idx() {
+		return user_idx;
+	}
+	public void setUser_idx(int user_idx) {
+		this.user_idx = user_idx;
+	}
+	public int getRegister() {
+		return register;
+	}
+	public void setRegister(int register) {
+		this.register = register;
+	}
+	public int getRecommend() {
+		return recommend;
+	}
+	public void setRecommend(int recommend) {
+		this.recommend = recommend;
+	}
 	@Override
 	public String toString() {
 		return "UserVo [user_id=" + user_id + ", user_name=" + user_name + ", user_pwd=" + user_pwd + ", user_phone="
 				+ user_phone + ", user_mail=" + user_mail + ", country=" + country + ", address=" + address
-				+ ", regdate=" + regdate + ", introduce=" + introduce + "]";
+				+ ", regdate=" + regdate + ", introduce=" + introduce + ", user_idx=" + user_idx + ", register="
+				+ register + ", recommend=" + recommend + "]";
 	}
 }

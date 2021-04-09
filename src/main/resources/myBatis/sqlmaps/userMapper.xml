@@ -17,5 +17,11 @@
    		      AND USERPASS = #{userpass}
    </select>   <- 조건값 있는 조회 시 
    -->
-  
+  <select id="GetTutorList" parameterType="hashmap" resultType="sjls.todotalk.user.vo.UserVo">
+  	SELECT	* FROM USER_INFO WHERE USER_NAME = #{queryString} AND REGISTER=2
+  </select>
+  <select id="GetMentorList" parameterType="hashmap" resultType="sjls.todotalk.user.vo.UserVo">
+  	SELECT	* FROM USER_INFO
+  	  WHERE USER_NAME = (SELECT  RECEIVER_NAME FROM RELATION_LIST WHERE PERMIT='Y' AND MENTOR='Y' AND RECEIVER_NAME = #{queryString})
+  </select>
 </mapper>
