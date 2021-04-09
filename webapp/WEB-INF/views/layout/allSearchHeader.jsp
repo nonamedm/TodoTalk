@@ -1,13 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script>
+	$(function () {
+		$('#btn-search2').on('click',function(){
+			var searchText = $('#search2-Text').val();
+			searchText1 = encodeURI(searchText);	// 한글 인코딩
+			//alert(searchText); //검색값+버튼액션 확인
+			var url = '/AllSearch?query='+searchText1;
+			$(location).attr('href',url);
+		});
+		
+	});
+</script>
 <div class="header-wrap">
                 <div class="header-title">
                     <!--<h1>H-Smart 인사관리시스템</h1>-->
                 </div>
                 <div class="common-box">
                     <div class="search-input">
-                        <input type="text" placeholder="통합검색">
-                        <a href="#" title="검색" class="btn-search2"></a>
+                        <input type="text" placeholder="통합검색" id='search2-Text'>
+                        <a href="#" title="검색" class="btn-search2" id="btn-search2"></a>
                     </div>
                     <div class="user-wrap">
                         <div class="user-img">
