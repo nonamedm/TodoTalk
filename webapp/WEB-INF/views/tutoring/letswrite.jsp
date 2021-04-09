@@ -38,52 +38,49 @@
 	</div>
 	
 	<c:forEach var="tuboVo"  items="${ tuboList }">
-	<div class="row">
- 		 <div class="leftcolumn">
-		    <div class="card">
-		      <h5>${tuboVo.user_id}, ${tuboVo.tubo_regdate}</h5>
-		      <p>${tuboVo.tubo_cont}</p>
-		     
-		    </div> 
-  		</div><!-- <div class="leftcolumn"> -->
-  		
-	  <div class="rightcolumn">
-		<button class="open-button" onclick="openForm()">Do exercise!</button>
-			<div class="form-popup" id="myForm">
-				<form action="<c:url value="/postwriting"/>" method="POST" id="postwriting">
-		   		<input type="hidden" name="user_idx"         value="5" />     
-    
-			
-			   <table id="writeTable">
-			    <caption><h2>UrrrrrrwWriting!!!</h2></caption>
-				    <tr>
-				      <td><input type="text" name="user_id"  id="user_id"
-				        value="tutor01" readonly /> <!-- 로그인된 유저아이디  -->
-				      </td>
-				    </tr> 
-				    <tr>
-				      <td><textarea name="tubo_cont" id="tubo_cont" placeholder="이거 보고계신분, 이거 크기좀 늘려주십쇼"></textarea></td>
-				    </tr> 
-					<!--     <tr>
-					      <td>파일</td>
-					      <td id="tdfile">
-					        <input type="button" id="btnAddFile" value="Add file" /><br>
-					        <input type="file" name="upfile" id="upfile" /><br>        
-					      </td>
-					    </tr>  -->
-				    <tr>      
-				      <td colspan="2">
-				        <input type="submit" value="확인" />
-				      </td>
-				    </tr> 
-			   </table> 
-				<!-- 	<button type="submit" class="btn">Login</button>
-					    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-					  -->
-		  		</form>
-			</div><!-- <div class="form-popup" id="myForm"> -->
-		</div><!-- <div class="rightcolumn"> -->
-  	</div><!-- <div class="row"> -->
+		<div class="row">
+	 		 <div class="leftcolumn">
+			    <div class="card">
+			      <h5>${tuboVo.user_id}, ${tuboVo.tubo_regdate}</h5>
+			      <p>${tuboVo.tubo_cont}</p>
+			    </div> 
+	  		</div><!-- <div class="leftcolumn"> -->
+	  		
+		  <div class="rightcolumn">
+			<button class="open-button" onclick="openForm()">Do exercise!</button>
+				<div class="form-popup" id="myForm">
+					<form action="<c:url value="/postwriting"/>" method="POST" id="postwriting">
+			   		<input type="hidden" name="user_idx"         value="5" />     
+
+					   <table id="writeTable">
+						    <tr>
+						    	<h2>UrrrrrrwWriting!!!</h2>
+						    </tr>
+						    <tr>
+						      <td><input type="text" name="user_id"  id="user_id"
+						        value="tutor01" readonly /> <!-- 로그인된 유저아이디  -->
+						      </td>
+						    </tr> 
+						    <tr>
+						      <td><textarea name="tubo_cont" id="tubo_cont" placeholder="이거 보고계신분, 이거 크기좀 늘려주십쇼"></textarea></td>
+						    </tr> 
+							<!--     <tr>
+							      <td>파일</td>
+							      <td id="tdfile">
+							        <input type="button" id="btnAddFile" value="Add file" /><br>
+							        <input type="file" name="upfile" id="upfile" /><br>        
+							      </td>
+							    </tr>  -->
+						    <tr>      
+						      <td colspan="2">
+						        <input type="submit" value="확인" />
+						      </td>
+						    </tr> 
+					   </table> 
+			  		</form>
+				</div><!-- <div class="form-popup" id="myForm"> -->
+			</div><!-- <div class="rightcolumn"> -->
+	  	</div><!-- <div class="row"> -->
 	</c:forEach>
 
 
