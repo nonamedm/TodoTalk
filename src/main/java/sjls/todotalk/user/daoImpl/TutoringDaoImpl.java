@@ -39,9 +39,9 @@ public class TutoringDaoImpl implements TutoringDao {
 
 	@Override
 	public TuboVo getView(HashMap<String, Object> map) {
-
+		System.out.println(map);
 		List<TuboVo> writingList = sqlSession.selectList("tutoring.ViewWriting", map);
-		
+		System.out.println(writingList);
 		TuboVo	vo = writingList.get(0);
 		
 		return vo;

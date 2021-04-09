@@ -13,7 +13,7 @@
     </select>
     
     <select id="ViewWriting" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TuboVo">
-    	SELECT	* FROM TUTOR_BOARD WHERE USER_ID = #{user_id} AND TUBO_REGDATE = #{TUBO_REGDATE} ;
+    	SELECT	* FROM TUTOR_BOARD WHERE USER_ID = #{user_id} AND TUBO_REGDATE = #{tubo_regdate} ;
     </select>
     
     <select id="Question1List" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TuboVo">

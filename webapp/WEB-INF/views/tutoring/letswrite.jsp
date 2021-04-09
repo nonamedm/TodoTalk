@@ -42,7 +42,7 @@
 	 		 <div class="leftcolumn">
 			    <div class="card">
 			      <h5>${tuboVo.user_id}, ${tuboVo.tubo_regdate}</h5>
-			      <p><a href="/tutoringwrite/view?idx=${ tuboVo.tubo_idx }">${tuboVo.tubo_cont}</a></p>
+			      <p><a href="/tutoringwrite/view?tubo_idx=${ tuboVo.tubo_idx }&user_id=${tuboVo.user_id}&tubo_regdate=${tuboVo.tubo_regdate}">${tuboVo.tubo_cont}</a></p>
 			    </div> 
 	  		 </div><!-- <div class="leftcolumn"> -->
 	  		

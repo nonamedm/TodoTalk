@@ -64,14 +64,18 @@ public class TutoringController {
 	public ModelAndView viewWriting(
 			@RequestParam HashMap<String, Object> map) {
 		
-		String tubo_title = (String) map.get("tubo_title");
-		
+		String user_id = (String) map.get("user_id");
+		map.put("user_id", user_id);
+		String tubo_regdate = (String) map.get("tubo_regdate");
+		map.put("tubo_regdate", tubo_regdate);
 		TuboVo tuboVo = tutoringService.getView(map);
+		
+		//댓글 파라미터 불러와야함
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("tuboVo",tuboVo);
-		mv.addObject("tubo_title",tubo_title);
-		mv.setViewName("viewwriting");
+		//mv.addObject("tubo_title",tubo_title);
+		mv.setViewName("/tutoring/viewwriting");
 		return mv;
 		
 	}
