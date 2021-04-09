@@ -10,6 +10,8 @@
           #{ tubo_cont, mode=IN, jdbcType=VARCHAR, javaType=string },
           #{ user_id,   mode=IN, jdbcType=VARCHAR, javaType=string }
        )}
+       
+       이렇게 넣어주세요
     </insert>
 
 
