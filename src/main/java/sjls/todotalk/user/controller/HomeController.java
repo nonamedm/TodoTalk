@@ -15,8 +15,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/AllSearch", method=RequestMethod.GET)
-	public ModelAndView allSearch() {
-		
+	public ModelAndView allSearch(String query) {
+		String searchText = query;
+		System.out.println(query);
 		
 		ModelAndView mav = new ModelAndView();
 		
