@@ -15,7 +15,7 @@ public class MentoringDaoImpl implements MentoringDao {
 
 	@Override
 	public void insertWriting(TuboVo vo) {
-		sqlSession.insert(".InsertWriting", vo);
+		sqlSession.insert("tutoring.InsertWriting", vo);
 	}
 
 
