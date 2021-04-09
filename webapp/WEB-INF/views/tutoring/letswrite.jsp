@@ -18,8 +18,7 @@
             <%@include file="../layout/allSearchHeader.jsp"%>
             <div class="middle-content-wrap2">
                 <!--여기부터 컨텐츠내용 작업시작-->
-                
-                         
+                               
 	<h1>Daily Practice</h1>
 ​
 	<div class="grid-container">
@@ -49,67 +48,50 @@
 		    </div>
   		</div><!-- <div class="leftcolumn"> -->
   		
-  <div class="rightcolumn">
-	<button class="open-button" onclick="openForm()">Do exercise!</button>
-	
-		<div class="form-popup" id="myForm">
-		  	<form action="" method="POST" id="">
-			<input type="hidden" name="TUBO_IDX"     value="${ TUTOR_BOARD.TUBO_IDX }" />     
-	   		<input type="hidden" name="TUBO_CONT"        value="${ TUTOR_BOARD.TUBO_CONT }" />     
-	   		<input type="hidden" name="USER_IDX"         value="${ TUTOR_BOARD.USER_IDX }" />     
-	   		<input type="hidden" name="USER_ID"        value="${ TUTOR_BOARD.USER_ID }" />        
-		
-		   <table id="writeTable">
-		    <caption><h2>UrrrrrrwWriting!!!</h2></caption>
-			    <tr>
-			      <td><input type="text" name="writer"  id="writer"
-			        value="${sessionScope.login.userid}여기는 아이디" readonly /> <!-- 로그인된 유저아이디  -->
-			      </td>
-			    </tr> 
-			    <tr>
-			      <td><textarea name="cont" id="cont" placeholder="자유롭게 글을 써주세요."></textarea></td>
-			    </tr> 
-				<!--     <tr>
-				      <td>파일</td>
-				      <td id="tdfile">
-				        <input type="button" id="btnAddFile" value="Add file" /><br>
-				        <input type="file" name="upfile" id="upfile" /><br>        
+	  <div class="rightcolumn">
+		<button class="open-button" onclick="openForm()">Do exercise!</button>
+			<div class="form-popup" id="myForm">
+				<form action="<c:url value="/postwriting"/>" method="POST" id="postwriting">
+				<input type="hidden" name="TUBO_IDX"     value="${ TUTOR_BOARD.TUBO_IDX }" />     
+		   		<input type="hidden" name="TUBO_CONT"        value="${ TUTOR_BOARD.TUBO_CONT }" />     
+		   		<input type="hidden" name="USER_IDX"         value="${ TUTOR_BOARD.USER_IDX }" />     
+		   		<input type="hidden" name="USER_ID"        value="${ TUTOR_BOARD.USER_ID }" />        
+			
+			   <table id="writeTable">
+			    <caption><h2>UrrrrrrwWriting!!!</h2></caption>
+				    <tr>
+				      <td><input type="text" name="writer"  id="writer"
+				        value="${sessionScope.login.userid}여기는 아이디" readonly /> <!-- 로그인된 유저아이디  -->
 				      </td>
-				    </tr>  -->
-			    <tr>      
-			      <td colspan="2">
-			        <input type="submit" value="확인" />
-			      </td>
-			    </tr> 
-		   </table> 
-			<!-- 	<button type="submit" class="btn">Login</button>
-				    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-				  -->
-	  		</form>
-		</div><!-- <div class="form-popup" id="myForm"> -->
-	</div><!-- <div class="rightcolumn"> -->
-		
-				    <div class="card">
-				      <h3>Popular Post</h3>
-				      <div class="fakeimg">Image</div><br>
-				      <div class="fakeimg">Image</div><br>
-				      <div class="fakeimg">Image</div>
-				    </div>
-				    <div class="card">
-				      <h3>Follow Me</h3>
-				      <p>Some text..</p>
-				    </div>
+				    </tr> 
+				    <tr>
+				      <td><textarea name="cont" id="cont" placeholder="자유롭게 글을 써주세요."></textarea></td>
+				    </tr> 
+					<!--     <tr>
+					      <td>파일</td>
+					      <td id="tdfile">
+					        <input type="button" id="btnAddFile" value="Add file" /><br>
+					        <input type="file" name="upfile" id="upfile" /><br>        
+					      </td>
+					    </tr>  -->
+				    <tr>      
+				      <td colspan="2">
+				        <input type="submit" value="확인" />
+				      </td>
+				    </tr> 
+			   </table> 
+				<!-- 	<button type="submit" class="btn">Login</button>
+					    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+					  -->
+		  		</form>
+			</div><!-- <div class="form-popup" id="myForm"> -->
+		</div><!-- <div class="rightcolumn"> -->
   	</div><!-- <div class="row"> -->
 
 
+<!-- 		여기까지가 보으니가 쓴거 -->
+                
 
-
-
-                
-                
-                
-                
-               
             </div>
             <footer>
                 <div class="sub-footer">
