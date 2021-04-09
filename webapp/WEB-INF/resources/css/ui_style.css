@@ -120,7 +120,7 @@
  .table-type01 td:last-child {border-right:0;}
  
  /*Write style*/
- .table-type02 { width:100%; border-top: 2px solid #1fabf2; border-collapse: inherit; }
+ .table-type02 { width:100%; border-top: 2px solid #1EDA69; border-collapse: inherit; }
  .table-type02 tbody th:first-child {border-left:0;}
  .table-type02 tbody td:last-child {border-right:0;}
  .table-type02 tbody th { border-left:1px solid #e8e8e8; border-right:1px solid #e8e8e8; padding:5px 5px; font-weight: 600; background-color: #f7f7f7; border-bottom: 1px solid #e8e8e8; height: 35px;}

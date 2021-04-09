@@ -5,6 +5,7 @@ public class TuboVo {
 	//Fields
 	private int tubo_idx;
 	private String tubo_cont;
+	private String tubo_title;
 	private int user_idx;
 	private String user_id;
 	private String tubo_regdate;
@@ -12,10 +13,11 @@ public class TuboVo {
 	
 	//Constructors
 	public TuboVo() {}
-	public TuboVo(int tubo_idx, String tubo_cont, int user_idx, String user_id, String tubo_regdate,
+	public TuboVo(int tubo_idx, String tubo_cont, String tubo_title, int user_idx, String user_id, String tubo_regdate,
 			int tubo_readcount) {
 		this.tubo_idx = tubo_idx;
 		this.tubo_cont = tubo_cont;
+		this.tubo_title = tubo_title;
 		this.user_idx = user_idx;
 		this.user_id = user_id;
 		this.tubo_regdate = tubo_regdate;
@@ -59,13 +61,19 @@ public class TuboVo {
 	public void setTubo_readcount(int tubo_readcount) {
 		this.tubo_readcount = tubo_readcount;
 	}
-	
-	//to String
-	@Override
-	public String toString() {
-		return "TuboVo [tubo_idx=" + tubo_idx + ", tubo_cont=" + tubo_cont + ", user_idx=" + user_idx + ", user_id="
-				+ user_id + ", tubo_regdate=" + tubo_regdate + ", tubo_readcount=" + tubo_readcount + "]";
+	public String getTubo_title() {
+		return tubo_title;
+	}
+	public void setTubo_title(String tubo_title) {
+		this.tubo_title = tubo_title;
 	}
 	
+	//toString
+	@Override
+	public String toString() {
+		return "TuboVo [tubo_idx=" + tubo_idx + ", tubo_cont=" + tubo_cont + ", tubo_title=" + tubo_title
+				+ ", user_idx=" + user_idx + ", user_id=" + user_id + ", tubo_regdate=" + tubo_regdate
+				+ ", tubo_readcount=" + tubo_readcount + "]";
+	}
 	
 }

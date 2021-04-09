@@ -18,7 +18,7 @@
                     <li>
                         <a href="#" title="튜터링" class="lnb-dep1">튜터링</a>
                         <ul class="lnb-dep2">
-                            <li><a href="#" title="학습공간" class="">학습공간</a></li>
+                            <li><a href="/tutoringwrite" title="학습공간" class="">학습공간</a></li>
                             <li><a href="#" title="튜터링 언어 검색" class="">튜터링 언어 검색</a></li>
                             <li><a href="#" title="튜터링 내용 등록" class="">튜터링 내용 등록</a></li>
                         </ul>

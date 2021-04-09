@@ -234,6 +234,35 @@ section .section-tit h3{font-size: 18px; font-weight: 800;}
 .regdate{font-size: 13px;}
 .select-btn{ background : #00a2ff; color:#fff; font-weight: 900;}
 
+/* modal CSS */
+.modal-wrap {display:none; position: absolute; top:50%; left:50%; transform:translate(-50%, -50%); width: 100%; height:100%; z-index:666;}
+.modal-bg {background-color:#000; opacity: 0.7; width: 100%; height:100%;}
+.modal-container {width:870px; position:absolute; top:50%; left:50%; transform: translate(-50%, -50%); background-color:#fff;}
+.modal-container .modal-header {padding:10px; color:#fff; background-color:#1EDA69; display: flex; justify-content: space-between; margin-top:-1px;}
+.modal-wrap .modal-header h4 {font-size:18px; font-weight: 600;}
+.modal-wrap .modal-contents {width:90%; margin:0 auto; padding:40px 0; background-color:#fff;}
+.modal-contents-box{display: flex;justify-content: space-between;}
+.modal-wrap .modal-contents .modal-btn-box ul {display: flex; justify-content: center; margin-top:35px;}
+.modal-wrap .modal-contents .modal-btn-box ul li {display:inline-block; text-align: center; margin:0 3px;}
+.modal-wrap .modal-contents .modal-btn-box ul li .btn-enroll {display:block; padding:8px 40px; width:100%; height:100%; font-size:16px; background-color:#218fe5; color:#fff; border-radius: 2px; border:none; cursor: pointer;}
+.modal-wrap .modal-contents .modal-btn-box ul li .btn-cancel {display:block; padding:8px 40px; width:100%; height:100%; font-size:16px; background-color:#fff; color:#1EDA69; border-radius: 2px; border:1px solid #1EDA69; cursor: pointer;}
+
+.modal-selectbtn-box{width: 10%; text-align: center;}
+.modal-selectbtn-box ul {padding-top: 18px;}
+.modal-selectbtn-box ul li{line-height: 92px;}
+.modal-selectname-box{width: 45%;}
+.modal-selectname-box h3{font-size: 15px; font-weight: 800;}
+.modal-selectname-box ul{margin-top: 8px; border: 1px solid #dbdbdb; padding: 8px; height: 48px;}
+.modal-selectname-box ul li{border: 1px solid #dbdbdb; border-radius:4px; width: 126px; padding: 5px;}
+.modal-selectname-box ul li a{float: right;}
+.modal-contents-box .table-type01 td label{display: inline-block; width: 100%; cursor: pointer;}
+.modal-selectname-reviewer{margin-top: 14px;}
+.modal-selectname-approver{margin-top: 20px;}
+.modal-selectname-referrer{margin-top: 20px;}
+.modal-selectname-referrer ul{height: 167px;}
+.modal-selectname-referrer ul li{margin-bottom: 10px;}
+.modal-selectname-referrer ul li:last-child{margin-bottom: 0;}
+
 /*사이트기능소개 페이지 CSS*/
 .top-title{margin-bottom: 12px;}
 .top-title > h1{font-size: 26px; color: #333;}
@@ -252,10 +281,11 @@ section .section-tit h3{font-size: 18px; font-weight: 800;}
 .mentorMenteePage .search-box .mentor-search{width: 50%; height:60px; border-radius:50px; padding: 20px; font-size: 16px; position: relative;}
 .mentorMenteePage .search-box .btn-search3{display: inline-block; background: url(../img/common/btn-search.png) no-repeat; width: 18px; height: 18px; margin-right: 10px; position: relative; top: -4px; left: -50px;}
 .mentorMenteePage .list-wrap{min-width: 1200px; max-width: 1200px; margin : 0 auto;}
-.mentorMenteePage #list ul{ width: 800px; height: 100%; box-shadow: 0px 2px 3px 1px rgba(0, 0, 0.1, 0.1); background: #fff; margin: 0 auto; margin-bottom: 25px; padding: 14px; border-radius: 16px;}
-
-
-
+.mentorMenteePage #list .mentor-info{ display:flex; justify-content: space-around; width: 50%; height: 100%; box-shadow: 0px 2px 3px 1px rgba(0, 0, 0.1, 0.1); background: #fff; margin: 0 auto; margin-bottom: 25px; padding: 14px; border-radius: 16px;}
+.mentorMenteePage #list .mentor-info ul:first-child {width:65%; padding-left: 24px;}
+.mentorMenteePage #list .mentor-info ul:first-child li {margin-bottom: 6px;}
+.mentorMenteePage #list .mentor-info ul:last-child {width:35%; display: flex; justify-content: center; padding-top:28px;}
+.mentorMenteePage #list .mentor-info ul:last-child li {width:40%; text-align: center;}
 
 @media (max-width:1700px) { 
     

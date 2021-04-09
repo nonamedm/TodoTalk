@@ -1,5 +1,6 @@
 package sjls.todotalk.user.daoImpl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,5 +22,13 @@ public class MentorSchDaoImpl implements MentorSchDao {
 		List<Map<String, Object>> mentorList = sqlSession.selectList("mentorSearch.getMentorSchList", mentorSearch);
 		return mentorList;
 	}
+
+	@Override
+	public HashMap<String, Object> getMentorInfo(String userid) {
+		HashMap<String, Object> mentorInfo = sqlSession.selectOne("mentorSearch.getMentorInfo", userid);
+		return mentorInfo;
+	}
+
+	
 
 }

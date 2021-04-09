@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tutoring">
+ 
+	 <insert id="InsertWriting">
+       INSERT INTO TUTOR_BOARD (TUBO_TITLE, TUBO_CONT, USER_IDX, USER_ID)
+        VALUES (#{tubo_title}, #{tubo_cont}, #{user_idx}, #{user_id})
+    </insert>
+    
+    <select id="TutoringList" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TuboVo">
+    	SELECT	* FROM TUTOR_BOARD ORDER BY TUBO_REGDATE DESC;
+    </select>
+    
+    <select id="ViewWriting" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TuboVo">
+    	SELECT	* FROM TUTOR_BOARD WHERE USER_ID = #{user_id} AND TUBO_REGDATE = #{tubo_regdate} ;
+    </select>
+    
+    <select id="Question1List" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TuboVo">
+    	SELECT	* FROM TUTOR_BOARD WHERE #{tubo_title} = #{Question1}
+    </select>
+
+
+</mapper>
