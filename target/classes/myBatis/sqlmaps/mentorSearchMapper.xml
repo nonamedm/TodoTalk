@@ -4,13 +4,18 @@
 <mapper namespace="mentorSearch">
 
 	<select id="getMentorSchList" parameterType="String" resultType="hashmap">
-		select 
-			USER_NAME,
-			COUNTRY,
-			INTRODUCE
-		from USER_INFO
-		where USER_NAME like concat('%', #{mentorSearch}, '%')
-		and REGISTER = 1
+		select distinct
+			rl.RECEIVER_NAME as USER_NAME,
+			rl.RECEIVER_ID as RECEIVER_ID,
+			ui.COUNTRY as COUNTRY,
+			ui.INTRODUCE as INTRODUCE
+		from USER_INFO ui
+		left outer join RELATION_LIST rl
+		on ui.USER_NAME = rl.RECEIVER_NAME 
+		where rl.RECEIVER_NAME like concat('%', #{mentorSearch}, '%')
+		or ui.COUNTRY like concat('%', #{mentorSearch}, '%')
+		and rl.MENTOR  = 'Y'
+		and rl.PERMIT = 'Y'
 	</select>
 
 </mapper>
