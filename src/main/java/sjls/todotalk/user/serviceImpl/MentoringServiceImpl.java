@@ -16,7 +16,7 @@ public class MentoringServiceImpl implements MentoringService {
 	@Override
 	public void insertWriting(TuboVo vo) {
 		
-		
+		mentoringDao.insertWriting(vo);
 	}
 	
 
