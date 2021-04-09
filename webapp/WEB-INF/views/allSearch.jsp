@@ -9,14 +9,14 @@
                 <!--여기부터 컨텐츠내용 작업시작-->
 
                 <div id="tutorSearch">
-                   튜터 검색창
+                   튜터 검색결과 - 총 XX건
                 </div>
                 <div id="mentorSearch">
-                   멘토 검색창
+                   멘토 검색결과 - 총 XX건
                 </div>
               
                 <div class="boardSearch">
-                    게시판 검색창
+                    게시판 검색결과 - 총 XX건
                 </div>
             </div>
             <footer>

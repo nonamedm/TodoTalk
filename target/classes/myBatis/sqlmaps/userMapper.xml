@@ -3,6 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
+  <!-- 
+  <select id="MenuList" resultType="com.green.menu.vo.MenuVo" >
+    SELECT    MENU_ID, MENU_NAME, MENU_SEQ
+     FROM     MENUS
+     ORDER BY MENU_SEQ ASC
+  </select>    <- 단순 조회, 입력 변수 없을 시
   
+  <select id="Login" parameterType="hashmap" resultType="com.green.user.vo.UserVo">
+   		   SELECT USERID, USERPASS, USERNAME, USERPOINT
+   		     FROM USER_TBL
+   		    WHERE USERID = #{userid}
+   		      AND USERPASS = #{userpass}
+   </select>   <- 조건값 있는 조회 시 
+   -->
   
 </mapper>
