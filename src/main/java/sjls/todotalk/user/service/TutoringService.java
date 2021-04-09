@@ -14,4 +14,6 @@ public interface TutoringService {
 
 	List<TuboVo> getQuestion1List(HashMap<String, Object> map);
 
+	TuboVo getView(HashMap<String, Object> map);
+
 }

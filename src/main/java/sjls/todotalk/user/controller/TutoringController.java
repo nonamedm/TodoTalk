@@ -18,14 +18,14 @@ import sjls.todotalk.user.vo.TuboVo;
 public class TutoringController {
 	
 	@Autowired
-	TutoringService mentoringService;
+	TutoringService tutoringService;
 
 	//튜터링 첫번째 게시판 이동
 	@RequestMapping(value="/tutoringwrite", method=RequestMethod.GET)
 	public ModelAndView letsWrite(
 			@RequestParam HashMap<String, Object> map) {
 		
-		List <TuboVo> tuboList = mentoringService.getWritingList(map);
+		List <TuboVo> tuboList = tutoringService.getWritingList(map);
 		
 		ModelAndView mav = new ModelAndView();
 		//HashMap<String, Object> map = new HashMap<String, Object>();
@@ -39,7 +39,7 @@ public class TutoringController {
 	public String postWriting(TuboVo tuboVo) {
 		
 		ModelAndView mv = new ModelAndView();
-		mentoringService.insertWriting(tuboVo);
+		tutoringService.insertWriting(tuboVo);
 		
 		return "redirect:/tutoringwrite";
 	}
@@ -49,7 +49,7 @@ public class TutoringController {
 	public ModelAndView question1(
 			@RequestParam HashMap<String, Object> map) {
 		
-		List <TuboVo> tuboListOfQuestion1 = mentoringService.getQuestion1List(map);
+		List <TuboVo> tuboListOfQuestion1 = tutoringService.getQuestion1List(map);
 		
 		ModelAndView mav = new ModelAndView();
 		//HashMap<String, Object> map = new HashMap<String, Object>();
@@ -58,4 +58,22 @@ public class TutoringController {
 		mav.setViewName("/tutoring/question1");
 		return mav; 
 	}
+	
+	//list에서 글 클릭했을때 이동하는 글 view페이지
+	@RequestMapping("/tutoringwrite/view")
+	public ModelAndView viewWriting(
+			@RequestParam HashMap<String, Object> map) {
+		
+		String tubo_title = (String) map.get("tubo_title");
+		
+		TuboVo tuboVo = tutoringService.getView(map);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("tuboVo",tuboVo);
+		mv.addObject("tubo_title",tubo_title);
+		mv.setViewName("viewwriting");
+		return mv;
+		
+	}
+	
 }

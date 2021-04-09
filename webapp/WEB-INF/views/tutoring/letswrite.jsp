@@ -42,9 +42,9 @@
 	 		 <div class="leftcolumn">
 			    <div class="card">
 			      <h5>${tuboVo.user_id}, ${tuboVo.tubo_regdate}</h5>
-			      <p>${tuboVo.tubo_cont}</p>
+			      <p><a href="/tutoringwrite/view?idx=${ tuboVo.tubo_idx }">${tuboVo.tubo_cont}</a></p>
 			    </div> 
-	  		</div><!-- <div class="leftcolumn"> -->
+	  		 </div><!-- <div class="leftcolumn"> -->
 	  		
 		  <div class="rightcolumn">
 			<button class="open-button" onclick="openForm()">Do exercise!</button>

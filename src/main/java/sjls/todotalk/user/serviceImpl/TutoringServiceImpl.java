@@ -14,18 +14,18 @@ import sjls.todotalk.user.vo.TuboVo;
 public class TutoringServiceImpl implements TutoringService {
 	
 	@Autowired 
-	private TutoringDao mentoringDao;
+	private TutoringDao tutoringDao;
 
 	@Override
 	public void insertWriting(TuboVo vo) {
 		
-		mentoringDao.insertWriting(vo);
+		tutoringDao.insertWriting(vo);
 	}
 
 	@Override
 	public List<TuboVo> getWritingList(HashMap<String, Object> map) {
 		
-		List<TuboVo> writingList = mentoringDao.getWritingList(map);
+		List<TuboVo> writingList = tutoringDao.getWritingList(map);
 		
 		return writingList;
 	}
@@ -33,9 +33,15 @@ public class TutoringServiceImpl implements TutoringService {
 	@Override
 	public List<TuboVo> getQuestion1List(HashMap<String, Object> map) {
 		
-		List<TuboVo> question1List = mentoringDao.getQuestion1List(map);
+		List<TuboVo> question1List = tutoringDao.getQuestion1List(map);
 		
 		return question1List;
+	}
+
+	@Override
+	public TuboVo getView(HashMap<String, Object> map) {
+		TuboVo tuboVo = tutoringDao.getView(map);
+		return tuboVo;
 	}
 	
 
