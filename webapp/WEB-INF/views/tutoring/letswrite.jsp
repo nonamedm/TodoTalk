@@ -42,7 +42,6 @@
  		 <div class="leftcolumn">
 		    <div class="card">
 		      <h5>${tuboVo.user_id}, ${tuboVo.tubo_regdate}</h5>
-		      <div class="fakeimg" style="height:200px;">Image</div>
 		      <p>${tuboVo.tubo_cont}</p>
 		     
 		    </div> 
