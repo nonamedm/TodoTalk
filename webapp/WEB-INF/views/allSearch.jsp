@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<%@include file="layout/header.jsp"%>
     <div class="sub-main-wrap">
     	<%@include file="layout/leftMenu.jsp"%>
@@ -9,14 +10,49 @@
                 <!--여기부터 컨텐츠내용 작업시작-->
 
                 <div id="tutorSearch">
-                   튜터 검색결과 - 총 XX건
+                튜터 검색결과 - 총 ${ tutorVoSize } 건
+                <c:forEach var="tutorVo" items="${ tutorVo }">
+                <br>
+                	<div>
+                	튜터 : ${ tutorVo.user_name } <br>
+                	이메일 : ${ tutorVo.user_mail } <br>
+                	국적 : ${ tutorVo.country }　　좋아요수 ${ tutorVo.recommend }
+                	</div>
+                <br>
+                </c:forEach>
                 </div>
+                <br>
+                <hr>
+                <br>
                 <div id="mentorSearch">
-                   멘토 검색결과 - 총 XX건
+                멘토 검색결과 - 총 ${ mentorVoSize }건
+                <c:forEach var="mentorVo" items="${ mentorVo }">
+                <br>
+                	<div>
+                	튜터 : ${ mentorVo.user_name } <br>
+                	이메일 : ${ mentorVo.user_mail } <br>
+                	국적 : ${ mentorVo.country }　　좋아요수 ${ mentorVo.recommend }
+                	</div>
+                <br>
+                </c:forEach>
                 </div>
+             	<br>
+                <hr>
+                <br>
               
                 <div class="boardSearch">
-                    게시판 검색결과 - 총 XX건
+                게시판 검색결과 - 총 ${ boardAllSearchSize }건
+                <c:forEach var="boardAllSearch" items="${ boardAllSearch }">
+                <br>
+                	<div>
+                	분류 : ${ boardAllSearch.BOARD_NAME }   작성자 : ${ boardAllSearch.USER_ID }<br>
+                	<a href="#">${ boardAllSearch.TITLE }</a> <br>
+                	${ boardAllSearch.CONT }
+                	
+                	
+                	</div>
+                <br>
+                </c:forEach> 
                 </div>
             </div>
             <footer>

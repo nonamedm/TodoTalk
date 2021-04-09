@@ -11,4 +11,8 @@ public interface AllSearchDao {
 
 	List<UserVo> getMentorList(HashMap<String, Object> map);
 
+	List<HashMap<String, Object>> getBoardList(HashMap<String, Object> map);
+
+	
+
 }

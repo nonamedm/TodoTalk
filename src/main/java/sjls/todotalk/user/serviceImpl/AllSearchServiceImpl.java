@@ -28,4 +28,10 @@ public class AllSearchServiceImpl implements AllSearchService {
 		return mentorVo;
 	}
 
+	@Override
+	public List<HashMap<String, Object>> getBoardList(HashMap<String, Object> map) {
+		List<HashMap<String, Object>> boardAllSearch = allSearchDao.getBoardList(map);
+		return boardAllSearch;
+	}
+
 }
