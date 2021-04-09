@@ -8,12 +8,15 @@
             <div class="middle-content-wrap">
                 <!--여기부터 컨텐츠내용 작업시작-->
 
-                <div id="contents">
-                   첫번째 창
+                <div id="tutorSearch">
+                   튜터 검색창
+                </div>
+                <div id="mentorSearch">
+                   멘토 검색창
                 </div>
               
-                <div class="sub-contents">
-                    두번째 창
+                <div class="boardSearch">
+                    게시판 검색창
                 </div>
             </div>
             <footer>
