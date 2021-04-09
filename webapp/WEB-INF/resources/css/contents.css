@@ -248,9 +248,15 @@ section .section-tit h3{font-size: 18px; font-weight: 800;}
 .color-intro{margin-top: 32px;}
 
 /* 멘토링 페이지 CSS */
-.mentorMenteePage .search-box{width: 100%; text-align: center; }
+.mentorMenteePage .search-box{width: 100%; text-align: center; margin-bottom: 87px;}
 .mentorMenteePage .search-box .mentor-search{width: 50%; height:60px; border-radius:50px; padding: 20px; font-size: 16px; position: relative;}
 .mentorMenteePage .search-box .btn-search3{display: inline-block; background: url(../img/common/btn-search.png) no-repeat; width: 18px; height: 18px; margin-right: 10px; position: relative; top: -4px; left: -50px;}
+.mentorMenteePage .list-wrap{min-width: 1200px; max-width: 1200px; margin : 0 auto;}
+.mentorMenteePage #list .mentor-info{ display:flex; justify-content: space-around; width: 50%; height: 100%; box-shadow: 0px 2px 3px 1px rgba(0, 0, 0.1, 0.1); background: #fff; margin: 0 auto; margin-bottom: 25px; padding: 14px; border-radius: 16px;}
+.mentorMenteePage #list .mentor-info ul:first-child {width:65%; padding-left: 24px;}
+.mentorMenteePage #list .mentor-info ul:first-child li {margin-bottom: 6px;}
+.mentorMenteePage #list .mentor-info ul:last-child {width:35%; display: flex; justify-content: center; padding-top:28px;}
+.mentorMenteePage #list .mentor-info ul:last-child li {width:40%; text-align: center;}
 
 @media (max-width:1700px) { 
     

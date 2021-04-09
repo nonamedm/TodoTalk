@@ -1,9 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../layout/header.jsp"%>
 
 <script>
 	$(function(){
+		
+		mentorSearch();
 		
 		//인풋창에서 Enter치면 mentorSearch 메소드 실행
 		$("#mentorSearch").keydown(function(key){
@@ -14,17 +16,30 @@
 	});
 	
 	function mentorSearch(){
-		alert("검색");
 		$.ajax({
 			url : '/mentorSearchFm',
 			type : 'POST',
 			data : {
-				mentorSearch : $("#mentorSearch").val() 
+				mentorSearch : $("#mentorSearch").val()
 			},
 			success : function(result){
 				console.dir(result);
-				alert("검색OK");
-				
+				var data = result.mentorList;
+				var html = "";
+				$.each(data, function(index, item){
+					html += '<div class="mentor-info">';
+					html +=  '<ul>';
+					html +=  	'<li>이름 : '+item.USER_NAME+'</li>';
+					html +=  	'<li>국적 : '+item.COUNTRY+'</li>';
+					html +=  	'<li>인사말 : '+item.INTRODUCE+'</li>';
+					html +=  '</ul>';
+					html +=  '<ul>';
+					html +=    '<li><a href="#" title="상세보기" class="detail-info"><img src="../img/common/btn-search.png"></a></li>';
+					html +=    '<li><a href="#" title="메세지보내기" class="message"><img src="../img/common/ico_mail.png"></a></li>';
+					html +=  '</ul>';
+					html += '</div>';
+				$("#list").html(html);
+				});
 			},
 			error : function(xhr){
 				alert(xhr.status + ", " + xhr.statusText);
@@ -39,8 +54,11 @@
             <div class="middle-content-wrap2 mentorMenteePage">
                 <!--여기부터 컨텐츠내용 작업시작-->
                	<div class="search-box">
-               		<input type="text" id="mentorSearch" name="mentorSearch" class="mentor-search" placeholder="멘토 검색">
+               		<input type="text" id="mentorSearch" name="mentorSearch" class="mentor-search" placeholder="멘토이름, 국적 검색">
                		<a href="javascript:mentorSearch()" title="검색" class="btn-search3"></a>
+               	</div>
+               	<div class="list-wrap">
+	               	<div id="list"></div>
                	</div>
             </div>
             <footer>
