@@ -57,6 +57,7 @@
 	<!-- css, js, img 사용 설정 -->
 	<mvc:resources location="/WEB-INF/resources/css/" mapping="/css/**"></mvc:resources>
 	<mvc:resources location="/WEB-INF/resources/js/" mapping="/js/**"></mvc:resources>
+	<mvc:resources location="/WEB-INF/resources/font/" mapping="/font/**"></mvc:resources>
 	<mvc:resources location="/WEB-INF/resources/img/" mapping="/img/**/**"></mvc:resources>
 	
 	
