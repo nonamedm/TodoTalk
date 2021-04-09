@@ -80,6 +80,7 @@ var obj = null;
 //var formdate =$("form[name=]").serializeObject();
 //var jsondata = JSON.stringify(formdate);
 
+//통합검색 스크립트
 
 
 

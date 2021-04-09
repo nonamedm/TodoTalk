@@ -16,12 +16,12 @@
 	function mentorSearch(){
 		alert("검색");
 		$.ajax({
-			url : '',
+			url : '/mentorSearchFm',
 			type : 'POST',
 			data : {
 				mentorSearch : $("#mentorSearch").val() 
 			},
-			success : function(){
+			success : function(result){
 				
 			},
 			error : function(xhr){
