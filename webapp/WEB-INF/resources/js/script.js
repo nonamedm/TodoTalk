@@ -172,16 +172,12 @@
         
 //:::::::::::::::::::::::::: Modal Popup
         function modal1() {
-            $('.pw-change').click(function () {
-                $('#pwModal').show();
+            $(document).on('click', '.detail-info', function () {
+                $('.modal-wrap').show();
                 return false;
             });
-            $('.btn-close').click(function () {
-                $('#pwModal').hide();
-                return false;
-            });
-            $('.btn-popup-cancel').click(function () {
-                $('#pwModal').hide();
+            $('.btn-cancel').click(function () {
+                $('.modal-wrap').hide();
                 return false;
             });
         }

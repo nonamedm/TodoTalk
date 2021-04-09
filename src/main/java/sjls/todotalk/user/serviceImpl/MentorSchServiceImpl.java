@@ -1,5 +1,6 @@
 package sjls.todotalk.user.serviceImpl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,5 +22,13 @@ public class MentorSchServiceImpl implements MentorSchService {
 		List<Map<String, Object>> mentorList = mentorSchDao.getMentorList(mentorSearch);
 		return mentorList;
 	}
+
+	@Override
+	public HashMap<String, Object> getMentorInfo(String userid) {
+		HashMap<String, Object> mentorInfo = mentorSchDao.getMentorInfo(userid);
+		return mentorInfo;
+	}
+
+	
 
 }

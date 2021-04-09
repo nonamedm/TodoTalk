@@ -1,7 +1,10 @@
 package sjls.todotalk.user.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +37,21 @@ public class MentorMenteeSchController {
 		System.out.println(mentorList);
 		
 		mav.addObject("mentorList", mentorList);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	//멘토정보보기 기능
+	@RequestMapping(value="/detailInfo", method=RequestMethod.POST)
+	public ModelAndView detailInfo(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		
+		String userid = req.getParameter("userid");
+		
+		System.out.println(userid);
+		
+		HashMap<String, Object> mentorInfo = mentorSchService.getMentorInfo(userid);
+		mav.addObject("mentorInfo", mentorInfo);
 		mav.setViewName("jsonView");
 		return mav;
 	}
