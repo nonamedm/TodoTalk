@@ -16,6 +16,8 @@ public class HomeController {
 	
 	@RequestMapping(value="/AllSearch", method=RequestMethod.GET)
 	public ModelAndView allSearch() {
+		
+		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName("/allSearch");
