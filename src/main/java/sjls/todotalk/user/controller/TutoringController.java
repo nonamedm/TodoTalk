@@ -27,10 +27,12 @@ public class TutoringController {
 	
 	//튜터링 첫번째 게시판에서 글썼을때
 	@RequestMapping(value="/postwriting", method=RequestMethod.POST)
-	public String postWriting(TuboVo tuboVo, Model model) {
+	public String postWriting(TuboVo tuboVo) {
 		
+		ModelAndView mv = new ModelAndView();
+		mentoringService.insertWriting(tuboVo);
 		
-		return null;
+		return "redirect:/tutoringwrite";
 	}
 	
 }

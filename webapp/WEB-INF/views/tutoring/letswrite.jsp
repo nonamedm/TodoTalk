@@ -12,6 +12,13 @@
 	  document.getElementById("myForm").style.display = "none";
 	}
 </script>
+<script>
+   $(function() {
+	   $('input[type=submit]').on('click', function(event) {
+		   alert("저장되었습니다!");
+		 })
+   });
+</script>
     <div class="sub-main-wrap">
         <%@include file="../layout/leftMenu.jsp"%>
         <div class="sub-container-wrap">
@@ -52,20 +59,18 @@
 		<button class="open-button" onclick="openForm()">Do exercise!</button>
 			<div class="form-popup" id="myForm">
 				<form action="<c:url value="/postwriting"/>" method="POST" id="postwriting">
-				<input type="hidden" name="TUBO_IDX"     value="${ TUTOR_BOARD.TUBO_IDX }" />     
-		   		<input type="hidden" name="TUBO_CONT"        value="${ TUTOR_BOARD.TUBO_CONT }" />     
-		   		<input type="hidden" name="USER_IDX"         value="${ TUTOR_BOARD.USER_IDX }" />     
-		   		<input type="hidden" name="USER_ID"        value="${ TUTOR_BOARD.USER_ID }" />        
+		   		<input type="hidden" name="user_idx"         value="5" />     
+    
 			
 			   <table id="writeTable">
 			    <caption><h2>UrrrrrrwWriting!!!</h2></caption>
 				    <tr>
-				      <td><input type="text" name="writer"  id="writer"
-				        value="${sessionScope.login.userid}여기는 아이디" readonly /> <!-- 로그인된 유저아이디  -->
+				      <td><input type="text" name="user_id"  id="user_id"
+				        value="tutor01" readonly /> <!-- 로그인된 유저아이디  -->
 				      </td>
 				    </tr> 
 				    <tr>
-				      <td><textarea name="cont" id="cont" placeholder="이거 보고계신분, 이거 크기좀 늘려주십쇼"></textarea></td>
+				      <td><textarea name="tubo_cont" id="tubo_cont" placeholder="이거 보고계신분, 이거 크기좀 늘려주십쇼"></textarea></td>
 				    </tr> 
 					<!--     <tr>
 					      <td>파일</td>

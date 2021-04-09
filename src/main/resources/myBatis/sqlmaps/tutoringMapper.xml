@@ -3,15 +3,9 @@
 
 <mapper namespace="tutoring">
 
-	 <insert id="InsertWriting"
-            statementType="CALLABLE"
-            parameterType="sjls.todotalk.user.vo.TuboVo" >
-       {CALL PKG_TUTORING.PROC_TUTORING_INSERTWRITING(
-          #{ tubo_cont, mode=IN, jdbcType=VARCHAR, javaType=string },
-          #{ user_id,   mode=IN, jdbcType=VARCHAR, javaType=string }
-       )}
-       
-       이렇게 넣어주세요
+	 <insert id="InsertWriting">
+       INSERT INTO TUTOR_BOARD (TUBO_CONT, USER_IDX, USER_ID)
+        VALUES (#{tubo_cont}, #{user_idx}, #{user_id})
     </insert>
 
 
