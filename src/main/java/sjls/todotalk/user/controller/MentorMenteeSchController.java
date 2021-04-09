@@ -32,6 +32,9 @@ public class MentorMenteeSchController {
 		
 		List<Map<String, Object>> mentorList = mentorSchService.getMentorList(mentorSearch);
 		
+		System.out.println(mentorList);
+		mav.addObject("mentorList", mentorList);
+		mav.setViewName("jsonView");
 		return mav;
 	}
 }

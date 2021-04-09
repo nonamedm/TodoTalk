@@ -22,6 +22,8 @@
 				mentorSearch : $("#mentorSearch").val() 
 			},
 			success : function(result){
+				console.dir(result);
+				alert("검색OK");
 				
 			},
 			error : function(xhr){

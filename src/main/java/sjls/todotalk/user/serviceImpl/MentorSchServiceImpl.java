@@ -17,6 +17,7 @@ public class MentorSchServiceImpl implements MentorSchService {
 	
 	@Override
 	public List<Map<String, Object>> getMentorList(String mentorSearch) {
+		
 		List<Map<String, Object>> mentorList = mentorSchDao.getMentorList(mentorSearch);
 		return mentorList;
 	}

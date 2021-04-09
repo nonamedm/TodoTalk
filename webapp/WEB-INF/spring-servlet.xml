@@ -61,6 +61,14 @@
 	<mvc:resources location="/WEB-INF/resources/img/" mapping="/img/**/**"></mvc:resources>
 	
 	
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+      
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+      <property name="order" value="0"/>
+    </bean>
+	
+	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+	
 	<!-- <bean id="userDao"
 		class="com.green.basic.dao.impl.UserDaoImpl">
 		<property name="dataSource" ref="dataSource"></property>

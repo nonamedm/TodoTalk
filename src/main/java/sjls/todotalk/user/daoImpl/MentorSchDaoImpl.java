@@ -17,7 +17,8 @@ public class MentorSchDaoImpl implements MentorSchDao {
 	
 	@Override
 	public List<Map<String, Object>> getMentorList(String mentorSearch) {
-		List<Map<String, Object>> mentorList = sqlSession.selectList("", mentorSearch);
+		
+		List<Map<String, Object>> mentorList = sqlSession.selectList("mentorSearch.getMentorSchList", mentorSearch);
 		return mentorList;
 	}
 
