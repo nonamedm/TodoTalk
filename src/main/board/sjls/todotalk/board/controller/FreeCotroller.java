@@ -3,61 +3,68 @@ package sjls.todotalk.board.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import sjls.todotalk.board.service.BoardService;
+import sjls.todotalk.board.vo.FreeBoardVo;
+
 
 @Controller
 public class FreeCotroller {
 	
-//	@Autowired
-//	private BoardService boardService;
-	
-	@RequestMapping("/")
-	public  String  home() {
-		return "home";
-	}
+	@Autowired
+	private BoardService boardService;
 	
 	@RequestMapping("/list")
-	public String FreeList() {
+	public String FreeList(Model model) {
 		//ModelAndView mv = new ModelAndView();
+		
+		List<FreeBoardVo> list = boardService.getBoardList();
+		model.addAttribute("list",list);
 		
 		return "/board/free/list";	
 	}
 	
 	
-//	@RequestMapping("/WriteForm")
-//	public ModelAndView writeForm() {
-//		
-//		ModelAndView mv = new ModelAndView();
-//		
-//		return mv;
-//		
-//	}
-	@RequestMapping("/Write")
-	public String Write() {
+	@RequestMapping("/writeForm")
+	public  String  writeForm( ) {
+		return "/board/free/write";     
+	} 
+	
+	@RequestMapping("/write")
+	public String Write(FreeBoardVo vo) {
+		//db에 저장 
+		boardService.insertBoard(vo);
 		
-		ModelAndView mv = new ModelAndView();
-		
-		
-		
-		
-		
-		return  "/board/free/write"; // + menu_id;
+		return  "redirect:/list"; // + menu_id;
 		
 	}
-//	
-//	@RequestMapping("/MBoard/Read")
-//	public  ModelAndView Read() {
-//
-//		ModelAndView  mv  = new ModelAndView();
-//	
-//		return mv;
-//	} 
+	
+	@RequestMapping("/read")
+	public  String Read(HttpServletRequest request, Model model) {
+		
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		FreeBoardVo vo = boardService.getBoardCont(idx);
+
+		model.addAttribute("board",vo);
+		return "/board/free/read";
+	} 
+	
+	@RequestMapping("/delete")
+	public  String  delete(HttpServletRequest request, Model model ) {
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		boardService.deleteBoard(idx);	
+		
+		return "redirect:/list";
+	} 
 //	
 //	
 //	@RequestMapping("/MBoard/UpdateForm")
@@ -76,14 +83,7 @@ public class FreeCotroller {
 //		return mv;
 //	} 
 //	
-//	@RequestMapping("/MBoard/Delete")
-//	public  ModelAndView  delete( ) {
-//		
-//		
-//		ModelAndView  mv  = new ModelAndView();			
-//		
-//		return mv;
-//	} 
+
 //	
 //
 //	
