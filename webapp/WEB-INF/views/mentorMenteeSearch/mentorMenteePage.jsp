@@ -4,26 +4,28 @@
 
 <script>
 	$(function(){
-		
 		mentorSearch();
-		
 		//인풋창에서 Enter치면 mentorSearch 메소드 실행
 		$("#mentorSearch").keydown(function(key){
 			if(key.keyCode == 13){
 				mentorSearch();
 			}
 		})
-		
-		
-		$(document).on('click', '.detail-info', function(event){
-			event.preventDefault();
+
+		$(document).on('click', '.detail-info', function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			
+			var userid = $(this).attr('href');
+			
 			$.ajax({
 				url : '/detailInfo',
 				type : 'POST',
 				data : {
-					userid : $("#mentorid").val()
+					userid : userid
 				},
 				success : function(result){
+					$('.modal-wrap').show();
 					$("#mentor_name").html(result.mentorInfo.USER_NAME);
 					$("#mentor_id").html(result.mentorInfo.USER_ID);
 					$("#mentor_phone").html(result.mentorInfo.USER_PHONE);
@@ -37,10 +39,10 @@
 					alert(xhr.status + ", " + xhr.statusText);
 				}
 			})
-		});
-		
-		
+		})
+			
 	});
+	
 	
 	function mentorSearch(){
 		$.ajax({
@@ -50,14 +52,12 @@
 				mentorSearch : $("#mentorSearch").val()
 			},
 			success : function(result){
-				
 				//인사말의 길이가 10 이상이면 그 이후의 문자들을 "..." 처리
 				for(var i = 0; i < result.mentorList.length; i++){
 					if(result.mentorList[i].INTRODUCE.length >= 10){
 						result.mentorList[i].INTRODUCE = result.mentorList[i].INTRODUCE.substr(0, 10)+" ...";
 					}
 				}
-				//href="/detailInfo?userid='+item.RECEIVER_ID+'"
 				var data = result.mentorList;
 				var html = "";
 				if(data != ""){
@@ -67,19 +67,21 @@
 						html +=  	'<li>이름 : '+item.USER_NAME+'</li>';
 						html +=  	'<li>국적 : '+item.COUNTRY+'</li>';
 						html +=  	'<li>인사말 : '+item.INTRODUCE+'</li>';
-						html +=  	'<input type="hidden" name="userid" value="'+item.RECEIVER_ID+'" id="mentorid">';
 						html +=  '</ul>';
 						html +=  '<ul>';
-						html +=    '<li><a href="#" title="상세보기" class="detail-info"><img src="../img/common/btn-search.png"></a></li>';
+						html +=    '<li><a href="'+item.RECEIVER_ID+'" title="상세보기" class="detail-info"><input type="hidden" class="mentorid" value="'+item.RECEIVER_ID+'"/><img src="../img/common/btn-search.png"></a></li>';
 						html +=    '<li><a href="#" title="메세지보내기" class="message"><img src="../img/common/ico_mail.png"></a></li>';
 						html +=  '</ul>';
 						html += '</div>';
 						$("#list").html(html);
-					});
+					})
+					
+					
 			  }else{
 				  html += '<p style="text-align:center; font-size:16px;">해당하는 멘토가 없습니다.</p>';
 				  $("#list").html(html);
 			  }
+				
 			},
 			error : function(xhr){
 				alert(xhr.status + ", " + xhr.statusText);

@@ -17,5 +17,21 @@
 		and rl.MENTOR  = 'Y'
 		and rl.PERMIT = 'Y'
 	</select>
+	
+	<select id="getMentorInfo" parameterType="String" resultType="hashmap">
+		select 
+			ui.USER_ID as USER_ID,
+			ui.USER_NAME as USER_NAME,
+			ui.USER_PHONE as USER_PHONE,
+			ui.USER_MAIL as USER_MAIL,
+			ui.COUNTRY as COUNTRY,
+			ui.ADDRESS as ADDRESS,
+			ui.INTRODUCE as INTRODUCE,
+			ui.RECOMMEND as RECOMMEND
+		from USER_INFO ui 
+		left outer join RELATION_LIST rl
+		on ui.USER_NAME = rl.RECEIVER_NAME
+		where rl.RECEIVER_ID = #{userid}
+	</select>
 
 </mapper>

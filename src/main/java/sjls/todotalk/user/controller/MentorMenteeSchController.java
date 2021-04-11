@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,11 +27,16 @@ public class MentorMenteeSchController {
 	public ModelAndView mentorMenteeSearch(){
 		ModelAndView mav = new ModelAndView();
 		
+//		String mentorSearch = "";
+//		List<Map<String, Object>> mentorList = mentorSchService.getMentorList(mentorSearch);
+//		System.out.println(mentorList);
+//		
+//		mav.addObject("mentorList", mentorList);
 		mav.setViewName("mentorMenteeSearch/mentorMenteePage");
 		return mav;
 	}
 	
-	@RequestMapping(value="/mentorSearchFm", method=RequestMethod.POST)
+	@RequestMapping(value="/mentorSearchFm", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView mentorSearchFm(@RequestParam String mentorSearch) {
 		ModelAndView mav = new ModelAndView();
 		
@@ -47,7 +54,6 @@ public class MentorMenteeSchController {
 		ModelAndView mav = new ModelAndView();
 		
 		String userid = req.getParameter("userid");
-		
 		System.out.println(userid);
 		
 		HashMap<String, Object> mentorInfo = mentorSchService.getMentorInfo(userid);
@@ -55,4 +61,5 @@ public class MentorMenteeSchController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
+
 }

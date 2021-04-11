@@ -172,10 +172,10 @@
         
 //:::::::::::::::::::::::::: Modal Popup
         function modal1() {
-            $(document).on('click', '.detail-info', function () {
-                $('.modal-wrap').show();
-                return false;
-            });
+//            $(document).on('click', '.detail-info', function () {
+//                $('.modal-wrap').show();
+//                return false;
+//            });
             $('.btn-cancel').click(function () {
                 $('.modal-wrap').hide();
                 return false;
