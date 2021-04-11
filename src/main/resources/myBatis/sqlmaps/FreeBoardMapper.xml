@@ -2,14 +2,14 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="board">
+  <mapper namespace="freeBoard">
   
   <select id="freeList" resultType="sjls.todotalk.board.vo.FreeBoardVo">
   	SELECT FREE_IDX, FREE_TITLE, FREE_CONT, USER_ID, FREE_REGDATE, FREE_READCOUNT
 	 FROM FREE_BOARD
   </select>
   
-  <select id="getCont"  resultType="sjls.todotalk.board.vo.FreeBoardVo"  parameterType="int">
+  <select id="read"  resultType="sjls.todotalk.board.vo.FreeBoardVo"  parameterType="int">
   	SELECT FREE_IDX, FREE_TITLE, FREE_CONT, USER_ID, FREE_REGDATE, FREE_READCOUNT
 	 FROM FREE_BOARD
 	 WHERE FREE_IDX = #{free_idx}
@@ -17,13 +17,26 @@
   
   <insert id="insert" >
 	INSERT INTO FREE_BOARD
-	(FREE_TITLE, FREE_CONT,USER_ID, FREE_REGDATE, FREE_READCOUNT)
-	VALUES(#{free_title}, #{free_cont}, #{user_id}, NOW(), 0);
+	  (BOARD_NAME,FREE_TITLE, FREE_CONT, USER_IDX, USER_ID, FREE_REGDATE, FREE_READCOUNT)
+	VALUES('FREE',#{free_title}, #{free_cont}, user_idx, #{user_id}, NOW(), 0);
   </insert>
+  
   
   <delete id="delete">
   	DELETE FROM FREE_BOARD
 	WHERE FREE_IDX= #{free_idx}
   </delete>
   
+  <update id="update">
+  	UPDATE FREE_BOARD
+	SET FREE_TITLE=#{free_title}, FREE_CONT=#{free_cont}, FREE_READCOUNT=0
+	WHERE FREE_IDX = #{free_idx}
+  </update>
+  
   </mapper>        
+  
+  
+  
+  
+  
+  

@@ -5,15 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import sjls.todotalk.board.dao.BoardDao;
-import sjls.todotalk.board.service.BoardService;
+import sjls.todotalk.board.dao.FreeBoardDao;
+import sjls.todotalk.board.service.FreeBoardService;
 import sjls.todotalk.board.vo.FreeBoardVo;
 
 @Service("BoardService")
-public class BoardServiceImpl implements BoardService {
+public class FreeBoardServiceImpl implements FreeBoardService {
 	
 	@Autowired
-	private BoardDao boardDao;
+	private FreeBoardDao boardDao;
 
 	@Override
 	public List<FreeBoardVo> getBoardList() {
@@ -37,6 +37,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void insertBoard(FreeBoardVo vo) {
 		boardDao.insertBoard(vo);
+		
+	}
+
+	@Override
+	public void updateBoard(FreeBoardVo vo) {
+		boardDao.updateBoard(vo);
 		
 	}
 

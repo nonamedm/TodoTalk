@@ -18,7 +18,10 @@
        <li>작성일 : ${ board.free_regdate }</li>
        <li>조회수 : ${ board.free_readcount }</li>
      </ul>
-     <a href="/delete?idx=${ board.free_idx}"" >삭제</a>
+     <a href="/list" >목록</a>
+     <a href="/delete?idx=${ board.free_idx}" >삭제</a>
+     <a href="/updateForm?idx=${ board.free_idx}" >수정</a>
+     <a href="/writeForm" >글쓰기</a>
 
 </body>
 </html>

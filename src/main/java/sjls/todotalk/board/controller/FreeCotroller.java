@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import sjls.todotalk.board.service.BoardService;
+import sjls.todotalk.board.service.FreeBoardService;
 import sjls.todotalk.board.vo.FreeBoardVo;
 
 
@@ -21,7 +21,7 @@ import sjls.todotalk.board.vo.FreeBoardVo;
 public class FreeCotroller {
 	
 	@Autowired
-	private BoardService boardService;
+	private FreeBoardService boardService;
 	
 	@RequestMapping("/list")
 	public String FreeList(Model model) {
@@ -44,8 +44,7 @@ public class FreeCotroller {
 		//db에 저장 
 		boardService.insertBoard(vo);
 		
-		return  "redirect:/list"; // + menu_id;
-		
+		return  "redirect:/list"; 
 	}
 	
 	@RequestMapping("/read")
@@ -65,28 +64,25 @@ public class FreeCotroller {
 		
 		return "redirect:/list";
 	} 
-//	
-//	
-//	@RequestMapping("/MBoard/UpdateForm")
-//	public  ModelAndView  updateForm() {
-//				
-//		ModelAndView  mv  = new ModelAndView();
-//		
-//		return mv;
-//	} 
-//	
-//	@RequestMapping("/MBoard/Update")
-//	public  ModelAndView  update() {
-//		
-//		ModelAndView  mv  = new ModelAndView();			
-//		
-//		return mv;
-//	} 
-//	
+	
+	
+	@RequestMapping("/updateForm")
+	public  String  updateForm(HttpServletRequest request, Model model ) {
+		
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		FreeBoardVo vo = boardService.getBoardCont(idx);
 
-//	
-//
-//	
-//	
+		model.addAttribute("upBoard",vo);
+		return "/board/free/update";
+	} 
+	
+	
+	@RequestMapping("/update")
+	public  String  update(FreeBoardVo vo) {
+		boardService.updateBoard(vo);
+		return "redirect:/list";
+	} 
+	
+
 
 }

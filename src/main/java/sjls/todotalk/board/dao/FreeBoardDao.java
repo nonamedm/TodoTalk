@@ -4,7 +4,7 @@ import java.util.List;
 
 import sjls.todotalk.board.vo.FreeBoardVo;
 
-public interface BoardDao {
+public interface FreeBoardDao {
 
 	List<FreeBoardVo> getBoardList();
 
@@ -13,5 +13,7 @@ public interface BoardDao {
 	void deleteBoard(int free_idx);
 
 	void insertBoard(FreeBoardVo vo);
+
+	void updateBoard(FreeBoardVo vo);
 
 }

@@ -7,7 +7,7 @@
 <title>Write</title>
 </head>
 <body>
-<form action="/write">
+<form action="/write"  method="post">
 <table>
  <h2>글쓰기</h2>
 
@@ -16,12 +16,15 @@
     <td><input type="text" name="free_title" /></td>
   </tr>
   <tr>
-    <td>글내용</td>
-    <td><input type="text" name="free_cont" /></td>
+    <td>작성자</td>
+    <td>${ board.user_id }</td>
   </tr>
-</table>
+  <tr>
+    <td>글내용</td>
+    <td><textarea name="free_cont" cols="50" rows="100"></textarea></td>
+  </tr>
 	<input type="submit" value="확인" />
-	<!-- 확인 누르면 뜨는 주소 http://localhost:9090/write?title=&cont= -->
+</table>
 </form>
 </body>
 </html>
