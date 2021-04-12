@@ -5,25 +5,21 @@
 <%@include file="../layout/header.jsp"%>
 
 <script>
-   $(function() {
-	  $('input[type=button]').on('click', function(event) {
-		  var btn = event.target;
-		  var href = '';
-		  switch( btn.id ) {
-		  case 'btnUpdate':
-			  var  idx =  '${ tuboVo.tubo_idx }';
-			  href     = '/tutoringwrite/update?tubo_title=${tuboVo.tubo_title}&idx=' + idx;
-		  	  break;
-		  case 'btnDelete':
-			  var  idx =  '${ tuboVo.tubo_idx }';
-			  href 	   = '/tutoringwrite/delete?&idx=' + idx;
-			  break;
-		  }
-		  //alert(href);
-		  location.href = href;
-		  
-	  })
-   });
+ 	$(function () {
+ 		var html='';
+		$.ajax({
+			url : '/postReply',
+			type : 'POST',
+			success : function(result){
+				html += '';	// (result.replyList.menu_id 
+				html += '<li></li>';
+			},
+			error : function (xhr) {
+				
+			}
+			$('#replyDiv').append(html);
+		});
+	}); 
 </script>
     <div class="sub-main-wrap">
         <%@include file="../layout/leftMenu.jsp"%>
@@ -32,7 +28,7 @@
             <div class="middle-content-wrap2">
                 <!--여기부터 컨텐츠내용 작업시작-->
          
-
+			<!-- 조회한 글 내용 -->
 		  <table> 
 		    <tr>
 		      <td class="td1">글쓴이</td>
@@ -57,8 +53,54 @@
 		      </td>
 		    </tr>
 		  </table>
+		  <br>
 
-   
+				<!-- 댓글쓰는 폼 -->
+				<form action="<c:url value="/postReply"/>" method="POST" name="replyForm" id="replyForm">
+			   		<input type="hidden" name="user_idx"   		value="5" />     
+			   		<input type="hidden" name="tubo_idx"   		value="${ tuboVo.tubo_idx }" />     
+			   		<input type="hidden" name="tubo_regdate"    value="${ tuboVo.tubo_regdate }" />     
+					   <table id="writeTable">
+						    <tr>
+						    	<h2>첨삭 댓글 쓰기</h2>
+						    </tr>
+					 	    <tr>
+						      <td><input type="text" name="user_id"  id="user_id"
+						        value="tutor01" readonly /> <!-- 로그인된 유저아이디  -->
+						      </td>
+						    </tr>
+						    <tr>
+						      <td><textarea name="tb_repcont" id="tb_repcont"></textarea></td>
+						    </tr> 
+							<!--     <tr>
+							      <td>파일</td>
+							      <td id="tdfile">
+							        <input type="button" id="btnAddFile" value="Add file" /><br>
+							        <input type="file" name="upfile" id="upfile" /><br>        
+							      </td>
+							    </tr>  -->
+						    <tr>      
+						      <td colspan="2">
+						        <button type="submit"> 확인 </button>
+						      </td>
+						    </tr> 
+					   </table> 
+			  	</form>
+
+			<!-- 댓글 리스트 -->
+		  	<c:forEach var="tureVo"  items="${ tureVo }">
+		  	<div class="row">
+		 		<div class="leftcolumn">
+				    <div class="card">
+				      <h5>${tureVo.user_id}, ${tureVo.tb_regdate}</h5>
+				      <p>${tureVo.tb_repcont}</p>
+				    </div> 
+		  		</div>
+	  		</div>
+		  	
+		  	</c:forEach>
+		  		<div id="replyDiv">
+		  		</div>
 				<!--여기부터 컨텐츠내용 작업 끝-->
             </div>
             <footer>

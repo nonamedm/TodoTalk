@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import sjls.todotalk.user.vo.TuboVo;
+import sjls.todotalk.user.vo.TureVo;
 
 public interface TutoringService {
 	
@@ -15,5 +16,9 @@ public interface TutoringService {
 	List<TuboVo> getQuestion1List(HashMap<String, Object> map);
 
 	TuboVo getView(HashMap<String, Object> map);
+
+	List<TureVo> getReplyView(HashMap<String, Object> map);
+
+	void insertReply(TureVo tureVo);
 
 }

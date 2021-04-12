@@ -7,9 +7,17 @@
        INSERT INTO TUTOR_BOARD (TUBO_TITLE, TUBO_CONT, USER_IDX, USER_ID)
         VALUES (#{tubo_title}, #{tubo_cont}, #{user_idx}, #{user_id})
     </insert>
+	 <insert id="InsertReply">
+       INSERT INTO TUTOR_REPLY (TUBO_IDX, TB_REPCONT, USER_IDX, USER_ID)
+        VALUES (#{tubo_idx}, #{tb_repcont}, #{user_idx}, #{user_id})
+    </insert>
     
     <select id="TutoringList" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TuboVo">
     	SELECT	* FROM TUTOR_BOARD ORDER BY TUBO_REGDATE DESC;
+    </select>
+    
+    <select id="ViewReply" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TureVo">
+    	SELECT	* FROM TUTOR_REPLY WHERE TUBO_IDX = ${tubo_idx} ORDER BY TB_REGDATE DESC ;
     </select>
     
     <select id="ViewWriting" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TuboVo">
