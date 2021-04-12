@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/views/layout/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,14 @@
 <title>Write</title>
 </head>
 <body>
+    <div class="sub-main-wrap">
+        <%@include file="/WEB-INF/views/layout/leftMenu.jsp"%>
+        <div class="sub-container-wrap">
+            <%@include file="/WEB-INF/views/layout/allSearchHeader.jsp"%>
+            <div class="middle-content-wrap2 mentorMenteePage">
+                <!--여기부터 컨텐츠내용 작업시작-->
+                
+                
 <form action="/write"  method="post">
 <table>
  <h2>글쓰기</h2>

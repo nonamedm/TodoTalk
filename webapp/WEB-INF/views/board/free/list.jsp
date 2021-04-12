@@ -1,15 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@include file="/WEB-INF/views/layout/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>List</title>
 <style></style>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script></script>
+
 </head>
 <body>
+    <div class="sub-main-wrap">
+        <%@include file="/WEB-INF/views/layout/leftMenu.jsp"%>
+        <div class="sub-container-wrap">
+            <%@include file="/WEB-INF/views/layout/allSearchHeader.jsp"%>
+            <div class="middle-content-wrap2 mentorMenteePage">
+                <!--여기부터 컨텐츠내용 작업시작-->
+
  <a href="/writeForm"  method="post">글쓰기</a>
  
  <h2>자게 목록</h2>
