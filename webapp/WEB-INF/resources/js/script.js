@@ -184,12 +184,11 @@
 
         function modal2() {
             $('.exprt-search').click(function () {
-                $('#exprtModal').show();
+                $('#translation-wrap').show();
                 return false;
             });
-            $('.btn-close').click(function () {
-                $('#exprtModal').hide();
-                return false;
+            $('#btn-close').click(function () {
+                $('#translation-wrap').hide();
             });
             $('.btn-popup-cancel').click(function () {
                 $('#exprtModal').hide();
