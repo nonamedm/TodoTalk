@@ -43,14 +43,9 @@ public class GetApiPapago {
 			String translatedText = null;
 			try {
 				jsonObject = (JSONObject) jsonParser.parse(responseBody);
-				System.out.println(jsonObject); 
 				JSONObject objMessage = (JSONObject) jsonObject.get("message"); 
-				System.out.println(objMessage); 
 				JSONObject objResult= (JSONObject) objMessage.get("result"); 
-				System.out.println(objResult); 
 				translatedText = (String) objResult.get("translatedText"); 
-				System.out.println(translatedText);
-				
 			} catch (ParseException e) {
 				e.printStackTrace();
 			} 

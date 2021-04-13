@@ -28,8 +28,6 @@ public class translatorController {
 		GetApiPapago translatorTxt = new GetApiPapago();
 		String data = translatorTxt.translator(getText, tarLanguage);
 		
-		System.out.println("con : "+ data);
-		
 		mav.addObject("resultData", data);
 		mav.setViewName("jsonView");
 		return mav;
