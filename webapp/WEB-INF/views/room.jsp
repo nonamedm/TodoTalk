@@ -18,7 +18,8 @@
 			sock.onclose = onClose;
 			console.dir(sock);
 			
-			var nickname='test용';
+			var nickname='test용';					//접속하는 사람 id 받아서 쓸 예정
+													//로그인 안되어있으면 동작X
 			var msg;
 			var roomId = '${room.roomId}';			//채팅 시작 할 상대방 아이디
 			
@@ -68,8 +69,8 @@
 
 </head>
 <body>
-<input type="text" id="nickname" class="form-inline" placeholder="닉네임을 입력해주세요" required autofocus>
-<button class = "btn btn-primary" id = "name">확인</button>
+<!-- <input type="text" id="nickname" class="form-inline" placeholder="닉네임을 입력해주세요" required autofocus>
+<button class = "btn btn-primary" id = "name">확인</button> -->
 <button class = "btn btn-primary" id = "close">나가기</button><br>
 <label for="roomId" class="label label-default">방 번호</label>
 <label id="roomId" class="form-inline">${ room.roomId }</label>
