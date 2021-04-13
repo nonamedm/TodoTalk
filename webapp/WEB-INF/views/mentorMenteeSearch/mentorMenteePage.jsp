@@ -89,9 +89,60 @@
 		})
 	}
 	
+	function selectText(){
+		var selectionText = "";
+		if(document.getSelection){
+			selectionText = document.getSelection();
+		}else if(document.selection){
+			selectionText = document.selection.createRange().text;
+		}
+		return selectionText;
+	}
+	
+	document.onmouseup = function(event){
+		if(selectText() == ""){
+			$("#translationTxt").hide();
+			return false;
+		}else{
+			var x = event.pageX;
+			var y = event.pageY;
+			$("#translationTxt").show();
+			$("#translationTxt").css({"position":"absolute", "left": x+"px", "top": y+-40+"px"});
+		}
+	}
+	
+	function translationTxt(){
+		$("#translationTxt").hide();
+		$("#translation-wrap").show();
+		$("#getText").val(selectText());
+		$("#getText").focus();
+	}
+	
+	function translationSend(){
+		
+		$.ajax({
+			url : '/translatorText',
+			type : 'POST',
+			data : {
+				getText  : $("#getText").val(),
+				tarLanguage : $(".languages-box2 option:selected").val()
+			},
+			success : function(data){
+				var tarLanguage = data.resultData;
+				$("#tarText").html(tarLanguage);
+			},
+			error : function(xhr){
+				alert(xhr.status + ", " + xhr.statusText);
+			}
+		})
+	}
 	
 </script>
     <div class="sub-main-wrap">
+    	<div id="translationTxt" class="translation-txt">
+        	<a href="javascript:translationTxt()" title="번역" id="btnTranslation">번역하기</a>
+        </div>
+        <%@include file="../popup/translation.jsp"%>
         <%@include file="../layout/leftMenu.jsp"%>
         <div class="sub-container-wrap">
             <%@include file="../layout/allSearchHeader.jsp"%>
@@ -175,6 +226,8 @@
                 </div>
             </div>
         </div> <!-- //modal-picture-->
+        
+        
 </body>
 
 </html>

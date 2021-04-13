@@ -286,6 +286,13 @@ section .section-tit h3{font-size: 18px; font-weight: 800;}
 .mentorMenteePage .list-wrap .mentor-info ul:first-child li {margin-bottom: 6px;}
 .mentorMenteePage .list-wrap .mentor-info ul:last-child {width:35%; display: flex; justify-content: center; padding-top:28px;}
 .mentorMenteePage .list-wrap .mentor-info ul:last-child li {width:40%; text-align: center;}
+.translation-txt{display: none; background: #00A2FF; width: 70px;padding: 6px; text-align:center; border-radius: 10px;}
+.translation-txt a{font-size: 13px; color: #fff;}
+#translation-wrap .select-language div{width:40%; text-align:center;}
+#translation-wrap .select-language div:nth-child(2){margin-top: 174px;}
+#translation-wrap .select-language{display: flex; justify-content: space-between;}
+#translation-wrap .select-language .translation-Text{max-width:300px; min-width: 300px; width:300px; max-height:300px; min-height: 300px; height: 300px; margin-top: 14px; padding: 10px;}
+.translation-btn{background: #1EDA69; width: 70px; padding: 8px; color: #fff; border-radius: 6px;}
 
 @media (max-width:1700px) { 
     
