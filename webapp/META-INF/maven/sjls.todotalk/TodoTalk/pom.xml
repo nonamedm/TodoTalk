@@ -9,6 +9,20 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<dependencies>
+		<!-- MultipartHttpServletRequest -->
+		<!-- 파일업로드 (commons-io) 2.0.1-->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.0.1</version>
+		</dependency>
+			
+		<!-- 파일업로드 (commons-fileupload) 1.2.2 -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.2.2</version>
+		</dependency>
 
 		<!-- Spring 필수요소 -->
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
@@ -88,6 +102,28 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.5.1</version>
         </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
+		
+	  <!-- websocket dependency 설정 : spring에서 웹 소켓 기능 사용 -->
+      <dependency>
+           <groupId>org.springframework</groupId>
+           <artifactId>spring-websocket</artifactId>
+           <version>4.2.5.RELEASE</version>
+       </dependency>
+       
+       <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+      <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+          <version>1.7.25</version>
+      </dependency>
+		
 	</dependencies>
 
 	<build>

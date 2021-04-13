@@ -7,11 +7,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import sjls.todotalk.user.vo.RoomVo;
+
 import sjls.todotalk.user.service.AllSearchService;
+import sjls.todotalk.user.service.ChatRoomService;
 import sjls.todotalk.user.vo.UserVo;
 
 
@@ -20,6 +24,9 @@ public class HomeController {
 	
 	@Autowired
 	AllSearchService allSearchService;
+	
+	@Autowired
+	ChatRoomService chatRoomService;
 	
 	@RequestMapping("/")
 	public String home() {
@@ -57,5 +64,24 @@ public class HomeController {
 		
 		return mav;		
 	}
+	@RequestMapping(value="/talk/{id}", method=RequestMethod.GET) 
+	public String talk (@PathVariable String id, Model model){				//클릭한 방의 id를 roomVo에 저장하고, 경로 지정
+		RoomVo roomVo = chatRoomService.createRoomById(id);
+		System.out.println(id+" 방 개설완료!");	
+		roomVo = chatRoomService.findRoomById(id);
+		model.addAttribute("room",roomVo);									//roomVo를 room에 입력
+		return "room";
+	}
+	
+	@RequestMapping("/rooms")
+	public String rooms (Model model) {
+		Object chatRooms = new HashMap<String,RoomVo>();
+		chatRooms = chatRoomService.findAllRoom();
+		model.addAttribute("rooms",chatRooms);		//개설된 모든 대화방을 찾아서 rooms에 입력
+		//System.out.println("넘어온 값 : "+chatRoomRepository.findAllRoom()); 확인
+		
+		return "rooms";
+	}
+	
 	
 }

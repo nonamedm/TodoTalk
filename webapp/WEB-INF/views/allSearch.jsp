@@ -16,7 +16,7 @@
                 	<div>
                 	튜터 : ${ tutorVo.user_name } <br>
                 	이메일 : ${ tutorVo.user_mail } <br>
-                	국적 : ${ tutorVo.country }　　좋아요 ${ tutorVo.recommend }
+                	국적 : ${ tutorVo.country }　　좋아요 ${ tutorVo.recommend }　　<a href="/talk/${ tutorVo.user_id }">대화시작</a>
                 	</div>
                 <br>
                 </c:forEach>
@@ -31,7 +31,7 @@
                 	<div>
                 	튜터 : ${ mentorVo.user_name } <br>
                 	이메일 : ${ mentorVo.user_mail } <br>
-                	국적 : ${ mentorVo.country }　　좋아요수 ${ mentorVo.recommend }
+                	국적 : ${ mentorVo.country }　　좋아요 ${ mentorVo.recommend }
                 	</div>
                 <br>
                 </c:forEach>
