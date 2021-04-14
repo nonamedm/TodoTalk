@@ -65,7 +65,7 @@
                         </div>
                         <div class="user-detail-box">
                             <ul>
-                            	<li><a href="/attendanceCheck" title="출석체크">출석체크</a></li>
+                            	<li><a href="/attendanceCheckFm" title="출석체크">출석체크</a></li>
                             	<li><a href="#" title="개인정보 수정" class="pw-change">개인정보 수정</a></li>
                                 <li><a href="/LogOut" title="로그아웃" onclick="return confirm('로그아웃 하시겠습니까?');">로그아웃</a></li>
                             </ul>
