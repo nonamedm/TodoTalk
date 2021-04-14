@@ -4,6 +4,25 @@
 
 <script>
 	$(function(){
+		$("#getText").keyup(function(){
+			
+			$.ajax({
+				url : '/srcLangText',
+				type : 'POST',
+				data : {
+					srcLangText : $("#getText").val()
+				},
+				success : function(data){
+					console.log(data.resultData2);
+					var srcLangText = data.resultData2;
+					$("#srcLangText").val(srcLangText);
+					var srcOption = $(".languages-box option").val();
+				},
+				error : function(xhr){
+					alert(xhr.status + ", " + xhr.statusText);
+				}
+			});
+		});
 		mentorSearch();
 		//인풋창에서 Enter치면 mentorSearch 메소드 실행
 		$("#mentorSearch").keydown(function(key){
@@ -25,7 +44,7 @@
 					userid : userid
 				},
 				success : function(result){
-					$('.modal-wrap').show();
+					$('#modal-mentor').show();
 					$("#mentor_name").html(result.mentorInfo.USER_NAME);
 					$("#mentor_id").html(result.mentorInfo.USER_ID);
 					$("#mentor_phone").html(result.mentorInfo.USER_PHONE);
@@ -116,14 +135,28 @@
 		$("#translation-wrap").show();
 		$("#getText").val(selectText());
 		$("#getText").focus();
+		
+		var getText = $("#getText").val();
+		if(getText != ""){
+			srcLangText();
+		}
 	}
 	
 	function translationSend(){
+		var langOption1 = $("#srcLangText").val();
+		var langOption2 = $(".languages-box2").val();
+		
+		if(langOption1 == langOption2){
+			alert("번역할 언어를 변경해주십시오.");
+			$(".languages-box2").focus();
+			return false;
+		}
 		
 		$.ajax({
 			url : '/translatorText',
 			type : 'POST',
 			data : {
+				srcLanguage : $("#srcLangText").val(),
 				getText  : $("#getText").val(),
 				tarLanguage : $(".languages-box2 option:selected").val()
 			},
@@ -135,6 +168,25 @@
 				alert(xhr.status + ", " + xhr.statusText);
 			}
 		})
+	}
+	
+	function srcLangText(){
+		$.ajax({
+			url : '/srcLangText',
+			type : 'POST',
+			data : {
+				srcLangText : $("#getText").val()
+			},
+			success : function(data){
+				console.log(data.resultData2);
+				var srcLangText = data.resultData2;
+				$("#srcLangText").val(srcLangText);
+				var srcOption = $(".languages-box option").val();
+			},
+			error : function(xhr){
+				alert(xhr.status + ", " + xhr.statusText);
+			}
+		});
 	}
 	
 </script>
@@ -167,7 +219,7 @@
         <!--//sub-container-wrap-->
     </div>
     <!--//sub-main-wrap-->
-    <div class="modal-wrap" id="modal">
+    <div class="modal-wrap" id="modal-mentor">
             <div class="modal-bg"></div>
             <div class="modal-container">
                 <div class="modal-header">

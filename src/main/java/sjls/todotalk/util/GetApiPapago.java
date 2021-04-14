@@ -22,7 +22,7 @@ public class GetApiPapago {
 		private String clientId = "eh8DSHYdZ7W2lUKl1qOM";//애플리케이션 클라이언트 아이디값";
 		private String clientSecret = "aNDEa_cGMN";//애플리케이션 클라이언트 시크릿값";
 		
-		public String translator(String getText, String tarLanguage) {
+		public String translator(String getText, String tarLanguage, String srcLanguage) {
 			String text="";
 			try {
 				text = URLEncoder.encode(getText, "UTF-8");
@@ -35,22 +35,16 @@ public class GetApiPapago {
 			requestHeaders.put("X-Naver-Client-Id", clientId);
 			requestHeaders.put("X-Naver-Client-Secret", clientSecret);
 			
-			String responseBody = post(apiURL, requestHeaders, text, tarLanguage);
+			String responseBody = post(apiURL, requestHeaders, text, tarLanguage, srcLanguage);
 			
-			System.out.println(responseBody); 
 			JSONParser jsonParser = new JSONParser(); 
 			JSONObject jsonObject;
 			String translatedText = null;
 			try {
 				jsonObject = (JSONObject) jsonParser.parse(responseBody);
-				System.out.println(jsonObject); 
 				JSONObject objMessage = (JSONObject) jsonObject.get("message"); 
-				System.out.println(objMessage); 
 				JSONObject objResult= (JSONObject) objMessage.get("result"); 
-				System.out.println(objResult); 
 				translatedText = (String) objResult.get("translatedText"); 
-				System.out.println(translatedText);
-				
 			} catch (ParseException e) {
 				e.printStackTrace();
 			} 
@@ -58,9 +52,9 @@ public class GetApiPapago {
 			return translatedText;
 		}
 
-	    private static String post(String apiUrl, Map<String, String> requestHeaders, String text, String tarLanguage){
+	    private static String post(String apiUrl, Map<String, String> requestHeaders, String text, String tarLanguage, String srcLanguage){
 	        HttpURLConnection con = connect(apiUrl);
-	        String postParams = "source=ko&target="+tarLanguage+"&text=" + text;
+	        String postParams = "source="+srcLanguage+"&target="+tarLanguage+"&text=" + text;
 	        try {
 	            con.setRequestMethod("POST");
 	            for(Map.Entry<String, String> header :requestHeaders.entrySet()) {
