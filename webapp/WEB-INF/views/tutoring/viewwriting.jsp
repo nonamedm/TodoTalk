@@ -33,6 +33,14 @@
  			tureList();
 
  		}) //document.on
+		var cont = '${ tuboVo.tubo_cont }';
+ 		
+ 		$('#tb_repcont').on('click',function(){
+ 			alert('무야호~');// 확인
+ 			
+ 			//alert(cont);
+ 			$('#tb_repcont').val(cont);
+ 		});
  		
 	}); //function
 </script>
