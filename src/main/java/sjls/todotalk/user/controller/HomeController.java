@@ -73,10 +73,23 @@ public class HomeController {
 	}
 	@RequestMapping(value="/talk/{id}", method=RequestMethod.GET) 
 	public String talk (@PathVariable String id, Model model){		//클릭한 방의 id를 roomVo에 저장하고, 경로 지정
-		RoomVo roomVo = chatRoomService.createRoomById(id);
-		System.out.println(id+" 방 개설완료!");						//회원 로그인 되면 토크 거는사람 아이디도 받아오기
-		roomVo = chatRoomService.findRoomById(id);
+		RoomVo roomVo = chatRoomService.createRoomById(id);			//회원 로그인 되면 토크 거는사람 아이디도 받아오기
+																	
+		//추가할 로직 : 받은 id값과 로그인유저 id값으로 검색해서, 포함된 방이 없으면 새로 만들기
+		roomVo = chatRoomService.findRoomById(roomVo.getRoomId());
+		
+		System.out.println(roomVo.getRoomId()+", "+roomVo.getName()+" : 대화방 생성 성공"); //대화방생성완료
+		
+		//여기서 DB 불러오기 -> model.addAttribute로 저장
+		
+		
 		model.addAttribute("room",roomVo);							//roomVo를 room에 입력
+		return "room";
+	}
+	@RequestMapping(value="/keeptalk/{id}", method=RequestMethod.GET)
+	public String keeptalk (@PathVariable String id, Model model) {
+		RoomVo roomVo = chatRoomService.findRoomById(id);
+		model.addAttribute("room", roomVo);
 		return "room";
 	}
 	
