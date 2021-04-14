@@ -19,7 +19,7 @@
                 <!--여기부터 컨텐츠내용 작업시작-->
                                
 	<h1>Question 1</h1>	
-	
+	 
   <form action="/postwriting" method="POST">
   <table id="board">
   	<input type="hidden" name="user_idx"         value="5" />     

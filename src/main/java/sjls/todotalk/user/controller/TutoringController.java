@@ -126,7 +126,7 @@ public class TutoringController {
 		tutoringService.insertReply(tureVo);
 
 		List<TureVo> tureVo2 = tutoringService.getReplyView(map);
-		
+		 
 //		String tubo_idx = (String) map.get("tubo_idx");
 //		String user_id = (String) map.get("user_id");
 //		String tubo_regdate = (String) map.get("tubo_regdate");
