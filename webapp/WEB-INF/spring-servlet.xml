@@ -84,8 +84,30 @@
 	
 	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
 	
+	
+	  <!-- Interceptor 설정 추가  -->
+   <!--  <mvc:interceptors>
+       
+        공통 Interceptor
+       <mvc:interceptor>
+         <mvc:mapping path="/**"/>
+         <mvc:exclude-mapping path="/resources/**"/>
+         <mvc:exclude-mapping path="/"/>
+         <mvc:exclude-mapping path="/User_MakeForm"/>
+         <mvc:exclude-mapping path="/User_Make"/>
+         <mvc:exclude-mapping path="/Check_id"/>
+         <bean id="authInterceptor" 
+            class="sjls.todotalk.user.controller.AuthInterceptor">
+         </bean>       
+       </mvc:interceptor>
+    </mvc:interceptors>  -->
+	
+	
+	
+	
 	<!-- <bean id="userDao"
 		class="com.green.basic.dao.impl.UserDaoImpl">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean> -->
+	
 </beans>
