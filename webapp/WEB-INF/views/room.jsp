@@ -77,6 +77,7 @@
 <br>
 <label for="roomName" class="label label-default">방 이름</label>
 <label id="roomName" class="form-inline">${ room.name }</label>
+로그인유저 : ${ login.user_id }
 <div id = "chatroom" style = "width:300px; height: 300px; border:1px solid; background-color : gray"></div>
 <input type = "text" id = "message" style = "height : 30px; width : 340px" placeholder="내용을 입력하세요" autofocus>
 <button class = "btn btn-primary" id = "send">전송</button>

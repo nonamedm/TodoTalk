@@ -29,7 +29,7 @@
         		<td>${room.roomId }</td>
         		<td>${room.name }</td>
         		<td>
-					<a href="/rooms/${room.roomId }"> 입장</a>
+					<a href="/talk/${room.roomId }"> 입장</a>
 				</td>
 				<td>${people }</td>
         	</tr>

@@ -3,7 +3,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,14 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import sjls.todotalk.user.vo.RoomVo;
-import sjls.todotalk.user.dao.Sha256;
 import sjls.todotalk.user.service.AllSearchService;
 import sjls.todotalk.user.service.ChatRoomService;
-import sjls.todotalk.user.service.UserService;
+import sjls.todotalk.user.vo.RoomVo;
 import sjls.todotalk.user.vo.UserVo;
 
 
@@ -63,27 +61,24 @@ public class ChatController {
 		
 		return mav;		
 	}
-	@RequestMapping(value="/talk/{id}", method=RequestMethod.GET) 
-	public String talk (@PathVariable String id, Model model){		//클릭한 방의 id를 roomVo에 저장하고, 경로 지정
-		RoomVo roomVo = chatRoomService.createRoomById(id);			//회원 로그인 되면 토크 거는사람 아이디도 받아오기
-																	
-		//추가할 로직 : 받은 id값과 로그인유저 id값으로 검색해서, 포함된 방이 없으면 새로 만들기
-		roomVo = chatRoomService.findRoomById(roomVo.getRoomId());
+	@RequestMapping(value="/talk", method= {RequestMethod.POST, RequestMethod.GET}) 
+	public String talk (HttpServletRequest request,HttpServletResponse response, Model model){	
+		String receiverId = request.getParameter("receiverId");
+		String requireId = request.getParameter("requireId");
 		
-		System.out.println(roomVo.getRoomId()+", "+roomVo.getName()+" : 대화방 생성 성공"); //대화방생성완료
+		Object chatRooms = new HashMap<String,RoomVo>();
+		chatRooms = chatRoomService.findAllRoom();
 		
-		//여기서 DB 불러오기 -> model.addAttribute로 저장
-		
-		
-		model.addAttribute("room",roomVo);							//roomVo를 room에 입력
-		return "room";
-	}
-	@RequestMapping(value="/keeptalk/{id}", method=RequestMethod.GET)
-	public String keeptalk (@PathVariable String id, Model model) {
-		RoomVo roomVo = chatRoomService.findRoomById(id);
+		//방이 현재 roomList에 없으면 만든다. DB 없으면 추가한다. 
+		RoomVo roomVo = chatRoomService.createRoomById(receiverId,requireId);			
 		model.addAttribute("room", roomVo);
 		return "room";
 	}
+	
+											//다음 할일  : 대화 db저장 -> 창닫기 인식 또는 나가기 버튼 클릭 시
+											//창닫기가 onClose로 인식되도록 바꾸기. 그리고 onClose에 DB저장 수식 넣기
+											//채팅창에 DB 불러오기 및 스크롤 지정하기
+	
 	
 	@RequestMapping("/rooms")
 	public String rooms (Model model) {

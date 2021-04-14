@@ -9,7 +9,7 @@ import sjls.todotalk.user.vo.RoomVo;
 
 public interface ChatRoomService {
 
-	RoomVo createRoomById(String id);
+	RoomVo createRoomById(String id1, String id2);
 
 	void handleActions(WebSocketSession session, MessageVo messageVo, ObjectMapper objectMapper);
 

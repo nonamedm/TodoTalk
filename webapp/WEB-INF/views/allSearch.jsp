@@ -6,6 +6,12 @@
     	<%@include file="layout/leftMenu.jsp"%>
         <div class="sub-container-wrap">
             <%@include file="layout/allSearchHeader.jsp"%>
+            
+            <script>
+            	$(function(){
+            		
+            	})
+            </script>
             <div class="middle-content-wrap">
                 <!--여기부터 컨텐츠내용 작업시작-->
 
@@ -17,7 +23,13 @@
                 	튜터 : ${ tutorVo.user_name } <br>
                 	이메일 : ${ tutorVo.user_mail } <br>
                 	국적 : ${ tutorVo.country }　　좋아요 ${ tutorVo.recommend }<br>
-                	<a href="/talk/${ tutorVo.user_id }">대화시작</a>　　<a href="/rooms/">대화방 목록</a>
+                	<form action="/talk" method="POST">
+                	<input type="hidden" name="receiverId" value="${tutorVo.user_id }" />
+                	<input type="hidden" name="requireId" value="${login.user_id }" />
+                	<input type="submit" value="대화시작"/>
+                	</form>
+                	
+                	<a href="/rooms/">대화방 목록</a>
                 	<!-- 대화방 목록에 수식 걸어서 내아이디 포함된 방만 보여주기 -->
                 	</div>
                 <br>
@@ -31,9 +43,16 @@
                 <c:forEach var="mentorVo" items="${ mentorVo }">
                 <br>
                 	<div>
-                	튜터 : ${ mentorVo.user_name } <br>
+                	멘토 : ${ mentorVo.user_name } <br>
                 	이메일 : ${ mentorVo.user_mail } <br>
-                	국적 : ${ mentorVo.country }　　좋아요 ${ mentorVo.recommend }
+                	국적 : ${ mentorVo.country }　　좋아요 ${ mentorVo.recommend }<br>
+                	<form action="/talk" method="POST">
+                	<input type="hidden" name="receiverId" value="${mentorVo.user_id }" />
+                	<input type="hidden" name="requireId" value="${login.user_id }" />
+                	<input type="submit" value="대화시작"/>
+                	</form>
+                	
+                	<a href="/rooms/">대화방 목록</a>
                 	</div>
                 <br>
                 </c:forEach>
