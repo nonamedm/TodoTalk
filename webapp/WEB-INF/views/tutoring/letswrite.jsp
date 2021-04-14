@@ -30,8 +30,8 @@
 	<h1>Daily Practice</h1>
 
 	<div class="grid-container"> 
- 	  <div class="grid-item" id="tubo_title1"><a href="/tutoringwrite/view/question?tubo_title=Question1">Question1</a></div>
- 	  <div class="grid-item" id="tubo_title1"><a href="/tutoringwrite/view/question?tubo_title=Question2">Question2</a></div>
+ 	  <div class="grid-item" id="tubo_title1"><a href="/tutoringwrite/view/question1?tubo_title=Question1">Question1</a></div>
+ 	  <div class="grid-item" id="tubo_title1"><a href="/tutoringwrite/view/question2?tubo_title=Question2">Question2</a></div>
 	</div>
  
 
@@ -50,7 +50,7 @@
 			<button class="open-button" onclick="openForm()">Do exercise!</button>
 				<div class="form-popup" id="myForm">
 					<form action="<c:url value="/postwriting"/>" method="POST" id="postwriting">
-			   		<input type="hidden" name="user_idx"         value="5" />     
+			   		<input type="hidden" name="user_idx"         value="${sessionScope.login.user_idx}" />     
 
 					   <table id="writeTable">
 						    <tr>
@@ -58,7 +58,7 @@
 						    </tr>
 						    <tr>
 						      <td><input type="text" name="user_id"  id="user_id"
-						        value="tutor01" readonly /> <!-- 로그인된 유저아이디  -->
+						        value="${sessionScope.login.user_id}" readonly /> <!-- 로그인된 유저아이디  -->
 						      </td>
 						    </tr>
 						    <tr>
@@ -67,10 +67,6 @@
 						    			<option value="0"> 주제를 선택하세요 </option>
 						    			<option value="Question1"> Question1 </option>
 						    			<option value="Question2"> Question2 </option>
-						    			<option value="Question3"> Question3 </option>
-						    			<option value="Question4"> Question4 </option>
-						    			<option value="Question5"> Question5 </option>
-						    			<option value="Question6"> Question6 </option>
 						    			<option value="자유"> 자유 </option>
 						    		</select>
 						    	</div>

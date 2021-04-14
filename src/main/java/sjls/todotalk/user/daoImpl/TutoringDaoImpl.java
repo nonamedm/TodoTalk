@@ -24,31 +24,31 @@ public class TutoringDaoImpl implements TutoringDao {
  
 	@Override
 	public List<TuboVo> getWritingList(HashMap<String, Object> map) {
-		
 		List <TuboVo> writingList = sqlSession.selectList("tutoring.TutoringList", map);
-		
 		return writingList;
 	}
 
 	@Override
 	public List<TuboVo> getQuestion1List(HashMap<String, Object> map) {
-	
-		List <TuboVo> question1List = sqlSession.selectList("tutoring.Question1List", map);
-		
+		List <TuboVo> question1List = sqlSession.selectList("tutoring.Question1List", map);	
 		return question1List;
 	}
 
 	@Override
+	public List<TuboVo> getQuestion2List(HashMap<String, Object> map) {
+		List <TuboVo> question2List = sqlSession.selectList("tutoring.Question2List", map);	
+		return question2List;
+	}
+	
+	@Override
 	public TuboVo getView(HashMap<String, Object> map) {
 		List<TuboVo> writingList = sqlSession.selectList("tutoring.ViewWriting", map);
 		TuboVo	vo = writingList.get(0);
-		
 		return vo;
 	}
 
 	@Override
 	public List<TureVo> getReplyView(HashMap<String, Object> map) {
-		
 		List<TureVo> replyList = sqlSession.selectList("tutoring.ViewReply", map);
 		return replyList;
 	}
@@ -58,6 +58,7 @@ public class TutoringDaoImpl implements TutoringDao {
 		sqlSession.insert("tutoring.InsertReply", tureVo);
 		
 	}
+
 
 
 }

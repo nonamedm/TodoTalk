@@ -21,4 +21,6 @@ public interface TutoringService {
 
 	void insertReply(TureVo tureVo);
 
+	List<TuboVo> getQuestion2List(HashMap<String, Object> map);
+
 }

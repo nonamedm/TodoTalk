@@ -34,6 +34,12 @@ public class TutoringServiceImpl implements TutoringService {
 		return question1List;
 	}
 
+	@Override
+	public List<TuboVo> getQuestion2List(HashMap<String, Object> map) {
+		List<TuboVo> question2List = tutoringDao.getQuestion2List(map);
+		return question2List;
+	}
+	
 	//게시물 내용 불러오기
 	@Override
 	public TuboVo getView(HashMap<String, Object> map) {
@@ -54,6 +60,7 @@ public class TutoringServiceImpl implements TutoringService {
 		tutoringDao.insertReply(tureVo);
 		
 	}
+
 	
 
 }

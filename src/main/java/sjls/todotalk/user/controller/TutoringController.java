@@ -60,10 +60,9 @@ public class TutoringController {
 	}
 
 	// 튜터링 첫번째 게시판에서 첫번째 질문 클릭했을때
-	@RequestMapping(value = "/tutoringwrite/view/question", method = RequestMethod.GET)
+	@RequestMapping(value = "/tutoringwrite/view/question1", method = RequestMethod.GET)
 	public ModelAndView question1(@RequestParam HashMap<String, Object> map) {
 
-		
 		 String tubo_idx = (String) map.get("tubo_idx");
 		 map.put("tubo_idx",tubo_idx);
 		 
@@ -86,6 +85,24 @@ public class TutoringController {
 		//mav.addObject("tureVo", tureVo);
 		// mav.addObject("tubo_title",tubo_title);
 		mav.addObject("tuboListOfQuestion1", tuboListOfQuestion1);
+		mav.setViewName("/tutoring/question");
+		return mav;
+	}
+	// 튜터링 첫번째 게시판에서 두번째 질문 클릭했을때
+	@RequestMapping(value = "/tutoringwrite/view/question2", method = RequestMethod.GET)
+	public ModelAndView question2(@RequestParam HashMap<String, Object> map) {
+		
+		String tubo_idx = (String) map.get("tubo_idx");
+		map.put("tubo_idx",tubo_idx);
+		
+		String tubo_regdate = (String) map.get("tubo_regdate");
+		map.put("tubo_regdate", tubo_regdate);
+		
+		List<TuboVo> tuboListOfQuestion2 = tutoringService.getQuestion2List(map);
+		
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("tuboListOfQuestion2", tuboListOfQuestion2);
 		mav.setViewName("/tutoring/question");
 		return mav;
 	}
