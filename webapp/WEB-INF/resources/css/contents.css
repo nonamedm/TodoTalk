@@ -118,11 +118,12 @@ section .section-tit h3{font-size: 18px; font-weight: 800;}
     height: auto;
     margin-top: -2px;
 }
-.user-detail-box{width: 148px; height: 102px; box-shadow: 4px 4px 5px #dfdfdf; background: #fff; position: absolute; padding: 14px; border-radius: 4px; top: 48px; right: 39px; display: none; z-index:9999;}
+.user-detail-box{width: 148px; height: 130px; box-shadow: 4px 4px 5px #dfdfdf; background: #fff; position: absolute; padding: 14px; border-radius: 4px; top: 48px; right: 39px; display: none; z-index:9999;}
 .user-detail-box.on{display: block;}
 .user-detail-box ul li a{display: block; width: 120px; padding: 7px 5px 7px 5px; border-radius: 5px; margin-bottom: 8px; text-align: center; font-size: 13px;}
 .user-detail-box ul li:nth-child(1) a{background: #dbdbdb;}
-.user-detail-box ul li:nth-child(2) a{background: #303d4d; color: #fff;margin-bottom: 0;}
+.user-detail-box ul li:nth-child(2) a{background: #dbdbdb;}
+.user-detail-box ul li:nth-child(3) a{background: #303d4d; color: #fff;margin-bottom: 0;}
 
 .sub-footer{width: 100%; background: #e5e5e5; padding: 11px 5px 11px 42px; display: flex;}
 .sub-footer p{border-left: 1px solid #828282; color: #828282; margin-right: 8px; padding-left: 8px; font-size: 13px;}
