@@ -16,7 +16,9 @@
                 	<div>
                 	튜터 : ${ tutorVo.user_name } <br>
                 	이메일 : ${ tutorVo.user_mail } <br>
-                	국적 : ${ tutorVo.country }　　좋아요 ${ tutorVo.recommend }　　<a href="/talk/${ tutorVo.user_id }">대화시작</a>
+                	국적 : ${ tutorVo.country }　　좋아요 ${ tutorVo.recommend }<br>
+                	<a href="/talk/${ tutorVo.user_id }">대화시작</a>　　<a href="/rooms/">대화방 목록</a>
+                	<!-- 대화방 목록에 수식 걸어서 내아이디 포함된 방만 보여주기 -->
                 	</div>
                 <br>
                 </c:forEach>
