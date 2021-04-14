@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="CommBoard">
+  
+	<select id="CommList" resultType="sjls.todotalk.board.vo.CommBoardVo" >
+		SELECT BOARD_NAME, COMM_IDX, COMM_TITLE, COMM_CONT, USER_IDX, USER_ID, COMM_REGDATE, COMM_READCOUNT
+		FROM COMM_BOARD
+	</select>
+	
+	<select id="fileList" resultType="sjls.todotalk.board.vo.CommFileVo" >
+		SELECT FILE_IDX, FILE_NAME, FILE_EXT, SFILE_NAME, COMM_IDX
+		FROM COMM_FILES
+	</select>
+	
+	
+	<select id="CommRead" resultType="sjls.todotalk.board.vo.CommBoardVo" >
+		SELECT BOARD_NAME, COMM_IDX, COMM_TITLE, COMM_CONT, USER_IDX, USER_ID, COMM_REGDATE, COMM_READCOUNT
+		FROM COMM_BOARD
+		WHERE COMM_IDX=#{comm_idx}
+	</select>
+	
+	<insert id="CommWrite">
+		INSERT INTO todotalk.COMM_BOARD
+		(BOARD_NAME, COMM_TITLE, COMM_CONT, USER_ID, COMM_REGDATE, COMM_READCOUNT)
+		VALUES('COMM', #{comm_title}, #{comm_cont}, #{user_id}, now(), 0)
+	</insert>
+	
+	<insert id="fileWrite" >
+		INSERT INTO COMM_FILES
+		(FILE_NAME, FILE_EXT, SFILE_NAME, COMM_IDX)
+		VALUES(#{file_name}, #{file_ext}, #{sfile_name}, #{comm_idx})
+	</insert>
+	
+	<delete id="delete">
+		DELETE FROM COMM_BOARD
+		WHERE COMM_IDX=#{comm_idx}
+	</delete>
+	
+	<update id="CommUpdate">
+		UPDATE COMM_BOARD
+		SET BOARD_NAME='COMM', COMM_TITLE=#{comm_title}, COMM_CONT=#{comm_cont}, COMM_REGDATE=NOW(), COMM_READCOUNT=0
+		WHERE COMM_IDX=#{comm_idx};
+	</update>
+  
+  </mapper>        
+  
+  
+  
+  
+  
+  

@@ -23,7 +23,7 @@ public class FreeCotroller {
 	@Autowired
 	private FreeBoardService boardService;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/freeList")
 	public String FreeList(Model model) {
 		//ModelAndView mv = new ModelAndView();
 		
@@ -41,11 +41,13 @@ public class FreeCotroller {
 	
 	@RequestMapping("/write")
 	public String Write(FreeBoardVo vo) {
-		//db에 저장 
+		//글제목, 본문 db에 저장 
 		boardService.insertBoard(vo);
+		
 		
 		return  "redirect:/list"; 
 	}
+	
 	
 	@RequestMapping("/read")
 	public  String Read(HttpServletRequest request, Model model) {
