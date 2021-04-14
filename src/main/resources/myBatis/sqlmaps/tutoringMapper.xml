@@ -25,7 +25,7 @@
     </select>
     
     <select id="Question1List" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TuboVo">
-    	SELECT	* FROM TUTOR_BOARD WHERE #{tubo_title} = #{Question1}
+    	SELECT	* FROM TUTOR_BOARD WHERE tubo_title = 'Question1'
     </select>
 
 
