@@ -1,25 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"  %>    
-<%@taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%@include file="../layout/header.jsp"%>
 
-<script>
- 	$(function () {
- 		var html='';
-		$.ajax({
-			url : '/postReply',
-			type : 'POST',
-			success : function(result){
-				html += '';	// (result.replyList.menu_id 
-				html += '<li></li>';
-			},
-			error : function (xhr) {
+<script> 
+		function tureList(){
+			var formData = $("#replyForm").serialize();
+			$.ajax({
+				url : '/postReply',
+				type : 'POST',
+				data : formData,
+				success : function(result){
+					var html			= '';
+					html += '<div class="leftcolumn">';	// (result.replyList.menu_id 
+					html += '<div class="card">';
+					html += ' <h5>'+ result.tureVo.user_id +', ' + result.tureVo.tubo_regdate + '</h5>';
+					html += ' <p>' + result.tureVo.tubo_regdate + '</p>';
+					html += '</div>';
+					html += '</div>';
+					$("#newlyWrittenReply").append(html);
+					
+				},
+				error : function(xhr){
+					alert(xhr.status + ", " + xhr.statusText);
+				}
 				
-			}
-			$('#replyDiv').append(html);
-		});
-	}); 
+			}); //ajax
+		}
+ 	 	$(function () {
+ 		
+ 		$(document).on('click','#submit', function(e){
+ 			tureList();
+
+ 		}) //document.on
+ 		
+	}); //function
+</script>
+<script>
+	$(document).ready(function(){
+	  $("#cont").click(function(){
+	    $("#tb_repcont").clone().appendTo("body");
+	  });
+	});
 </script>
     <div class="sub-main-wrap">
         <%@include file="../layout/leftMenu.jsp"%>
@@ -56,10 +78,10 @@
 		  <br>
 
 				<!-- 댓글쓰는 폼 -->
-				<form action="<c:url value="/postReply"/>" method="POST" name="replyForm" id="replyForm">
+ 				<form name="replyForm" id="replyForm">
 			   		<input type="hidden" name="user_idx"   		value="5" />     
 			   		<input type="hidden" name="tubo_idx"   		value="${ tuboVo.tubo_idx }" />     
-			   		<input type="hidden" name="tubo_regdate"    value="${ tuboVo.tubo_regdate }" />     
+			   		<input type="hidden" name="tubo_regdate"    id = "tubo_regdate" value="${ tuboVo.tubo_regdate }" />     
 					   <table id="writeTable">
 						    <tr>
 						    	<h2>첨삭 댓글 쓰기</h2>
@@ -71,6 +93,7 @@
 						    </tr>
 						    <tr>
 						      <td><textarea name="tb_repcont" id="tb_repcont"></textarea></td>
+						      
 						    </tr> 
 							<!--     <tr>
 							      <td>파일</td>
@@ -81,11 +104,16 @@
 							    </tr>  -->
 						    <tr>      
 						      <td colspan="2">
-						        <button type="submit"> 확인 </button>
+						        <button type="submit" id="submit"> 확인 </button>
 						      </td>
 						    </tr> 
 					   </table> 
 			  	</form>
+
+		  		<div id="newlyWrittenReply">
+		  		</div>
+		  		
+	 
 
 			<!-- 댓글 리스트 -->
 		  	<c:forEach var="tureVo"  items="${ tureVo }">
@@ -99,8 +127,7 @@
 	  		</div>
 		  	
 		  	</c:forEach>
-		  		<div id="replyDiv">
-		  		</div>
+		  	
 				<!--여기부터 컨텐츠내용 작업 끝-->
             </div>
             <footer>

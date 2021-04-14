@@ -71,7 +71,7 @@ public class HomeController {
 		
 		return mav;		
 	}
-	@@RequestMapping(value="/talk/{id}", method=RequestMethod.GET) 
+	@RequestMapping(value="/talk/{id}", method=RequestMethod.GET) 
 	public String talk (@PathVariable String id, Model model){		//클릭한 방의 id를 roomVo에 저장하고, 경로 지정
 		RoomVo roomVo = chatRoomService.createRoomById(id);			//회원 로그인 되면 토크 거는사람 아이디도 받아오기
 																	

@@ -1,18 +1,9 @@
 
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"  %>    
+<%@taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"  %>     
 <%@include file="../layout/header.jsp"%>
 
-<script>
-	function openForm() {
-	  document.getElementById("myForm").style.display = "block";
-	}
-	function closeForm() {
-	  document.getElementById("myForm").style.display = "none";
-	}
-</script>
 <script>
    $(function() {
 	   $('input[type=submit]').on('click', function(event) {
@@ -27,30 +18,36 @@
             <div class="middle-content-wrap2">
                 <!--여기부터 컨텐츠내용 작업시작-->
                                
-	<h1>Daily Practice</h1>
-
-	<div class="grid-container"> 
- 	  <div class="grid-item" id="tubo_title1"><a href="/tutoringwrite/view/question?tubo_title=Question1">Question1</a></div>
- 	  <div class="grid-item" id="tubo_title1"><a href="/tutoringwrite/view/question?tubo_title=Question2">Question2</a></div>
-	</div>
- 
-
-
+	<h1>Question 1</h1>	
+	 
+  <form action="/postwriting" method="POST">
+  <table id="board">
+  	<input type="hidden" name="user_idx"         value="5" />     
+	<input type="hidden" name="tubo_title"       value="Question1" />     
+    <caption><h2>게시물 등록</h2></caption>
+    <tr>
+      <td class="td2"><input type="text" id="user_id" name="user_id"  value="tutor01" readonly/></td>
+    </tr>
+	<tr>
+	<td><textarea name="tubo_cont" id="tubo_cont" placeholder="이거 보고계신분, 이거 크기좀 늘려주십쇼"></textarea></td>
+	</tr> 
+   
+    <tr>
+      <td colspan="2">
+       <input type="submit" value="저장" />
+      </td>
+    </tr>
+  </table>
+  </form>
 	
-	<c:forEach var="tuboVo"  items="${ tuboList }">
-		<div class="row">
-	 		 <div class="leftcolumn">
-			    <div class="card">
-			      <h5>${tuboVo.user_id}, ${tuboVo.tubo_regdate}</h5>
-			      <p><a href="/tutoringwrite/view?tubo_idx=${ tuboVo.tubo_idx }&user_id=${tuboVo.user_id}&tubo_regdate=${tuboVo.tubo_regdate}&tubo_title=${tuboVo.tubo_title}">${tuboVo.tubo_cont}</a></p>
-			    </div> 
-	  		 </div><!-- <div class="leftcolumn"> -->
-	  		
-		  <div class="rightcolumn">
-			<button class="open-button" onclick="openForm()">Do exercise!</button>
+	
+	
+​
+		 <%--  <div class="rightcolumn">
 				<div class="form-popup" id="myForm">
 					<form action="<c:url value="/postwriting"/>" method="POST" id="postwriting">
 			   		<input type="hidden" name="user_idx"         value="5" />     
+			   		<input type="hidden" name="tubo_title"       value="Question1" />     
 
 					   <table id="writeTable">
 						    <tr>
@@ -60,20 +57,6 @@
 						      <td><input type="text" name="user_id"  id="user_id"
 						        value="tutor01" readonly /> <!-- 로그인된 유저아이디  -->
 						      </td>
-						    </tr>
-						    <tr>
-						    	<div class="question-select" style="width:200px;">
-						    		<select name="tubo_title" id="tubo_title" style="width:200px;">
-						    			<option value="0"> 주제를 선택하세요 </option>
-						    			<option value="Question1"> Question1 </option>
-						    			<option value="Question2"> Question2 </option>
-						    			<option value="Question3"> Question3 </option>
-						    			<option value="Question4"> Question4 </option>
-						    			<option value="Question5"> Question5 </option>
-						    			<option value="Question6"> Question6 </option>
-						    			<option value="자유"> 자유 </option>
-						    		</select>
-						    	</div>
 						    </tr>
 						    <tr>
 						      <td><textarea name="tubo_cont" id="tubo_cont" placeholder="이거 보고계신분, 이거 크기좀 늘려주십쇼"></textarea></td>
@@ -94,6 +77,16 @@
 			  		</form>
 				</div><!-- <div class="form-popup" id="myForm"> -->
 			</div><!-- <div class="rightcolumn"> -->
+	 --%>
+	<c:forEach var="Question"  items="${ tuboListOfQuestion1 }">	
+		<div class="row">
+	 		 <div class="leftcolumn">
+			    <div class="card">
+			      <h5>${Question.user_id}, ${Question.tubo_regdate}</h5>
+			      <p><a href="/tutoringwrite/view?tubo_idx=${ Question.tubo_idx }&user_id=${Question.user_id}&tubo_regdate=${Question.tubo_regdate}&tubo_title=${Question.tubo_title}">${Question.tubo_cont}</a></p>
+			    </div> 
+	  		 </div><!-- <div class="leftcolumn"> -->
+	  		
 	  	</div><!-- <div class="row"> -->
 	</c:forEach>
 
