@@ -117,24 +117,24 @@ public class TutoringController {
 
 	}
 
-	@RequestMapping(value = "/postreply", method = RequestMethod.POST)
-	public String postReply(TureVo tureVo, @RequestParam HashMap<String, Object> map) {
+	//댓글달기 ajax
+	@RequestMapping(value = "/postReply", method = RequestMethod.POST)
+	public ModelAndView postReply(TureVo tureVo, @RequestParam HashMap<String, Object> map) {
 
 		ModelAndView mav = new ModelAndView();
-		// 댓글리스트 땡겨와서 넣기
-		// addObject 에 떙겨온 리스트(replyList) 넣기 -> ajax에서 result로 불러오기
-		// (result.replyList.user_id)
-
+		
 		tutoringService.insertReply(tureVo);
 
-		String tubo_idx = (String) map.get("tubo_idx");
-		String user_id = (String) map.get("user_id");
-		String tubo_regdate = (String) map.get("tubo_regdate");
-		System.out.println("tubo_idx : " + tubo_idx + "user_id : " + user_id + "tubo_regdate : " + tubo_regdate);
+		List<TureVo> tureVo2 = tutoringService.getReplyView(map);
+		
+//		String tubo_idx = (String) map.get("tubo_idx");
+//		String user_id = (String) map.get("user_id");
+//		String tubo_regdate = (String) map.get("tubo_regdate");
 
-		mav.setViewName("jsonView");
+		mav.addObject("tureVo", tureVo2);
+//		mav.setViewName("jsonView");
 
-		return null;
+		return mav;
 	}
 
 }

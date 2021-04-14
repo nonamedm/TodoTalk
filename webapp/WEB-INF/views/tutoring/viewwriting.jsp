@@ -3,28 +3,22 @@
 <%@taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"  %>    
 <%@include file="../layout/header.jsp"%>
 
-<!-- <script>
- 	 	$(function () {
- 		
- 		$(document).on('click','#submit', function(e){
- 			
- 			 			
- 		var html			= '';
- 		var user_id			= document.getElementById("user_id");
- 		var tb_repcont		= document.getElementById("tb_repcont"); 		
- 		var tubo_regdate	= document.getElementById("tubo_regdate"); 		
- 			
- 			$.ajax({
+<script>
+		function tureList(){
+			var formData = $("#replyForm").serialize();
+			$.ajax({
 				url : '/postReply',
 				type : 'POST',
+				data : formData,
 				success : function(result){
+					var html			= '';
 					html += '<div class="leftcolumn">';	// (result.replyList.menu_id 
 					html += '<div class="card">';
-					html += ' <h5>'+ user_id +', ' + tubo_regdate + '</h5>';
-					html += ' <p>' + tubo_regdate + '</p>';
+					html += ' <h5>'+ result.tureVo.user_id +', ' + result.tureVo.tubo_regdate + '</h5>';
+					html += ' <p>' + result.tureVo.tubo_regdate + '</p>';
 					html += '</div>';
 					html += '</div>';
-					$("#newlyWrittenReply").html(html);
+					$("#newlyWrittenReply").append(html);
 					
 				},
 				error : function(xhr){
@@ -32,9 +26,16 @@
 				}
 				
 			}); //ajax
+		}
+ 	 	$(function () {
+ 		
+ 		$(document).on('click','#submit', function(e){
+ 			tureList();
+
  		}) //document.on
+ 		
 	}); //function
-</script> -->
+</script>
 <script>
 	$(document).ready(function(){
 	  $("#cont").click(function(){
@@ -77,7 +78,7 @@
 		  <br>
 
 				<!-- 댓글쓰는 폼 -->
- 				<form action="<c:url value="/postreply"/>" method="POST" name="replyForm" id="replyForm">
+ 				<form name="replyForm" id="replyForm">
 			   		<input type="hidden" name="user_idx"   		value="5" />     
 			   		<input type="hidden" name="tubo_idx"   		value="${ tuboVo.tubo_idx }" />     
 			   		<input type="hidden" name="tubo_regdate"    id = "tubo_regdate" value="${ tuboVo.tubo_regdate }" />     

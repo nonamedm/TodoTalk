@@ -29,9 +29,9 @@
                                
 	<h1>Daily Practice</h1>
 
-	<%-- <c:forEach var="tuboVo"  items="${ tuboList }"> --%> 
 	<div class="grid-container"> 
  	  <div class="grid-item" id="tubo_title1"><a href="/tutoringwrite/view/question?tubo_title=Question1">Question1</a></div>
+ 	  <div class="grid-item" id="tubo_title1"><a href="/tutoringwrite/view/question?tubo_title=Question2">Question2</a></div>
 	</div>
 
 
