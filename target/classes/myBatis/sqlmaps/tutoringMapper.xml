@@ -25,11 +25,11 @@
     </select>
     
     <select id="Question1List" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TuboVo">
-    	SELECT	* FROM TUTOR_BOARD WHERE tubo_title = 'Question1' ORDER BY TUBO_REGDATE DESC;
+    	SELECT	* FROM TUTOR_BOARD WHERE tubo_title = 'Question1'
     </select>
     
     <select id="Question2List" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TuboVo">
-    	SELECT	* FROM TUTOR_BOARD WHERE tubo_title = 'Question2' ORDER BY TUBO_REGDATE DESC;
+    	SELECT	* FROM TUTOR_BOARD WHERE tubo_title = 'Question2'
     </select>
 
 

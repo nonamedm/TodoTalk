@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import sjls.todotalk.user.service.AllSearchService;
 import sjls.todotalk.user.service.ChatRoomService;
+import sjls.todotalk.user.vo.MessageVo;
 import sjls.todotalk.user.vo.RoomVo;
 import sjls.todotalk.user.vo.UserVo;
 
@@ -75,8 +75,8 @@ public class ChatController {
 		return "room";
 	}
 	
-											//다음 할일  : 대화 db저장 -> 창닫기 인식 또는 나가기 버튼 클릭 시
-											//창닫기가 onClose로 인식되도록 바꾸기. 그리고 onClose에 DB저장 수식 넣기
+											//다음 할일  : 창닫기 인식 또는 나가기 버튼 클릭 시
+											//창닫기가 onClose로 인식되도록 바꾸기. 
 											//채팅창에 DB 불러오기 및 스크롤 지정하기
 	
 	
@@ -84,9 +84,24 @@ public class ChatController {
 	public String rooms (Model model) {
 		Object chatRooms = new HashMap<String,RoomVo>();
 		chatRooms = chatRoomService.findAllRoom();
-		model.addAttribute("rooms",chatRooms);						//개설된 모든 대화방을 찾아서 rooms에 입력
+		model.addAttribute("rooms",chatRooms);			//개설된 모든 대화방을 찾아서 rooms에 입력
 		//System.out.println("넘어온 값 : "+chatRoomRepository.findAllRoom()); 확인
 		
 		return "rooms";
 	}
+	
+	@RequestMapping(value="/loadTalk", method=RequestMethod.POST)
+	public ModelAndView loadTalk (HttpServletRequest request) {
+		String roomId = request.getParameter("roomId");
+		List<MessageVo> loadMessage = new ArrayList<MessageVo>();
+		ModelAndView mav = new ModelAndView();
+		loadMessage = chatRoomService.loadAllMessage(roomId);
+		
+		System.out.println("메세지 불러오기 확인 : "+loadMessage);
+		mav.addObject("loadMessage",loadMessage);
+		mav.setViewName("jsonView");
+		
+		return mav;
+	}
+	
 }

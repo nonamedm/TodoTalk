@@ -33,7 +33,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	
 	@Override
 	public RoomVo createRoomById(String id1, String id2) {
-		System.out.println("중복검색할 id값 : "+id1 + "," + id2);
+		
 		RoomVo roomVo = new RoomVo();
 		roomVo.setRoomId(UUID.randomUUID().toString());						//랜덤아이디 셋팅
 		roomVo.setName(id1+id2);
@@ -48,7 +48,6 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 			createRoom.put("room_id", roomId);
 			roomVo.setRoomId(roomId);
 			chatRooms.put(roomVo.getRoomId(), roomVo);					//중복되면 안들어감
-			System.out.println("chatRooms값 : "+chatRooms.values() );
 
 		} else {
 			
@@ -70,7 +69,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	}
 
 	@Override
-	public void handleActions(WebSocketSession session, MessageVo messageVo, ObjectMapper objectMapper) {
+	public void handleActions(WebSocketSession session, MessageVo messageVo, ObjectMapper objectMapper) throws Exception {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		if(messageVo.getType().equals(MessageType.ENTER)) {
@@ -100,14 +99,21 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 				if(roomNumber.equals(sessions.get(i).get("roomNumber"))) {
 					//System.out.println( "세션 출력테스트 : "+sessions.get(i).get("session")); 확인
 					WebSocketSession sess = (WebSocketSession) sessions.get(i).get("session");
-					sess.sendMessage(textMessage);
-				}
+					sess.sendMessage(textMessage);					//메세지를 room.jsp로 전송하고
+					chatDao.saveMessage(messageVo);				//메세지 내용을 db에 저장
+					
+				} 
 			}
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	@Override
+	public List<MessageVo> loadAllMessage(String roomId) {
+		List<MessageVo> loadMessage = chatDao.loadAllMessage(roomId);
+		return loadMessage;
 	}
 
 }

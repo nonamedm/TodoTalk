@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@include file="layout/header.jsp"%>
+    <div class="sub-main-wrap">
+    	<%@include file="layout/leftMenu.jsp"%>
+        <div class="sub-container-wrap">
+            <%@include file="layout/allSearchHeader.jsp"%>
 
 <!DOCTYPE html>
 <head>
@@ -17,11 +22,30 @@
 			sock.onmessage = onMessage;
 			sock.onclose = onClose;
 			console.dir(sock);
-			
-			var nickname='test용';					//접속하는 사람 id 받아서 쓸 예정
+			//채팅창에 기존값 불러오기
+			var nickname='${login.user_id}';		//접속한 사람 id
 													//로그인 안되어있으면 동작X
 			var msg;
-			var roomId = '${room.roomId}';			//채팅 시작 할 상대방 아이디
+			var roomId = '${room.roomId}';			//방번호
+			var loadText = '';
+			$.ajax({
+				url : '/loadTalk',
+				type : 'POST',
+				data : { roomId : roomId },
+				success : function(result){			///result.셋오브젝트이름.변수
+					//console.dir(result.loadMessage);
+					for (var i = 0; i < result.loadMessage.length; i++) {
+						//alert(result.loadMessage[i].message); loadMessage 전달 확인
+						loadText += '<br>'+result.loadMessage[i].message;
+					}
+					var chatroom =	 $('#chatroom');
+					chatroom.append(loadText);
+				},
+				error : function(xhr){
+					alert(xhr.status + " : "+xhr.statusText);
+				}
+			});
+			
 			
 			
 			$('#send').on('click',function(){
@@ -63,7 +87,15 @@
 					type : 'LEAVE',
 					sender : nickname
 				}));
+				
+				
 			}
+			//인풋에서 Enter치면 send 메소드 실행
+			$("#message").keydown(function(key){
+				if(key.keyCode == 13){
+					send();
+				}
+			});
 	});
 </script>
 
