@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 
 public class PdsFile {
 
@@ -22,7 +21,18 @@ public class PdsFile {
 		
 		// 자료실 파일 저장될 경로
 		String   filePath  = "c:\\upload\\";
-		
+		File fileFolder = new File(filePath);
+		if (!fileFolder.exists()) {
+			try{
+				fileFolder.mkdir(); //폴더 생성합니다.
+			    System.out.println("폴더가 생성되었습니다.");
+		        } 
+		        catch(Exception e){
+			    e.getStackTrace();
+			}        
+	         }else {
+			System.out.println("이미 폴더가 생성되어 있습니다.");
+		}
 		MultipartHttpServletRequest  multipartHttpServletRequest
 		 =  (MultipartHttpServletRequest) request;
 		
