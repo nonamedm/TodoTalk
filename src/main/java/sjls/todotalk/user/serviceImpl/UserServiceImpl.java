@@ -1,6 +1,7 @@
 package sjls.todotalk.user.serviceImpl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,6 +68,25 @@ public class UserServiceImpl implements UserService {
 		}
 		
 	}
+	
+	@Override
+	public int attendanceCheckYn(HashMap<String, Object> map) {
+		int result = userDao.attendanceCheckYn(map);
+		return result;
+	}
+	
+	@Override
+	public void attendanceCheck(HashMap<String, Object> map) {
+		userDao.attendanceCheck(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> attendanceTag(String userid) {
+		List<Map<String, Object>> attendanceList = userDao.attendanceTag(userid);
+		return attendanceList;
+	}
+
+	
 
 
 }

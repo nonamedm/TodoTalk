@@ -47,31 +47,43 @@
                       var month = ("00"+(now.getMonth()+1)).slice(-2);
                       var day   = now.getDate();
                       var today = year+"-"+month+"-"+day;
-    	        	  alert($("#attendanceCheck_userid").val());
+                      var hour  = now.getHours();
+                      var min  = now.getMinutes();
+                      var sec  = now.getSeconds();
+                      
     	        	  $.ajax({
-    	        		  url : '',
+    	        		  url : '/attendanceCheck',
     	        		  type : 'POST',
     	        		  data : {
     	        			  userid : $("#attendanceCheck_userid").val(),
     	        			  today  : today
     	        		  },
     	        		  success : function (result){
+    	        			  if(result.attendanceCheckYn == 1){
+    	        				  alert("이미 출석 하셨습니다.");
+    	        			  }
     	        			  
+    	        			  if(result.attendanceCheckYn2 == 1){
+    	        				  alert("출석완료");
+    	        			  }
     	        		  },
     	        		  error : function (xhr){
-    	        			  
+    	        			  alert(xhr.status + ", " + xhr.statusText);
     	        		  }
     	        	  });
                       
     	          }
     	        }
     	    },
-    	    events: [
-                {
-                    title : "All Day Event"
-                  , start : "2021-04-01"
-              },
-			]
+    	    events: {
+    	    	url : '/attendanceTag',
+    	    	extraParams : {
+    	    		userid : $("#attendanceCheck_userid").val()
+    	    	},
+    	    	success : function(response){
+    	    		
+    	    	}
+    	    }
         });
         calendar.render();
       });

@@ -25,5 +25,16 @@ public interface UserDao {
 	
 	// 프로필 사진 
 	void savePhoto(HashMap<String, Object> map);
+	
+	//유저출석체크여부
+	public int attendanceCheckYn(HashMap<String, Object> map);
+	
+	//유저 출석쳌
+	public void attendanceCheck(HashMap<String, Object> map);
+	
+	//출석현황리스트
+	public List<Map<String, Object>> attendanceTag(String userid);
+
+	
 
 }

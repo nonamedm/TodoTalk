@@ -1,5 +1,6 @@
 package sjls.todotalk.user.daoImpl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,6 +72,26 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void savePhoto(HashMap<String, Object> map) {
 		sqlSession.insert("user.savephoto",map);
+	}
+
+	
+	@Override
+	public void attendanceCheck(HashMap<String, Object> map) {
+		sqlSession.insert("user.attendanceCheck", map);
+	}
+
+
+	@Override
+	public int attendanceCheckYn(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("user.attendanceCheckYn", map);
+		return result;
+	}
+
+
+	@Override
+	public List<Map<String, Object>> attendanceTag(String userid) {
+		List<Map<String, Object>> attendanceList = sqlSession.selectList("user.attendanceTag", userid);
+		return attendanceList;
 	}
 	
 	
