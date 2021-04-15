@@ -76,7 +76,6 @@ public class TutoringController {
 		 
 
 		List<TuboVo> tuboListOfQuestion1 = tutoringService.getQuestion1List(map);
-
 		//List<TureVo> tureVo = tutoringService.getReplyView(map);
 
 		ModelAndView mav = new ModelAndView();
