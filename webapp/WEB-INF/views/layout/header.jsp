@@ -11,9 +11,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" type="text/css" href="/css/import.css" />
+    
+    <!-- calendar를 위한 css 지우면 안됨 -->
+    <link rel="stylesheet" type="text/css" href="/css/fullCalendar.css" />
+    
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/script.js"></script>
     <script src="/js/TweenMax.min.js"></script>
     <script src="/js/common.js"></script>
+    
+
 </head>
+    
 <body>
