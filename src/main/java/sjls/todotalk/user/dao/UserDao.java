@@ -2,6 +2,7 @@ package sjls.todotalk.user.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import sjls.todotalk.user.vo.UserVo;
 
@@ -21,5 +22,8 @@ public interface UserDao {
 	
 	// user  비밀번호 찾기
 	UserVo find_pwd(HashMap<String, Object> map);
+	
+	// 프로필 사진 
+	void savePhoto(HashMap<String, Object> map);
 
 }

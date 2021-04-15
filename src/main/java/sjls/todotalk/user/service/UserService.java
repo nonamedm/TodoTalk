@@ -1,6 +1,9 @@
 package sjls.todotalk.user.service;
 
 import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,5 +25,12 @@ public interface UserService {
 	
 	//비번 찾기
 	UserVo find_pwd(HashMap<String, Object> map);
+	
+
+	// 프로필 삽입
+	void savePhoto(HashMap<String, Object> map, HttpServletRequest request);
+	
+//	// 비밀 번호 재설정
+//	void user_pwdupdate(HashMap<String, Object> map);
 
 }

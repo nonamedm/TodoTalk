@@ -2,6 +2,7 @@ package sjls.todotalk.user.daoImpl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,9 +61,16 @@ public class UserDaoImpl implements UserDao {
 	//비밀번호 찾기
 	@Override
 	public UserVo find_pwd(HashMap<String, Object> map) {
-		UserVo vo = sqlSession.selectOne("user.find_pwd",map);
-		
+		sqlSession.selectOne("user.find_pwd",map);
+		UserVo vo = sqlSession.selectOne("user.userid", map); 
 		return vo;
+	}
+
+
+	// 프로필 저장 DB
+	@Override
+	public void savePhoto(HashMap<String, Object> map) {
+		sqlSession.insert("user.savephoto",map);
 	}
 	
 	

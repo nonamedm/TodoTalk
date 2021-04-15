@@ -1,9 +1,9 @@
 package sjls.todotalk.user.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +15,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import sjls.todotalk.user.vo.RoomVo;
 import sjls.todotalk.user.dao.Sha256;
 import sjls.todotalk.user.service.AllSearchService;
 import sjls.todotalk.user.service.ChatRoomService;
 import sjls.todotalk.user.service.UserService;
+import sjls.todotalk.user.vo.RoomVo;
 import sjls.todotalk.user.vo.UserVo;
 
 
 @Controller
 public class HomeController {
+	
 	
 	@Autowired
 	private UserService userService;
@@ -33,7 +34,6 @@ public class HomeController {
 	public String home() {
 		return "home";		
 	}
-	
 	
 	// 로그인 화면
 		@RequestMapping("/LoginForm")
@@ -151,26 +151,15 @@ public class HomeController {
 				System.out.println("기존 PWD"+ user_pwd2);
 				
 				
-				
+				// 암호화 작업
 				Sha256 sha = new Sha256();
 				String shaPwd = sha.encrypt(user_pwd2);
 				
 				map.put("user_pwd", shaPwd);
 				System.out.println("map :"+map);
-					
-				
-				
-				
 				
 				
 			userService.inserUser(map);
-			
-			
-			
-			
-			
-
-			
 			
 			return "redirect:/";     // �씠�룞�븷 jsp �씠由�
 		}
@@ -248,10 +237,17 @@ public class HomeController {
 			
 				return "login/user_info"; 
 			}
-			// 회원정보 업데이트 
+			// 회원정보 업데이트  프로필 사진 업로드
+			
 			@RequestMapping("/User_UpDate")
-			public String user_update( HttpSession session ,  @RequestParam HashMap <String , Object>   map	) {
+			public String user_update(HttpServletRequest request,HttpSession session ,  @RequestParam HashMap <String , Object> map) throws Exception {
 //				ModelAndView mv = new ModelAndView();
+		//-----------------------------------------
+				
+				userService.savePhoto(map, request);
+			
+				
+		//-----------------------------------------
 				System.out.println("1"+map);
 				 userService.getuser_info(map);
 				map.remove("user_idx",   map.get("user_idx"));
@@ -297,7 +293,7 @@ public class HomeController {
 		
 			@RequestMapping("/Find")
 			public String find() {
-				return "find";		
+				return "login/find";		
 			}
 			@RequestMapping("/Find_Id")
 			public String find_id( ) {
@@ -309,23 +305,39 @@ public class HomeController {
 			}
 			@RequestMapping("/Find_Pwd")
 			public String find_pwd( ) {
-				return "find";		
+				return "login/find_pwd";		
 			}
 		
 			@RequestMapping("/Find_PwdLoding")
 			public String find_pwdloding(HttpSession session, @RequestParam HashMap<String , Object> map) {
 				System.out.println("비번 찾기 "+map);
-				UserVo vo =userService.find_pwd(map);
-//				session.setAttribute("user_id", map.get("user_id"));
-				if(vo!= null) {
-					session.setAttribute("user_idx", vo);
-					return  "redirect:/"; 
-				}else {
-					return  "redirect:/"; 
-					
+				
+				String user_pwd2 =(String) map.get("user_pwd");
+				
+				System.out.println("기존 PWD"+ user_pwd2);
+				
+				// 암호화 작업
+				Sha256 sha = new Sha256();
+				String shaPwd = sha.encrypt(user_pwd2);
+				
+				map.put("user_pwd", shaPwd);
+				System.out.println("map :"+map);
+				
+				
+				
+				
+				UserVo vo =userService.find_pwd(map); 
+				
+				
+				
+				
+				
+//				
+				if (vo != null) {
+					return "redirect:/";
 				}
 				
-//				return "find";		
+				return "";		
 			}
 	
 	

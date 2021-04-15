@@ -1,6 +1,9 @@
 package sjls.todotalk.user.serviceImpl;
 
 import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,6 +54,18 @@ public class UserServiceImpl implements UserService {
 	public UserVo find_pwd(HashMap<String, Object> map) {
 		UserVo vo = userDao.find_pwd(map);
 		return vo ;
+	}
+
+
+	@Override
+	public void savePhoto(HashMap<String, Object> map, HttpServletRequest request) {
+		ProFilePhoto.savePhoto(map,request);
+		
+		System.out.println(map);
+		if(map.get("user_photo")!=null) {
+			userDao.savePhoto(map);
+		}
+		
 	}
 
 
