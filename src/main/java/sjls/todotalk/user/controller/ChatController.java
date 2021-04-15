@@ -77,7 +77,7 @@ public class ChatController {
 	
 											//다음 할일  : 창닫기 인식 또는 나가기 버튼 클릭 시
 											//창닫기가 onClose로 인식되도록 바꾸기. 
-											//채팅창에 DB 불러오기 및 스크롤 지정하기
+											//채팅창에 스크롤 지정하기
 	
 	
 	@RequestMapping("/rooms")
@@ -97,7 +97,7 @@ public class ChatController {
 		ModelAndView mav = new ModelAndView();
 		loadMessage = chatRoomService.loadAllMessage(roomId);
 		
-		System.out.println("메세지 불러오기 확인 : "+loadMessage);
+		//System.out.println("메세지 불러오기 확인 : "+loadMessage);
 		mav.addObject("loadMessage",loadMessage);
 		mav.setViewName("jsonView");
 		

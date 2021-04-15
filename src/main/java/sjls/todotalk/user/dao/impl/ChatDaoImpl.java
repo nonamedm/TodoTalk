@@ -42,6 +42,7 @@ public class ChatDaoImpl implements ChatDao {
 		
 		System.out.println("DB 저장할 messageVo값 : "+messageVo);	//type있는지 확인하고 enter, leave 거르기
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		
 		if(messageVo.getType().toString().equals("CHAT")) {
 		map.put("messageVo", messageVo);
 		sqlSession.insert("talk.saveMessage",map);

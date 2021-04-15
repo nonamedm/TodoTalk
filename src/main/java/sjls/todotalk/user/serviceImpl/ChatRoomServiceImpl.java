@@ -89,7 +89,10 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 			System.out.println("남은 세션 수 : "+sessions.size());
 			
 		} else {
-			messageVo.setMessage(messageVo.getSender()+" : "+messageVo.getMessage());
+			if(messageVo.getMessage().length()!=0) {
+				messageVo.setMessage(messageVo.getSender()+":"+messageVo.getMessage());
+				chatDao.saveMessage(messageVo);				//메세지 내용을 db에 저장
+			}
 		}
 		try {
 			TextMessage textMessage = new TextMessage(objectMapper.writeValueAsString(messageVo.getMessage()));		// 
@@ -100,8 +103,6 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 					//System.out.println( "세션 출력테스트 : "+sessions.get(i).get("session")); 확인
 					WebSocketSession sess = (WebSocketSession) sessions.get(i).get("session");
 					sess.sendMessage(textMessage);					//메세지를 room.jsp로 전송하고
-					chatDao.saveMessage(messageVo);				//메세지 내용을 db에 저장
-					
 				} 
 			}
 		} catch (JsonProcessingException e) {
