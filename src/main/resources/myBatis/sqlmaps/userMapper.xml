@@ -18,7 +18,7 @@
   		SELECT *
   		FROM  USER_INFO
   		WHERE  USER_ID = #{user_id}
-  		AND  USER_PWD = #{user_pwd}
+  		
   	</select>
   	
   	<select id="userid"
