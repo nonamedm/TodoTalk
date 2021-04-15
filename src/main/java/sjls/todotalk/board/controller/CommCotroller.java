@@ -56,6 +56,7 @@ public class CommCotroller {
 	
 	@RequestMapping("/board/comm/commRead")
 	public ModelAndView read(@RequestParam HashMap<String , Object> map) {
+		
 		List<CommBoardVo> commList = commService.getCommList(map);
 		CommBoardVo commBoardVo = commService.getCommRead(map);
 		//CommBoardVo commBoardVo = (CommBoardVo) map.get("commBoardVo");
@@ -109,7 +110,15 @@ public class CommCotroller {
 	@RequestMapping("/board/comm/commUpdateForm")
 	public ModelAndView updateForm(@RequestParam HashMap<String, Object>map, HttpServletRequest requst) {
 		
+		List<CommBoardVo> commList = commService.getCommList(map);
+		List<CommFileVo> fileList = commService.getFileList(map);
+		CommBoardVo commBoardVo = commService.getCommRead(map);
+		
+		
 		ModelAndView  mv = new ModelAndView();
+		mv.addObject("commList",  commList);
+		mv.addObject("fileList",  fileList);
+		mv.addObject("commBoardVo",  commBoardVo);
 		mv.addObject("map",  map);
 		mv.setViewName("/board/comm/commUpdate");
 		
@@ -129,11 +138,6 @@ public class CommCotroller {
 		return  mv;
 		
 	}
-	
-	
-	
-	
-	
 	
 	
 	

@@ -38,13 +38,26 @@
 		 WHERE   USER_IDX = #{user_idx}
   	</update>
   	
-  	<select id="find_pwd" 
+  	<update id="find_pwd" 
   		parameterType="hashmap">
-  		SELECT USER_IDX
-  		FROM   USER_INFO
-  		WHERE  USER_ID = #{user_id}
+  		UPDATE   USER_INFO 
+  		SET   USER_PWD = #{user_pwd}
+  		WHERE USER_ID = #{user_id}
+  	</update>
   	
-  	</select>
+  	<insert id="userfile"
+  		parameterType="hashmap"
+  	>
+  	
+   	INSERT INTO USER_INFO(USER_ID,USER_NAME,USER_PWD,USER_MAIL,COUNTRY,USER_PHONE)
+  	VALUES(#{user_id},#{user_name},#{user_pwd},#{user_mail},#{country},#{user_phone}) 
+  	</insert>
+  	
+  	<insert id="savephoto"
+  		parameterType="hashmap">
+	  INSERT INTO USER_PHOTO( USER_IDX,USER_ID , PHOTO_NAME ,PHOTO_FILEEXT,PHOTO_SFILENAME  ) 
+	   VALUES(#{user_idx},#{user_id}, #{photo_name}, #{photo_fileext}, #{photo_sfilename})
+  	</insert>
   	
   	
   	
