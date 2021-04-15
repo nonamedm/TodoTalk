@@ -16,7 +16,10 @@
 <style>
 	#notice_message {text-align: center; background-color: white;}
 	#my_message {text-align: right;}
+	#my_message_span {text-align: right; background-color: yellow; padding : 7px;}
 	#your_message {text-align: left;}
+	#your_message_span {text-align: left; background-color: yellow; padding : 7px;}
+	#chatroom {width : 400px; height : 500px; border:1px solid; background-color: lavender; overflow : scroll;}
 	
 </style>
 <script>
@@ -39,9 +42,9 @@
 						var message = result.loadMessage[i].message;
 						
 						if(sender=='${login.user_id}'){
-							loadText += '<br><div id="my_message">'+(message.substring(message.indexOf(':')+1))+'</div>';
+							loadText += '<br><div id="my_message"><span id="my_message_span">'+(message.substring(message.indexOf(':')+1))+'</span></div>';
 						} else {
-							loadText += '<br><div id="your_message">'+(message.substring(message.indexOf(':')+1))+'</div>'
+							loadText += '<br><div id="your_message"><span id="your_message_span">'+(message.substring(message.indexOf(':')+1))+'</span></div>'
 						}
 					}
 					var chatroom =	 $('#chatroom');
@@ -99,9 +102,9 @@
 				if(sender==''){
 					var	html = '<br><div id="notice_message">'+message+'</div>';
 				} else if(sender=='${login.user_id}'){
-					var html = '<br><div id="my_message">'+message+'</div>';
+					var html = '<br><div id="my_message"><span id="my_message_span">'+message+'</span></div>';
 				} else {
-					var	html = '<br><div id="your_message">'+message+'</div>';
+					var	html = '<br><div id="your_message"><span id="your_message_span">'+message+'</span></div>';
 				}
 				if(html!='<br>'){
 				chatroom.append(html);
@@ -136,7 +139,7 @@
 <label for="roomName" class="label label-default">방 이름</label>
 <label id="roomName" class="form-inline">${ room.name }</label>
 로그인유저 : ${ login.user_id }
-<div id = "chatroom" style = "width:300px; height: 300px; border:1px solid; background-color : gray; overflow:scroll"></div>
+<div id = "chatroom"></div>
 <input type = "text" id = "message" style = "height : 30px; width : 340px" placeholder="내용을 입력하세요" autofocus>
 <button class = "btn btn-primary" id = "send">전송</button>
 </body>
