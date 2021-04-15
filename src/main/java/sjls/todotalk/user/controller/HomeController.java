@@ -41,64 +41,71 @@ public class HomeController {
 			return "login/loginForm";		
 		}
 		// 로그인 과정
-		@RequestMapping("/Login")
-		public  ModelAndView login(HttpSession session, @RequestParam HashMap<String, Object> map) {
-			ModelAndView  mv = new ModelAndView();
-			
-			
-			UserVo vo = userService.getUser(map);
-			
-			System.out.println(vo);
-			
-			if( session.getAttribute("login") != null ) {
-				//  기존의 login 값이 존재하면 삭제
-				session.removeAttribute("login");
-			}
-			
-			if(vo != null) {  // 암호화가 되어있지 않은 로그인
-				session.setAttribute("login",          vo);
-				session.setAttribute("user_id",        vo.getUser_id());
-				session.setAttribute("user_idx",       vo.getUser_idx());
-				session.setAttribute("user_mail",      vo.getUser_mail());
-				session.setAttribute("user_name",      vo.getUser_name());
-				session.setAttribute("user_phone",     vo.getUser_phone());
-				session.setAttribute("user_pwd",       vo.getUser_pwd());
-				session.setAttribute("user_regdate",   vo.getRegdate());
-				session.setAttribute("user_register",  vo.getRegister());
-				session.setAttribute("user_country",   vo.getCountry());
-				session.setAttribute("user_introduce", vo.getIntroduce());
-				mv.setViewName("redirect:/");
-			}else if(map!= null){  // 암화화가 되어있는 비밀번호
-				String user_pwd2 =(String) map.get("user_pwd");
+				@RequestMapping("/Login")
+				public  ModelAndView login(HttpSession session, @RequestParam HashMap<String, Object> map) {
+					ModelAndView  mv = new ModelAndView();
+					String  check = (String) map.get("user_pwd");
+					Sha256 sha = new Sha256();
+					String check2 = sha.encrypt(check);
+					
+					
+					
+					UserVo vo = userService.getUser(map);
+					
+					
+					String vocheck = vo.getUser_pwd();  // vo ㅇ
+					System.out.println(vo);
+					System.out.println(vocheck+"ddddd"+check);
+					
+					if( session.getAttribute("login") != null ) {
+						//  기존의 login 값이 존재하면 삭제
+						session.removeAttribute("login");
+					}
+					
+					if(vocheck.equals(check)) {  // 암호화가 되어있지 않은 로그인
+						session.setAttribute("login",          vo);
+						session.setAttribute("user_id",        vo.getUser_id());
+						session.setAttribute("user_idx",       vo.getUser_idx());
+						session.setAttribute("user_mail",      vo.getUser_mail());
+						session.setAttribute("user_name",      vo.getUser_name());
+						session.setAttribute("user_phone",     vo.getUser_phone());
+						session.setAttribute("user_pwd",       vo.getUser_pwd());
+						session.setAttribute("user_regdate",   vo.getRegdate());
+						session.setAttribute("user_register",  vo.getRegister());
+						session.setAttribute("user_country",   vo.getCountry());
+						session.setAttribute("user_introduce", vo.getIntroduce());
+						mv.setViewName("redirect:/");
+					}else if(vocheck.equals(check2)){  // 암화화가 되어있는 비밀번호
+						String user_pwd2 =(String) map.get("user_pwd");
+						
+//						Sha256 sha = new Sha256();
+//						String shaPwd = sha.encrypt(user_pwd2);
+//						
+						map.put("user_pwd", check2);
+						System.out.println("map :"+map);
+						
+						 vo = userService.getUser(map);
+						 	session.setAttribute("login",          vo);
+							session.setAttribute("user_id",        vo.getUser_id());
+							session.setAttribute("user_idx",       vo.getUser_idx());
+							session.setAttribute("user_mail",      vo.getUser_mail());
+							session.setAttribute("user_name",      vo.getUser_name());
+							session.setAttribute("user_phone",     vo.getUser_phone());
+							session.setAttribute("user_pwd",       vo.getUser_pwd());
+							session.setAttribute("user_regdate",   vo.getRegdate());
+							session.setAttribute("user_register",  vo.getRegister());
+							session.setAttribute("user_country",   vo.getCountry());
+							session.setAttribute("user_introduce", vo.getIntroduce());
+						
+							mv.setViewName("redirect:/");		
+					}else {
+						
+						mv.setViewName("redirect:/LoginForm");		
+						
+					}
+					return mv;    
+				}  
 				
-				Sha256 sha = new Sha256();
-				String shaPwd = sha.encrypt(user_pwd2);
-				
-				map.put("user_pwd", shaPwd);
-				System.out.println("map :"+map);
-				
-				 vo = userService.getUser(map);
-				 	session.setAttribute("login",          vo);
-					session.setAttribute("user_id",        vo.getUser_id());
-					session.setAttribute("user_idx",       vo.getUser_idx());
-					session.setAttribute("user_mail",      vo.getUser_mail());
-					session.setAttribute("user_name",      vo.getUser_name());
-					session.setAttribute("user_phone",     vo.getUser_phone());
-					session.setAttribute("user_pwd",       vo.getUser_pwd());
-					session.setAttribute("user_regdate",   vo.getRegdate());
-					session.setAttribute("user_register",  vo.getRegister());
-					session.setAttribute("user_country",   vo.getCountry());
-					session.setAttribute("user_introduce", vo.getIntroduce());
-				
-					mv.setViewName("redirect:/");		
-			}else {
-				mv.setViewName("redirect:/LoginForm");		
-				
-			}
-			return mv;    
-		}  
-		
-		
 		// 로그아웃 처리
 		@RequestMapping("/LogOut")
 		public  String  logout( HttpSession session	) {
