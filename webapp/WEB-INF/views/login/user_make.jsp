@@ -25,6 +25,8 @@
 	   			 var regNumber = /^\d{1,4}$/; 
 	   			/* var regNumber = /^[0-9]{1,4}$/; */
 	   			var temp = $('#user_phon2').val();
+		   		
+
 	   			if(!regNumber.test(temp)){
 	   				console.log('잘못된값잆니다.  다시 입력하세요');
 	   				/*  $('#user_phon2').val(temp.replace(/^\d{1,4}/g, '')); */ 
@@ -63,9 +65,6 @@
 	   		
 	   		// 회원가입눌렀을때
 			$('form').on('submit', function(e){
-				
-				
-				
 				// 아이디가  '' 이면  false
 				if(user_id.value=='' ){
 					alert('아이디를 입력 입력바랍니다');
@@ -140,7 +139,7 @@
 					user_id.focus();
 					return false;
 				// 아이디와 비밀번호가 blue 일때만 true
-				}else if($('#id_check_result').children().attr('class') == 'blue' && $('#pwd_check_result').children().attr('class') == 'blue'){
+				}else if($('#id_check_result').children().attr('class') == 'blue' && $('#pwd_check_result').children().attr('class') == 'blue' &&$('#user_mail1').val()!=''&&$('#user_mail2').val()!=''&&$('#user_mail3').val()!=''){
 					return true;
 				// 나머지 혹시 false  다른 에러있음 추가하겠습니다
 				}else{
@@ -159,21 +158,29 @@
 			// 비밀번호 체크
 			$('#button_pwd').on('click', function(e){
 				// 비밀번호가  '' 이면  false 
+				
 				if($('#user_pwd').val() ==''){
 					alert('-1');
 					$('#user_pwd').focus();
 					return false;
 				}else{
-					if(user_pwd.value==user_pwd2.value ){
-						alert('체크 완료');
-						$("#pwd_check_result").html('<b class="blue">체크완료</b>');
-						return true;
-					}else{
-						
-						alert('비밀번호를 확인해주세요');
-						$("#pwd_check_result").html('<b class="red">다시 입력하세요</b>');
-						$('#user_pwd').focus();
-						return false;	
+					 if ($('#user_pwd').val().trim().length < 5 || $('#user_pwd').val() == null) {
+						 $('#user_pwd').focus();
+	 		         	 $("#pwd_check_result").html('<b class="red">최소 6글자입니다</b>');
+							return false;
+			   		 }else {
+			   			 
+						if($('#user_pwd').val().trim().length > 5 && $('#user_pwd').val().trim().length==$('#user_pwd2').val().trim().length ){
+							alert('체크 완료');
+							$("#pwd_check_result").html('<b class="blue">체크완료</b>');
+							return true;
+						}else{
+							
+							alert('비밀번호를 확인해주세요');
+							$("#pwd_check_result").html('<b class="red">다시 입력하세요</b>');
+							$('#user_pwd').focus();
+							return false;	
+				   		}
 					}			
 				}
 				}); // 비밀번호 체크 끝
@@ -213,7 +220,17 @@
 				}else{
 					$("#user_mail2").val($("#user_mail3").val());
 				}				
-			}); // 메일뒤에  선택 예(네이버 : naver.com) 끝
+			}); 
+			$('#user_mail3').on('click', function(e){
+				if ($("#user_mail3").val() == ""){
+					$("#user_mail3").val('');
+					$("#user_mail2").attr(false);
+					$("#user_mail2").focus();
+				}else{
+					$("#user_mail2").val($("#user_mail3").val());
+				}				
+			}); 
+			// 메일뒤에  선택 예(네이버 : naver.com) 끝
 			
 			// 국가 선택 
 			$('#country1').on('keyup', function(e){
@@ -224,7 +241,17 @@
 				}else{
 					$("#country").val($("#country1").val());
 				}				
-			});// 국가 선택  끝
+			});
+			$('#country1').on('click', function(e){
+				if ($("#country1").val() == ""){
+					$("#country1").val('');
+					$("#country1").attr(false);
+					$("#country").focus();
+				}else{
+					$("#country").val($("#country1").val());
+				}				
+			});
+			// 국가 선택  끝
 			// 폰 앞번호 선택
 			$('#user_phon').on('keyup', function(e){
 				if ($("#user_phon").val() == ""){
@@ -234,7 +261,17 @@
 				}else{
 					$("#user_phon1").val($("#user_phon").val());
 				}				
-			}); 	// 폰 앞번호 선택
+			});
+			$('#user_phon').on('click', function(e){
+				if ($("#user_phon").val() == ""){
+					$("#user_phon").val('');
+					$("#user_phon").attr(false);
+					$("#user_phon1").focus();
+				}else{
+					$("#user_phon1").val($("#user_phon").val());
+				}				
+			});
+			// 폰 앞번호 선택
 			
 			
 			
