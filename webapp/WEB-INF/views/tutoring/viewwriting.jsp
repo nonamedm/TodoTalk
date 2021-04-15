@@ -91,34 +91,43 @@
 						    <tr>
 						    	<h2>첨삭 댓글 쓰기</h2>
 						    </tr>
-					 	    <tr>
-						      <td><input type="text" name="user_id"  id="user_id"
-						        value="tutor01" readonly /> <!-- 로그인된 유저아이디  -->
-						      </td>
-						    </tr>
-						    <tr>
-						      <td><textarea name="tb_repcont" id="tb_repcont"></textarea></td>
-						      
-						    </tr> 
-							<!--     <tr>
-							      <td>파일</td>
-							      <td id="tdfile">
-							        <input type="button" id="btnAddFile" value="Add file" /><br>
-							        <input type="file" name="upfile" id="upfile" /><br>        
-							      </td>
-							    </tr>  -->
-						    <tr>      
-						      <td colspan="2">
-						        <button type="submit" id="submit"> 확인 </button>
-						      </td>
-						    </tr> 
+						    	<c:choose>
+						         <c:when test="${ sessionScope.login.user_id eq null }">
+						         	<tr>
+						         	  <td><input type="text" name="guest"  id="guest"
+						        		value="guest" readonly />
+						        	  </td>
+						        	</tr>
+						        	<tr>
+						        	  <td>
+								      <input type="text" name="guest"  id="guest" 
+								      	value="로그인 해주세요" readonly />
+							          </td>
+								    </tr> 
+						        	
+						         </c:when>
+						         <c:otherwise>
+						         	<tr>
+								      <td><input type="text" name="user_id"  id="user_id"
+								        value="${sessionScope.login.user_id}" readonly /> <!-- 로그인된 유저아이디  -->
+								      </td>
+								    </tr>
+								    <tr>
+								      <td><textarea name="tb_repcont" id="tb_repcont"></textarea></td>
+								    </tr> 
+								    <tr>      
+								      <td colspan="2">
+								        <button type="submit" id="submit"> 확인 </button>
+								      </td>
+								    </tr> 
+						         </c:otherwise>
+						        </c:choose>
 					   </table> 
 			  	</form>
 
 		  		<div id="newlyWrittenReply">
 		  		</div>
-		  		
-	 
+
 
 			<!-- 댓글 리스트 -->
 		  	<c:forEach var="tureVo"  items="${ tureVo }">

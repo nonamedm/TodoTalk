@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"  %>    
@@ -54,38 +52,42 @@
 
 					   <table id="writeTable">
 						    <tr>
-						    	<h2>UrrrrrrwWriting!!!</h2>
+						    	<h2>글을 쓰시오</h2>
 						    </tr>
-						    <tr>
-						      <td><input type="text" name="user_id"  id="user_id"
-						        value="${sessionScope.login.user_id}" readonly /> <!-- 로그인된 유저아이디  -->
-						      </td>
-						    </tr>
-						    <tr>
-						    	<div class="question-select" style="width:200px;">
-						    		<select name="tubo_title" id="tubo_title" style="width:200px;">
-						    			<option value="0"> 주제를 선택하세요 </option>
-						    			<option value="Question1"> Question1 </option>
-						    			<option value="Question2"> Question2 </option>
-						    			<option value="자유"> 자유 </option>
-						    		</select>
-						    	</div>
-						    </tr>
-						    <tr>
-						      <td><textarea name="tubo_cont" id="tubo_cont" placeholder="이거 보고계신분, 이거 크기좀 늘려주십쇼"></textarea></td>
-						    </tr> 
-							<!--     <tr>
-							      <td>파일</td>
-							      <td id="tdfile">
-							        <input type="button" id="btnAddFile" value="Add file" /><br>
-							        <input type="file" name="upfile" id="upfile" /><br>        
-							      </td>
-							    </tr>  -->
-						    <tr>      
-						      <td colspan="2">
-						        <input type="submit" value="확인" />
-						      </td>
-						    </tr> 
+								<c:choose>
+						         <c:when test="${ sessionScope.login.user_id eq null }">
+						         	<tr>
+						         		<td><input type="text" name="guest"  id="guest"
+						        		value="로그인 해주세요" readonly /></td> 
+						        	</tr> 
+						         </c:when>
+						         <c:otherwise>
+						         	<tr>
+										<td><input type="text" name="user_id"  id="user_id"
+						        		value="${sessionScope.login.user_id}" readonly />
+						      			</td>
+						      		</tr>
+						      		<tr>
+						    			<div class="question-select" style="width:200px;">
+								    		<select name="tubo_title" id="tubo_title" style="width:200px;">
+								    			<option value="0"> 주제를 선택하세요 </option>
+								    			<option value="Question1"> Question1 </option>
+								    			<option value="Question2"> Question2 </option>
+								    			<option value="자유"> 자유 </option>
+								    		</select>
+						    			</div>
+						    		</tr>
+								    <tr>
+								      <td><textarea name="tubo_cont" id="tubo_cont" placeholder="예쁜말 고운말"></textarea></td>
+								    </tr> 
+								    <tr>      
+								      <td colspan="2">
+								        <input type="submit" value="확인" />
+								      </td>
+								    </tr> 
+						      		
+						         </c:otherwise>
+						        </c:choose>
 					   </table> 
 			  		</form>
 				</div><!-- <div class="form-popup" id="myForm"> -->
