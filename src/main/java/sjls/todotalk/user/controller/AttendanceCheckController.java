@@ -62,7 +62,7 @@ public class AttendanceCheckController {
 		List<Map<String, Object>> attendanceList = userService.attendanceTag(userid);
 		System.out.println(attendanceList);
 		
-		System.out.println("들어왔다");
+		mav.addObject("attendanceList", attendanceList);
 		mav.setViewName("jsonView");
 		return mav;
 	}
