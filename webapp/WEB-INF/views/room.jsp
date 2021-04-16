@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	<%@include file="layout/header.jsp"%>
-    <div class="sub-main-wrap">
-    	<%@include file="layout/leftMenu.jsp"%>
-        <div class="sub-container-wrap">
-            <%@include file="layout/allSearchHeader.jsp"%>
 
 <!DOCTYPE html>
 <head>
@@ -16,16 +11,16 @@
 <style>
 	#notice_message {text-align: center; background-color: white;}
 	#my_message {text-align: right;}
-	#my_message_span {text-align: right; background-color: yellow; padding : 7px;}
+	#my_message_span {text-align: right; width:300px; background-color: yellow; padding : 7px;}
 	#your_message {text-align: left;}
-	#your_message_span {text-align: left; background-color: yellow; padding : 7px;}
+	#your_message_span {text-align: left; width:300px; background-color: yellow; padding : 7px;}
 	#chatroom {width : 400px; height : 500px; border:1px solid; background-color: lavender; overflow : scroll;}
 	
 </style>
 <script>
 	$(function(){
 			//전역변수 설정하고
-			var nickname='${login.user_id}';		//접속한 사람 id
+			var nickname='${param.loginId}';		//접속한 사람 id
 													//로그인 안되어있으면 동작X
 			var msg;
 			var roomId = '${room.roomId}';			//방번호
@@ -41,7 +36,7 @@
 						var sender = result.loadMessage[i].sender;
 						var message = result.loadMessage[i].message;
 						
-						if(sender=='${login.user_id}'){
+						if(sender=='${param.loginId}'){
 							loadText += '<br><div id="my_message"><span id="my_message_span">'+(message.substring(message.indexOf(':')+1))+'</span></div>';
 						} else {
 							loadText += '<br><div id="your_message"><span id="your_message_span">'+(message.substring(message.indexOf(':')+1))+'</span></div>'
@@ -68,7 +63,10 @@
 			});
 			$('#close').on('click',function(){
 				onClose();
-				window.history.back();
+				window.close();
+			});
+			$('#talklist').on('click',function(){
+				$(location).attr('href','/rooms?loginId=${param.loginId}');
 			});
 			function send(){
 				msg = $('#message').val();
@@ -101,7 +99,7 @@
 				var chatroom =	 $('#chatroom');
 				if(sender==''){
 					var	html = '<br><div id="notice_message">'+message+'</div>';
-				} else if(sender=='${login.user_id}'){
+				} else if(sender=='${param.loginId}'){
 					var html = '<br><div id="my_message"><span id="my_message_span">'+message+'</span></div>';
 				} else {
 					var	html = '<br><div id="your_message"><span id="your_message_span">'+message+'</span></div>';
@@ -125,6 +123,10 @@
 					send();
 				}
 			});
+			//창닫기 감지 -> onClose명령 수행
+			$(window).bind("beforeunload", function (e){
+				onClose();
+			});
 	});
 </script>
 
@@ -132,13 +134,14 @@
 <body>
 <!-- <input type="text" id="nickname" class="form-inline" placeholder="닉네임을 입력해주세요" required autofocus>
 <button class = "btn btn-primary" id = "name">확인</button> -->
+<button class = "btn btn-primary" id = "talklist">대화방목록</button>
 <button class = "btn btn-primary" id = "close">나가기</button><br>
 <label for="roomId" class="label label-default">방 번호</label>
 <label id="roomId" class="form-inline">${ room.roomId }</label>
 <br>
 <label for="roomName" class="label label-default">방 이름</label>
 <label id="roomName" class="form-inline">${ room.name }</label>
-로그인유저 : ${ login.user_id }
+로그인유저 : ${param.loginId}
 <div id = "chatroom"></div>
 <input type = "text" id = "message" style = "height : 30px; width : 340px" placeholder="내용을 입력하세요" autofocus>
 <button class = "btn btn-primary" id = "send">전송</button>

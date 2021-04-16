@@ -17,4 +17,6 @@ public interface ChatDao {
 
 	List<MessageVo> loadAllMessage(String roomId);
 
+	List<MessageVo> findRoomByLogin(String loginId);
+
 }

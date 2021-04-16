@@ -18,7 +18,7 @@
   		SELECT *
   		FROM  USER_INFO
   		WHERE  USER_ID = #{user_id}
-  		AND  USER_PWD = #{user_pwd}
+  		
   	</select>
   	
   	<select id="userid"
@@ -59,6 +59,22 @@
 	   VALUES(#{user_idx},#{user_id}, #{photo_name}, #{photo_fileext}, #{photo_sfilename})
   	</insert>
   	
+  	<select id="attendanceCheckYn" parameterType="map" resultType="int">
+  		SELECT count(*)
+  		FROM ATTENDANCECHECK
+  		WHERE USERID = #{userid}
+  		AND ATTENDANCECHECK_DAY = #{today}
+  	</select>
+  	
+  	<insert id="attendanceCheck" parameterType="map">
+  		INSERT INTO ATTENDANCECHECK(USERID, ATTENDANCECHECK_DAY) VALUES(#{userid}, #{today})
+  	</insert>
+  	
+  	<select id="attendanceTag" parameterType="String" resultType="hashmap">
+  		SELECT USERID, ATTENDANCECHECK_DAY
+  		FROM ATTENDANCECHECK
+  		WHERE USERID = #{userid}
+  	</select>
   	
   	
   

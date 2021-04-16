@@ -116,5 +116,10 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 		List<MessageVo> loadMessage = chatDao.loadAllMessage(roomId);
 		return loadMessage;
 	}
+	@Override
+	public List<MessageVo> findRoomByLogin(String loginId) {
+		List<MessageVo> findRoomByLogin = chatDao.findRoomByLogin(loginId);
+		return findRoomByLogin;
+	}
 
 }

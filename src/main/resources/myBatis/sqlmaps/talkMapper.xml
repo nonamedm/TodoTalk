@@ -18,8 +18,11 @@
   </insert>
   
   <select id="loadMessage" parameterType="String" resultType="sjls.todotalk.user.vo.MessageVo">
-  	SELECT ROOM_ID AS roomID, REQUIRE_ID AS sender, CHAT_MESSAGE AS message
+  	SELECT ROOM_ID AS roomId, REQUIRE_ID AS sender, CHAT_MESSAGE AS message
   	  FROM CHAT_MESSAGE WHERE ROOM_ID = #{roomId}
+  </select>
+  <select id="findRoomByLogin" parameterType="String" resultType="sjls.todotalk.user.vo.MessageVo">
+  	SELECT ROOM_ID AS roomId, REQUIRE_ID as sender FROM CHAT_ROOMS WHERE RECEIVER_ID = #{loginId}
   </select>
   
 </mapper>

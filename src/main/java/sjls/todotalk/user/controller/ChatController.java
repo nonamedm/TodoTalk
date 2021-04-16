@@ -65,28 +65,28 @@ public class ChatController {
 	public String talk (HttpServletRequest request,HttpServletResponse response, Model model){	
 		String receiverId = request.getParameter("receiverId");
 		String requireId = request.getParameter("requireId");
-		
+		String loginId = request.getParameter("loginId");
+		System.out.println("로그인아이디 확인 : "+loginId);
 		Object chatRooms = new HashMap<String,RoomVo>();
 		chatRooms = chatRoomService.findAllRoom();
 		
 		//방이 현재 roomList에 없으면 만든다. DB 없으면 추가한다. 
 		RoomVo roomVo = chatRoomService.createRoomById(receiverId,requireId);			
 		model.addAttribute("room", roomVo);
+		model.addAttribute("loginId",loginId);
 		return "room";
 	}
 	
-											//다음 할일  : 창닫기 인식 또는 나가기 버튼 클릭 시
-											//창닫기가 onClose로 인식되도록 바꾸기. 
-											//채팅창에 스크롤 지정하기
-	
-	
 	@RequestMapping("/rooms")
-	public String rooms (Model model) {
+	public String rooms (String loginId,Model model) {
 		Object chatRooms = new HashMap<String,RoomVo>();
 		chatRooms = chatRoomService.findAllRoom();
 		model.addAttribute("rooms",chatRooms);			//개설된 모든 대화방을 찾아서 rooms에 입력
 		//System.out.println("넘어온 값 : "+chatRoomRepository.findAllRoom()); 확인
-		
+		List<MessageVo> findRoomByLogin = chatRoomService.findRoomByLogin(loginId);
+		System.out.println("대화방 목록 : "+findRoomByLogin);
+		model.addAttribute("list",findRoomByLogin);
+		model.addAttribute("loginId",loginId);
 		return "rooms";
 	}
 	

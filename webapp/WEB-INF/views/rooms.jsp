@@ -1,48 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	<%@include file="layout/header.jsp"%>
-    <div class="sub-main-wrap">
-    	<%@include file="layout/leftMenu.jsp"%>
-        <div class="sub-container-wrap">
-            <%@include file="layout/allSearchHeader.jsp"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <head>
     <title>채팅 서비스</title>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-
-
 </head>
-
 <body>
-
 <div class = "container">
     <table class = "table table-striped">
-        <thead>
-        <tr>
-            <th>번호</th>
-            <th>방 이름</th>
-            <th>입장버튼</th>
-            <th>인원수</th>
-        </tr>
-        </thead>
         <tbody>
-        <c:forEach var="room" items="${ rooms }">
-        	<tr>
-        		<td>${room.roomId }</td>
-        		<td>${room.name }</td>
-        		<td>
-					<a href="/talk/${room.roomId }"> 입장</a>
-				</td>
-				<td>${people }</td>
-        	</tr>
+              ${loginId }
+        <c:forEach var="list" items="${list }">
+        ${list.roomId }<br>
+        ${list.sender }<br>
+        
+        <!-- 다시 form 으로 지정해서, login id, receiver id, require id 구분해서 날리기 -->
         </c:forEach>
         </tbody>
     </table>
-    <a class = "btn btn-primary pull-right" href = "/new">새로 만들기</a>
-    <a class = "btn btn-primary pull-right" href = "javascript:location.reload()">새로 고침</a>
 </div>
 
 

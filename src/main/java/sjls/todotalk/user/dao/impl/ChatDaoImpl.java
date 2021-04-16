@@ -55,6 +55,12 @@ public class ChatDaoImpl implements ChatDao {
 		return loadMessage;
 	}
 
+	@Override
+	public List<MessageVo> findRoomByLogin(String loginId) {
+		List<MessageVo> findRoomByLogin = sqlSession.selectList("talk.findRoomByLogin",loginId);
+		return findRoomByLogin;
+	}
+
 	
 
 

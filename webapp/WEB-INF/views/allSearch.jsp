@@ -7,11 +7,14 @@
         <div class="sub-container-wrap">
             <%@include file="layout/allSearchHeader.jsp"%>
             
+            
             <script>
-            	$(function(){
-            		
-            	})
+	            var win;
+	            function createWindow(){
+	             win = open('','TodoTalk','width=450,height=650');
+	            }
             </script>
+            
             <div class="middle-content-wrap">
                 <!--여기부터 컨텐츠내용 작업시작-->
 
@@ -23,7 +26,8 @@
                 	튜터 : ${ tutorVo.user_name } <br>
                 	이메일 : ${ tutorVo.user_mail } <br>
                 	국적 : ${ tutorVo.country }　　좋아요 ${ tutorVo.recommend }<br>
-                	<form action="/talk" method="POST">
+                	<form action="/talk" method="POST" target="TodoTalk" onsubmit="createWindow();">
+                	<input type="hidden" name="loginId" value="${login.user_id}" />
                 	<input type="hidden" name="receiverId" value="${tutorVo.user_id }" />
                 	<input type="hidden" name="requireId" value="${login.user_id }" />
                 	<input type="submit" value="대화시작"/>
@@ -46,7 +50,8 @@
                 	멘토 : ${ mentorVo.user_name } <br>
                 	이메일 : ${ mentorVo.user_mail } <br>
                 	국적 : ${ mentorVo.country }　　좋아요 ${ mentorVo.recommend }<br>
-                	<form action="/talk" method="POST">
+                	<form action="/talk" method="POST" target="TodoTalk" onsubmit="createWindow();">
+                	<input type="hidden" name="loginId" value="${login.user_id}" />
                 	<input type="hidden" name="receiverId" value="${mentorVo.user_id }" />
                 	<input type="hidden" name="requireId" value="${login.user_id }" />
                 	<input type="submit" value="대화시작"/>
