@@ -13,10 +13,16 @@
 <div class = "container">
     <table class = "table table-striped">
         <tbody>
-              ${loginId }
+              내아이디 : ${loginId }<br>
         <c:forEach var="list" items="${list }">
-        ${list.roomId }<br>
-        ${list.sender }<br>
+        방번호 : ${list.roomId }<br>
+        대화상대 : ${list.sender }<br>
+        입장 : <form action="/talk" method="POST" >
+                	<input type="hidden" name="loginId" value="${loginId}" />
+                	<input type="hidden" name="receiverId" value="${list.sender }" />
+                	<input type="hidden" name="requireId" value="${loginId }" />
+                	<input type="submit" value="대화시작"/>
+               	</form>
         
         <!-- 다시 form 으로 지정해서, login id, receiver id, require id 구분해서 날리기 -->
         </c:forEach>
