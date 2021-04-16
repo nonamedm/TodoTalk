@@ -12,6 +12,7 @@
 	<select id="fileList" resultType="sjls.todotalk.board.vo.CommFileVo" >
 		SELECT FILE_IDX, FILE_NAME, FILE_EXT, SFILE_NAME, COMM_IDX
 		FROM COMM_FILES
+		WHERE COMM_IDX=#{comm_idx}
 	</select>
 	
 	
