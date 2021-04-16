@@ -74,6 +74,7 @@ public class ChatController {
 		RoomVo roomVo = chatRoomService.createRoomById(receiverId,requireId);			
 		model.addAttribute("room", roomVo);
 		model.addAttribute("loginId",loginId);
+		model.addAttribute("receiverId",receiverId);
 		return "room";
 	}
 	

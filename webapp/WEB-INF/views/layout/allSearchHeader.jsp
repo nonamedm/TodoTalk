@@ -1,8 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 <script>
 	$(function () {
+		var sock = new SockJS("http://localhost:9090/chat2/");
+		/* sock.onopen = onOpen;					//소켓 오픈 시 function 연결
+		sock.onmessage = onMessage;				//메세지 도착 시 function 연결
+		sock.onclose = onClose;					//종료 시 function 연결 */
+		console.dir(sock);
+		
+		
+		//새로운 소켓은 if(안읽은 메세지 to me의 갯수가 변하면 onmessage)
+		
+		
 		$('#btn-search2').on('click',function(){
 			allSearch();
 		});

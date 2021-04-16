@@ -19,4 +19,8 @@ public interface ChatDao {
 
 	List<MessageVo> findRoomByLogin(String loginId);
 
+	void readMessage(MessageVo messageVo);
+
+	void nowConnect(MessageVo messageVo);
+
 }

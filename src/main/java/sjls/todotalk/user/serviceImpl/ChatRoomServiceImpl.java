@@ -78,6 +78,10 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 			sessions.add(map);
 			
 			messageVo.setMessage(messageVo.getSender() + " 님이 입장하셨습니다.");
+			//READCHECK -> RECEIVERID, ROOMID 나인거 다 Y로 바꾸기
+			chatDao.readMessage(messageVo);
+			//NOWCONNECT -> 현재 접속상태 1에서 0으로 바꾸기
+			chatDao.nowConnect(messageVo);
 			
 		} else if (messageVo.getType().equals(MessageType.LEAVE)) {
 			
@@ -86,10 +90,14 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 			sessions.remove(map);						// 나갈때 그 세션 지운다
 			//방은 어차피 세션 리셋되면 리셋 되는거고... 아니라도 추가 생성 안되니까 굳이 지우지 말자
 			messageVo.setMessage(messageVo.getSender() + " 님이 퇴장하셨습니다.");
+			
+			//NOWCONNECT -> 현재 접속상태 0에서 1로 바꾸기
+			chatDao.nowConnect(messageVo);
+			
 			System.out.println("남은 세션 수 : "+sessions.size());
 			
 		} else {
-			if(messageVo.getMessage().length()!=0) {
+			if(messageVo.getMessage().length()!=0) {		//메세지 길이가 0이 아니면(공백메세지가 아니면)
 				messageVo.setMessage(messageVo.getSender()+":"+messageVo.getMessage());
 				chatDao.saveMessage(messageVo);				//메세지 내용을 db에 저장
 			}

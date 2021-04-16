@@ -23,7 +23,7 @@
                 	<input type="hidden" name="requireId" value="${loginId }" />
                 	<input type="submit" value="대화시작"/>
                	</form>
-        
+      
         <!-- 다시 form 으로 지정해서, login id, receiver id, require id 구분해서 날리기 -->
         </c:forEach>
         </tbody>

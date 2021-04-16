@@ -13,8 +13,8 @@
   	INSERT INTO CHAT_ROOMS (ROOM_ID, RECEIVER_ID, REQUIRE_ID) VALUES (#{room_id},#{require_id},#{receiver_id})
   </insert>
   <insert id="saveMessage" parameterType="hashmap">
-  	INSERT INTO CHAT_MESSAGE (ROOM_ID, REQUIRE_ID, CHAT_MESSAGE)
-  		 VALUES (#{messageVo.roomId},#{messageVo.sender},#{messageVo.message})
+  	INSERT INTO CHAT_MESSAGE (ROOM_ID, RECEIVER_ID, REQUIRE_ID, CHAT_MESSAGE)
+  		 VALUES (#{messageVo.roomId},#{messageVo.receiver},#{messageVo.sender},#{messageVo.message})
   </insert>
   
   <select id="loadMessage" parameterType="String" resultType="sjls.todotalk.user.vo.MessageVo">
@@ -24,5 +24,18 @@
   <select id="findRoomByLogin" parameterType="String" resultType="sjls.todotalk.user.vo.MessageVo">
   	SELECT ROOM_ID AS roomId, REQUIRE_ID as sender FROM CHAT_ROOMS WHERE RECEIVER_ID = #{loginId}
   </select>
+  
+  <update id="readMessage" parameterType="hashmap">
+  	UPDATE CHAT_MESSAGE SET READCHECK=0
+  	 WHERE ROOM_ID = #{messageVo.roomId} AND RECEIVER_ID = #{messageVo.sender} 
+  </update>
+  <update id="enterConnect" parameterType="hashmap">
+  	UPDATE CHAT_ROOMS SET NOWCONNECT=0
+  	 WHERE ROOM_ID = #{messageVo.roomId} AND RECEIVER_ID = #{messageVo.sender} 
+  </update>
+  <update id="leaveConnect" parameterType="hashmap">
+  	UPDATE CHAT_ROOMS SET NOWCONNECT=1
+  	 WHERE ROOM_ID = #{messageVo.roomId} AND RECEIVER_ID = #{messageVo.sender} 
+  </update>
   
 </mapper>

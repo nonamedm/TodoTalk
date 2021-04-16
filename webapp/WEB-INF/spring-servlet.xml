@@ -25,6 +25,11 @@
 		<websocket:sockjs />
 	</websocket:handlers>
 	<bean id="echoHandler" class="sjls.todotalk.user.controller.EchoHandler"></bean>
+	<websocket:handlers>
+		<websocket:mapping handler="echoHandler2" path="/chat2" />
+		<websocket:sockjs />
+	</websocket:handlers>
+	<bean id="echoHandler2" class="sjls.todotalk.user.controller.EchoHandler2"></bean>
 	
 	<!-- MultipartResolver 설정 -->
     <!-- 최대 업로드 크기설정 100000000 : 100M -->

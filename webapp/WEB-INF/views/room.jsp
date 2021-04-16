@@ -52,9 +52,9 @@
 			});
 			//소켓 On명령 + onopen, onmessage, onclose 액션 연결
 			var sock = new SockJS("http://localhost:9090/chat/");
-			sock.onopen = onOpen;							
-			sock.onmessage = onMessage;
-			sock.onclose = onClose;
+			sock.onopen = onOpen;					//소켓 오픈 시 function 연결		
+			sock.onmessage = onMessage;				//메세지 도착 시 function 연결
+			sock.onclose = onClose;					//종료 시 function 연결
 			console.dir(sock);
 			
 			
@@ -75,6 +75,7 @@
 					roomId : roomId,
 					type : 'CHAT',
 					sender : nickname,
+					receiver : '${receiverId}',
 					message : msg
 				}));
 				$('#message').val('');
@@ -141,7 +142,7 @@
 <br>
 <label for="roomName" class="label label-default">방 이름</label>
 <label id="roomName" class="form-inline">${ room.name }</label>
-로그인유저 : ${param.loginId}
+로그인유저 : ${param.loginId} 대화상대방 : ${receiverId }
 <div id = "chatroom"></div>
 <input type = "text" id = "message" style = "height : 30px; width : 340px" placeholder="내용을 입력하세요" autofocus>
 <button class = "btn btn-primary" id = "send">전송</button>
