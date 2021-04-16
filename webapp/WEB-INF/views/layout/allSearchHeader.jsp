@@ -21,6 +21,11 @@
 		var url = '/AllSearch?query='+searchText1;
 		$(location).attr('href',url);
 	}
+    var win;
+    function createWindow(){
+     win = open('/rooms?loginId=${login.user_id}','TodoTalk','width=450,height=650');
+    }
+
 </script>
 <div class="header-wrap">
                 <div class="header-title">
@@ -64,7 +69,7 @@
                         <div class="user-detail-box">
                             <ul>
                             	<li><a href="/attendanceCheckFm" title="출석체크">출석체크</a></li>
-                            	<li><a href="/rooms" title="대화방">대화방 목록</a></li>
+                            	<li><a title="대화방" onclick="createWindow();">대화방 목록</a></li>
                             	<li><a href="#" title="개인정보 수정" class="pw-change">개인정보 수정</a></li>
                                 <li><a href="/LogOut" title="로그아웃" onclick="return confirm('로그아웃 하시겠습니까?');">로그아웃</a></li>
                             </ul>
