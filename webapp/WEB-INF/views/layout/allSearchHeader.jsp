@@ -31,10 +31,8 @@
                         <input type="text" placeholder="통합검색" id='search2-Text'>
                         <a href="#" title="검색" class="btn-search2" id="btn-search2"></a>
                     </div>
-                    
                      <c:choose>
 		<c:when test="${empty login.user_id }"> <!-- session 값없을때  -->
-		<p>바보</p>
 			 <div class="user-wrap">
                         <div class="user-info-txt">
                             <ul>
@@ -66,6 +64,7 @@
                         <div class="user-detail-box">
                             <ul>
                             	<li><a href="/attendanceCheckFm" title="출석체크">출석체크</a></li>
+                            	<li><a href="/rooms" title="대화방">대화방 목록</a></li>
                             	<li><a href="#" title="개인정보 수정" class="pw-change">개인정보 수정</a></li>
                                 <li><a href="/LogOut" title="로그아웃" onclick="return confirm('로그아웃 하시겠습니까?');">로그아웃</a></li>
                             </ul>
