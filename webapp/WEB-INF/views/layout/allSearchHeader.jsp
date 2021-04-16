@@ -60,7 +60,7 @@
                             <ul>
                                 <li class="user-team"></li>
                                 <li class="user-name">${login.user_name }</li>
-                                <li><a href="/LogOut" title="로그아웃">로그인아웃</a></li>
+                                <li><a href="/LogOut" title="로그아웃">로그아웃</a></li>
                             </ul>
                         </div>
                         <div class="user-detail-box">
