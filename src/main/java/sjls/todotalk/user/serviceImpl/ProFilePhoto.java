@@ -35,7 +35,18 @@ public class ProFilePhoto {
 			List<String>  photo_names      = new ArrayList<String>(); 
 			List<String>  photo_fileexts   = new ArrayList<String>(); 
 			List<String>  photo_sfilenames = new ArrayList<String>(); 
-					
+			
+			
+//			int            user_idx2   =  (int) map.get("user_idx");
+//			String         user_id2    =  (String) map.get("user_idx");
+//			System.out.println(user_idx2x);
+//			map.remove("user_idx", map.get("user_idx"));
+//			map.remove("user_id",  map.get("user_id"));
+//			map.put("user_idx", user_idx2);
+//			map.put("user_id", user_id2);
+			
+			
+			
 			String         photo_name          = null; 
 			String         photo_orgfilename   = null; 
 			String         photo_fileext       = null; 
