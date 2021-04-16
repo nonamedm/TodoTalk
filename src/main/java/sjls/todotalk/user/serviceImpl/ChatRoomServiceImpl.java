@@ -75,24 +75,26 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 		if(messageVo.getType().equals(MessageType.ENTER)) {
 			map.put("roomNumber", messageVo.getRoomId());
 			map.put("session", session);
+			//NOWCONNECT -> 현재 접속상태 1에서 0으로 바꾸기
+			chatDao.readMessage(messageVo);
+			chatDao.nowConnect(messageVo);
+			
+			
 			sessions.add(map);
 			
 			messageVo.setMessage(messageVo.getSender() + " 님이 입장하셨습니다.");
 			//READCHECK -> RECEIVERID, ROOMID 나인거 다 Y로 바꾸기
-			chatDao.readMessage(messageVo);
-			//NOWCONNECT -> 현재 접속상태 1에서 0으로 바꾸기
-			chatDao.nowConnect(messageVo);
 			
 		} else if (messageVo.getType().equals(MessageType.LEAVE)) {
 			
 			map.put("roomNumber",messageVo.getRoomId());
 			map.put("session",session);
+			//NOWCONNECT -> 현재 접속상태 0에서 1로 바꾸기
+			chatDao.nowConnect(messageVo);
 			sessions.remove(map);						// 나갈때 그 세션 지운다
 			//방은 어차피 세션 리셋되면 리셋 되는거고... 아니라도 추가 생성 안되니까 굳이 지우지 말자
 			messageVo.setMessage(messageVo.getSender() + " 님이 퇴장하셨습니다.");
 			
-			//NOWCONNECT -> 현재 접속상태 0에서 1로 바꾸기
-			chatDao.nowConnect(messageVo);
 			
 			System.out.println("남은 세션 수 : "+sessions.size());
 			
@@ -128,6 +130,11 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	public List<MessageVo> findRoomByLogin(String loginId) {
 		List<MessageVo> findRoomByLogin = chatDao.findRoomByLogin(loginId);
 		return findRoomByLogin;
+	}
+	@Override
+	public int alertCount(String loginId) {
+		int alertCount = chatDao.alertCount(loginId);
+		return alertCount;
 	}
 
 }

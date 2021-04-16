@@ -17,6 +17,8 @@
         <c:forEach var="list" items="${list }">
         방번호 : ${list.roomId }<br>
         대화상대 : ${list.sender }<br>
+        <!-- 새 메세지 몇개 -->
+        안읽은메세지 수 : 
         입장 : <form action="/talk" method="POST" >
                 	<input type="hidden" name="loginId" value="${loginId}" />
                 	<input type="hidden" name="receiverId" value="${list.sender }" />

@@ -85,6 +85,7 @@ public class ChatController {
 		model.addAttribute("rooms",chatRooms);			//개설된 모든 대화방을 찾아서 rooms에 입력
 		//System.out.println("넘어온 값 : "+chatRoomRepository.findAllRoom()); 확인
 		List<MessageVo> findRoomByLogin = chatRoomService.findRoomByLogin(loginId);
+		
 		System.out.println("대화방 목록 : "+findRoomByLogin);
 		model.addAttribute("list",findRoomByLogin);
 		model.addAttribute("loginId",loginId);
@@ -102,6 +103,16 @@ public class ChatController {
 		mav.addObject("loadMessage",loadMessage);
 		mav.setViewName("jsonView");
 		
+		return mav;
+	}
+	
+	@RequestMapping(value="/alertCount", method=RequestMethod.POST)
+	public ModelAndView alertCount (HttpServletRequest request) {
+		String loginId = request.getParameter("loginId");		//로그인 id 받아서, sql 조회 -> 메세지 수신 나인데 상태 1인거 다 가져오기
+		int alertCount = chatRoomService.alertCount(loginId);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("alertCount",alertCount);
+		mav.setViewName("jsonView");
 		return mav;
 	}
 	

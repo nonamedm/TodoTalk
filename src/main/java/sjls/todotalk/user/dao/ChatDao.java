@@ -23,4 +23,6 @@ public interface ChatDao {
 
 	void nowConnect(MessageVo messageVo);
 
+	int alertCount(String loginId);
+
 }

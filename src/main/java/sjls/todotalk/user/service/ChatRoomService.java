@@ -23,4 +23,6 @@ public interface ChatRoomService {
 
 	List<MessageVo> findRoomByLogin(String loginId);
 
+	int alertCount(String loginId);
+
 }

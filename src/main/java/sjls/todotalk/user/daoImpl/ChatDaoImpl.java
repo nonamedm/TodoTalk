@@ -43,11 +43,16 @@ public class ChatDaoImpl implements ChatDao {
 		
 		System.out.println("DB 저장할 messageVo값 : "+messageVo);	
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("messageVo", messageVo);
 		
-		if(messageVo.getType().toString().equals("CHAT")) {
-			map.put("messageVo", messageVo);
-			sqlSession.insert("talk.saveMessage",map);
+		int nowConnect = sqlSession.selectOne("talk.nowConnect",map);
+		// System.out.println(nowConnect); 현재 상대방 접속상태 ->확인
+		if(nowConnect==0) {//현재 접속중이면 0으로 저장
+			sqlSession.insert("talk.saveMessage0",map);
+		} else {//접속중 아니면 1로 저장
+			sqlSession.insert("talk.saveMessage1",map);
 		}
+		
 	}
 
 	@Override
@@ -84,6 +89,13 @@ public class ChatDaoImpl implements ChatDao {
 			sqlSession.update("talk.leaveConnect",map);
 		}
 		
+	}
+
+	@Override
+	public int alertCount(String loginId) {
+		int alertCount = sqlSession.selectOne("talk.alertCount",loginId);
+		System.out.println(alertCount);
+		return alertCount;
 	}
 
 	

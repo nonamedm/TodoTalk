@@ -6,13 +6,24 @@
 <script>
 	$(function () {
 		var sock = new SockJS("http://localhost:9090/chat2/");
-		/* sock.onopen = onOpen;					//소켓 오픈 시 function 연결
+//		sock.onopen = onOpen;					//소켓 오픈 시 function 연결
 		sock.onmessage = onMessage;				//메세지 도착 시 function 연결
-		sock.onclose = onClose;					//종료 시 function 연결 */
+//		sock.onclose = onClose;					//종료 시 function 연결 */
 		console.dir(sock);
-		
-		
-		//새로운 소켓은 if(안읽은 메세지 to me의 갯수가 변하면 onmessage)
+		var loginId = '${login.user_id}';			
+		$.ajax({
+			url : '/alertCount',
+			type : 'POST',
+			data : {loginId : loginId},
+			success : function (result) {
+				$('#alertCount').html(result.alertCount+'건');
+				//alert(result.alertCount+'건의 안읽은 메시지');
+			},
+			error : function(xhr) {
+				alert(xhr.status + " : "+xhr.statusText);
+			}
+		});
+		//안읽은메세지는 구현했고, 실시간알림이 필요해
 		
 		
 		$('#btn-search2').on('click',function(){
@@ -85,6 +96,7 @@
                                 <li class="user-team"></li>
                                 <li class="user-name">${login.user_name }</li>
                                 <li><a href="/LogOut" title="로그아웃">로그아웃</a></li>
+                                <li id="alertCount"></li>
                             </ul>
                         </div>
                         <div class="user-detail-box">
