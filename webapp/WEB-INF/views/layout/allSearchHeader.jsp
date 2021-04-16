@@ -67,7 +67,16 @@
 <%--                             <a href="/User_Info?user_id=${login.user_id}" title="사용자 정보 더보기" class="user-open"> --%> 
                             <a href="/User_Info" title="사용자 정보 더보기" class="user-open"> 
                            <!--  <a href="user_info" title="사용자 정보 더보기" class="user-open"> -->
-                                <img src="img/common/user-img.png" alt="사용자 이미지">
+                                <c:choose>
+											<c:when test="${empty img.photo_name}"> 
+			                              		<img src="img/common/user-img.png" alt="사용자 이미지"> 
+											
+											</c:when>
+			                           		<c:otherwise>
+				                                <img src="/image/${img.photo_name}" alt="사용자 이미지">
+			                           		
+			                           		</c:otherwise>
+			                           </c:choose>  
                                 <span class="mask"></span>
                             </a>
                         </div>

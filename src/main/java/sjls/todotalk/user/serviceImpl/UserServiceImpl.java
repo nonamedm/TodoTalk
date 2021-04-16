@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import sjls.todotalk.user.dao.UserDao;
 import sjls.todotalk.user.service.UserService;
+import sjls.todotalk.user.vo.ImgVo;
 import sjls.todotalk.user.vo.UserVo;
 
 @Service("userService")
@@ -58,16 +59,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 
-	@Override
-	public void savePhoto(HashMap<String, Object> map, HttpServletRequest request) {
-		ProFilePhoto.savePhoto(map,request);
-		
-		System.out.println(map);
-		if(map.get("user_photo")!=null) {
-			userDao.savePhoto(map);
-		}
-		
-	}
+//	@Override
+//	public void savePhoto(HashMap<String, Object> map, HttpServletRequest request) {
+//		ProFilePhoto.savePhoto(map,request);
+//		
+//		System.out.println(map);
+//		if(map.get("user_photo")!=null) {
+//			userDao.savePhoto(map);
+//		}
+//		
+//	}
 	
 	@Override
 	public int attendanceCheckYn(HashMap<String, Object> map) {
@@ -86,7 +87,26 @@ public class UserServiceImpl implements UserService {
 		return attendanceList;
 	}
 
-	
+	@Override
+	public void savePhoto(HashMap<String, Object> map, HttpServletRequest request) {
+		ProFilePhoto.savePhoto(map,request);
+		if(map != null) {
+			userDao.savePhoto(map);
+		}
+		
+	}
+
+	@Override
+	public ImgVo getPhoto(HashMap<String, Object> map) {
+		ImgVo img = userDao.getPhoto(map);
+		
+		return img;
+	}
+
+	@Override
+	public void deletePhoto(HashMap<String , Object> map) {
+		userDao.deletePhoto(map);
+	}
 
 
 }

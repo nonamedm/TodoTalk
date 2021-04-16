@@ -53,11 +53,7 @@
   	VALUES(#{user_id},#{user_name},#{user_pwd},#{user_mail},#{country},#{user_phone}) 
   	</insert>
   	
-  	<insert id="savephoto"
-  		parameterType="hashmap">
-	  INSERT INTO USER_PHOTO( USER_IDX,USER_ID , PHOTO_NAME ,PHOTO_FILEEXT,PHOTO_SFILENAME  ) 
-	   VALUES(#{user_idx},#{user_id}, #{photo_name}, #{photo_fileext}, #{photo_sfilename})
-  	</insert>
+  	
   	
   	<select id="attendanceCheckYn" parameterType="map" resultType="int">
   		SELECT count(*)
@@ -76,6 +72,28 @@
   		WHERE USERID = #{userid}
   	</select>
   	
+  	<insert id="savephoto"
+  		parameterType="hashmap">
+	   INSERT INTO USER_PHOTO( USER_ID , PHOTO_NAME ,PHOTO_FILEEXT,PHOTO_SFILENAME ) 
+  		 VALUES( #{user_id} , #{photo_name}, #{photo_fileext}, #{photo_sfilename} )
+ 	</insert>
+  	
+  	<select id="getphoto"
+  				parameterType="hashmap"
+  				resultType="sjls.todotalk.user.vo.ImgVo">
+		SELECT  PHOTO_NAME, USER_ID, PROFILE_PHOTO, PHOTO_ORGFILENAME, PHOTO_FILEEXT, PHOTO_SFILENAME,USER_IDX,USER_PHOTO_IDX
+		FROM    USER_PHOTO
+		WHERE   USER_ID = #{user_id}
+		
+  	</select>
+  	
+  	<delete id="deletephoto"
+  			parameterType="hashmap">
+  		 	DELETE FROM USER_PHOTO 	WHERE   USER_ID = #{user_id}
+  			
+  			
+  	
+  	</delete>
   	
   
 </mapper>

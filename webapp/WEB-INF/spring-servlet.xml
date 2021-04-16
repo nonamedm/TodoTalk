@@ -82,7 +82,8 @@
 	<mvc:resources location="/WEB-INF/resources/js/" mapping="/js/fullCalendar/**"></mvc:resources>
 	<mvc:resources location="/WEB-INF/resources/font/" mapping="/font/**"></mvc:resources>
 	<mvc:resources location="/WEB-INF/resources/img/" mapping="/img/**/**"></mvc:resources>
-	
+	<mvc:resources mapping="/image/**" location="file:///c:/upload/photo/" /> 
+	<!--  이미지 보여주기 위한  mvc 추가 -->
 	
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
       

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import sjls.todotalk.user.dao.UserDao;
+import sjls.todotalk.user.vo.ImgVo;
 import sjls.todotalk.user.vo.UserVo;
 
 @Repository("userDao")
@@ -66,14 +67,6 @@ public class UserDaoImpl implements UserDao {
 		UserVo vo = sqlSession.selectOne("user.userid", map); 
 		return vo;
 	}
-
-
-	// 프로필 저장 DB
-	@Override
-	public void savePhoto(HashMap<String, Object> map) {
-		sqlSession.insert("user.savephoto",map);
-	}
-
 	
 	@Override
 	public void attendanceCheck(HashMap<String, Object> map) {
@@ -94,7 +87,27 @@ public class UserDaoImpl implements UserDao {
 		return attendanceList;
 	}
 	
-	
+	// 프로필 저장 DB
+	@Override
+	public void savePhoto(HashMap<String, Object> map) {
+		sqlSession.insert("user.savephoto",map);
+	}
+
+	// 프로필 사진 보여주기용
+	@Override
+	public ImgVo getPhoto(HashMap<String, Object>  map) {
+		ImgVo img = sqlSession.selectOne("user.getphoto",map);
+		
+		return img;
+	}
+
+	// 프로필 사진 삭제
+	@Override
+	public void deletePhoto(HashMap<String, Object> map) {
+		sqlSession.delete("user.deletephoto",map);
+		
+		
+	}
 	
 	
 	

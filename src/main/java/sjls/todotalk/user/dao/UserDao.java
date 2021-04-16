@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import sjls.todotalk.user.vo.ImgVo;
 import sjls.todotalk.user.vo.UserVo;
 
 public interface UserDao {
@@ -23,9 +24,7 @@ public interface UserDao {
 	// user  비밀번호 찾기
 	UserVo find_pwd(HashMap<String, Object> map);
 	
-	// 프로필 사진 
-	void savePhoto(HashMap<String, Object> map);
-	
+
 	//유저출석체크여부
 	public int attendanceCheckYn(HashMap<String, Object> map);
 	
@@ -35,6 +34,14 @@ public interface UserDao {
 	//출석현황리스트
 	public List<Map<String, Object>> attendanceTag(String userid);
 
+
+	// 프로필 사진 
+	void savePhoto(HashMap<String, Object> map);
 	
+	//프로필 사진 불러오기
+	ImgVo getPhoto(HashMap<String, Object> map);
+	
+	// 프로필사진 삭제
+	void deletePhoto(HashMap<String, Object> map);
 
 }

@@ -1,25 +1,19 @@
 package sjls.todotalk.user.controller;
 
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import sjls.todotalk.user.dao.Sha256;
-import sjls.todotalk.user.service.AllSearchService;
-import sjls.todotalk.user.service.ChatRoomService;
 import sjls.todotalk.user.service.UserService;
-import sjls.todotalk.user.vo.RoomVo;
+import sjls.todotalk.user.vo.ImgVo;
 import sjls.todotalk.user.vo.UserVo;
 
 
@@ -30,6 +24,8 @@ public class HomeController {
 	@Autowired
 	private UserService userService;
 	
+	
+
 	@RequestMapping("/")
 	public String home() {
 		return "home";		
@@ -41,78 +37,76 @@ public class HomeController {
 			return "login/loginForm";		
 		}
 		// 로그인 과정
-				@RequestMapping("/Login")
-				public  ModelAndView login(HttpSession session, @RequestParam HashMap<String, Object> map) {
-					ModelAndView  mv = new ModelAndView();
-					String  check = (String) map.get("user_pwd");
-					Sha256 sha = new Sha256();
-					String check2 = sha.encrypt(check);
-					
-					
-					
-					UserVo vo = userService.getUser(map);
-					
-					if(vo!=null) {
-							
-						
-						String vocheck = vo.getUser_pwd();  // vo ㅇ
-						System.out.println(vo);
-						System.out.println(vocheck+"ddddd"+check);
-						
-						if( session.getAttribute("login") != null ) {
-							//  기존의 login 값이 존재하면 삭제
-							session.removeAttribute("login");
-						}
-						
-						if(vocheck.equals(check)) {  // 암호화가 되어있지 않은 로그인
-							session.setAttribute("login",          vo);
-							session.setAttribute("user_id",        vo.getUser_id());
-							session.setAttribute("user_idx",       vo.getUser_idx());
-							session.setAttribute("user_mail",      vo.getUser_mail());
-							session.setAttribute("user_name",      vo.getUser_name());
-							session.setAttribute("user_phone",     vo.getUser_phone());
-							session.setAttribute("user_pwd",       vo.getUser_pwd());
-							session.setAttribute("user_regdate",   vo.getRegdate());
-							session.setAttribute("user_register",  vo.getRegister());
-							session.setAttribute("user_country",   vo.getCountry());
-							session.setAttribute("user_introduce", vo.getIntroduce());
-							mv.setViewName("redirect:/");
-						}else if(vocheck.equals(check2)){  // 암화화가 되어있는 비밀번호
-							String user_pwd2 =(String) map.get("user_pwd");
-							
-			//				Sha256 sha = new Sha256();
-			//				String shaPwd = sha.encrypt(user_pwd2);
-			//				
-							map.put("user_pwd", check2);
-							System.out.println("map :"+map);
-							
-							 vo = userService.getUser(map);
-							 	session.setAttribute("login",          vo);
-								session.setAttribute("user_id",        vo.getUser_id());
-								session.setAttribute("user_idx",       vo.getUser_idx());
-								session.setAttribute("user_mail",      vo.getUser_mail());
-								session.setAttribute("user_name",      vo.getUser_name());
-								session.setAttribute("user_phone",     vo.getUser_phone());
-								session.setAttribute("user_pwd",       vo.getUser_pwd());
-								session.setAttribute("user_regdate",   vo.getRegdate());
-								session.setAttribute("user_register",  vo.getRegister());
-								session.setAttribute("user_country",   vo.getCountry());
-								session.setAttribute("user_introduce", vo.getIntroduce());
-							
-								mv.setViewName("redirect:/");		
-						}else {
-							
-							mv.setViewName("redirect:/LoginForm");		
-							
-						}
-					}else {
-						mv.setViewName("redirect:/LoginForm");		
-						
-					}
-					return mv;    
-				}  
+		@RequestMapping("/Login")
+		public  ModelAndView login(HttpSession session, @RequestParam HashMap<String, Object> map) {
+			ModelAndView  mv = new ModelAndView();
+			String  check = (String) map.get("user_pwd");
+			Sha256 sha = new Sha256();
+			String check2 = sha.encrypt(check);
+			
+			if( session.getAttribute("login") != null ) {
+				//  기존의 login 값이 존재하면 삭제
+				session.removeAttribute("login");
+			}
+			// 회원의 사진을 들고오기위한 로직
+//			String user_id = (String) session.getAttribute("user_id");
+//			map.put("user_id", user_id);
+			ImgVo  img = userService.getPhoto(map);
+			if(img != null) {
+				session.setAttribute("img", img);
 				
+			}else {}
+			
+			UserVo vo = userService.getUser(map);
+			
+			if(vo!=null) {
+					
 				
+				String vocheck = vo.getUser_pwd();  // vo ㅇ
+				if(vocheck.equals(check)) {  // 암호화가 되어있지 않은 로그인
+					session.setAttribute("login",          vo);
+					session.setAttribute("user_id",        vo.getUser_id());
+					session.setAttribute("user_idx",       vo.getUser_idx());
+					session.setAttribute("user_mail",      vo.getUser_mail());
+					session.setAttribute("user_name",      vo.getUser_name());
+					session.setAttribute("user_phone",     vo.getUser_phone());
+					session.setAttribute("user_pwd",       vo.getUser_pwd());
+					session.setAttribute("user_regdate",   vo.getRegdate());
+					session.setAttribute("user_register",  vo.getRegister());
+					session.setAttribute("user_country",   vo.getCountry());
+					session.setAttribute("user_introduce", vo.getIntroduce());
+					mv.setViewName("redirect:/");
+				}else if(vocheck.equals(check2)){  // 암화화가 되어있는 비밀번호
+					String user_pwd2 =(String) map.get("user_pwd");
+					
+					map.put("user_pwd", check2);
+					 vo = userService.getUser(map);
+					 	session.setAttribute("login",          vo);
+						session.setAttribute("user_id",        vo.getUser_id());
+						session.setAttribute("user_idx",       vo.getUser_idx());
+						session.setAttribute("user_mail",      vo.getUser_mail());
+						session.setAttribute("user_name",      vo.getUser_name());
+						session.setAttribute("user_phone",     vo.getUser_phone());
+						session.setAttribute("user_pwd",       vo.getUser_pwd());
+						session.setAttribute("user_regdate",   vo.getRegdate());
+						session.setAttribute("user_register",  vo.getRegister());
+						session.setAttribute("user_country",   vo.getCountry());
+						session.setAttribute("user_introduce", vo.getIntroduce());
+					
+						mv.setViewName("redirect:/");		
+				}else {
+					
+					mv.setViewName("redirect:/LoginForm");		
+					
+				}
+			}else {
+				mv.setViewName("redirect:/LoginForm");		
+				
+			}
+			return mv;    
+		}  
+		
+		
 		// 로그아웃 처리
 		@RequestMapping("/LogOut")
 		public  String  logout( HttpSession session	) {
@@ -122,9 +116,7 @@ public class HomeController {
 			else {
 				System.out.println("값이 없습니다");
 			}
-			//  session.removeArribute("login"); // 해당 속성만 제거
 			return "redirect:/"; // 로그아웃시 이동할 주소
-			//return "redirect:/PDS/List?menu_id..."; // 로그아웃시 이동할 주소
 		}
 		
 		
@@ -158,24 +150,16 @@ public class HomeController {
 			map.remove("user_phone2", map.get("user_phone2"));
 			map.remove("user_phone3", map.get("user_phone3"));
 			
-				System.out.println(map);
 				
 				String user_pwd2 =(String) map.get("user_pwd");
-				
-				System.out.println("기존 PWD"+ user_pwd2);
-				
-				
 				// 암호화 작업
 				Sha256 sha = new Sha256();
 				String shaPwd = sha.encrypt(user_pwd2);
-				
 				map.put("user_pwd", shaPwd);
-				System.out.println("map :"+map);
-				
-				
+				//----------- 암호화 끝 
 			userService.inserUser(map);
 			
-			return "redirect:/";     // �씠�룞�븷 jsp �씠由�
+			return "redirect:/";     
 		}
 		// 아이디 중복확인
 		@RequestMapping("/Check_id")
@@ -203,20 +187,14 @@ public class HomeController {
 				html += " </b>";
 				
 			}
-			System.out.println("userid1 "+html);
 			mv.addObject("html", html);
 			mv.setViewName("jsonView");
-			
-			
 			return mv;     
 		}
 		// 아이디 중복확인
 		@RequestMapping("/Check_id2")
 		public  ModelAndView check_id2(
 				@RequestParam HashMap<String, Object> map) {
-			
-			System.out.println(map);
-			
 			UserVo  vo  = userService.getid2(map);
 			ModelAndView mv= new ModelAndView();
 			System.out.println(vo);
@@ -236,33 +214,37 @@ public class HomeController {
 				html += " </b>";
 				
 			}
-			System.out.println("getid2"+ html);
 			mv.addObject("html", html);
 			mv.setViewName("jsonView");
-			
-			
 			return mv;     
 		}
 		
 		// 로그인된 상태에서 회원정보 가지고 오기
 			@RequestMapping("/User_Info")
 			public String user_info( HttpSession session ,  @RequestParam HashMap <String , Object>   map	) {
-				System.out.println("user_info :"+ session.getAttribute("login"));
-			
+				String user_id = (String) session.getAttribute("user_id");
+				map.put("user_id", user_id);
+				ImgVo  img = userService.getPhoto(map);
+				if(img!= null ) {
+					session.setAttribute("img", img);
+					session.setAttribute("photo_name", img.getPhoto_name());
+					
+				}else {}
 				return "login/user_info"; 
 			}
 			// 회원정보 업데이트  프로필 사진 업로드
 			
 			@RequestMapping("/User_UpDate")
-			public String user_update(HttpServletRequest request,HttpSession session ,  @RequestParam HashMap <String , Object> map) throws Exception {
+			public String user_update(HttpServletRequest request,HttpSession session ,  @RequestParam HashMap <String , Object> map)  {
 //				ModelAndView mv = new ModelAndView();
 		//-----------------------------------------
-				
-				userService.savePhoto(map, request);
+				ImgVo  img = userService.getPhoto(map);
+				if(img == null) {
+					userService.savePhoto(map, request);
+				} else {}
 			
 				
 		//-----------------------------------------
-				System.out.println("1"+map);
 				 userService.getuser_info(map);
 				map.remove("user_idx",   map.get("user_idx"));
 				map.remove("user_name",  map.get("user_name"));
@@ -273,14 +255,10 @@ public class HomeController {
 				
 				
 				UserVo vo = userService.getUser(map);
-				
-				System.out.println(vo);
-				
 				if( session.getAttribute("login") != null ) {
 					//  기존의 login 값이 존재하면 삭제
 					session.removeAttribute("login");
 				}
-				
 				if(vo != null) {
 					session.setAttribute("login",          vo);
 					session.setAttribute("user_id",        vo.getUser_id());
@@ -296,13 +274,8 @@ public class HomeController {
 				
 				}else{
 					return "redirect:/";
-					
 				}
-				
-				System.out.println("수정"+map);
-				
-				System.out.println("update :" + session.getAttribute("login") );
-				return "redirect:/"; 
+				return "redirect:/User_Info"; 
 			}
 		
 			@RequestMapping("/Find")
@@ -324,36 +297,64 @@ public class HomeController {
 		
 			@RequestMapping("/Find_PwdLoding")
 			public String find_pwdloding(HttpSession session, @RequestParam HashMap<String , Object> map) {
-				System.out.println("비번 찾기 "+map);
 				
 				String user_pwd2 =(String) map.get("user_pwd");
 				
-				System.out.println("기존 PWD"+ user_pwd2);
 				
 				// 암호화 작업
 				Sha256 sha = new Sha256();
 				String shaPwd = sha.encrypt(user_pwd2);
 				
 				map.put("user_pwd", shaPwd);
-				System.out.println("map :"+map);
-				
-				
-				
-				
 				UserVo vo =userService.find_pwd(map); 
-				
-				
-				
-				
-				
-//				
 				if (vo != null) {
 					return "redirect:/";
 				}
-				
 				return "";		
 			}
-	
+			@RequestMapping("/TestPhoto")
+			public String test(HttpSession session, HashMap<String , Object> map) {
+				map.put("photo_name", session.getAttribute("photo_name"));
+				map.put("user_id", session.getAttribute("user_id"));
+				
+				userService.deletePhoto(map);
+				
+				//_________________________________________________
+				
+				if( session.getAttribute("login") != null ) {
+					//  기존의 login 값이 존재하면 삭제
+					session.removeAttribute("login");
+				}
+				
+				if( session.getAttribute("img") != null ) {
+					//  기존의 login 값이 존재하면 삭제
+					session.removeAttribute("img");
+				}
+				ImgVo  img = userService.getPhoto(map);
+				UserVo vo = userService.getUser(map);
+
+				
+				if(vo!=null) {
+						session.setAttribute("login",          vo);
+						session.setAttribute("user_id",        vo.getUser_id());
+						session.setAttribute("user_idx",       vo.getUser_idx());
+						session.setAttribute("user_mail",      vo.getUser_mail());
+						session.setAttribute("user_name",      vo.getUser_name());
+						session.setAttribute("user_phone",     vo.getUser_phone());
+						session.setAttribute("user_pwd",       vo.getUser_pwd());
+						session.setAttribute("user_regdate",   vo.getRegdate());
+						session.setAttribute("user_register",  vo.getRegister());
+						session.setAttribute("user_country",   vo.getCountry());
+						session.setAttribute("user_introduce", vo.getIntroduce());
+				}else {}
+				
+				if(img!= null ) {
+					session.setAttribute("img", img);
+				}else {}
+				//_________________________________________________
+				
+				return "redirect:/";		
+			}
 	
 	
 }
