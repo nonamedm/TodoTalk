@@ -47,9 +47,6 @@
                       var month = ("00"+(now.getMonth()+1)).slice(-2);
                       var day   = now.getDate();
                       var today = year+"-"+month+"-"+day;
-                      var hour  = now.getHours();
-                      var min  = now.getMinutes();
-                      var sec  = now.getSeconds();
                       
     	        	  $.ajax({
     	        		  url : '/attendanceCheck',
@@ -65,6 +62,7 @@
     	        			  
     	        			  if(result.attendanceCheckYn2 == 1){
     	        				  alert("출석완료");
+    	        				  location.reload();
     	        			  }
     	        		  },
     	        		  error : function (xhr){
@@ -75,19 +73,35 @@
     	          }
     	        }
     	    },
-    	    events: {
-    	    	url : '/attendanceTag',
-    	    	extraParams : {
-    	    		userid : $("#attendanceCheck_userid").val()
-    	    	},
-    	    	success : function(response){
-    	    		
-    	    	}
-    	    }
+    	    editable: true,
+            navLinks: true,
+            eventLimit: true,
+            events: function(info, successCallback, failureCallback){
+            	console.log(info);
+            	$.ajax({
+            		url : '/attendanceTag',
+            		type : 'GET',
+            		data : {
+            			userid : $("#attendanceCheck_userid").val()
+            		},
+            		success: function(data){
+            			var form = data.attendanceList;
+            			var events = [];
+            			$.each(form, function(index, item){
+            				events.push({
+            					title : '출석완료',
+            					start : form[index].ATTENDANCECHECK_DAY,
+            					end   : form[index].ATTENDANCECHECK_DAY
+            				});
+            			});
+            			successCallback(events);
+            		}
+            	})
+            }
         });
         calendar.render();
       });
-
+		
     </script>
 
     <div class="sub-main-wrap">
