@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import sjls.todotalk.board.service.QnAService;
+import sjls.todotalk.board.vo.PdsVo;
 import sjls.todotalk.board.vo.QnABoardVo;
 
 @Controller
@@ -25,11 +26,20 @@ public class QnAController {
 	public ModelAndView qnaList(@RequestParam HashMap<String, Object> map) {
 		
 		//게시물 목록 
-		List<QnABoardVo> qnaList = qnaService.getQnAList(map);
+		//List<QnABoardVo> qnaList = qnaService.getQnAList(map);
+		List<PdsVo>  pdsList    = qnaService.getQnAList( map );
 		QnABoardVo qnaBoardVo = (QnABoardVo) map.get("qnaBoardVo");
 		
+		//페이징
+		// qnaService.getQnAList(map)명령 실행후 map("pagePdsVo") 에 돌아온 결과 처리
+		PdsVo pagePdsVo  = (PdsVo) map.get("pagePdsVo");
+		
+	
+		//addObject
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("list",qnaList);
+		//mv.addObject("list",qnaList);
+		mv.addObject("list",pdsList);
+		mv.addObject("pagePdsVo",  pagePdsVo );
 		mv.setViewName("/board/QnA/qnaList");
 		
 		return mv;
@@ -41,14 +51,13 @@ public class QnAController {
 	public ModelAndView qnaRead(@RequestParam HashMap<String, Object> map) {
 		
 		//idx로 조회된 글 내용 불러오기 
-		List<QnABoardVo> qnaList = qnaService.getQnAList(map);
+	//	List<QnABoardVo> qnaList = qnaService.getQnAList(map);
 		QnABoardVo qnaBoardVo = qnaService.getQnARead(map);
 
-		
+		//addObject
 		ModelAndView mv = new ModelAndView();
-		
 		mv.addObject("qnaBoardVo",qnaBoardVo);
-		mv.addObject("list",qnaList);
+		//mv.addObject("list",qnaList);
 		mv.addObject("read",map);
 		mv.setViewName("/board/QnA/qnaRead");
 		
@@ -74,6 +83,7 @@ public class QnAController {
 		
 		QnABoardVo qnaBoardVo = qnaService.getQnARead(map);
 		
+		//addObject
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("qnaBoardVo",qnaBoardVo); //글 쓸 때 저장할 값
 		mv.addObject("map",map);
@@ -97,8 +107,10 @@ public class QnAController {
 	//글 수정 form
 	@RequestMapping("/board/QnA/updateForm")
 	public ModelAndView updateForm(@RequestParam HashMap<String, Object> map) {
+		
 		QnABoardVo qnaBoardVo = qnaService.getQnARead(map);
 		
+		//addObject
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("qnaBoardVo",qnaBoardVo); //수정할 때 저장할 값
 		mv.addObject("map",map);

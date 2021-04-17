@@ -44,9 +44,15 @@ table,td {border:2px solid DarkOrchid;
 	 	<td>${list.qna_regdate }</td>
 	 	<td>${list.qna_readcount }</td>
 	 </tr>
-	 
-	
 	</c:forEach>
+	
+   <!-- 페이징 영역   -->
+    <tr>
+     <td colspan="6">
+       <%@include file="/WEB-INF/views/board/paging.jsp" %>
+     </td>
+   </tr>	 
+	
 </table>
 
 

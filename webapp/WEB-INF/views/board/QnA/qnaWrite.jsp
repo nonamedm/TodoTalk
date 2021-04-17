@@ -38,6 +38,8 @@ table,td {border:2px solid DarkOrchid;
  <input type="submit" value="확인" />
  <a href="/board/QnA/qnaList"> 목록 </a>
  <a href="/#"> 홈으로 </a>
+ 
+<!--  페이징 -->
 
 </table>
 </form>
