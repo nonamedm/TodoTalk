@@ -18,18 +18,23 @@
 		 })
    });
 </script>
+<style>
+h1 {
+  font-size: 40px;
+}
+</style>
     <div class="sub-main-wrap">
         <%@include file="../layout/leftMenu.jsp"%>
         <div class="sub-container-wrap">
             <%@include file="../layout/allSearchHeader.jsp"%>
             <div class="middle-content-wrap2">
                 <!--여기부터 컨텐츠내용 작업시작-->
-                               
-	<h1>Daily Practice</h1>
+                                 
+	<br><h1>Daily Practice</h1><br>
 
 	<div class="grid-container"> 
- 	  <div class="grid-item" id="tubo_title1"><a href="/tutoringwrite/view/question1?tubo_title=Question1">Question1</a></div>
- 	  <div class="grid-item" id="tubo_title1"><a href="/tutoringwrite/view/question2?tubo_title=Question2">Question2</a></div>
+ 	  <div class="grid-item" id="tubo_title1"><a href="/tutoringwrite/view/question1?tubo_title=Question1">Question1. How was your day?</a></div>
+ 	  <div class="grid-item" id="tubo_title1"><a href="/tutoringwrite/view/question2?tubo_title=Question2">Question2. What is your hobby?</a></div>
 	</div>
  
 
@@ -73,12 +78,11 @@
 								    			<option value="0"> 주제를 선택하세요 </option>
 								    			<option value="Question1"> Question1 </option>
 								    			<option value="Question2"> Question2 </option>
-								    			<option value="자유"> 자유 </option>
 								    		</select>
 						    			</div>
 						    		</tr>
 								    <tr>
-								      <td><textarea name="tubo_cont" id="tubo_cont" placeholder="예쁜말 고운말"></textarea></td>
+								      <td><textarea rows="20" cols="50" name="tubo_cont" id="tubo_cont" placeholder="예쁜말 고운말"></textarea></td>
 								    </tr> 
 								    <tr>      
 								      <td colspan="2">

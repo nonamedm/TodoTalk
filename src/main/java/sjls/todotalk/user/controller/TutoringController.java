@@ -139,16 +139,20 @@ public class TutoringController {
 
 		ModelAndView mav = new ModelAndView();
 		
+		System.out.println("db에 저장되는 tureVo : " + tureVo);
+		
 		tutoringService.insertReply(tureVo);
 
 		List<TureVo> tureVo2 = tutoringService.getReplyView(map);
-		 
+		
+		System.out.println("불러오는 tureVo2 : " + tureVo2);
+		
 //		String tubo_idx = (String) map.get("tubo_idx");
 //		String user_id = (String) map.get("user_id");
 //		String tubo_regdate = (String) map.get("tubo_regdate");
 
 		mav.addObject("tureVo", tureVo2);
-//		mav.setViewName("jsonView");
+		mav.setViewName("jsonView");
 
 		return mav;
 	}

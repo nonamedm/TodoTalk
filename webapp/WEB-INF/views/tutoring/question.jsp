@@ -19,15 +19,31 @@
 		 })
    });
 </script>
+<style>
+h2 {
+  font-size: 70px;
+}
+</style>
+<body>
     <div class="sub-main-wrap">
         <%@include file="../layout/leftMenu.jsp"%>
         <div class="sub-container-wrap">
             <%@include file="../layout/allSearchHeader.jsp"%>
             <div class="middle-content-wrap2">
                 <!--여기부터 컨텐츠내용 작업시작-->
-                               
-	<h1>Question 1</h1>	
+   
+		<c:choose>
+         <c:when test="${ tuboListOfQuestion1 eq null }">
+			<h2>Question 2</h2>
+         </c:when>
+        </c:choose>
 
+		<c:choose>
+         <c:when test="${ tuboListOfQuestion2 eq null }">
+			<h2>Question 1</h2>
+         </c:when>
+         </c:choose> 
+                  
 			<div class="rightcolumn">
 			<button class="open-button" onclick="openForm()">Do exercise!</button>
 				<div class="form-popup" id="myForm">

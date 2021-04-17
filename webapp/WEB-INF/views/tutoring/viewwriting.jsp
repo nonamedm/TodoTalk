@@ -84,7 +84,7 @@
 
 				<!-- 댓글쓰는 폼 -->
  				<form name="replyForm" id="replyForm">
-			   		<input type="hidden" name="user_idx"   		value="5" />     
+			   		<input type="hidden" name="user_idx"   		value="${ sessionScope.login.user_idx }" />     
 			   		<input type="hidden" name="tubo_idx"   		value="${ tuboVo.tubo_idx }" />     
 			   		<input type="hidden" name="tubo_regdate"    id = "tubo_regdate" value="${ tuboVo.tubo_regdate }" />     
 					   <table id="writeTable">
