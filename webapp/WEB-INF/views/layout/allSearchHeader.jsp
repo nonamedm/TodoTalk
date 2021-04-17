@@ -7,7 +7,7 @@
 	$(function () {
 		var sock = new SockJS("http://localhost:9090/chat2/");
 //		sock.onopen = onOpen;					//소켓 오픈 시 function 연결
-		sock.onmessage = onMessage;				//메세지 도착 시 function 연결
+//		sock.onmessage = onMessage;				//메세지 도착 시 function 연결
 //		sock.onclose = onClose;					//종료 시 function 연결 */
 		console.dir(sock);
 		var loginId = '${login.user_id}';			
