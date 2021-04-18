@@ -94,7 +94,6 @@ public class ChatDaoImpl implements ChatDao {
 	@Override
 	public int alertCount(String loginId) {
 		int alertCount = sqlSession.selectOne("talk.alertCount",loginId);
-		System.out.println(alertCount);
 		return alertCount;
 	}
 
