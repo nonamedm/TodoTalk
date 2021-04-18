@@ -3,9 +3,9 @@ package sjls.todotalk.board.dao;
 import java.util.HashMap;
 import java.util.List;
 
-import sjls.todotalk.board.vo.subPdsVo;
 import sjls.todotalk.board.vo.PdsVo;
 import sjls.todotalk.board.vo.QnABoardVo;
+import sjls.todotalk.board.vo.QnAFileVo;
 
 public interface QnADao {
 
@@ -20,5 +20,10 @@ public interface QnADao {
 	void qnaUpdate(HashMap<String, Object> map);
 
 	int countBoardList();
+
+	List<QnAFileVo> getFileList(HashMap<String, Object> map);
+
+	void fileDelete(HashMap<String, Object> map);
+
 
 }

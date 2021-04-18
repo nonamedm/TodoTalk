@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-public class PdsFile {
+public class QnAPdsFile {
 
 	public static  void   save(HashMap<String, Object> map,HttpServletRequest request) {
 		
@@ -48,7 +48,6 @@ public class PdsFile {
 		String         orgFileName   = null; 
 		String         file_ext       = null; 
 		String         sfile_name     = null; 
-		String         comm_idx     = null; 
 		
 		// upload 된 파일 반복하여 처리
 		// 파일하나당 반복
@@ -76,7 +75,6 @@ public class PdsFile {
 				map.put("file_name",  file_name);
 				map.put("file_ext",   file_ext);
 				map.put("sfile_name", sfile_name);
-				map.put("comm_idx", comm_idx);
 				
 				// 파일 저장 : c:\\upload\\
 				File file = new File(filePath + sfile_name);				

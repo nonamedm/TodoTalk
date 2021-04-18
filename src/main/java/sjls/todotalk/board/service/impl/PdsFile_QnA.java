@@ -12,9 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-public class PdsFile {
+import sjls.todotalk.board.vo.QnABoardVo;
+import sjls.todotalk.board.vo.QnAFileVo;
 
-	public static  void   save(HashMap<String, Object> map,HttpServletRequest request) {
+
+public class PdsFile_QnA {
+
+	public static  void   save(HashMap<String, Object> map
+			,HttpServletRequest request) {
 		
 		//    넘어온 파일저장(c:\\upload\\)처리 (중복파일처리)
 		CheckFileName  checkFile =  new CheckFileName(); 
@@ -22,9 +27,10 @@ public class PdsFile {
 		// 자료실 파일 저장될 경로
 		String   filePath  = "c:\\upload\\";
 		File fileFolder = new File(filePath);
+		
 		if (!fileFolder.exists()) {
 			try{
-				fileFolder.mkdir(); //폴더 생성합니다.
+				fileFolder.mkdir(); //폴더 생성
 			    System.out.println("폴더가 생성되었습니다.");
 		        } 
 		        catch(Exception e){
@@ -43,12 +49,14 @@ public class PdsFile {
 		List<String>  filenames  = new ArrayList<String>(); 
 		List<String>  fileexts   = new ArrayList<String>(); 
 		List<String>  sfilenames = new ArrayList<String>(); 
+		 //QnAFileVo vo = new QnAFileVo();
+		QnABoardVo vo = new QnABoardVo();
 				
-		String         file_name      = null; 
-		String         orgFileName   = null; 
-		String         file_ext       = null; 
-		String         sfile_name     = null; 
-		String         comm_idx     = null; 
+		String file_name   = null; 
+		String orgFileName = null; 
+		String file_ext    = null; 
+		String sfile_name  = null; 
+		int qna_idx   = vo.getQna_idx();
 		
 		// upload 된 파일 반복하여 처리
 		// 파일하나당 반복
@@ -76,7 +84,7 @@ public class PdsFile {
 				map.put("file_name",  file_name);
 				map.put("file_ext",   file_ext);
 				map.put("sfile_name", sfile_name);
-				map.put("comm_idx", comm_idx);
+				map.put("qna_idx", qna_idx);
 				
 				// 파일 저장 : c:\\upload\\
 				File file = new File(filePath + sfile_name);				

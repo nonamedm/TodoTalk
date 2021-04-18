@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import sjls.todotalk.board.dao.QnADao;
 import sjls.todotalk.board.vo.PdsVo;
 import sjls.todotalk.board.vo.QnABoardVo;
+import sjls.todotalk.board.vo.QnAFileVo;
 
 @Repository("QnABoardDao")
 public class QnADaoImpl implements QnADao {
@@ -54,6 +55,8 @@ public class QnADaoImpl implements QnADao {
 	public void qnaWrite(HashMap<String, Object> map) {
 		
 		sqlSession.insert("QnABoard.qnaWrite",map); //text 쓰기
+		sqlSession.insert("QnABoard.fileWrite",map); //파일 쓰기
+		System.out.println("게시글 쓰기map:  "+map);
 		
 	}
 
@@ -62,6 +65,20 @@ public class QnADaoImpl implements QnADao {
 		sqlSession.update("QnABoard.qnaUpdate",map);
 		
 	}
+	
+	//파일 목록 조회
+	@Override
+	public List<QnAFileVo> getFileList(HashMap<String, Object> map) {
+		List<QnAFileVo> fileList = sqlSession.selectList("QnABoard.fileList",map);
+		return fileList;
+	}
+	
+	//파일 삭제
+	@Override
+	public void fileDelete(HashMap<String, Object> map) {
+		sqlSession.delete("QnABoard.FileDelete",map);
+	}
+
 
 
 
