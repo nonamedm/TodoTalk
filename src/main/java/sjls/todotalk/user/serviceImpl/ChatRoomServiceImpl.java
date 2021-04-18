@@ -1,16 +1,22 @@
 package sjls.todotalk.user.serviceImpl;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.URI;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketExtension;
+import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -75,15 +81,13 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 		if(messageVo.getType().equals(MessageType.ENTER)) {
 			map.put("roomNumber", messageVo.getRoomId());
 			map.put("session", session);
-			//NOWCONNECT -> 현재 접속상태 1에서 0으로 바꾸기
+			//nowConnect -> 현재 접속상태 1에서 0으로 바꾸기
+			//readMessage -> 입장하면서 안읽은 메세지 전부 읽기
 			chatDao.readMessage(messageVo);
 			chatDao.nowConnect(messageVo);
-			
-			
 			sessions.add(map);
 			
 			messageVo.setMessage(messageVo.getSender() + " 님이 입장하셨습니다.");
-			//READCHECK -> RECEIVERID, ROOMID 나인거 다 Y로 바꾸기
 			
 		} else if (messageVo.getType().equals(MessageType.LEAVE)) {
 			
@@ -94,14 +98,13 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 			sessions.remove(map);						// 나갈때 그 세션 지운다
 			//방은 어차피 세션 리셋되면 리셋 되는거고... 아니라도 추가 생성 안되니까 굳이 지우지 말자
 			messageVo.setMessage(messageVo.getSender() + " 님이 퇴장하셨습니다.");
-			
-			
 			System.out.println("남은 세션 수 : "+sessions.size());
 			
 		} else {
 			if(messageVo.getMessage().length()!=0) {		//메세지 길이가 0이 아니면(공백메세지가 아니면)
 				messageVo.setMessage(messageVo.getSender()+":"+messageVo.getMessage());
 				chatDao.saveMessage(messageVo);				//메세지 내용을 db에 저장
+				
 			}
 		}
 		try {
@@ -113,6 +116,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 					//System.out.println( "세션 출력테스트 : "+sessions.get(i).get("session")); 확인
 					WebSocketSession sess = (WebSocketSession) sessions.get(i).get("session");
 					sess.sendMessage(textMessage);					//메세지를 room.jsp로 전송하고
+					
 				} 
 			}
 		} catch (JsonProcessingException e) {
@@ -136,5 +140,6 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 		int alertCount = chatDao.alertCount(loginId);
 		return alertCount;
 	}
+	
 
 }

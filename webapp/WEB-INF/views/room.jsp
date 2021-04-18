@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <head>
@@ -18,9 +17,11 @@
 	
 </style>
 <script>
+//layout 없는 빈 페이지를 import 하면??헤더랑 채팅방이랑??
+		
 	$(function(){
 			//전역변수 설정하고
-			var nickname='${param.loginId}';		//접속한 사람 id
+			var nickname='${loginId}';		//접속한 사람 id
 													//로그인 안되어있으면 동작X
 			var msg;
 			var roomId = '${room.roomId}';			//방번호
@@ -36,7 +37,7 @@
 						var sender = result.loadMessage[i].sender;
 						var message = result.loadMessage[i].message;
 						
-						if(sender=='${param.loginId}'){
+						if(sender=='${loginId}'){
 							loadText += '<br><div id="my_message"><span id="my_message_span">'+(message.substring(message.indexOf(':')+1))+'</span></div>';
 						} else {
 							loadText += '<br><div id="your_message"><span id="your_message_span">'+(message.substring(message.indexOf(':')+1))+'</span></div>'
@@ -52,12 +53,27 @@
 			});
 			//소켓 On명령 + onopen, onmessage, onclose 액션 연결
 			var sock = new SockJS("http://localhost:9090/chat/");
+			
 			sock.onopen = onOpen;					//소켓 오픈 시 function 연결		
 			sock.onmessage = onMessage;				//메세지 도착 시 function 연결
 			sock.onclose = onClose;					//종료 시 function 연결
 			console.dir(sock);
 			
+			function onOpen () {
+				sock.send(JSON.stringify({
+					roomId : roomId,
+					type : 'ENTER',
+					sender : nickname
+				}));
+			}
 			
+			function onClose () {
+				sock.send(JSON.stringify({
+					roomId : roomId,
+					type : 'LEAVE',
+					sender : nickname
+				}));
+			}
 			$('#send').on('click',function(){
 				send();
 			});
@@ -67,6 +83,16 @@
 			});
 			$('#talklist').on('click',function(){
 				$(location).attr('href','/rooms?loginId=${param.loginId}');
+			});
+			//인풋에서 Enter치면 send 메소드 실행
+			$("#message").keydown(function(key){
+				if(key.keyCode == 13){
+					send();
+				}
+			});
+			//창닫기 감지 -> onClose명령 수행
+			$(window).bind("beforeunload", function (e){
+				onClose();
 			});
 			function send(){
 				msg = $('#message').val();
@@ -78,15 +104,8 @@
 					receiver : '${receiverId}',
 					message : msg
 				}));
-				$('#message').val('');
 				
-			}
-			function onOpen () {
-				sock.send(JSON.stringify({
-					roomId : roomId,
-					type : 'ENTER',
-					sender : nickname
-				}));
+				$('#message').val('');
 			}
 			function onMessage(e) {
 				console.dir(e);
@@ -106,28 +125,13 @@
 					var	html = '<br><div id="your_message"><span id="your_message_span">'+message+'</span></div>';
 				}
 				if(html!='<br>'){
-				chatroom.append(html);
-				chatroom.scrollTop($('#chatroom')[0].scrollHeight);	//새글 내려올 때 마다 스크롤 아래로
+					chatroom.append(html);
+					chatroom.scrollTop($('#chatroom')[0].scrollHeight);	//새글 내려올 때 마다 스크롤 아래로
+					
 				}
 				
 			}
-			function onClose () {
-				sock.send(JSON.stringify({
-					roomId : roomId,
-					type : 'LEAVE',
-					sender : nickname
-				}));
-			}
-			//인풋에서 Enter치면 send 메소드 실행
-			$("#message").keydown(function(key){
-				if(key.keyCode == 13){
-					send();
-				}
-			});
-			//창닫기 감지 -> onClose명령 수행
-			$(window).bind("beforeunload", function (e){
-				onClose();
-			});
+			
 	});
 </script>
 
@@ -142,7 +146,7 @@
 <br>
 <label for="roomName" class="label label-default">방 이름</label>
 <label id="roomName" class="form-inline">${ room.name }</label>
-로그인유저 : ${param.loginId} 대화상대방 : ${receiverId }
+로그인유저 : ${loginId} 대화상대방 : ${receiverId }
 <div id = "chatroom"></div>
 <input type = "text" id = "message" style = "height : 30px; width : 340px" placeholder="내용을 입력하세요" autofocus>
 <button class = "btn btn-primary" id = "send">전송</button>
