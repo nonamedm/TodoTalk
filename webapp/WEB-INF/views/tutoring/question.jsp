@@ -34,13 +34,13 @@ h2 {
    
 		<c:choose>
          <c:when test="${ tuboListOfQuestion1 eq null }">
-			<h2>Question 2</h2>
+			<h2>Question2. What is your hobby?</h2>
          </c:when>
         </c:choose>
 
 		<c:choose>
          <c:when test="${ tuboListOfQuestion2 eq null }">
-			<h2>Question 1</h2>
+			<h2>Question1. How was your day?</h2>
          </c:when>
          </c:choose> 
                   
