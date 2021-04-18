@@ -48,5 +48,7 @@
   	UPDATE CHAT_ROOMS SET NOWCONNECT=1
   	 WHERE ROOM_ID = #{messageVo.roomId} AND RECEIVER_ID = #{messageVo.sender} 
   </update>
-  
+  <select id="findNewMessage" parameterType="hashmap" resultType="int">
+    SELECT COUNT(READCHECK) FROM CHAT_MESSAGE WHERE RECEIVER_ID=#{loginId} AND ROOM_ID=#{roomId} AND READCHECK=1
+  </select>
 </mapper>

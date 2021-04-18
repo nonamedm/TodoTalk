@@ -140,6 +140,11 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 		int alertCount = chatDao.alertCount(loginId);
 		return alertCount;
 	}
+	@Override
+	public int findNewMessage(Map<String, Object> map) {
+		int newMessage = chatDao.findNewMessage(map);
+		return newMessage;
+	}
 	
 
 }

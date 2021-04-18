@@ -1,6 +1,7 @@
 package sjls.todotalk.user.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.socket.WebSocketSession;
 
@@ -24,5 +25,7 @@ public interface ChatRoomService {
 	List<MessageVo> findRoomByLogin(String loginId);
 
 	int alertCount(String loginId);
+
+	int findNewMessage(Map<String, Object> map);
 
 }

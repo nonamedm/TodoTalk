@@ -2,6 +2,7 @@ package sjls.todotalk.user.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -85,9 +86,20 @@ public class ChatController {
 		model.addAttribute("rooms",chatRooms);			//개설된 모든 대화방을 찾아서 rooms에 입력
 		//System.out.println("넘어온 값 : "+chatRoomRepository.findAllRoom()); 확인
 		List<MessageVo> findRoomByLogin = chatRoomService.findRoomByLogin(loginId);
-		
+		List<Integer> newMessageList = new ArrayList<>();
+		if(findRoomByLogin.size()!=0) {
+			for (int i = 0; i < findRoomByLogin.size(); i++) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				String roomId = findRoomByLogin.get(i).getRoomId();
+				map.put("roomId", roomId);
+				map.put("loginId", loginId);
+				int newMessage = chatRoomService.findNewMessage(map);
+				newMessageList.add(newMessage);
+			}
+		}
 		System.out.println("대화방 목록 : "+findRoomByLogin);
 		model.addAttribute("list",findRoomByLogin);
+		model.addAttribute("newList",newMessageList);
 		model.addAttribute("loginId",loginId);
 		return "rooms";
 	}

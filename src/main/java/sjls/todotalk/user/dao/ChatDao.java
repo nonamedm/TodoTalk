@@ -2,6 +2,7 @@ package sjls.todotalk.user.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.socket.TextMessage;
 
@@ -24,5 +25,7 @@ public interface ChatDao {
 	void nowConnect(MessageVo messageVo);
 
 	int alertCount(String loginId);
+
+	int findNewMessage(Map<String, Object> map);
 
 }

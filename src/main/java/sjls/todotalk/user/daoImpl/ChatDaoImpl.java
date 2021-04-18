@@ -3,6 +3,7 @@ package sjls.todotalk.user.daoImpl;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,6 +96,13 @@ public class ChatDaoImpl implements ChatDao {
 	public int alertCount(String loginId) {
 		int alertCount = sqlSession.selectOne("talk.alertCount",loginId);
 		return alertCount;
+	}
+
+	@Override
+	public int findNewMessage(Map<String, Object> map) {
+		int newMessage = sqlSession.selectOne("talk.findNewMessage",map);
+		System.out.println("roomId : "+map.get("roomId")+", loginId : "+map.get("loginId")+", 새 메세지 : "+newMessage+" 건");
+		return newMessage;
 	}
 
 	
