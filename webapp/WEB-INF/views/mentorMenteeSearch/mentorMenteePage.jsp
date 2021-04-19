@@ -82,6 +82,7 @@
 				if(data != ""){
 					$.each(data, function(index, item){
 						html += '<div class="mentor-info">';
+						html += '<img src="/image/'+item.PHOTO_NAME+'" alt="사용자 이미지" style="width: 11%;">';
 						html +=  '<ul>';
 						html +=  	'<li>이름 : '+item.USER_NAME+'</li>';
 						html +=  	'<li>국적 : '+item.COUNTRY+'</li>';
