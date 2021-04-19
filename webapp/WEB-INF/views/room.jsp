@@ -141,11 +141,11 @@
 <button class = "btn btn-primary" id = "name">확인</button> -->
 <button class = "btn btn-primary" id = "talklist">대화방목록</button>
 <button class = "btn btn-primary" id = "close">나가기</button><br>
-<label for="roomId" class="label label-default">방 번호</label>
+<%-- <label for="roomId" class="label label-default">방 번호</label>
 <label id="roomId" class="form-inline">${ room.roomId }</label>
 <br>
 <label for="roomName" class="label label-default">방 이름</label>
-<label id="roomName" class="form-inline">${ room.name }</label>
+<label id="roomName" class="form-inline">${ room.name }</label> --%>
 로그인유저 : ${loginId} 대화상대방 : ${receiverId }
 <div id = "chatroom"></div>
 <input type = "text" id = "message" style = "height : 30px; width : 340px" placeholder="내용을 입력하세요" autofocus>

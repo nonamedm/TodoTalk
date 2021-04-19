@@ -16,6 +16,7 @@
 				if(result.alertCount == 0){
 					$('#alertCount').hide();
 				}else{
+					$('#alertCount').show();
 					$('#alertCount').html(result.alertCount);
 				}
 			},
