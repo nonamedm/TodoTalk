@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import sjls.todotalk.board.vo.PdsVo;
 import sjls.todotalk.board.vo.QnABoardVo;
+import sjls.todotalk.board.vo.QnAFileVo;
 
 public interface QnAService {
 
-	List<QnABoardVo> getQnAList(HashMap<String, Object> map);
+	List<PdsVo> getQnAList(HashMap<String, Object> map);
 
 	QnABoardVo getQnARead(HashMap<String, Object> map);
 
@@ -18,5 +20,8 @@ public interface QnAService {
 	void getQnAWrite(HashMap<String, Object> map, HttpServletRequest request);
 
 	void getQnAUpdate(HashMap<String, Object> map, HttpServletRequest request);
+
+	List<QnAFileVo> getFileList(HashMap<String, Object> map);
+
 
 }

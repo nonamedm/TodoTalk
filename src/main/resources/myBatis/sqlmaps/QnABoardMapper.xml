@@ -4,33 +4,71 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="QnABoard">
   
-	<select id="qnaList" resultType="sjls.todotalk.board.vo.QnABoardVo" >
+  	<!-- 페이징 없는 목록 조회 -->
+  	<select id="qnaList" resultType="sjls.todotalk.board.vo.PdsVo" >
 		SELECT BOARD_NAME, QNA_IDX, QNA_TITLE, QNA_CONT, USER_IDX, USER_ID, QNA_REGDATE, QNA_READCOUNT
 		FROM QNA_BOARD
+	</select> 
+	
+	<!-- 파일 목록 불러오기 -->
+	<select id="fileList" resultType="sjls.todotalk.board.vo.QnAFileVo" >
+		SELECT FILE_IDX, FILE_NAME, FILE_EXT, SFILE_NAME, QNA_IDX
+		FROM QNA_FILES
+		WHERE QNA_IDX=#{qna_idx}  
 	</select>
 	
+	<!-- mysql 페이징 로직 -->
+ 	<select id="pagingList" resultType="sjls.todotalk.board.vo.PdsVo">
+		SELECT BOARD_NAME, QNA_IDX, QNA_TITLE, QNA_CONT, USER_IDX, USER_ID, QNA_REGDATE, QNA_READCOUNT
+		FROM QNA_BOARD
+		ORDER BY QNA_IDX ASC 
+		<!-- LIMIT #{startPageNum},#{endPageNum}  -->
+	</select> 
 	
+    <!-- 페이징을 위한 총 갯수 구하기 -->
+	<select id="countBoardList" resultType="int">
+	    SELECT COUNT(QNA_IDX)
+		FROM QNA_BOARD
+		WHERE 1=1
+		AND QNA_IDX>0
+	</select>
+	
+	<!-- 글 읽기 -->
    <select id="qnaRead" resultType="sjls.todotalk.board.vo.QnABoardVo" >
 		SELECT BOARD_NAME, QNA_IDX, QNA_TITLE, QNA_CONT, USER_IDX, USER_ID, QNA_REGDATE, QNA_READCOUNT
 		FROM QNA_BOARD
 		WHERE QNA_IDX = #{qna_idx}
 	</select>
 	
+	<!-- 게시글 쓰기 -->
  	<insert id="qnaWrite" >
 		INSERT INTO QNA_BOARD
 		(BOARD_NAME, QNA_TITLE, QNA_CONT, USER_IDX, USER_ID, QNA_REGDATE, QNA_READCOUNT)
 		VALUES('QNA', #{qna_title}, #{qna_cont}, #{user_idx}, #{user_id}, now(), #{qna_readcount});
 	</insert>
 	
+	<!-- 파일쓰기 -->
+	<insert id="fileWrite" >
+		INSERT INTO QNA_FILES
+		(FILE_NAME, FILE_EXT, SFILE_NAME, QNA_IDX)
+		VALUES(#{file_name}, #{file_ext}, #{sfile_name}, #{qna_idx})
+	</insert>
 	
+	<!-- 글 삭제 -->
 	<delete id="delete">
 		DELETE FROM QNA_BOARD
 		WHERE QNA_IDX=#{qna_idx}
 	</delete>
 	
+   <!--게시글의 파일 삭제 -->
+	<delete id="FileDelete">
+		DELETE FROM todotalk.QNA_FILES
+		WHERE QNA_IDX=#{qna_idx};
+	</delete>
+	
+	<!-- 게시글 수정 -->
  	<update id="qnaUpdate">
 	 	UPDATE QNA_BOARD
-		SET BOARD_NAME='QNA', QNA_TITLE=#{qna_title}, QNA_CONT=#{qna_cont}, 
 				USER_IDX=#{user_idx}, USER_ID=#{user_id}, QNA_READCOUNT=#{qna_readcount}
 		WHERE QNA_IDX= #{qna_idx};
 	</update> 

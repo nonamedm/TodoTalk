@@ -1,9 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"  %>    
 <%@include file="../layout/header.jsp"%>
-
-<script> 
+<%@taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"  %>    
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+	window.onload = function(){
+		var selectedCont = $('#cont').text();
+		var contArray = selectedCont.split(' ');
+		
+		$.each(contArray, function (i, el){
+			contArray[i] = $.trim(el);
+		});
+		
+		$('#reply-list p').each(function(){
+			if ($.inArray ($.trim ($(this).text()),
+					contArray) != 1) {
+				$(this).addClass('highlight');
+			}
+		});
+		
+		
+	};
+</script>
+<!-- <script> 
 		function tureList(){
 			var formData = $("#replyForm").serialize();
 			$.ajax({
@@ -47,7 +66,11 @@
 	    $("#tb_repcont").clone().appendTo("body");
 	  });
 	});
-</script>
+</script> -->
+
+<style>
+	.highlight { background: yellow; }
+</style>
     <div class="sub-main-wrap">
         <%@include file="../layout/leftMenu.jsp"%>
         <div class="sub-container-wrap">
@@ -58,33 +81,41 @@
 			<!-- 조회한 글 내용 -->
 		  <table> 
 		    <tr>
-		      <td class="td1">글쓴이</td>
+		      <td class="td1">글쓴이</td><br>
+		    </tr>
+		    <tr>
 		      <td class="td2">${ tuboVo.user_id }</td>   
-		    </tr>    
+		    </tr> 
 		    <tr>
 		      <td class="td1">주제</td>
+		    </tr>
+		    <tr>
 		      <td class="td5" colspan="3">${ tuboVo.tubo_title }</td>
 		    </tr>
 		    <tr>
 		      <td class="td1">내용</td>
+		    </tr>
+		    <tr>
 		      <td class="td5" id="cont" colspan="3">${ tuboVo.tubo_cont }</td>
 		    </tr>  
 		    <tr>
 		      <td class="td3">날짜</td>
+		    </tr>
+		    <tr>
 		      <td class="td4">${ tuboVo.tubo_regdate }</td>
 		    </tr>    
-		    <tr>
+<!-- 		    <tr>
 		      <td colspan="4">
 		       <input type="button" value="글수정"    id="btnUpdate"/>
 		       <input type="button" value="글삭제"    id="btnDelete"/>
 		      </td>
-		    </tr>
+		    </tr> -->
 		  </table>
 		  <br>
 
 				<!-- 댓글쓰는 폼 -->
  				<form name="replyForm" id="replyForm">
-			   		<input type="hidden" name="user_idx"   		value="5" />     
+			   		<input type="hidden" name="user_idx"   		value="${ sessionScope.login.user_idx }" />     
 			   		<input type="hidden" name="tubo_idx"   		value="${ tuboVo.tubo_idx }" />     
 			   		<input type="hidden" name="tubo_regdate"    id = "tubo_regdate" value="${ tuboVo.tubo_regdate }" />     
 					   <table id="writeTable">
@@ -133,7 +164,7 @@
 		  	<c:forEach var="tureVo"  items="${ tureVo }">
 		  	<div class="row">
 		 		<div class="leftcolumn">
-				    <div class="card">
+				    <div class="card" id="reply-list">
 				      <h5>${tureVo.user_id}, ${tureVo.tb_regdate}</h5>
 				      <p>${tureVo.tb_repcont}</p>
 				    </div> 

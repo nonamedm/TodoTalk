@@ -25,14 +25,7 @@
 		<websocket:sockjs />
 	</websocket:handlers>
 	<bean id="echoHandler" class="sjls.todotalk.user.controller.EchoHandler"></bean>
-	<websocket:handlers>
-		<websocket:mapping handler="echoHandler2" path="/chat2" />
-		<websocket:sockjs />
-	</websocket:handlers>
-	<bean id="echoHandler2" class="sjls.todotalk.user.controller.EchoHandler2"></bean>
-	
 	<!-- MultipartResolver 설정 -->
-    <!-- 최대 업로드 크기설정 100000000 : 100M -->
     <!-- 최대 업로드 크기설정 100000000 : 100M -->
     <bean id    ="multipartResolver"
           class ="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -79,11 +72,9 @@
 	<!-- css, js, img 사용 설정 -->
 	<mvc:resources location="/WEB-INF/resources/css/" mapping="/css/**"></mvc:resources>
 	<mvc:resources location="/WEB-INF/resources/js/" mapping="/js/**"></mvc:resources>
-	<mvc:resources location="/WEB-INF/resources/js/" mapping="/js/fullCalendar/**"></mvc:resources>
 	<mvc:resources location="/WEB-INF/resources/font/" mapping="/font/**"></mvc:resources>
 	<mvc:resources location="/WEB-INF/resources/img/" mapping="/img/**/**"></mvc:resources>
-	<mvc:resources mapping="/image/**" location="file:///c:/upload/photo/" /> 
-	<!--  이미지 보여주기 위한  mvc 추가 -->
+	
 	
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
       

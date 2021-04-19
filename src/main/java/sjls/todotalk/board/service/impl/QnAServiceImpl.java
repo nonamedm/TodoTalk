@@ -8,9 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import sjls.todotalk.board.dao.QnADao;
 import sjls.todotalk.board.service.QnAService;
+import sjls.todotalk.board.vo.PdsVo;
 import sjls.todotalk.board.vo.QnABoardVo;
+import sjls.todotalk.board.vo.QnAFileVo;
 
 @Service("QnAService")
 public class QnAServiceImpl implements QnAService {
@@ -20,12 +23,35 @@ public class QnAServiceImpl implements QnAService {
 	
 	//게시판 목록 
 	@Override
-	public List<QnABoardVo> getQnAList(HashMap<String, Object> map) {
+	public List<PdsVo> getQnAList(HashMap<String, Object> map) {
+		
 		// 게시글 목록 
-		List<QnABoardVo> qnaList = qnaBoardDao.getQnAList(map);
+		List<PdsVo> qnaList = qnaBoardDao.getQnAList(map);
+		System.out.println("service list "+ qnaList);
+		System.out.println("service MAP: "+ map);
+		
+		//페이징 ----------------------------------------------------------
+//		int pagetotalcount = 5;  //페이지 번호 갯수 (1~5번까지)
+//		int pagecount  = (int) map.get("pagecount"); //조회된 결과 라인수
+//		int nowpage    = (int) map.get("nowpage"); //현재 페이지
+//		int pagegrpnum = (int) map.get("pagegrpnum"); // 한 페이지에 출력될 row(line) 수
+//		int totalcount = countBoardListTotal();
+		
+		
+		// 출력할 paging.jsp를 위힌 정보 준비
+		BoardPaging bp = new BoardPaging();
+		PdsVo vo = bp.getPdsPagingInfo();
+		map.put("pagePdsVo", vo);
+		
+		
 		return qnaList;
 	}
 	
+	//총 게시글 수
+	private int countBoardListTotal() {
+		return qnaBoardDao.countBoardList();
+	}
+
 	//게시글 읽기
 	@Override
 	public QnABoardVo getQnARead(HashMap<String, Object> map) {
@@ -37,17 +63,25 @@ public class QnAServiceImpl implements QnAService {
 	//게시글 삭제 
 	@Override
 	public void boardDelete(HashMap<String, Object> map) {
-		qnaBoardDao.boardDelete(map);
 		
+		qnaBoardDao.fileDelete(map);  //파일 삭제 
+		qnaBoardDao.boardDelete(map); //게시글 삭제 
+		
+		//부모 자식 테이블로 되어있어서 
+		//파일 테이블 먼저 삭제하고 게시판 테이블 삭제해야 삭제 됨 
+		//아니면 foreign key 에러남 ﻿
 	}
 	
 	//게시글 쓰기
 	@Override
 	public void getQnAWrite(HashMap<String, Object> map, HttpServletRequest request) {
 		
-		//textarea에 text 글쓰기
-		qnaBoardDao.qnaWrite(map);
+		//파일 쓰기
+		PdsFile_QnA.save(map, request);
 		
+		//넘어온 정보 db에 저장
+		qnaBoardDao.qnaWrite(map);
+		//qnaBoardDao.fileWrite(map);
 	}
 	
 	//게시글 수정
@@ -58,5 +92,13 @@ public class QnAServiceImpl implements QnAService {
 		
 	}
 	
+	//파일 목록 
+	@Override
+	public List<QnAFileVo> getFileList(HashMap<String, Object> map) {
+		
+		List<QnAFileVo> fileList = qnaBoardDao.getFileList(map);
+		return fileList;
+	}
+
 
 }

@@ -6,15 +6,20 @@
   <select id="findChatRoom" parameterType="hashmap" resultType="String">
   	SELECT ROOM_ID FROM CHAT_ROOMS WHERE RECEIVER_ID=#{receiver_id} AND REQUIRE_ID=#{require_id} 
   </select>
+  
   <insert id="createChatRoom" parameterType="hashmap">
   	INSERT INTO CHAT_ROOMS (ROOM_ID, RECEIVER_ID, REQUIRE_ID) VALUES (#{room_id},#{receiver_id},#{require_id})
   </insert>
   <insert id="createChatRoom2" parameterType="hashmap">
   	INSERT INTO CHAT_ROOMS (ROOM_ID, RECEIVER_ID, REQUIRE_ID) VALUES (#{room_id},#{require_id},#{receiver_id})
   </insert>
-  <insert id="saveMessage" parameterType="hashmap">
-  	INSERT INTO CHAT_MESSAGE (ROOM_ID, RECEIVER_ID, REQUIRE_ID, CHAT_MESSAGE)
-  		 VALUES (#{messageVo.roomId},#{messageVo.receiver},#{messageVo.sender},#{messageVo.message})
+  <insert id="saveMessage0" parameterType="hashmap">
+  	INSERT INTO CHAT_MESSAGE (ROOM_ID, RECEIVER_ID, REQUIRE_ID, CHAT_MESSAGE, READCHECK)
+  		 VALUES (#{messageVo.roomId},#{messageVo.receiver},#{messageVo.sender},#{messageVo.message},0)
+  </insert>
+  <insert id="saveMessage1" parameterType="hashmap">
+  	INSERT INTO CHAT_MESSAGE (ROOM_ID, RECEIVER_ID, REQUIRE_ID, CHAT_MESSAGE, READCHECK)
+  		 VALUES (#{messageVo.roomId},#{messageVo.receiver},#{messageVo.sender},#{messageVo.message},1)
   </insert>
   
   <select id="loadMessage" parameterType="String" resultType="sjls.todotalk.user.vo.MessageVo">
@@ -29,6 +34,12 @@
   	UPDATE CHAT_MESSAGE SET READCHECK=0
   	 WHERE ROOM_ID = #{messageVo.roomId} AND RECEIVER_ID = #{messageVo.sender} 
   </update>
+  <select id="nowConnect" resultType="int">
+  	SELECT NOWCONNECT FROM CHAT_ROOMS WHERE ROOM_ID=#{messageVo.roomId} AND RECEIVER_ID=#{messageVo.receiver} 
+  </select>
+  <select id="alertCount" parameterType="String" resultType="int">
+  	SELECT COUNT(READCHECK) FROM CHAT_MESSAGE WHERE RECEIVER_ID=#{loginId} AND READCHECK=1 
+  </select>
   <update id="enterConnect" parameterType="hashmap">
   	UPDATE CHAT_ROOMS SET NOWCONNECT=0
   	 WHERE ROOM_ID = #{messageVo.roomId} AND RECEIVER_ID = #{messageVo.sender} 
@@ -37,5 +48,7 @@
   	UPDATE CHAT_ROOMS SET NOWCONNECT=1
   	 WHERE ROOM_ID = #{messageVo.roomId} AND RECEIVER_ID = #{messageVo.sender} 
   </update>
-  
+  <select id="findNewMessage" parameterType="hashmap" resultType="int">
+    SELECT COUNT(READCHECK) FROM CHAT_MESSAGE WHERE RECEIVER_ID=#{loginId} AND ROOM_ID=#{roomId} AND READCHECK=1
+  </select>
 </mapper>
