@@ -91,7 +91,7 @@ section .section-tit h3{font-size: 18px; font-weight: 800;}
 .common-box .search-input .btn-search2{background: url("../img/common/btn-search.png")no-repeat; width: 18px; height: 18px; display: inline-block; position: absolute; top: 8px; left: 380px;}
 
 /* user-info CSS */
-.user-wrap{display: flex; padding-top: 2px;}
+.user-wrap{display: flex; padding-top: 2px; position: relative;}
 .user-wrap > ul{display: flex; padding-top: 6px;}
 .user-wrap > ul li{margin-left: 2px; font-size: 13px;}
 .user-wrap > ul li:nth-child(2) {display: flex;}
@@ -116,7 +116,7 @@ section .section-tit h3{font-size: 18px; font-weight: 800;}
 .user-wrap .user-img img {
     width: 100%;
     height: auto;
-    margin-top: -2px;
+    margin-top: 0px;
 }
 .user-detail-box{width: 148px; height: 170px; box-shadow: 4px 4px 5px #dfdfdf; background: #fff; position: absolute; padding: 14px; border-radius: 4px; top: 48px; right: 39px; display: none; z-index:9999;}
 .user-detail-box.on{display: block;}
@@ -295,6 +295,9 @@ section .section-tit h3{font-size: 18px; font-weight: 800;}
 #translation-wrap .select-language{display: flex; justify-content: space-between;}
 #translation-wrap .select-language .translation-Text{max-width:300px; min-width: 300px; width:300px; max-height:300px; min-height: 300px; height: 300px; margin-top: 14px; padding: 10px;}
 .translation-btn{background: #1EDA69; width: 70px; padding: 8px; color: #fff; border-radius: 6px;}
+
+/*대화건수 CSS*/
+.alert-count {position: absolute; top: -6px; left:23px; width: 20px; height: 20px; background: red; padding: 1px 4px 4px 6px; border-radius: 10px; color:#fff;}
 
 @media (max-width:1700px) { 
     

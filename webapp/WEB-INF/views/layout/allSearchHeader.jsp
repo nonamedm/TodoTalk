@@ -12,7 +12,12 @@
 			complete : poll,
 			timeout : 30000,
 			success : function (result) {
-				$('#alertCount').html(result.alertCount+'건');
+				
+				if(result.alertCount == 0){
+					$('#alertCount').hide();
+				}else{
+					$('#alertCount').html(result.alertCount);
+				}
 			},
 			error : function (xhr) {
 				
@@ -109,8 +114,7 @@
                             <ul>
                                 <li class="user-team"></li>
                                 <li class="user-name">${login.user_name }</li>
-                                <li><a href="/LogOut" title="로그아웃">로그아웃</a></li>
-                                <li id="alertCount"></li>
+                                <li id="alertCount" class="alert-count"></li>
                             </ul>
                         </div>
                         <div class="user-detail-box">
