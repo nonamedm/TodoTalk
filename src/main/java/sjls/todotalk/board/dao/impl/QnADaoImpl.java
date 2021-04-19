@@ -3,6 +3,8 @@ package sjls.todotalk.board.dao.impl;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -52,18 +54,18 @@ public class QnADaoImpl implements QnADao {
 	
 	//게시글 쓰기
 	@Override
-	public void qnaWrite(HashMap<String, Object> map) {
+	public QnABoardVo qnaWrite(HashMap<String, Object> map) {
 		
 		sqlSession.insert("QnABoard.qnaWrite",map); //text 쓰기
-		sqlSession.insert("QnABoard.fileWrite",map); //파일 쓰기
-		System.out.println("게시글 쓰기map:  "+map);
+		QnABoardVo vo = sqlSession.selectOne("QnABoard.getQna_Idx",map); //게시글 번호 조회
+		return vo;
 		
 	}
-
+	
+	//게시글 수정 
 	@Override
 	public void qnaUpdate(HashMap<String, Object> map) {
-		sqlSession.update("QnABoard.qnaUpdate",map);
-		
+		sqlSession.update("QnABoard.qnaUpdate",map);	
 	}
 	
 	//파일 목록 조회
@@ -77,6 +79,13 @@ public class QnADaoImpl implements QnADao {
 	@Override
 	public void fileDelete(HashMap<String, Object> map) {
 		sqlSession.delete("QnABoard.FileDelete",map);
+	}
+	
+	//파일 쓰기
+	@Override
+	public void fileWrite(HashMap<String, Object> map) {
+		System.out.println("게시글 쓰기map:  "+map);
+		sqlSession.insert("QnABoard.fileWrite",map); 
 	}
 
 

@@ -14,6 +14,7 @@ table,td {border:2px solid DarkOrchid;
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
+/* 
 $(function() {
 	   // btnAdd Click 	
 	   var  num = 1;
@@ -29,6 +30,9 @@ $(function() {
 	
 	
 })
+
+ */
+ 
 </script>
 </head>
 <body>
@@ -40,7 +44,7 @@ $(function() {
                 <!--여기부터 컨텐츠내용 작업시작-->
 
 
-<form action="/board/QnA/qnaWrite?"  method="POST"  enctype="multipart/form-data" >
+<form action="/board/QnA/qnaWrite"  method="POST"  enctype="multipart/form-data" >
 
 <%-- 
    <input type="hidden" name="qna_idx" value="${map.qna_idx}"/>
@@ -67,7 +71,7 @@ $(function() {
  <tr>
 	<td>파일</td>
 	<td id="tdfile" colspan="2">
-		<input type="button" id="btnAddFile" value="Add file" />
+<!-- 	 	<input type="button" id="btnAddFile" value="Add file" />  -->
 		<input type="file" name="file_name" id="file_name" />
 	</td>
  </tr>

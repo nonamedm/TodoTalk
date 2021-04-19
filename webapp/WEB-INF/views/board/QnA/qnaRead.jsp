@@ -56,7 +56,7 @@ th,td {padding:10px;}
           <td colspan="3"> 
 			<c:forEach var="file" items="${ filesList }" >
 	          <a href=" <c:out value="${ file.file_name}" />" > 
-		          <c:out value="${ file.file_name}" />
+		          ★<c:out value="${ file.file_name}" />
 	          </a>  
       		 </c:forEach> 
           </td>

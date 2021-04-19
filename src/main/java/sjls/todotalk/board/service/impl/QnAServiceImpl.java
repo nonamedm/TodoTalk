@@ -27,8 +27,7 @@ public class QnAServiceImpl implements QnAService {
 		
 		// 게시글 목록 
 		List<PdsVo> qnaList = qnaBoardDao.getQnAList(map);
-		System.out.println("service list "+ qnaList);
-		System.out.println("service MAP: "+ map);
+		System.out.println("service에서 게시글 목록 값 "+ qnaList);
 		
 		//페이징 ----------------------------------------------------------
 //		int pagetotalcount = 5;  //페이지 번호 갯수 (1~5번까지)
@@ -42,16 +41,11 @@ public class QnAServiceImpl implements QnAService {
 		BoardPaging bp = new BoardPaging();
 		PdsVo vo = bp.getPdsPagingInfo();
 		map.put("pagePdsVo", vo);
-		
-		
+		System.out.println("service 목록 MAP: "+ map);
+	
 		return qnaList;
 	}
 	
-	//총 게시글 수
-	private int countBoardListTotal() {
-		return qnaBoardDao.countBoardList();
-	}
-
 	//게시글 읽기
 	@Override
 	public QnABoardVo getQnARead(HashMap<String, Object> map) {
@@ -80,16 +74,19 @@ public class QnAServiceImpl implements QnAService {
 		PdsFile_QnA.save(map, request);
 		
 		//넘어온 정보 db에 저장
-		qnaBoardDao.qnaWrite(map);
-		//qnaBoardDao.fileWrite(map);
+		QnABoardVo vo =qnaBoardDao.qnaWrite(map);
+		int qna_idx = vo.getQna_idx();
+		map.put("qna_idx",qna_idx);
+		
+		qnaBoardDao.fileWrite(map);
 	}
 	
+
 	//게시글 수정
 	@Override
 	public void getQnAUpdate(HashMap<String, Object> map, HttpServletRequest request) {
 		//게시글 text 수정
 		qnaBoardDao.qnaUpdate(map);
-		
 	}
 	
 	//파일 목록 

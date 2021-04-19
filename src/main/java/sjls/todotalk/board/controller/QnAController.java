@@ -69,7 +69,8 @@ public class QnAController {
 	public ModelAndView qnaRead(@RequestParam HashMap<String, Object> map) {
 		
 		//idx로 조회된 글 내용 불러오기 
-	//	List<QnABoardVo> qnaList = qnaService.getQnAList(map);
+		//List<QnABoardVo> qnaList = qnaService.getQnAList(map);
+		List<PdsVo>  pdsList    = qnaService.getQnAList( map );
 		QnABoardVo qnaBoardVo = qnaService.getQnARead(map);
 		
 		//파일 목록 
@@ -82,7 +83,7 @@ public class QnAController {
 		mv.addObject("qnaBoardVo",qnaBoardVo);
 		mv.addObject("qnafileVo",qnafileVo);
 		mv.addObject("filesList",filesList);
-		//mv.addObject("list",qnaList);
+		mv.addObject("list",pdsList);
 		mv.addObject("read",map);
 		mv.setViewName("/board/QnA/qnaRead");
 		
@@ -157,6 +158,8 @@ public class QnAController {
 		mv.setViewName("redirect:/board/QnA/qnaList");
 		return mv;
 	}
+	
+	
 
 //	//파일 다운로드
 //	// {sfile}    :    .jpg 와 같은 . 포함 문자는 무시한다 

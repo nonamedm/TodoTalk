@@ -49,15 +49,12 @@ public class PdsFile_QnA {
 		List<String>  filenames  = new ArrayList<String>(); 
 		List<String>  fileexts   = new ArrayList<String>(); 
 		List<String>  sfilenames = new ArrayList<String>(); 
-		 //QnAFileVo vo = new QnAFileVo();
-		QnABoardVo vo = new QnABoardVo();
 				
 		String file_name   = null; 
 		String orgFileName = null; 
 		String file_ext    = null; 
 		String sfile_name  = null; 
-		int qna_idx   = vo.getQna_idx();
-		
+
 		// upload 된 파일 반복하여 처리
 		// 파일하나당 반복
 		while( iterator.hasNext() ) {
@@ -84,7 +81,7 @@ public class PdsFile_QnA {
 				map.put("file_name",  file_name);
 				map.put("file_ext",   file_ext);
 				map.put("sfile_name", sfile_name);
-				map.put("qna_idx", qna_idx);
+				//map.put("qna_idx", qna_idx);
 				
 				// 파일 저장 : c:\\upload\\
 				File file = new File(filePath + sfile_name);				

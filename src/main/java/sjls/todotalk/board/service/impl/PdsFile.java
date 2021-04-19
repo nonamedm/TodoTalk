@@ -45,10 +45,10 @@ public class PdsFile {
 		List<String>  sfilenames = new ArrayList<String>(); 
 				
 		String         file_name      = null; 
-		String         orgFileName    = null; 
+		String         orgFileName   = null; 
 		String         file_ext       = null; 
 		String         sfile_name     = null; 
-		String         comm_idx     = null; 
+		//int            comm_idx     = 0; 
 		
 		// upload 된 파일 반복하여 처리
 		// 파일하나당 반복
@@ -66,20 +66,20 @@ public class PdsFile {
 				
 				// filePath + orgFileName + fileExt 이 존재하면 
 				//  중복되지 않는 새로운 파일명을 생성
-//				sfile_name = checkFile.getCheckFileName(
-//						filePath, orgFileName, file_ext );
+				sfile_name = checkFile.getCheckFileName(
+						filePath, orgFileName, file_ext );
 				
 				filenames.add( file_name );
 				fileexts.add( file_ext );
-//				sfilenames.add( sfile_name );
+				sfilenames.add( sfile_name );
 								
 				map.put("file_name",  file_name);
 				map.put("file_ext",   file_ext);
 				map.put("sfile_name", sfile_name);
-				map.put("comm_idx", comm_idx);
+				//map.put("comm_idx", comm_idx);
 				
 				// 파일 저장 : c:\\upload\\
-				File file = new File(filePath + filenames);				
+				File file = new File(filePath + sfile_name);				
 				try {
 					multipartFile.transferTo(file);   // 실제파일 저장
 				} catch( IllegalStateException e ) {
