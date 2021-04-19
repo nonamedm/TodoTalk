@@ -13,9 +13,9 @@
 <div class = "container">
     <table class = "table table-striped">
         <tbody>
-              내아이디 : ${loginId }<br>
+              내아이디 : ${loginId }<hr>
         <c:forEach var="list" items="${list }" varStatus="status">
-        방번호 : ${list.roomId }<br>
+        <%-- 방번호 : ${list.roomId }<br> --%>
         대화상대 : ${list.sender }<br>
         <!-- 새 메세지 몇개 -->
         새 메시지 : ${newList[status.index] } 건   
@@ -23,10 +23,9 @@
                 	<input type="hidden" name="loginId" value="${loginId}" />
                 	<input type="hidden" name="receiverId" value="${list.sender }" />
                 	<input type="hidden" name="requireId" value="${loginId }" />
-                	<input type="submit" value="대화시작"/><br>
+                	<input type="submit" value="대화시작"/><hr>
                	</form>
       
-        <!-- 다시 form 으로 지정해서, login id, receiver id, require id 구분해서 날리기 -->
         </c:forEach>
         </tbody>
     </table>
