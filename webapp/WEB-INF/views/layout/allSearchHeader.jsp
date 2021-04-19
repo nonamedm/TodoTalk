@@ -69,7 +69,7 @@
                            <!--  <a href="user_info" title="사용자 정보 더보기" class="user-open"> -->
                                 <c:choose>
 											<c:when test="${empty img.photo_name}"> 
-			                              		<img src="img/common/user-img.png" alt="사용자 이미지"> 
+			                              		<img src="img/common/user-img3.png" alt="사용자 이미지"> 
 											
 											</c:when>
 			                           		<c:otherwise>
