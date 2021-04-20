@@ -50,10 +50,10 @@
 	
 	<!-- 게시글 수정 -->
  	<update id="qnaUpdate">
-	 	UPDATE QNA_BOARD
-				USER_IDX=#{user_idx}, USER_ID=#{user_id}, QNA_READCOUNT=#{qna_readcount}
-		WHERE QNA_IDX= #{qna_idx}
-	</update> 
+		UPDATE QNA_BOARD
+		SET BOARD_NAME='QNA', QNA_TITLE=#{qna_title}, QNA_CONT=#{qna_cont}
+		WHERE QNA_IDX=#{qna_idx}
+	</update>
 	
 	<!-- 파일 관련 쿼리 -->
 		
