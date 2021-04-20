@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public interface NoticeService {
 	
 	//공지사항 리스트 불러오기
-	public List<Map<String, Object>> getNoticeList();
+	//public List<Map<String, Object>> getNoticeList();
 	
 	
 	

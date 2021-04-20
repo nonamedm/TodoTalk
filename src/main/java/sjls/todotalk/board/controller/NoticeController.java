@@ -14,16 +14,16 @@ import sjls.todotalk.board.service.NoticeService;
 @Controller
 public class NoticeController {
 	
-	@Autowired
-	private NoticeService noticeService;
+	//@Autowired
+	//private NoticeService noticeService;
 	
 	@RequestMapping(value="/noticeFm", method=RequestMethod.GET)
 	public ModelAndView noticeFm() {
 		ModelAndView mav = new ModelAndView();
 		
-		List<Map<String, Object>> getNoticeList = noticeService.getNoticeList();
+	//	List<Map<String, Object>> getNoticeList = noticeService.getNoticeList();
 		
-		mav.addObject("getNoticeList", getNoticeList);
+	//	mav.addObject("getNoticeList", getNoticeList);
 		mav.setViewName("/board/notice/noticeList");
 		return mav;
 	}
