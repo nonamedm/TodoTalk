@@ -32,7 +32,7 @@
                     <li>
                         <a href="#" title="게시판" class="lnb-dep1">게시판</a>
                         <ul class="lnb-dep2">
-                            <li><a href="#" title="공지사항" class="">공지사항</a></li>
+                            <li><a href="/noticeFm" title="공지사항" class="">공지사항</a></li>
                             <li><a href="/board/QnA/qnaList" title="Q&A" class="">Q&A</a></li>
                             <li><a href="/list" title="커뮤니티" class="">자유 커뮤니티</a></li>
                             <li><a href="/board/comm/commList" title="커뮤니티" class="">멘티 멘토 소통 커뮤니티</a></li>

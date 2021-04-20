@@ -27,16 +27,16 @@
         	  let weekList = ["일", "월", "화", "수", "목", "금", "토"];
         	  return weekList[date.dow];
         	},
-        	dateClick: function (dateClickInfo) {
-        		  const fcDayElements = document.querySelectorAll(
-        		    ".fc-daygrid-day.fc-day"
-        		  );
-        		  fcDayElements.forEach((element, key, parent) => {
-        		    element.style.backgroundColor = "";
-        		  });
-        		  //선택한 날짜 div 컬러 변경
-        		  dateClickInfo.dayEl.style.backgroundColor = "#787878";
-        	},
+//         	dateClick: function (dateClickInfo) {
+//         		  const fcDayElements = document.querySelectorAll(
+//         		    ".fc-daygrid-day.fc-day"
+//         		  );
+//         		  fcDayElements.forEach((element, key, parent) => {
+//         		    element.style.backgroundColor = "";
+//         		  });
+//         		  //선택한 날짜 div 컬러 변경
+//         		  dateClickInfo.dayEl.style.backgroundColor = "#787878";
+//         	},
     		customButtons: { 
     	        custom2: {
     	          text: '출석체크하기',
@@ -91,7 +91,8 @@
             				events.push({
             					title : '출석완료',
             					start : form[index].ATTENDANCECHECK_DAY,
-            					end   : form[index].ATTENDANCECHECK_DAY
+            					end   : form[index].ATTENDANCECHECK_DAY,
+            					color : "#000"
             				});
             			});
             			successCallback(events);
