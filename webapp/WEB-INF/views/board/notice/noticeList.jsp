@@ -37,41 +37,37 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>2019.11.29</td>
-                                            <td>휴가신청서</td>
-                                            <td>최원영 사원</td>
-                                            <td>2019.12.03</td>
-                                            <td></td>
-                                        </tr>
+                                        <c:forEach var="getNoticeList" items="${getNoticeList}">
+                                        	<tr>
+                                        		<td>${getNoticeList.NOTICE_IDX}</td>
+                                        		<td>${getNoticeList.NOTICE_TITLE}</td>
+                                        		<td>${getNoticeList.USER_ID}</td>
+                                        		<td>${getNoticeList.NOTICE_NOTICE_REGDATE}</td>
+                                        		<td>${getNoticeList.NOTICE_NOTICE_READCOUNT}</td>
+                                        	</tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="btn-paging btn-pageing-bg">
-                                <ul>
-                                    <li>
-                                        <a href="#" title="이전"><img src="img/sub/btn-prev.png" alt="이전"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="더보기" class="on">1</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="더보기">2</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="더보기">3</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="더보기">4</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="더보기">5</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="다음"><img src="img/sub/btn-next.png" alt="다음"></a>
-                                    </li>
-                                </ul>
-                            </div>
+                           	<div class="btn-paging btn-pageing-bg">
+								<ul>
+								  <c:if test="${pageMaker.prev}">
+								    <li>
+								    	<a href="<c:url value='/noticeFm?page=${pageMaker.startPage-1}'/>" title="이전"><img src="/img/sub/btn-prev.png" alt="이전"></a>
+								    </li>
+								  </c:if>
+								  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
+								    <li>
+								    	<a href="<c:url value='/noticeFm?page=${pageNum}'/>" title="더보기">${pageNum}</a>
+								    </li>
+								  </c:forEach>
+								  <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+								    <li>
+								    	<a href="/noticeFm?page=${pageMaker.endPage+1}" title="다음"><img src="/img/sub/btn-next.png" alt="다음"></a>
+								    </li>
+								  </c:if>
+								</ul>
+							</div>
                         </section>
                         <div class="btn-box">
 			                    <ul>
