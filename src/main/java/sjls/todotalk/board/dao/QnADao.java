@@ -31,6 +31,8 @@ public interface QnADao {
 
 	void readcount(HashMap<String, Object> map);
 
+	void repAllDelete(HashMap<String, Object> map);
+
 
 
 }

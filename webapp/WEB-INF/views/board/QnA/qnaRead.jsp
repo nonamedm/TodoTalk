@@ -74,15 +74,18 @@ th,td {padding:10px;}
 	<!-- 댓글 -->
 <table>
 	<tr>
-		<td>댓글 목록</td>
+		<td colspan="2">댓글 내용</td>
+		<td>작성자</td>
+		<td>작성일</td>
 	</tr>
-	<tr>
-		<td>
-			<c:forEach var="list" items="${ repList }" >
-	         <c:out value="${list.qna_re_cont}" /><br> 
-      		</c:forEach> 
-		</td>
-	</tr>	
+	  <c:forEach var="list" items="${ repList }" >
+		<tr>
+		 <td><c:out value="${list.qna_re_cont}" /></td>
+     	 <td><a href="/board/QnA/repDelete?qna_idx=${list.qna_idx}&qna_re_idx=${list.qna_re_idx}"> 삭제 </a></td>
+	     <td><c:out value="${user_id}" /></td>
+	     <td><c:out value="${list.qna_re_regdate}" /></td>
+		</tr>	
+      </c:forEach> 
 </table><br>
 	
 

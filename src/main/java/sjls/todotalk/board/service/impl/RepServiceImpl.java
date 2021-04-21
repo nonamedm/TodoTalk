@@ -32,4 +32,10 @@ public class RepServiceImpl implements RepService {
 		
 	}
 
+	@Override
+	public void repDelete(HashMap<String, Object> map) {
+		repDao.repDelete(map);
+		
+	}
+
 }
