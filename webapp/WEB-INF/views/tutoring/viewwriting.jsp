@@ -3,7 +3,7 @@
 <%@include file="../layout/header.jsp"%>
 <%@taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"  %>    
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>
+<!-- <script>
 	window.onload = function(){
 		var selectedCont = $('#cont').text();
 		var contArray = selectedCont.split(' ');
@@ -19,10 +19,27 @@
 			}
 		});
 		
-		
 	};
+</script> -->
+<script>
+	$(document).ready(function(){
+		
+		var cont = $("#cont").text();
+
+	  $("#tb_repcont").click(function(){
+		  //alert($("#cont").text());
+		  //alert(cont);
+		
+		  if( $("#tb_repcont").val() == "" ){
+		   	$("#tb_repcont").append(cont);
+		  } else {
+			  
+		  }
+
+	  });
+	});
 </script>
-<!-- <script> 
+<script> 
 		function tureList(){
 			var formData = $("#replyForm").serialize();
 			$.ajax({
@@ -60,13 +77,7 @@
  		
 	}); //function
 </script>
-<script>
-	$(document).ready(function(){
-	  $("#cont").click(function(){
-	    $("#tb_repcont").clone().appendTo("body");
-	  });
-	});
-</script> -->
+
 
 <style>
 	.highlight { background: yellow; }
