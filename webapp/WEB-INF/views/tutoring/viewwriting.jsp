@@ -126,7 +126,7 @@
 		    </tr> -->
 		  </table>
 		  <br>
-
+ 
 				<!-- 댓글쓰는 폼 -->
  				<form name="replyForm" id="replyForm">
 			   		<input type="hidden" name="user_idx"   		value="${ sessionScope.login.user_idx }" />     
