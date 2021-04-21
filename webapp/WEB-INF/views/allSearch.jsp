@@ -6,14 +6,9 @@
     	<%@include file="layout/leftMenu.jsp"%>
         <div class="sub-container-wrap">
             <%@include file="layout/allSearchHeader.jsp"%>
+            <script src="js/common.js"></script>
+            <script src="js/main.js"></script>
             
-            
-            <script>
-	            var win;
-	            function createWindow(){
-	             win = open('','TodoTalk','width=450,height=650');
-	            }
-            </script>
             
             <div class="middle-content-wrap">
                 <!--여기부터 컨텐츠내용 작업시작-->
