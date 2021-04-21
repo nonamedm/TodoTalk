@@ -83,7 +83,7 @@
 
 <style>
 	.highlight { background: yellow; }
-	textarea { width: 700px; height: 300px; }
+	textarea { width: 700px; height: 300px; } 
 </style>
     <div class="sub-main-wrap">
         <%@include file="../layout/leftMenu.jsp"%>
