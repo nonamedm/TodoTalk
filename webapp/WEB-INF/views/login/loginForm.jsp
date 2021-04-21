@@ -60,7 +60,7 @@
                                 <h3>로그인</h3>
                             </div>
                             <div class="table-wrap">
-                             <form  action="/User_Make" method="POST">
+					 	   <form  action="/Login" method="POST">
                                 <table class="table-type02">
                                     <caption>로그인 테이블</caption>
                                     <colgroup>
@@ -69,8 +69,6 @@
                                     </colgroup>
                                     <tbody>
                                        
-								 	   <form  action="/Login" method="POST">
-										   	<table>
 										   		<tr>
 										   			<th>아이디</th>
 											   		<td><input type="text" name="user_id" id="user_id" value="11" /><span id=id_check_result></span></td>
