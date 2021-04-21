@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,25 +108,27 @@
 					return false;
 				}
 				// 
-				else if(($('#id_check_result').children().attr('class') == '')){
+				/* else if(($('#check').val() == '')){
 					alert('아이디  중복체크바랍니다');
 					$('#id_check_result').focus();
 					return false;
-				}
+				} */
+				 else if(($('#id_check_result').children().attr('class') != 'blue')){
+					alert('아이디  중복체크바랍니다');
+					$('#id_check_result').focus();
+					return false;
+				} 
 				// 
-				else if(($('#pws_check_result').children().attr('class') == '')){
+				else if(($('#pws_check_result').children().attr('class') != 'blue')){
 					alert('암호 체크바랍니다');
 					$('#pwd_check_result').focus();
 					return false;
 				}
-				
 				// 비밀번호1과 비밀번호2의 값이 같다면 true
-				else if(user_pwd.value!=user_pwd2.value ){
+				else if(user_pwd.value()!=user_pwd2.value() ){
 					return false;
 					alert('암호들을  확인 바랍니다');
 					user_pwd.focus();
-				
-				
 				// 아이디 혹은 비밀번호 체크를 안한경우
 				}else if($('#id_check_result').children().attr('class')== '' || $('#pwd_check_result').children().attr('class')== ''){
 					alert('아이디 중복체크 혹은 비밀번호 체크를  해주세요');
@@ -145,16 +146,7 @@
 				}else{
 					return  false;
 				}
-				
-				
-				
-				
-				
 			}); // 회원가입눌렀을때 end
-			
-			
-			
-			
 			// 비밀번호 체크
 			$('#button_pwd').on('click', function(e){
 				// 비밀번호가  '' 이면  false 
@@ -196,7 +188,9 @@
 				}else{
 					$.ajax({
 						url:'/Check_id',
-						data:$('#user_id').val(), 
+						data:{
+						user_id:$('#user_id').val()
+					}, 
 						type:'POST',
 						success: function(data){
 							alert('사용 가능한 아이디 입니다');
@@ -279,89 +273,158 @@
 </script>
 </head>
 <body>
-   <h1>회원가입</h1>
-   <form  action="/User_Make" method="POST">
-   	<table>
-   		<tr>
-   			<th>아이디</th>
-	   		<td><input type="text" name="user_id" id="user_id" /><span id="id_check_result"></span></td>
-	   		<td><input type="button" value="아이디 중복확인 " id='button2'/></td>
-	   			
-   		</tr>
-   		<tr>
-   			<th>이름</th>
-	   		<td><input type="text" name="user_name" id="user_name" /></td>
-	   		
-   		</tr>
-   		<tr>
-   			<th>비번</th>
-	   		<td><input type="password" name="user_pwd" id="user_pwd" /></td>
-   		</tr>
-   		<tr>
-   			<th>비번2</th>
-	   		<td>
-	   			<input type="password" id="user_pwd2" />
-	   			<span id="pwd_check_result"></span>
-	   			<input type="button" id="button_pwd" value="비밀번호 확인"/>
-	   		</td>
-   		</tr>
-	   		
-   		 <tr>
-   		 	<th>휴대폰번호</th>
-	   		<td>
-	   			<select id=user_phon>
-	   				<option value="">직접입력</option>
-	   				<option value="010">010</option>
-	   				<option value="011">011</option>
-	   			</select>
-		   			<input type="text" name="user_phone1" id="user_phon1" />-
-		   			<input type="text" name="user_phone2" id="user_phon2" />-
-		   			<input type="text" name="user_phone3" id="user_phon3" />
-	   		</td>
-   		</tr> 
-   		<tr>
-   			<th>이메일</th>
-	   		<td><input type="text" name="user_mail1" id="user_mail1" />
-	   			@
-	   			<input type="text" name="user_mail2" id="user_mail2" />
-	   			<select id=user_mail3>
-	   				<option value="">직접입력</option>
-	   				<option value="naver.com">네이버</option>
-	   				<option value="nate.com">네이트</option>
-	   			</select>
-	   			
-	   		</td>
-	   		
-   		</tr>
-   		<tr>
-   			<th>국적</th>
-	   		<td><input type="text" name="country" id="country" /></td>
-   			<td>
-   			<select  id="country1">
-	   			<option value="">선택하세요</option> 
-	   			<option value="한국">대한한국</option> 
-	   			<option value="미국">미국</option> 
-	   			<option value="일본">일본</option> 
-	   			<option value="중국">중국</option> 
-   			</select>
-   			</td>
-   		</tr>
-   		<tr>
-   			<th>당신은 멘토 입니까 튜터 입니까?</th>
-	   		<td><input type="checkbox" name="register" value="" />상관없음
-  				<input type="checkbox" name="register" value="1" />멘토/멘티
-  				<input type="checkbox" name="register" value="2" />튜터
-	   		</td>
-   		</tr>
-   		
-   		<tr>
-	   		<td>
-		   		<input type="submit" value="회원가입" />
-	   			<a href="javascript:history.back();" >취소</a>
-	   		</td>
-   		</tr>
-   	</table>
-   </form>
+<%@include file="../layout/header.jsp"%>
+   <div class="sub-main-wrap">
+  <%@include file="../layout/leftMenu.jsp"%>
+        <div class="sub-container-wrap">
+            <%@include file="../layout/allSearchHeader.jsp"%>
+            <div class="middle-content-wrap">
+   <div class="sub-section-wrap review-sttus">
+                        <section style="width: 82%; margin: 16px auto;">
+                            <div class="section-tit">
+                                <h3>회원가입</h3>
+                            </div>
+                            <div class="table-wrap">
+                             <form  action="/User_Make" method="POST">
+                                <table class="table-type02">
+                                    <caption>회원가입 테이블</caption>
+                                    <colgroup>
+                                        <col class="wp20">
+                                        <col class="wauto">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+								   			<th>아이디</th>
+									   		<td><input type="text" name="user_id" id="user_id" class="wp40"/><span id="id_check_result"></span></td>
+									   		<td><input type="button" value="아이디 중복확인 " id='button2'/></td>
+									   			
+								   		</tr>
+								   		<tr>
+								   			<th>이름</th>
+									   		<td><input type="text" name="user_name" id="user_name" class="wp40" /></td>
+									   		
+								   		</tr>
+								   		<tr>
+								   			<th>비번</th>
+									   		<td><input type="password" name="user_pwd" id="user_pwd"class="wp40" /></td>
+								   		</tr>
+								   		<tr>
+								   			<th>비번2</th>
+									   		<td><input type="password" id="user_pwd2" class="wp40"/><span id="pwd_check_result"></span></td>
+									   		<td>
+									   			<input type="button" id="button_pwd" value="비밀번호 확인"/>
+									   		</td>
+								   		</tr>
+									   		
+								   		 <tr>
+								   		 	<th>휴대폰번호</th>
+									   		<td>
+									   			<select id=user_phon>
+									   				<option value="">직접입력</option>
+									   				<option value="010">010</option>
+									   				<option value="011">011</option>
+									   			</select>
+										   			<input type="text" name="user_phone1" id="user_phon1" class="wp18" />-
+										   			<input type="text" name="user_phone2" id="user_phon2"  class="wp18"/>-
+										   			<input type="text" name="user_phone3" id="user_phon3"  class="wp18"/>
+									   		</td>
+								   		</tr> 
+								   		<tr>
+								   			<th>이메일</th>
+									   		<td><input type="text" name="user_mail1" id="user_mail1"  class="wp40"/>
+									   			@
+									   			<input type="text" name="user_mail2" id="user_mail2"  class="wp40"/>
+									   			<select id=user_mail3>
+									   				<option value="">직접 입력</option>
+									   				<option value="naver.com">네이버</option>
+									   				<option value="nate.com">네이트</option>
+									   			</select>
+									   			
+									   		</td>
+									   		
+								   		</tr>
+								   		<tr>
+								   			<th>국적</th>
+									   		<td><input type="text" name="country" id="country"  class="wp80"/>
+								   			<select  id="country1">
+									   			<option value="">선택하세요</option> 
+									   			<option value="한국">대한한국</option> 
+									   			<option value="미국">미국</option> 
+									   			<option value="일본">일본</option> 
+									   			<option value="중국">중국</option> 
+								   			</select>
+								   			</td>
+								   		</tr>
+								   		<tr>
+								   			<th>당신은 멘토 입니까 튜터 입니까?</th>
+									   		<td><input type="checkbox" name="register" value="" />상관없음
+								  				<input type="checkbox" name="register" value="1" />멘토/멘티
+								  				<input type="checkbox" name="register" value="2" />튜터
+									   		</td>
+								   		</tr>
+								   		<tr>
+									   		<td>
+										   		<input type="submit" value="회원가입" />
+										   		<input type="button" value="취소"  onclick="location.href='javascript:history.back();' "  />
+									   			
+									   		</td>
+								   		</tr>
+								   		
+                                    </tbody>
+                                </table>
+                                </form>
+                            </div>
+                           	
+                        </section>
+                </div>
+	        </div>
+	       <section style="width: 88%; margin: 10px auto; background:#f1f1f1; box-shadow: 0px 0px 0px 0px;">
+	         <div class="sub-contents">
+                    <div class="tabs">
+                        <div id="pro_cap_btns">
+                            <ul>
+                                <li onClick="sub_pop(1);" id="menu1" class="sub_pop1">공지사항</li>
+                                <li onClick="sub_pop(2);" id="menu2" class="sub_pop2">커뮤니티</li>
+                            </ul>
+                        </div>
+
+                        <div id="sub_pa_pop_1">
+                            <div class="">
+                                <div class="">
+                                    <ul>
+                                        <li class="">메인페이지 공지사항입니다.</li>
+                                        <span class="regdate">2021-04-02</span>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="sub_pa_pop_2">
+                            <div class="">
+                                <div class="">
+                                    <ul>
+                                        <li class="">메인페이지 커뮤니티입니다.</li>
+                                        <span class="regdate">2021-04-02</span>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 55%; height: 300px; background: #00a2ff; margin-top: 49px;">
+                        추천멘트및강의 프로그램 목록(광고 또는 별점순)
+                    </div>
+                </div>
+              </section>
+	            <footer>
+	                <div class="sub-footer">
+	                    <p></p>
+	                    <p>시스템관리자</p>
+	                    <p>todotalk@gmail.com <span class="red fs13">(수정할 수 없는 항목에 오류가 있는 경우는 시스템 관리사에게 해당메일로 수정 요청을 해주시기 바랍니다.)</span></p>
+	                </div>
+	            </footer>
+	        </div>
+	        <!--//sub-container-wrap-->
+	    </div>
+	    <!--//sub-main-wrap-->
    
    
    

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="Reply">
+
+<!-- 댓글 쿼리 -->
+
+	<!-- 댓글 목록 --> 
+	<select id="repList"  resultType="sjls.todotalk.board.vo.QnAReplyVo">
+		SELECT QNA_IDX, QNA_RE_IDX, QNA_RE_CONT, USER_ID, QNA_RE_REGDATE
+		FROM QNA_REPLY
+		WHERE QNA_IDX=#{qna_idx}
+	</select>
+	
+	<!-- 댓글 쓰기 -->
+	<insert id="repWrite">
+		INSERT INTO QNA_REPLY
+		(QNA_IDX, QNA_RE_CONT, USER_ID, QNA_RE_REGDATE)
+		VALUES(#{qna_idx}, #{qna_re_cont}, #{user_id}, now());
+	</insert>
+	
+	<!-- 댓글 삭제  -->
+	
+	<delete id="repDelete">
+	</delete>
+	
+	<!-- 댓글 수정 --> 
+	<update id="repUpdate">
+	</update>  
+
+
+
+  
+  </mapper>        
+  
+  
+  
+  
+  
+  

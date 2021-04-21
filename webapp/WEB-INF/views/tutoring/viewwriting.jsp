@@ -3,7 +3,7 @@
 <%@include file="../layout/header.jsp"%>
 <%@taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"  %>    
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>
+<!-- <script>
 	window.onload = function(){
 		var selectedCont = $('#cont').text();
 		var contArray = selectedCont.split(' ');
@@ -13,16 +13,24 @@
 		});
 		
 		$('#reply-list p').each(function(){
-			if ($.inArray ($.trim ($(this).text()),
+			if ($.inArray ($.trim ($(this).text()), 
 					contArray) != 1) {
 				$(this).addClass('highlight');
 			}
 		});
 		
-		
 	};
-</script>
-<!-- <script> 
+</script> -->
+<script> 
+	$(document).ready(function(){
+
+ 		$(document).on('submit','#replyForm', function(e){
+ 			e.preventDefault();
+ 			e.stopPropagation();
+ 			tureList();
+
+ 		}) //document.on
+		
 		function tureList(){
 			var formData = $("#replyForm").serialize();
 			$.ajax({
@@ -33,8 +41,8 @@
 					var html			= '';
 					html += '<div class="leftcolumn">';	// (result.replyList.menu_id 
 					html += '<div class="card">';
-					html += ' <h5>'+ result.tureVo.user_id +', ' + result.tureVo.tubo_regdate + '</h5>';
-					html += ' <p>' + result.tureVo.tubo_regdate + '</p>';
+					html += ' <h5>'+ result.tureVo[0].user_id +', ' + result.tureVo[0].tb_regdate + '</h5>';
+					html += ' <p>' + result.tureVo[0].tb_repcont + '</p>';
 					html += '</div>';
 					html += '</div>';
 					$("#newlyWrittenReply").append(html);
@@ -44,32 +52,35 @@
 					alert(xhr.status + ", " + xhr.statusText);
 				}
 				
+				
 			}); //ajax
 		}
+		
  	 	$(function () {
  		
- 		$(document).on('click','#submit', function(e){
- 			tureList();
-
- 		}) //document.on
-		var cont = '${ tuboVo.tubo_cont }';
+			var cont = $("#cont").text();
+	
+		  	$("#tb_repcont").click(function(){
+			  //alert($("#cont").text());
+			  //alert(cont);
+			
+			  if( $("#tb_repcont").val() == "" ){
+			   	$("#tb_repcont").append(cont);
+			  } else {
+				  
+			  }
+	
+		  	});
  		
- 		$('#tb_repcont').on('click',function(){		
- 			$('#tb_repcont').val(cont);
- 		});
- 		
-	}); //function
+		}); //function
+		
+	}); //document.ready
 </script>
-<script>
-	$(document).ready(function(){
-	  $("#cont").click(function(){
-	    $("#tb_repcont").clone().appendTo("body");
-	  });
-	});
-</script> -->
+
 
 <style>
 	.highlight { background: yellow; }
+	textarea { width: 700px; height: 300px; } 
 </style>
     <div class="sub-main-wrap">
         <%@include file="../layout/leftMenu.jsp"%>
@@ -112,7 +123,7 @@
 		    </tr> -->
 		  </table>
 		  <br>
-
+ 
 				<!-- 댓글쓰는 폼 -->
  				<form name="replyForm" id="replyForm">
 			   		<input type="hidden" name="user_idx"   		value="${ sessionScope.login.user_idx }" />     
