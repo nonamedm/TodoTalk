@@ -13,7 +13,7 @@
 		});
 		
 		$('#reply-list p').each(function(){
-			if ($.inArray ($.trim ($(this).text()),
+			if ($.inArray ($.trim ($(this).text()), 
 					contArray) != 1) {
 				$(this).addClass('highlight');
 			}
