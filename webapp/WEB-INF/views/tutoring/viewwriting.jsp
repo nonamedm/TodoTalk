@@ -21,25 +21,18 @@
 		
 	};
 </script> -->
-<script>
+
+<script> 
 	$(document).ready(function(){
 		
-		var cont = $("#cont").text();
+ 		$(document).on('submit','#replyForm', function(e){
+ 			e.preventDefault();
+ 			e.stopPropagation();
+ 			alert("보내짐");
+ 			tureList();
 
-	  $("#tb_repcont").click(function(){
-		  //alert($("#cont").text());
-		  //alert(cont);
+ 		}) //document.on
 		
-		  if( $("#tb_repcont").val() == "" ){
-		   	$("#tb_repcont").append(cont);
-		  } else {
-			  
-		  }
-
-	  });
-	});
-</script>
-<script> 
 		function tureList(){
 			var formData = $("#replyForm").serialize();
 			$.ajax({
@@ -54,7 +47,9 @@
 					html += ' <p>' + result.tureVo.tubo_regdate + '</p>';
 					html += '</div>';
 					html += '</div>';
+					alert(html);
 					$("#newlyWrittenReply").append(html);
+
 					
 				},
 				error : function(xhr){
@@ -63,24 +58,32 @@
 				
 			}); //ajax
 		}
+		
  	 	$(function () {
  		
- 		$(document).on('click','#submit', function(e){
- 			tureList();
-
- 		}) //document.on
-		var cont = '${ tuboVo.tubo_cont }';
+			var cont = $("#cont").text();
+	
+		  	$("#tb_repcont").click(function(){
+			  //alert($("#cont").text());
+			  //alert(cont);
+			
+			  if( $("#tb_repcont").val() == "" ){
+			   	$("#tb_repcont").append(cont);
+			  } else {
+				  
+			  }
+	
+		  	});
  		
- 		$('#tb_repcont').on('click',function(){		
- 			$('#tb_repcont').val(cont);
- 		});
- 		
-	}); //function
+		}); //function
+		
+	}); //document.ready
 </script>
 
 
 <style>
 	.highlight { background: yellow; }
+	textarea { width: 700px; height: 300px; }
 </style>
     <div class="sub-main-wrap">
         <%@include file="../layout/leftMenu.jsp"%>
