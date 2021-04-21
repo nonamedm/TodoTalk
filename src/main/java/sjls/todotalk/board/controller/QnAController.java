@@ -117,6 +117,17 @@ public class QnAController {
 		return mv;
 	}
 	
+	//댓글 삭제
+	@RequestMapping("/board/QnA/repDelete")
+	public ModelAndView repDelete(@RequestParam HashMap<String, Object> map) {
+		
+		repService.repDelete(map);
+		ModelAndView mv = new ModelAndView();
+//		mv.setViewName("redirect:/board/QnA/qnaRead?qna_idx=${list.qna_idx}");
+		mv.setViewName("redirect:/board/QnA/qnaList");
+		return mv;
+	}
+	
 	
 	//게시글 삭제
 	@RequestMapping("/board/QnA/delete")
@@ -124,7 +135,7 @@ public class QnAController {
 		
 		//게시판 테이블 데이터 삭제
 		qnaService.boardDelete(map);
-		//파일 삭제는 service impl에 있음 
+		//파일,댓글 다 같이 삭제는 service impl에 있음 
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:/board/QnA/qnaList");

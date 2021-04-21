@@ -58,6 +58,7 @@ public class QnAServiceImpl implements QnAService {
 	public void boardDelete(HashMap<String, Object> map) {
 		
 		qnaBoardDao.fileDelete(map);  //파일 삭제 
+		qnaBoardDao.repAllDelete(map);    //댓글 삭제 (전체)
 		qnaBoardDao.boardDelete(map); //게시글 삭제 
 		
 		//부모 자식 테이블로 되어있어서 

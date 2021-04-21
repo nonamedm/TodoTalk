@@ -93,6 +93,14 @@ public class QnADaoImpl implements QnADao {
 		sqlSession.update("QnABoard.readcount",map);
 	}
 	
+	//댓글 삭제 
+	@Override
+	public void repAllDelete(HashMap<String, Object> map) {
+		sqlSession.delete("Reply.repAllDelete",map);
+		
+	}
+	
+	
 
 
 

@@ -13,4 +13,6 @@ public interface RepService {
 
 	void repWrite(HashMap<String, Object> map, HttpServletRequest request);
 
+	void repDelete(HashMap<String, Object> map);
+
 }

@@ -30,4 +30,10 @@ public class RepDaoImpl implements RepDao {
 		
 	}
 
+	@Override
+	public void repDelete(HashMap<String, Object> map) {
+		sqlSession.delete("Reply.repDelete",map);
+		
+	}
+
 }
