@@ -21,14 +21,12 @@
 		
 	};
 </script> -->
-
 <script> 
 	$(document).ready(function(){
-		
+
  		$(document).on('submit','#replyForm', function(e){
  			e.preventDefault();
  			e.stopPropagation();
- 			alert("보내짐");
  			tureList();
 
  		}) //document.on
@@ -43,18 +41,17 @@
 					var html			= '';
 					html += '<div class="leftcolumn">';	// (result.replyList.menu_id 
 					html += '<div class="card">';
-					html += ' <h5>'+ result.tureVo.user_id +', ' + result.tureVo.tubo_regdate + '</h5>';
-					html += ' <p>' + result.tureVo.tubo_regdate + '</p>';
+					html += ' <h5>'+ result.tureVo[0].user_id +', ' + result.tureVo[0].tb_regdate + '</h5>';
+					html += ' <p>' + result.tureVo[0].tb_repcont + '</p>';
 					html += '</div>';
 					html += '</div>';
-					alert(html);
 					$("#newlyWrittenReply").append(html);
-
 					
 				},
 				error : function(xhr){
 					alert(xhr.status + ", " + xhr.statusText);
 				}
+				
 				
 			}); //ajax
 		}

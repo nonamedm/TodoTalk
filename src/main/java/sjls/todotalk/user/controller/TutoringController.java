@@ -152,7 +152,7 @@ public class TutoringController {
 //		String tubo_regdate = (String) map.get("tubo_regdate");
 
 		mav.addObject("tureVo", tureVo2);
-		//mav.setViewName("jsonView");
+		mav.setViewName("jsonView");
 
 		return mav;
 	}
