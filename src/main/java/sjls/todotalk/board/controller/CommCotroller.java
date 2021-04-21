@@ -140,52 +140,52 @@ public class CommCotroller {
 	}
 	
 	
-	
-	//파일 다운로드
-	// {sfile}    :    .jpg 와 같은 . 포함 문자는 무시한다 
-	// {sfile:.+} : 정규식문법 .문자가 한개이상(+) 있을때
-	@RequestMapping(value="/download/{type}/{sfile_name:.+}", method = RequestMethod.GET )
-	public void downloadFile(HttpServletResponse response,
-		@PathVariable("type") String type,@PathVariable("sfile_name") String sfile_name) throws IOException {
-		
-		String  INTERNAL_FILE        = sfile_name;
-		String  EXTERNAL_FILE_PATH   = "c:\\upload\\" + sfile_name;
-		
-		File    file   =  null;
-		if( type.equalsIgnoreCase("internal") ) {
-			ClassLoader   classLoader = 
-				Thread.currentThread().getContextClassLoader();
-			file = new File(classLoader.getResource(INTERNAL_FILE).getFile() );
-		} else {
-			file  =  new File( EXTERNAL_FILE_PATH );
-		}
-				
-		if(!file.exists() ) {
-			String errorMessage = "죄송합니다. 파일이 없습니다";
-			System.out.println(errorMessage);
-			OutputStream outputStream = response.getOutputStream();
-			outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
-			outputStream.close();
-			return;
-		}
-		
-		String  mimeType = URLConnection.guessContentTypeFromName(file.getName());
-		mimeType = "application/octet-stream"; // 무조건 다운로드
-		
-		response.setContentType(mimeType);
-		response.setHeader("Content-Disposition", 
-			String.format("inline; filename=\"" + file.getName() + "\"" ) );
-		
-		response.setContentLength( (int) file.length() );
-		
-		InputStream  inputStream = new BufferedInputStream(
-			new FileInputStream(file) );
-		
-		FileCopyUtils.copy(inputStream, response.getOutputStream() );
-		
-		inputStream.close();
-		
-	}
+//	
+//	//파일 다운로드
+//	// {sfile}    :    .jpg 와 같은 . 포함 문자는 무시한다 
+//	// {sfile:.+} : 정규식문법 .문자가 한개이상(+) 있을때
+//	@RequestMapping(value="/download/{type}/{sfile_name:.+}", method = RequestMethod.GET )
+//	public void downloadFile(HttpServletResponse response,
+//		@PathVariable("type") String type,@PathVariable("sfile_name") String sfile_name) throws IOException {
+//		
+//		String  INTERNAL_FILE        = sfile_name;
+//		String  EXTERNAL_FILE_PATH   = "c:\\upload\\" + sfile_name;
+//		
+//		File    file   =  null;
+//		if( type.equalsIgnoreCase("internal") ) {
+//			ClassLoader   classLoader = 
+//				Thread.currentThread().getContextClassLoader();
+//			file = new File(classLoader.getResource(INTERNAL_FILE).getFile() );
+//		} else {
+//			file  =  new File( EXTERNAL_FILE_PATH );
+//		}
+//				
+//		if(!file.exists() ) {
+//			String errorMessage = "죄송합니다. 파일이 없습니다";
+//			System.out.println(errorMessage);
+//			OutputStream outputStream = response.getOutputStream();
+//			outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
+//			outputStream.close();
+//			return;
+//		}
+//		
+//		String  mimeType = URLConnection.guessContentTypeFromName(file.getName());
+//		mimeType = "application/octet-stream"; // 무조건 다운로드
+//		
+//		response.setContentType(mimeType);
+//		response.setHeader("Content-Disposition", 
+//			String.format("inline; filename=\"" + file.getName() + "\"" ) );
+//		
+//		response.setContentLength( (int) file.length() );
+//		
+//		InputStream  inputStream = new BufferedInputStream(
+//			new FileInputStream(file) );
+//		
+//		FileCopyUtils.copy(inputStream, response.getOutputStream() );
+//		
+//		inputStream.close();
+//		
+//	}
 	
 	
 	

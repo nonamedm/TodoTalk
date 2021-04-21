@@ -87,6 +87,13 @@ public class QnADaoImpl implements QnADao {
 		System.out.println("게시글 쓰기map:  "+map);
 		sqlSession.insert("QnABoard.fileWrite",map); 
 	}
+	
+	//조회수
+	@Override
+	public void readcount(HashMap<String, Object> map) {
+		sqlSession.update("QnABoard.readcount",map);
+	}
+	
 
 
 

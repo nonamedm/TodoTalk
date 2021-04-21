@@ -51,6 +51,7 @@ public class QnAServiceImpl implements QnAService {
 	public QnABoardVo getQnARead(HashMap<String, Object> map) {
 		//글 내용 읽기 
 		QnABoardVo qnaBoardVo = qnaBoardDao.getQnARead(map);
+		
 		return qnaBoardVo;
 	}
 	
@@ -70,11 +71,12 @@ public class QnAServiceImpl implements QnAService {
 	@Override
 	public void getQnAWrite(HashMap<String, Object> map, HttpServletRequest request) {
 		
-		//파일 쓰기
+		//파일 업로드
 		PdsFile_QnA.save(map, request);
 		
-		//넘어온 정보 db에 저장
+		//게시글 쓰기 
 		QnABoardVo vo =qnaBoardDao.qnaWrite(map);
+		//위에 쓴 게시글 정보 db에 저장
 		int qna_idx = vo.getQna_idx();
 		map.put("qna_idx",qna_idx);
 		
@@ -85,9 +87,12 @@ public class QnAServiceImpl implements QnAService {
 	//게시글 수정
 	@Override
 	public void getQnAUpdate(HashMap<String, Object> map, HttpServletRequest request) {
+		//파일 업로드
+		//PdsFile_QnA.save(map, request);
 		//게시글 text 수정
-		qnaBoardDao.qnaUpdate(map);
+		qnaBoardDao.qnaUpdate(map);	
 	}
+	
 	
 	//파일 목록 
 	@Override
@@ -95,6 +100,12 @@ public class QnAServiceImpl implements QnAService {
 		
 		List<QnAFileVo> fileList = qnaBoardDao.getFileList(map);
 		return fileList;
+	}
+	
+	//조회수 
+	@Override
+	public void readcount(HashMap<String, Object> map) {
+		qnaBoardDao.readcount(map);
 	}
 
 

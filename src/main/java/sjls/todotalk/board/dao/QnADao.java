@@ -29,6 +29,8 @@ public interface QnADao {
 
 	void fileWrite(HashMap<String, Object> map);
 
+	void readcount(HashMap<String, Object> map);
+
 
 
 }
