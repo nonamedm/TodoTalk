@@ -37,6 +37,7 @@ table,td {border:2px solid DarkOrchid;
  	<td colspan="4"><textarea name="qna_cont" rows="30" cols="80"></textarea> </td>
  </tr>
  
+ 
  <input type="submit" value="확인" />
  <a href="/board/QnA/qnaList"> 목록 </a>
 

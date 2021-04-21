@@ -23,5 +23,8 @@ public interface QnAService {
 
 	List<QnAFileVo> getFileList(HashMap<String, Object> map);
 
+	void readcount(HashMap<String, Object> map);
+
+
 
 }
