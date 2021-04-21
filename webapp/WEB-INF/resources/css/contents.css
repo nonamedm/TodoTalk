@@ -264,7 +264,7 @@ section .section-tit h3{font-size: 18px; font-weight: 800;}
 .modal-selectname-referrer ul{height: 167px;}
 .modal-selectname-referrer ul li{margin-bottom: 10px;}
 .modal-selectname-referrer ul li:last-child{margin-bottom: 0;}
-
+.chat-header {padding: 10px; color: #fff; background-color: #1EDA69; display: flex; justify-content: space-between; margin-top: -1px;}
 /*사이트기능소개 페이지 CSS*/
 .top-title{margin-bottom: 12px;}
 .top-title > h1{font-size: 26px; color: #333;}
