@@ -14,23 +14,24 @@
                 <!--여기부터 컨텐츠내용 작업시작-->
 
                 <div id="tutorSearch">
-                튜터 검색결과 - 총 ${ tutorVoSize } 건
+                <h3>튜터 검색결과 - 총 ${ tutorVoSize } 건</h3>
                 <c:forEach var="tutorVo" items="${ tutorVo }">
                 <br>
-                	<div>
-                	튜터 : ${ tutorVo.user_name } <br>
-                	이메일 : ${ tutorVo.user_mail } <br>
-                	국적 : ${ tutorVo.country }　　좋아요 ${ tutorVo.recommend }<br>
+                	
+                	<table class="table-type02" style="width:850px;">
+                	<thead></thead>
+                	<tbody>
+                	<tr><td>튜터 : ${ tutorVo.user_name }</td><td colspan="2">이메일 : ${ tutorVo.user_mail }</td></tr>
+                	<tr><td>국적 : ${ tutorVo.country }</td><td>좋아요 ${ tutorVo.recommend }</td>
                 	<form action="/talk" method="POST" target="TodoTalk" onsubmit="createWindow();">
                 	<input type="hidden" name="loginId" value="${login.user_id}" />
                 	<input type="hidden" name="receiverId" value="${tutorVo.user_id }" />
                 	<input type="hidden" name="requireId" value="${login.user_id }" />
-                	<input type="submit" value="대화시작"/>
+                	<th><input type="submit" value="대화시작"/></th></tr>
                 	</form>
+                	</tbody>
+                	</table>
                 	
-                	<a href="/rooms/">대화방 목록</a>
-                	<!-- 대화방 목록에 수식 걸어서 내아이디 포함된 방만 보여주기 -->
-                	</div>
                 <br>
                 </c:forEach>
                 </div>
@@ -38,22 +39,22 @@
                 <hr>
                 <br>
                 <div id="mentorSearch">
-                멘토 검색결과 - 총 ${ mentorVoSize }건
+                <h3>멘토 검색결과 - 총 ${ mentorVoSize }건</h3>
                 <c:forEach var="mentorVo" items="${ mentorVo }">
                 <br>
-                	<div>
-                	멘토 : ${ mentorVo.user_name } <br>
-                	이메일 : ${ mentorVo.user_mail } <br>
-                	국적 : ${ mentorVo.country }　　좋아요 ${ mentorVo.recommend }<br>
+                	<table class="table-type02" style="width:850px;">
+                	<thead></thead>
+                	<tbody>
+                	<tr><td>멘토 : ${ mentorVo.user_name } </td><td colspan="2">이메일 : ${ mentorVo.user_mail } </td></tr>
+                	<tr><td>국적 : ${ mentorVo.country }</td><td>좋아요 ${ mentorVo.recommend }</td>
                 	<form action="/talk" method="POST" target="TodoTalk" onsubmit="createWindow();">
                 	<input type="hidden" name="loginId" value="${login.user_id}" />
                 	<input type="hidden" name="receiverId" value="${mentorVo.user_id }" />
                 	<input type="hidden" name="requireId" value="${login.user_id }" />
-                	<input type="submit" value="대화시작"/>
+                	<th><input type="submit" value="대화시작"/></th></tr>
                 	</form>
-                	
-                	<a href="/rooms/">대화방 목록</a>
-                	</div>
+                	</tbody>
+                	</table>
                 <br>
                 </c:forEach>
                 </div>
@@ -62,16 +63,17 @@
                 <br>
               
                 <div class="boardSearch">
-                게시판 검색결과 - 총 ${ boardAllSearchSize }건
+                <h3>게시판 검색결과 - 총 ${ boardAllSearchSize }건</h3>
                 <c:forEach var="boardAllSearch" items="${ boardAllSearch }">
                 <br>
-                	<div>
-                	분류 : ${ boardAllSearch.BOARD_NAME }   작성자 : ${ boardAllSearch.USER_ID }<br>
-                	<a href="#">${ boardAllSearch.TITLE }</a> <br>
-                	${ boardAllSearch.CONT } <br>
-                	${ boardAllSearch.REGDATE }
-                	</div>
-                <br>
+                	<table class="table-type02" style="width:850px;">
+                	<thead></thead>
+                	<tbody>
+                	<tr><td>분류 : ${ boardAllSearch.BOARD_NAME } </td><td>작성자 : ${ boardAllSearch.USER_ID } </td></tr>
+                	<tr><td colspan="2"><a href="#">${ boardAllSearch.TITLE }</a></td></tr>
+                	<tr><td colspan="2">${ boardAllSearch.CONT }</td></tr>
+                </tbody>
+                	</table>
                 </c:forEach> 
                 </div>
             </div>
