@@ -24,15 +24,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import sjls.todotalk.board.service.QnAService;
+import sjls.todotalk.board.service.RepService;
 import sjls.todotalk.board.vo.PdsVo;
 import sjls.todotalk.board.vo.QnABoardVo;
 import sjls.todotalk.board.vo.QnAFileVo;
+import sjls.todotalk.board.vo.QnAReplyVo;
 
 @Controller
 public class QnAController {
 	
 	@Autowired
 	private QnAService qnaService;
+	@Autowired
+	private RepService repService;
 	
 	//QnA 게시판
 	@RequestMapping("/board/QnA/qnaList")
@@ -80,6 +84,11 @@ public class QnAController {
 		
 		//조회수
 		qnaService.readcount(map);
+		
+		//댓글 목록 조회
+		List<QnAReplyVo> repList = repService.getRepList(map);
+		QnAReplyVo qnaReplyVo = (QnAReplyVo) map.get("qnaReplyVo");
+		
 
 		//addObject
 		ModelAndView mv = new ModelAndView();
@@ -87,9 +96,24 @@ public class QnAController {
 		mv.addObject("qnafileVo",qnafileVo);
 		mv.addObject("filesList",filesList);
 		mv.addObject("list",pdsList);
+		mv.addObject("repList",repList);
+		mv.addObject("qnaReplyVo",qnaReplyVo);
 		mv.addObject("map",map);
 		mv.setViewName("/board/QnA/qnaRead");
 		
+		return mv;
+	}
+	
+	//댓글 쓰기
+	@RequestMapping("/board/QnA/repWrite")
+	public ModelAndView repWrite(@RequestParam HashMap<String, Object> map
+			,HttpServletRequest request) {
+		
+		//qnaRead.jsp 안에 댓글쓰기에서 받아온 정보 insert 
+		repService.repWrite(map,request);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/board/QnA/qnaList");
 		return mv;
 	}
 	
@@ -105,7 +129,6 @@ public class QnAController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:/board/QnA/qnaList");
 		return mv;
-		
 	}
 	
 	//글 쓰기 form

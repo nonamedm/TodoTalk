@@ -59,7 +59,6 @@ public class QnADaoImpl implements QnADao {
 		sqlSession.insert("QnABoard.qnaWrite",map); //text 쓰기
 		QnABoardVo vo = sqlSession.selectOne("QnABoard.getQna_Idx",map); //게시글 번호 조회
 		return vo;
-		
 	}
 	
 	//게시글 수정 

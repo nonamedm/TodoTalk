@@ -59,31 +59,41 @@ th,td {padding:10px;}
 	<tr>
 	    <td class="tdfile" colspan="1">파일</td> 
           <td colspan="3"> 
+          
 			<c:forEach var="file" items="${ filesList }" >
 	          <a href=" <c:out value="${ file.file_name}" />" > 
 		          ★파일번호: <c:out value="${ file.file_idx}" /><br>
 		          ★파일이름: <c:out value="${ file.file_name}" />
 	          </a>  
       		 </c:forEach> 
+      		 
           </td>
 	</tr>
-</table>
+</table><br>
 
 	<!-- 댓글 -->
-<form action=""  >
 <table>
-	<br>
 	<tr>
 		<td>댓글 목록</td>
-		<td colspan="2"> 목록 넣어 </td>
+	</tr>
+	<tr>
+		<td>
+			<c:forEach var="list" items="${ repList }" >
+	         <c:out value="${list.qna_re_cont}" /><br> 
+      		</c:forEach> 
+		</td>
 	</tr>	
+</table><br>
 	
 
+<form action="/board/QnA/repWrite"  method="POST">
+<table>
 	<tr>
  		<td>댓글쓰기</td>
+	 	<input type="hidden" name="qna_idx" value="${map.qna_idx}"/>
  		<td>
 			작성자: ${user_id}<input type="hidden" name="user_id"  value="${user_id}"/>
-	 		<textarea name="replye" rows="5" cols="15"></textarea> 
+	 		<textarea name="qna_re_cont" rows="5" cols="15"></textarea> 
  		</td>
  		<td><input type="submit" value="댓글쓰기"/></td>
 	</tr>

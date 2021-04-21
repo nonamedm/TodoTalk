@@ -27,7 +27,6 @@ public class QnAServiceImpl implements QnAService {
 		
 		// 게시글 목록 
 		List<PdsVo> qnaList = qnaBoardDao.getQnAList(map);
-		System.out.println("service에서 게시글 목록 값 "+ qnaList);
 		
 		//페이징 ----------------------------------------------------------
 //		int pagetotalcount = 5;  //페이지 번호 갯수 (1~5번까지)
@@ -41,7 +40,6 @@ public class QnAServiceImpl implements QnAService {
 		BoardPaging bp = new BoardPaging();
 		PdsVo vo = bp.getPdsPagingInfo();
 		map.put("pagePdsVo", vo);
-		System.out.println("service 목록 MAP: "+ map);
 	
 		return qnaList;
 	}
@@ -107,6 +105,7 @@ public class QnAServiceImpl implements QnAService {
 	public void readcount(HashMap<String, Object> map) {
 		qnaBoardDao.readcount(map);
 	}
+
 
 
 }
