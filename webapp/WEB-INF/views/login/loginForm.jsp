@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,6 +44,24 @@
 		}); 
  
     } 
+    function Login(){
+    	 var formdate =$("form[name=Login]").serializeObject();
+    	 var jsondata = JSON.stringify(formdate);
+    	 
+    	 $.ajax({
+    			url:'/Login',
+    			contentType : "application/json; charset=utf-8",
+    			dataType : 'json',
+    			data:jsondata,
+    			type:'POST',
+    			success: function(data){
+    				
+    			},
+    			error: function(xhr){
+    				xhr.status+","+ xhr.statusText;
+    			}
+    			});
+    }
 </script>
 </head>
 <body>
@@ -60,7 +79,7 @@
                                 <h3>로그인</h3>
                             </div>
                             <div class="table-wrap">
-					 	   <form  action="/Login" method="POST">
+						 	   <form  action="/Login" method="POST">
                                 <table class="table-type02">
                                     <caption>로그인 테이블</caption>
                                     <colgroup>
@@ -71,19 +90,18 @@
                                        
 										   		<tr>
 										   			<th>아이디</th>
-											   		<td><input type="text" name="user_id" id="user_id" value="11" /><span id=id_check_result></span></td>
+											   		<td><input type="text" name="user_id" id="user_id" value="11" class="wp30" /><span id=id_check_result></span></td>
 										   		</tr>
 										   		<tr>
 										   			<th>비번</th>
-											   		<td><input type="password" name="user_pwd" id="user_pwd" value="11" /></td>
+											   		<td><input type="password" name="user_pwd" id="user_pwd" value="11" class="wp30" /></td>
 										   		</tr>
 										   		<tr>
-											   		<td>
-											   		<input type="submit" value="확인"/>
-											   		
-											   		<a href="javascript:history.back();" >취소</a>
-											   		<a href="/User_MakeForm">회원가입</a>
-											   		<a href="/Find" >아이디 /비번찾기</a>
+											   		<td  class="wp30">
+												   		<input type="submit" value="로그인" />
+												   		<input type="button" value="취소"  onclick="location.href='javascript:history.back();'"  />
+												   		<input type="button" value="회원가입"  onclick="location.href='/User_MakeForm;'"  />
+												   		<input type="button" value="아이디/비번찾기"  onclick="location.href='/Find;'"  />
 											   		</td>
 										   		</tr>
 								          </tbody>

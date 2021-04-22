@@ -266,10 +266,30 @@
 				}				
 			});
 			// 폰 앞번호 선택
-			
-			
-			
    });
+   
+   function joinFm(){
+	 var formdate =$("form[name=joinFm]").serializeObject();
+	 var jsondata = JSON.stringify(formdate);
+	 
+	 $.ajax({
+			url:'/joinFm',
+			contentType : "application/json; charset=utf-8",
+			dataType : 'json',
+			data:jsondata,
+			type:'POST',
+			success: function(data){
+				
+			},
+			error: function(xhr){
+				xhr.status+","+ xhr.statusText;
+			}
+			});
+	 
+	 
+	 
+   }
+   
 </script>
 </head>
 <body>
@@ -285,7 +305,7 @@
                                 <h3>회원가입</h3>
                             </div>
                             <div class="table-wrap">
-                             <form  action="/User_Make" method="POST">
+                      		 <form  action="/User_Make" method="POST">
                                 <table class="table-type02">
                                     <caption>회원가입 테이블</caption>
                                     <colgroup>
@@ -324,7 +344,7 @@
 									   				<option value="010">010</option>
 									   				<option value="011">011</option>
 									   			</select>
-										   			<input type="text" name="user_phone1" id="user_phon1" class="wp18" />-
+										   			<input type="text" name="user_phone1" id="user_phon1"  class="wp18"/>-
 										   			<input type="text" name="user_phone2" id="user_phon2"  class="wp18"/>-
 										   			<input type="text" name="user_phone3" id="user_phon3"  class="wp18"/>
 									   		</td>
@@ -364,9 +384,8 @@
 								   		</tr>
 								   		<tr>
 									   		<td>
-										   		<input type="submit" value="회원가입" />
+						                        <input type="submit" value="회원가입" class="btn-minsu"/>
 										   		<input type="button" value="취소"  onclick="location.href='javascript:history.back();' "  />
-									   			
 									   		</td>
 								   		</tr>
 								   		
@@ -376,6 +395,12 @@
                             </div>
                            	
                         </section>
+                       <!--  <div class="btn-box">
+                        	<ul>
+                        		<li><a href="javascript:joinFm()">회원가입</a></li>
+                        		<li><a href="">취소</a></li>
+                        	</ul>
+                        </div> -->
                 </div>
 	        </div>
 	       <section style="width: 88%; margin: 10px auto; background:#f1f1f1; box-shadow: 0px 0px 0px 0px;">

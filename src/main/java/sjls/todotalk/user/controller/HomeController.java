@@ -1,8 +1,11 @@
 package sjls.todotalk.user.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,30 +41,23 @@ public class HomeController {
 		}
 		// 로그인 과정
 		@RequestMapping("/Login")
-		public  ModelAndView login(HttpSession session, @RequestParam HashMap<String, Object> map) {
+		public  ModelAndView login(HttpServletResponse response,HttpSession session, @RequestParam HashMap<String, Object> map) throws IOException {
 			ModelAndView  mv = new ModelAndView();
 			String  check = (String) map.get("user_pwd");
-			Sha256 sha = new Sha256();
-			String check2 = sha.encrypt(check);
+			Sha256  sha = new Sha256();
+			String  check2 = sha.encrypt(check);
 			
 			if( session.getAttribute("login") != null ) {
 				//  기존의 login 값이 존재하면 삭제
 				session.removeAttribute("login");
 			}
 			// 회원의 사진을 들고오기위한 로직
-//			String user_id = (String) session.getAttribute("user_id");
-//			map.put("user_id", user_id);
 			ImgVo  img = userService.getPhoto(map);
 			if(img != null) {
 				session.setAttribute("img", img);
-				
 			}else {}
-			
 			UserVo vo = userService.getUser(map);
-			
 			if(vo!=null) {
-					
-				
 				String vocheck = vo.getUser_pwd();  // vo ㅇ
 				if(vocheck.equals(check)) {  // 암호화가 되어있지 않은 로그인
 					session.setAttribute("login",          vo);
@@ -95,6 +91,10 @@ public class HomeController {
 					
 						mv.setViewName("redirect:/");		
 				}else {
+//					response.setContentType("text/html; charset=UTF-8");
+//					PrintWriter out = response.getWriter();
+//					out.println("<script>alert('비밀번호가 틀립니다');   </script>");
+//					out.flush();
 					
 					mv.setViewName("redirect:/LoginForm");		
 					
@@ -161,7 +161,7 @@ public class HomeController {
 			
 			return "redirect:/";     
 		}
-		// 아이디 중복확인
+		//회원가입 아이디 중복확인
 		@RequestMapping("/Check_id")
 		public  ModelAndView check_id(
 				@RequestParam HashMap<String, Object> map) {
@@ -180,10 +180,10 @@ public class HomeController {
 			
 			String html = "<b";
 			if(result.equals("false") ) {
-				html += " class=red> 사용불가"  ; 
+				html += " class=red id=check> 사용불가"  ; 
 				html += " </b>";
 			}else {
-				html += " class=blue> 사용가능"  ; 
+				html += " class=blue id=check> 사용가능"  ; 
 				html += " </b>";
 				
 			}
@@ -191,32 +191,89 @@ public class HomeController {
 			mv.setViewName("jsonView");
 			return mv;     
 		}
-		// 아이디 중복확인
+		//로그인시  아이디 중복확인
 		@RequestMapping("/Check_id2")
-		public  ModelAndView check_id2(
-				@RequestParam HashMap<String, Object> map) {
-			UserVo  vo  = userService.getid2(map);
-			ModelAndView mv= new ModelAndView();
-			System.out.println(vo);
+		public  ModelAndView check_id2(@RequestParam HashMap<String, Object> map) throws IOException {
+			ModelAndView mav = new ModelAndView();
 			String result = "";
-			if(vo != null) {
-				result += "true";
-			}else {
-				result += "false";
-			}
+			System.out.println(map);
+		/* UserVo vo = userService.getid2(map); */
+			UserVo vo = userService.getUser(map);
 			
-			String html = "<b";
-			if(result.equals("false") ) {
-				html += " class=red> 존제하지않는 값입니다"  ; 
-				html += " </b>";
-			}else {
-				html += " class=blue>"  ; 
-				html += " </b>";
+			System.out.println("아이디  체크2 "+vo);
+			System.out.println("비밀번호  체크  오나? ");
+			String  check = (String) map.get("user_pwd");
+			System.out.println("비밀번호 값 "+check);
+			Sha256 sha = new Sha256();
+			String check2 = sha.encrypt(check);
+			String vocheck = vo.getUser_pwd();  // vo
+			if(vo != null) {
+				if(vocheck.equals(check)) {  // 암호화가 되어있지 않은 로그인
+					result = "1";
+					System.out.println("1번"+result);
+					mav.addObject("result1",result);
+					mav.setViewName("jsonView");
+				}else if(vocheck.equals(check2)){  // 암화화가 되어있는 비밀번호
+					result = "1";
+					System.out.println("2번"+result);
+					mav.addObject("result1", result);
+					mav.setViewName("jsonView");
+				}else {
+					result = "0";
+					System.out.println("3번"+result);
+//					mav.addObject("result1", result);
+//					mav.setViewName("jsonView");
+				}
 				
 			}
-			mv.addObject("html", html);
-			mv.setViewName("jsonView");
-			return mv;     
+				
+			mav.addObject("result", result);
+			mav.setViewName("jsonView");
+			return mav;
+		}
+		
+		// 비밀번호 체크 
+		
+		@RequestMapping("/Check_pwd")
+		public ModelAndView  check_pwd(@RequestParam HashMap<String, Object> map) {
+			
+			ModelAndView mav = new ModelAndView();
+			String result = "";
+			System.out.println("비밀번호  체크  오나? ");
+			String  check = (String) map.get("user_pwd");
+			System.out.println("비밀번호 값 "+check);
+			Sha256 sha = new Sha256();
+			String check2 = sha.encrypt(check);
+			UserVo vo = userService.getUser(map);
+			
+			
+				String vocheck = vo.getUser_pwd();  // vo ㅇ
+				if(vo!=null) {
+					if(vocheck.equals(check)) {  // 암호화가 되어있지 않은 로그인
+						result = "1";
+						System.out.println("1번"+result);
+						mav.addObject("result1",result);
+						mav.setViewName("jsonView");
+					}else if(vocheck.equals(check2)){  // 암화화가 되어있는 비밀번호
+						result = "1";
+						System.out.println("2번"+result);
+						mav.addObject("result1", result);
+						mav.setViewName("jsonView");
+					}else {
+						result = "0";
+						System.out.println("3번"+result);
+						mav.addObject("result1", result);
+						mav.setViewName("jsonView");
+					}
+					
+				}else {
+					result = "0";
+					System.out.println(result);
+					mav.addObject("result1", result);
+					mav.setViewName("jsonView");
+					
+				}
+			return mav;
 		}
 		
 		// 로그인된 상태에서 회원정보 가지고 오기
