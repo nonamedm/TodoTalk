@@ -44,7 +44,7 @@
 		}); 
  
     } 
-    function Login(){
+  /*   function Login(){
     	 var formdate =$("form[name=Login]").serializeObject();
     	 var jsondata = JSON.stringify(formdate);
     	 
@@ -61,7 +61,7 @@
     				xhr.status+","+ xhr.statusText;
     			}
     			});
-    }
+    } */
 </script>
 </head>
 <body>
