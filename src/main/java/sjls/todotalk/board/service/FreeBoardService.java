@@ -1,20 +1,31 @@
 package sjls.todotalk.board.service;
 
+import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import sjls.todotalk.board.vo.FreeBoardVo;
+import sjls.todotalk.board.vo.FreeFileVo;
+import sjls.todotalk.util.Criteria;
 
 public interface FreeBoardService {
 
-	List<FreeBoardVo> getBoardList();
+	int getListCount();
 
-	FreeBoardVo getBoardCont(int free_idx);
+	List<FreeBoardVo> getFreeList(Criteria cri);
 
-	void deleteBoard(int free_idx);
+	FreeBoardVo getFreeRead(HashMap<String, Object> map);
 
-	void insertBoard(FreeBoardVo vo);
+	void boardDelete(HashMap<String, Object> map);
 
-	void updateBoard(FreeBoardVo vo);
+	void getFreeWrite(HashMap<String, Object> map, HttpServletRequest request);
+
+	void getFreeUpdate(HashMap<String, Object> map, HttpServletRequest request);
+
+	void readcount(HashMap<String, Object> map);
+
+	List<FreeFileVo> getFileList(HashMap<String, Object> map);
 
 	
 }

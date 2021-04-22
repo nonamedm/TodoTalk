@@ -75,10 +75,11 @@ public class QnAServiceImpl implements QnAService {
 		
 		//게시글 쓰기 
 		QnABoardVo vo =qnaBoardDao.qnaWrite(map);
+		
 		//위에 쓴 게시글 정보 db에 저장
 		int qna_idx = vo.getQna_idx();
 		map.put("qna_idx",qna_idx);
-		
+		//파일 쓰기
 		qnaBoardDao.fileWrite(map);
 	}
 	

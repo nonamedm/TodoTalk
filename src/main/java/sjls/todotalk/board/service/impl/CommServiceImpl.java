@@ -17,6 +17,7 @@ import sjls.todotalk.board.vo.FreeBoardVo;
 
 @Service("CommService")
 public class CommServiceImpl implements CommService {
+	
 	@Autowired
 	private CommDao commDao;
 
@@ -38,7 +39,7 @@ public class CommServiceImpl implements CommService {
 	@Override
 	public void getCommWrite(HashMap<String, Object> map, HttpServletRequest request) {
 		//파일처리
-	    PdsFile.save(map, request);
+	    PdsFile_Free.save(map, request);
 		
 		//게시글 쓰기
 		commDao.CommWrite(map);
@@ -59,13 +60,10 @@ public class CommServiceImpl implements CommService {
 
 	@Override
 	public void update(HashMap<String, Object> map, HttpServletRequest request) {
-		PdsFile.save(map, request);
+		PdsFile_Free.save(map, request);
 		commDao.update(map);
 
 	}
-
-
-
 
 
 }

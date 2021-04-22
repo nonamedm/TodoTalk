@@ -15,76 +15,120 @@ import org.springframework.web.servlet.ModelAndView;
 
 import sjls.todotalk.board.service.FreeBoardService;
 import sjls.todotalk.board.vo.FreeBoardVo;
+import sjls.todotalk.board.vo.FreeFileVo;
+import sjls.todotalk.board.vo.NoticeBoard;
+import sjls.todotalk.util.Criteria;
+import sjls.todotalk.util.PageMaker;
 
-
+//자유 커뮤니티 게시판 
 @Controller
 public class FreeCotroller {
 	
 	@Autowired
 	private FreeBoardService boardService;
 	
-	@RequestMapping("/freeList")
-	public String FreeList(Model model) {
-		//ModelAndView mv = new ModelAndView();
+	//게시판 목록(페이징 됨)
+	@RequestMapping("/board/free/freeList")
+	public ModelAndView noticeFm(@RequestParam HashMap<String, Object> map,Criteria cri){
 		
-		List<FreeBoardVo> list = boardService.getBoardList();
-		model.addAttribute("list",list);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);   
 		
-		return "/board/free/list";	
+		pageMaker.setTotalCount(boardService.getListCount()); //총 게시글 수 
+		
+		//게시글 목록 
+		List<FreeBoardVo> getFreeList = boardService.getFreeList(cri);
+		
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("getFreeList", getFreeList);
+		mv.addObject("pageMaker", pageMaker);
+		mv.setViewName("/board/free/freeList");
+		return mv;	
 	}
 	
-	
-	@RequestMapping("/writeForm")
-	public  String  writeForm( ) {
-		return "/board/free/write";     
-	} 
-	
-	@RequestMapping("/write")
-	public String Write(FreeBoardVo vo) {
-		//글제목, 본문 db에 저장 
-		boardService.insertBoard(vo);
+	//게시글 조회 글 읽기
+	@RequestMapping("/board/free/freeRead")
+	public ModelAndView freeRead(@RequestParam HashMap<String, Object> map) {
 		
+		//idx로 조회된 글 내용 불러오기
+		FreeBoardVo freeBoardVo =  boardService.getFreeRead(map);
+		//파일 목록 
+		List<FreeFileVo> filesList = boardService.getFileList(map);
+		//조회수
+		boardService.readcount(map);
 		
-		return  "redirect:/list"; 
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("freeBoardVo",freeBoardVo);
+		mv.addObject("filesList",filesList);
+		mv.addObject("map",map);
+		mv.setViewName("/board/free/freeRead");
+		return mv;
 	}
 	
-	
-	@RequestMapping("/read")
-	public  String Read(HttpServletRequest request, Model model) {
+	//게시글 삭제 
+	@RequestMapping("/board/free/delete")
+	public ModelAndView delete(@RequestParam HashMap<String, Object> map) {
 		
-		int idx = Integer.parseInt(request.getParameter("idx"));
-		FreeBoardVo vo = boardService.getBoardCont(idx);
-
-		model.addAttribute("board",vo);
-		return "/board/free/read";
-	} 
-	
-	@RequestMapping("/delete")
-	public  String  delete(HttpServletRequest request, Model model ) {
-		int idx = Integer.parseInt(request.getParameter("idx"));
-		boardService.deleteBoard(idx);	
+		//게시판 테이블 삭제 
+		boardService.boardDelete(map);
 		
-		return "redirect:/list";
-	} 
-	
-	
-	@RequestMapping("/updateForm")
-	public  String  updateForm(HttpServletRequest request, Model model ) {
+		//파일 댓글 다 같이 삭제는 serviceimpl에 코딩
 		
-		int idx = Integer.parseInt(request.getParameter("idx"));
-		FreeBoardVo vo = boardService.getBoardCont(idx);
-
-		model.addAttribute("upBoard",vo);
-		return "/board/free/update";
-	} 
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/board/free/freeList");
+		return mv;
+	}
 	
+	//글 쓰기 form
+	@RequestMapping("/board/free/freeWriteForm")
+	public ModelAndView writeForm(@RequestParam HashMap<String, Object> map) {
+		
+		FreeBoardVo freeBoardVo = boardService.getFreeRead(map);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("freeBoardVo",freeBoardVo);
+		mv.addObject("map",map);
+		mv.setViewName("/board/free/freeWrite");
+		return mv;
+	}
 	
-	@RequestMapping("/update")
-	public  String  update(FreeBoardVo vo) {
-		boardService.updateBoard(vo);
-		return "redirect:/list";
-	} 
+	//글 쓰기
+	@RequestMapping("/board/free/freeWrite")
+	public ModelAndView freeWrite(@RequestParam HashMap<String, Object> map,HttpServletRequest request) {
+		
+		//Write.jsp에서 받아온 값 인서트하러 가는 길
+		boardService.getFreeWrite(map,request);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/board/free/freeList");
+		return mv;
+	}
 	
-
+	//글 수정 form
+	@RequestMapping("/board/free/freeUpdateForm")
+	public ModelAndView updateForm(@RequestParam HashMap<String, Object> map) {
+		
+		FreeBoardVo freeBoardVo = boardService.getFreeRead(map);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("freeBoardVo",freeBoardVo);
+		mv.addObject("map",map);
+		mv.setViewName("/board/free/freeUpdate");
+		return mv;
+	}
+	
+	//글 수정
+	@RequestMapping("/board/free/freeUpdate")
+	public ModelAndView freeUpdate(@RequestParam HashMap<String, Object> map,HttpServletRequest request) {
+		
+		//Write.jsp에서 받아온 값 인서트하러 가는 길
+		boardService.getFreeUpdate(map,request);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/board/free/freeList");
+		return mv;
+	}
 
 }
+

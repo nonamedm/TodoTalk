@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import sjls.todotalk.board.dao.NoticeDao;
+import sjls.todotalk.board.vo.NoticeBoard;
 import sjls.todotalk.util.Criteria;
 
 @Repository
@@ -17,8 +18,8 @@ public class NoticeDaoImpl implements NoticeDao {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<Map<String, Object>> getNoticeList(Criteria cri) {
-		List<Map<String, Object>> getNoticeList = sqlSession.selectList("notice.getNoticeList", cri);
+	public List<NoticeBoard> getNoticeList(Criteria cri) {
+		List<NoticeBoard> getNoticeList = sqlSession.selectList("notice.getNoticeList", cri);
 		return getNoticeList;
 	}
 

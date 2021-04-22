@@ -22,7 +22,7 @@ public class FileUpServiceImpl implements FileUpService {
 			HttpServletRequest request) {
 
 		// 1. request 처리  - 넘어온 파일을 처리
-	    PdsFile.save(map, request);
+	    PdsFile_Free.save(map, request);
 		
 		// 2. 넘어온 정보 db 저장
 	    fileupDao.setWrite(map); 

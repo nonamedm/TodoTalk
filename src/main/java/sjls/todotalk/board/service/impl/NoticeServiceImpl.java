@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import sjls.todotalk.board.dao.NoticeDao;
 import sjls.todotalk.board.service.NoticeService;
+import sjls.todotalk.board.vo.NoticeBoard;
 import sjls.todotalk.util.Criteria;
 
 @Service
@@ -17,8 +18,8 @@ public class NoticeServiceImpl implements NoticeService {
 	private NoticeDao noticeDao;
 	
 	@Override
-	public List<Map<String, Object>> getNoticeList(Criteria cri) {
-		List<Map<String, Object>> getNoticeList = noticeDao.getNoticeList(cri);
+	public List<NoticeBoard>  getNoticeList(Criteria cri) {
+		List<NoticeBoard>  getNoticeList = noticeDao.getNoticeList(cri);
 		return getNoticeList;
 	}
 

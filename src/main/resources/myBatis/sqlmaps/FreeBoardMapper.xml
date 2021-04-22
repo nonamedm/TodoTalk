@@ -4,34 +4,78 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="freeBoard">
   
+  <!-- 페이징 된 게시판 리스트 -->
   <select id="freeList" resultType="sjls.todotalk.board.vo.FreeBoardVo">
   	SELECT FREE_IDX, FREE_TITLE, FREE_CONT, USER_ID, FREE_REGDATE, FREE_READCOUNT
 	 FROM FREE_BOARD
+	 ORDER BY FREE_IDX DESC 
+	 LIMIT #{pageStart}, #{perPageNum}
+  </select>
+   
+   <!-- 총 게시글 수 -->
+   <select id="getCount" resultType="int">
+	SELECT count(*) 
+	FROM FREE_BOARD
   </select>
   
-  <select id="read"  resultType="sjls.todotalk.board.vo.FreeBoardVo"  parameterType="int">
+  <!-- 글 읽기 -->
+  <select id="freeRead"  resultType="sjls.todotalk.board.vo.FreeBoardVo" >
   	SELECT FREE_IDX, FREE_TITLE, FREE_CONT, USER_ID, FREE_REGDATE, FREE_READCOUNT
 	 FROM FREE_BOARD
+	 
 	 WHERE FREE_IDX = #{free_idx}
   </select>
   
-  <insert id="insert" >
+  <!-- 글 쓰기 -->
+  <insert id="freeInsert" >
 	INSERT INTO FREE_BOARD
 	  (BOARD_NAME,FREE_TITLE, FREE_CONT, USER_IDX, USER_ID, FREE_REGDATE, FREE_READCOUNT)
-	VALUES('FREE',#{free_title}, #{free_cont}, user_idx, #{user_id}, NOW(), 0);
+	VALUES('FREE',#{free_title}, #{free_cont}, #{user_idx}, #{user_id}, NOW(), 0);
   </insert>
   
-  
+  <!-- 글 삭제 -->
   <delete id="delete">
   	DELETE FROM FREE_BOARD
 	WHERE FREE_IDX= #{free_idx}
   </delete>
   
+  <!-- 글 수정 -->
   <update id="update">
   	UPDATE FREE_BOARD
-	SET FREE_TITLE=#{free_title}, FREE_CONT=#{free_cont}, FREE_READCOUNT=0
+	SET FREE_TITLE=#{free_title}, FREE_CONT=#{free_cont}
 	WHERE FREE_IDX = #{free_idx}
   </update>
+  
+  
+	
+	<!-- 조회수  -->
+	<update id="readcount" >
+	 	UPDATE FREE_BOARD 
+		SET FREE_READCOUNT= FREE_READCOUNT+1 
+		WHERE FREE_IDX = #{free_idx}
+	</update>
+	
+  <!-- 파일 관련 쿼리 -->
+  <!-- 파일 목록 조회 -->
+  	<select id="fileList" resultType="sjls.todotalk.board.vo.FreeFileVo" >
+		SELECT FILE_IDX, FILE_NAME, FILE_EXT, SFILE_NAME, FREE_IDX
+		FROM FREE_FILES
+		WHERE FREE_IDX = #{free_idx}
+	</select>
+
+  <!-- 해당 파일 글 번호 조회 -->	
+  	<select id="getFree_idx" resultType="sjls.todotalk.board.vo.FreeBoardVo" parameterType="hashmap" >
+	  	SELECT (MAX(FREE_IDX)) FREE_IDX 
+		FROM FREE_BOARD 
+  	</select>
+  
+	
+  <!-- 파일 쓰기 -->
+  <insert id="fileWrite">
+	  INSERT INTO todotalk.FREE_FILES
+		(FILE_NAME, FILE_EXT, SFILE_NAME, FREE_IDX)
+	 VALUES(#{file_name}, #{file_ext}, #{sfile_name}, #{free_idx})
+  </insert>
   
   </mapper>        
   

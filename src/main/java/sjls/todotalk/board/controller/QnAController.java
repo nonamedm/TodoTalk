@@ -29,6 +29,8 @@ import sjls.todotalk.board.vo.PdsVo;
 import sjls.todotalk.board.vo.QnABoardVo;
 import sjls.todotalk.board.vo.QnAFileVo;
 import sjls.todotalk.board.vo.QnAReplyVo;
+import sjls.todotalk.util.Criteria;
+import sjls.todotalk.util.PageMaker;
 
 @Controller
 public class QnAController {
@@ -40,7 +42,7 @@ public class QnAController {
 	
 	//QnA 게시판
 	@RequestMapping("/board/QnA/qnaList")
-	public ModelAndView qnaList(@RequestParam HashMap<String, Object> map) {
+	public ModelAndView qnaList(@RequestParam HashMap<String, Object> map,Criteria cri) {
 		
 		//게시물 목록 
 		//List<QnABoardVo> qnaList = qnaService.getQnAList(map);
@@ -48,20 +50,20 @@ public class QnAController {
 		QnABoardVo qnaBoardVo = (QnABoardVo) map.get("qnaBoardVo");
 		
 		//파일 목록 
-		List<QnAFileVo> filesList = qnaService.getFileList(map);
+		List<QnAFileVo> fileList = qnaService.getFileList(map);
 		QnAFileVo qnafileVo = (QnAFileVo) map.get("qnafileVo");
 		
 		//페이징
 		// qnaService.getQnAList(map)명령 실행후 map("pagePdsVo") 에 돌아온 결과 처리
-		PdsVo pagePdsVo  = (PdsVo) map.get("pagePdsVo");
-		
+		//PdsVo pagePdsVo  = (PdsVo) map.get("pagePdsVo");
+
 	
 		//addObject
 		ModelAndView mv = new ModelAndView();
 		//mv.addObject("list",qnaList);
-		mv.addObject("filesList",filesList);
+		mv.addObject("fileList",fileList);
 		mv.addObject("list",pdsList);
-		mv.addObject("pagePdsVo",  pagePdsVo );
+		//mv.addObject("pagePdsVo",  pagePdsVo );
 		mv.addObject("map",  map );
 		mv.setViewName("/board/QnA/qnaList");
 		
@@ -176,10 +178,7 @@ public class QnAController {
 	public ModelAndView updateForm(@RequestParam HashMap<String, Object> map) {
 		
 		QnABoardVo qnaBoardVo = qnaService.getQnARead(map);
-		
-		System.out.println("컨트롤러 수정 map"+map);
-		
-		
+
 		//addObject
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("qnaBoardVo",qnaBoardVo); //수정할 때 저장할 값
