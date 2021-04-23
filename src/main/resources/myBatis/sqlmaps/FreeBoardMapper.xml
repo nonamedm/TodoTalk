@@ -77,6 +77,12 @@
 	 VALUES(#{file_name}, #{file_ext}, #{sfile_name}, #{free_idx})
   </insert>
   
+ <!--  파일삭제 -->
+  <delete id="fileDelete">
+  	DELETE FROM FREE_FILES
+	WHERE FREE_IDX=#{free_idx};
+  </delete>
+  
   </mapper>        
   
   

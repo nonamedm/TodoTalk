@@ -27,6 +27,10 @@ public interface FreeBoardDao {
 
 	void fileWrite(HashMap<String, Object> map);
 
+	void fileDelete(HashMap<String, Object> map);
+
+	void repAllDelete(HashMap<String, Object> map);
+
 
 
 }

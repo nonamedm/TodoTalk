@@ -119,7 +119,8 @@ public class QnAController {
 		return mv;
 	}
 	
-	//댓글 삭제
+	
+	//댓글 하나하나 삭제
 	@RequestMapping("/board/QnA/repDelete")
 	public ModelAndView repDelete(@RequestParam HashMap<String, Object> map) {
 		

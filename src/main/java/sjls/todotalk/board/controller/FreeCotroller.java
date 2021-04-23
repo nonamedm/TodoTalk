@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import sjls.todotalk.board.service.FreeBoardService;
+import sjls.todotalk.board.service.RepService;
 import sjls.todotalk.board.vo.FreeBoardVo;
 import sjls.todotalk.board.vo.FreeFileVo;
+import sjls.todotalk.board.vo.FreeReplyVo;
 import sjls.todotalk.board.vo.NoticeBoard;
 import sjls.todotalk.util.Criteria;
 import sjls.todotalk.util.PageMaker;
@@ -26,6 +28,8 @@ public class FreeCotroller {
 	
 	@Autowired
 	private FreeBoardService boardService;
+	@Autowired
+	private RepService repService;
 	
 	//게시판 목록(페이징 됨)
 	@RequestMapping("/board/free/freeList")
@@ -58,13 +62,41 @@ public class FreeCotroller {
 		//조회수
 		boardService.readcount(map);
 		
+		//댓글 목록 조회
+		List<FreeReplyVo> repList = repService.getFreeRepList(map);
+		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("freeBoardVo",freeBoardVo);
 		mv.addObject("filesList",filesList);
+		mv.addObject("repList",repList);
 		mv.addObject("map",map);
 		mv.setViewName("/board/free/freeRead");
 		return mv;
 	}
+	
+	//댓글 삭제 
+	@RequestMapping("/board/free/repDelete")
+	public ModelAndView repDelete(@RequestParam HashMap<String, Object> map) {
+		
+		repService.freeRepDelete(map);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/board/free/freeList");
+		return mv;
+	}
+	//댓글 쓰기
+	@RequestMapping("/board/free/repWrite")
+	public ModelAndView repWrite(@RequestParam HashMap<String, Object> map
+			,HttpServletRequest request) {
+		
+		//freeRead.jsp 안에 댓글쓰기에서 받아온 정보 insert 
+		repService.FreeRepWrite(map,request);
+		
+		ModelAndView mv = new ModelAndView();
+		//mv.addObject("map",map);
+		mv.setViewName("redirect:/board/free/freeList");
+		return mv;
+	}
+	
 	
 	//게시글 삭제 
 	@RequestMapping("/board/free/delete")

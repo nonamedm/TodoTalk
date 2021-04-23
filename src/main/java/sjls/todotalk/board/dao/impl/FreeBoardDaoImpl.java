@@ -49,7 +49,9 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	//게시글 삭제 
 	@Override
 	public void boardDelete(HashMap<String, Object> map) {
-		sqlSession.delete("freeBoard.delete",map);
+		
+		
+		sqlSession.delete("freeBoard.delete",map);//게시글 삭제 
 	}
 	
 	//게시글 쓰기 
@@ -65,7 +67,11 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	public void fileWrite(HashMap<String, Object> map) {
 		sqlSession.insert("freeBoard.fileWrite",map);
 	}
-	
+	//파일 삭제 
+	@Override
+	public void fileDelete(HashMap<String, Object> map) {
+		sqlSession.delete("freeBoard.fileDelete",map);
+	}
 	
 	//글 수정 
 	@Override
@@ -80,6 +86,17 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		sqlSession.update("freeBoard.readcount",map);
 		
 	}
+
+	
+	//댓글 전체 삭제(게시글이랑 같이)
+	@Override
+	public void repAllDelete(HashMap<String, Object> map) {
+		sqlSession.delete("Reply.repAllDeleteF",map);
+		
+	}
+
+	
+
 
 	
 

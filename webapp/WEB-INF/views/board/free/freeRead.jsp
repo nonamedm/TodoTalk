@@ -64,6 +64,48 @@ table,td {border:2px solid DarkOrchid;  border-collapse:collapse; }
           </td>
 	</tr>
 
+</table><br>
+<!-- 댓글 목록 -->
+<table>
+	<tr>
+		<td colspan="2">댓글 내용</td>
+		<td>작성자</td>
+		<td>작성일</td>
+	</tr>
+	  <c:forEach var="list" items="${repList}" >
+		<tr>
+		 <td><c:out value="${list.free_re_cont}" /></td>
+     	 <td><a href="/board/free/repDelete?free_idx=${list.free_idx}&free_re_idx=${list.free_re_idx}"> 삭제 </a></td>
+     	 <!-- <td>대댓</td> -->
+	     <td><c:out value="${user_id}" /></td>
+	     <td><c:out value="${list.free_re_regdate}" /></td>
+		</tr>	
+      </c:forEach> 
+</table><br>
+
+
+<!-- 댓글쓰기 -->
+<form action="/board/free/repWrite"  method="POST">
+<table>
+	<tr>
+ 		<td>댓글쓰기</td>
+ 		<td>글번호</td>
+	 	<input type="hidden" name="free_idx" value="${map.free_idx}"/>
+ 		<td>
+			작성자: ${user_id}<input type="hidden" name="user_id"  value="${map.user_id}"/>
+	 		<textarea name="free_re_cont" rows="5" cols="15"></textarea> 
+ 		</td>
+ 		<td><input type="submit" value="댓글쓰기"/></td>
+	</tr>
 </table>
+</form>	
+
+
+
 </body>
 </html>
+
+
+
+
+

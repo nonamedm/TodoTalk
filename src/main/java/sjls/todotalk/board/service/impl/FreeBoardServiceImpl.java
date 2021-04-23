@@ -54,8 +54,8 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	@Override
 	public void boardDelete(HashMap<String, Object> map) {
 		
-		//파일 삭제 
-		//댓글 삭제(전체)
+		boardDao.repAllDelete(map); //댓글 삭제(전체)
+		boardDao.fileDelete(map);//파일 삭제 
 		boardDao.boardDelete(map); //게시글 삭제 
 		
 		//부모 자식 테이블로 되어있어서 

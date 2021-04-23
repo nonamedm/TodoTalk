@@ -77,7 +77,7 @@ public class QnADaoImpl implements QnADao {
 	//파일 삭제
 	@Override
 	public void fileDelete(HashMap<String, Object> map) {
-		sqlSession.delete("QnABoard.FileDelete",map);
+		sqlSession.delete("QnABoard.fileDelete",map);
 	}
 	
 	//파일 쓰기
