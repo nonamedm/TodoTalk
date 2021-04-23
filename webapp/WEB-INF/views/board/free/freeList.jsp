@@ -7,8 +7,7 @@
 <meta charset="UTF-8">
 <title>List</title>
 <style>
-table,td {border:2px solid DarkOrchid;  border-collapse:collapse; }
- th,td {padding:10px;}
+
 </style>
 
 </head>
@@ -19,38 +18,61 @@ table,td {border:2px solid DarkOrchid;  border-collapse:collapse; }
             <%@include file="/WEB-INF/views/layout/allSearchHeader.jsp"%>
             <div class="middle-content-wrap2 mentorMenteePage">
                 <!--여기부터 컨텐츠내용 작업시작-->
- 
- <h1>자게 목록</h1>
+                
+                
+<div class="sub-section-wrap review-sttus">
+    <div class="">
+        <section class="wp100">
+			<div class="section-tit"> 
+			 <h1>자게 목록</h1>
+			 </div>
  <table>
-  <a href="/board/free/freeWriteForm"> 글쓰기 </a>
-     <tr>
-        <th>글번호</th>
-        <th>글제목</th>
-        <th>작성자</th>
-        <th>작성일</th>
-        <th>조회수</th>
-    </tr>
-
-   <c:forEach var="list" items="${getFreeList}">
-   	<tr>
-   		<td>${list.free_idx}</td>
-   		<td>
-   			<a href="/board/free/freeRead?free_idx=${list.free_idx}">
-   			${list.free_title}
-   			</a>
-   		</td>
-   		<td>${list.user_id}</td>
-   		<td>${list.free_regdate}</td>
-   		<td>${list.free_readcount}</td>
-   	</tr>
-   </c:forEach>
+  <div class="btn-box">
+     <li><a href="/board/free/freeWriteForm" > 글쓰기 </a></li>
+  </div>
+  
+<div class="table-wrap">
+	<table class="table-type01">
+      <colgroup>
+          <col class="wp8">
+          <col class="wauto">
+          <col class="wp10">
+          <col class="wp10">
+          <col class="wp8">
+      </colgroup>
+            <thead>
+                 <tr>
+				    <th>글번호</th>
+				    <th>글제목</th>
+				    <th>작성자</th>
+				    <th>작성일</th>
+				    <th>조회수</th>
+				</tr>
+            </thead>
+                <tbody>
+	   <c:forEach var="list" items="${getFreeList}">
+	   	<tr>
+	   		<td>${list.free_idx}</td>
+	   		<td>
+	   			<a href="/board/free/freeRead?free_idx=${list.free_idx}">
+	   			${list.free_title}
+	   			</a>
+	   		</td>
+	   		<td>${list.user_id}</td>
+	   		<td>${list.free_regdate}</td>
+	   		<td>${list.free_readcount}</td>
+	   	</tr>
+	   </c:forEach>
+        </tbody>
+    </table>
+ <!-- 페이징 영역   -->
+<div class="btn-paging btn-pageing-bg">
+   <%@include file="/WEB-INF/views/board/Freepaging.jsp" %>
+</div>   	
+</div>
    
-   <!-- 페이징 영역   -->
-    <tr>
-     <td colspan="6">
-       <%@include file="/WEB-INF/views/board/Freepaging.jsp" %>
-     </td>
-   </tr>	
  </table>
+</div>
+</div>
 </body>
 </html>

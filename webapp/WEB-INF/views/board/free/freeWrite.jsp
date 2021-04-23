@@ -6,10 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Write</title>
-<style>
-table,td {border:2px solid DarkOrchid; border-collapse:collapse; }
- th,td {padding:10px;}
-</style>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 </head>
 <body>
     <div class="sub-main-wrap">
@@ -20,38 +20,52 @@ table,td {border:2px solid DarkOrchid; border-collapse:collapse; }
                 <!--여기부터 컨텐츠내용 작업시작-->
                 
 <!--  파일 업로드때 필요 enctype="multipart/form-data"    -->             
-<form action="/board/free/freeWrite"  method="post" enctype="multipart/form-data" >
-<table>
- <h2>글쓰기</h2>
- 
-  <tr>
- 	<td>제목</td>
- 	<td><input type="text" name="free_title"/></td>
- 	<td>작성자: ${user_id}<input type="hidden" name="user_id"  value="${user_id}"/></td>
- </tr>
- <tr>
- 	<td>내용</td>
- 	<td colspan="2"><textarea name="free_cont" rows="30" cols="80"></textarea> </td>
- </tr>
- 
 
- <tr>
-	<td>파일</td>
-	<td id="tdfile" colspan="2">
-	 	<input type="button" id="btnAddFile" value="Add file" /> 
-		<input type="file" name="file_name" id="file_name" />
-	</td>
- </tr>
-	 
-	
- <td colspan="4">
-	 <input type="submit" value="확인" />
-	 <a href="/board/free/freeList"> 목록 </a>
-	 <a href="/#"> 홈으로 </a>
- </td>
+<div class="container">
+	<div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="well well-sm">
+			
+          <form action="/board/free/freeWrite"  method="post" enctype="multipart/form-data" >
+          <fieldset>
+            <legend class="text-center">자유 게시판 글쓰기</legend>
+    
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="name">글 제목</label>
+              <div class="col-md-9">
+                <input id="name" name="free_title" type="text" placeholder="제목을 입력하세요 " class="form-control" >
+				<input type="hidden" name="user_id"  value="${user_id}"/>
+              </div>
+            </div>
+    
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="message">글 내용 </label>
+              <div class="col-md-9">
+                <textarea class="form-control" id="message" name="free_cont" placeholder="글 내용 입력 " rows="5" cols="50"></textarea>
+              </div>
+            </div>
+			     
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="email">파일 추가</label>
+              <div class="col-md-9">
+				<input type="file" name="file_name" id="file_name" />
+              </div>
+            </div>
+    
+            <div class="form-group">
+              <div class="col-md-12 text-right">
+                <input type="submit" value="확인"  class="btn btn-primary btn-lg" />
+				  <a href="/board/free/freeList"  class="btn btn-primary btn-lg"> 목록 </a>
+	 			  <a href="/#" class="btn btn-primary btn-lg"> 홈으로 </a> 
+              </div>
+            </div>
+          </fieldset>
+          </form>
+			
+        </div>
+      </div>
+	</div>
+</div>
 
- 
-</table>
-</form>
 </body>
 </html>
