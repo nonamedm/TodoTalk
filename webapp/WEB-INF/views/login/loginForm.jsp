@@ -32,7 +32,7 @@
 					alert("아이디혹은 비밀번호가  틀렸습니다.");
 				}
 				if(data.result == '1'){
-					alert('로그인성공1');
+					alert('로그인성공');
 				}
 				
 			 $("#id_check_result").html(data.html); 

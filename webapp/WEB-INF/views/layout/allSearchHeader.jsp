@@ -21,13 +21,16 @@
 				}
 			},
 			error : function (xhr) {
-				
+				alert(xhr.status+" : "+xhr.statusText);
 			}
 		});
 	}
 	$(function () {
-		poll();				//로그인 시 실행하는걸로 바꿔야 합니다
+		
 		var loginId = '${login.user_id}';
+		if(loginId!=''){
+			poll();				//로그인 시 실행
+		}
 		
 		//읽지 않은 메세지 카운트 ajax
 		/* $.ajax({
@@ -66,7 +69,7 @@
 	}
     var win;
     function createWindow(){
-     win = open('/rooms?loginId=${login.user_id}','TodoTalk','width=450,height=650');
+	    win = open('/rooms?loginId=${login.user_id}','TodoTalk','width=450,height=650');
     }
 
 </script>

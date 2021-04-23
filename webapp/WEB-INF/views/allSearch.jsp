@@ -27,7 +27,13 @@
                 	<input type="hidden" name="loginId" value="${login.user_id}" />
                 	<input type="hidden" name="receiverId" value="${tutorVo.user_id }" />
                 	<input type="hidden" name="requireId" value="${login.user_id }" />
-                	<th><input type="submit" value="대화시작"/></th></tr>
+                	<c:choose>
+	                	<c:when test="${empty login.user_id}">
+	                	</c:when>
+	                	<c:otherwise>
+	                	<th><input type="submit" id="chatStart" value="대화시작"/></th></tr>
+	                	</c:otherwise>
+                	</c:choose>
                 	</form>
                 	</tbody>
                 	</table>
@@ -51,7 +57,13 @@
                 	<input type="hidden" name="loginId" value="${login.user_id}" />
                 	<input type="hidden" name="receiverId" value="${mentorVo.user_id }" />
                 	<input type="hidden" name="requireId" value="${login.user_id }" />
-                	<th><input type="submit" value="대화시작"/></th></tr>
+                	<c:choose>
+	                	<c:when test="${empty login.user_id}">
+	                	</c:when>
+	                	<c:otherwise>
+	                	<th><input type="submit" id="chatStart" value="대화시작"/></th></tr>
+	                	</c:otherwise>
+                	</c:choose>
                 	</form>
                 	</tbody>
                 	</table>
