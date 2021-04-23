@@ -12,7 +12,7 @@
             
             <div class="middle-content-wrap">
                 <!--여기부터 컨텐츠내용 작업시작-->
-
+				
                 <div id="tutorSearch">
                 <h3>튜터 검색결과 - 총 ${ tutorVoSize } 건</h3>
                 <c:forEach var="tutorVo" items="${ tutorVo }">

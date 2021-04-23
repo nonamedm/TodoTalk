@@ -9,7 +9,7 @@
 			up.PHOTO_NAME as PHOTO_NAME,
 			rl.RECEIVER_ID as RECEIVER_ID,
 			ui.COUNTRY as COUNTRY,
-			ui.INTRODUCE as INTRODUCE
+			if(CHAR_LENGTH(INTRODUCE) > 10, concat(SUBSTRING(INTRODUCE, 1,10),'...') ,'소개말이 없습니다.') as INTRODUCE
 		from USER_INFO ui
 		left outer join RELATION_LIST rl
 		on ui.USER_NAME = rl.RECEIVER_NAME 
