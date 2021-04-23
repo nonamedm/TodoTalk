@@ -2,15 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>      
 <%@include file="/WEB-INF/views/layout/header.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>read</title>
-<style>
-table,td {border:2px solid DarkOrchid;  border-collapse:collapse; }
- th,td {padding:10px;}
-</style>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
     <div class="sub-main-wrap">
@@ -21,7 +21,7 @@ table,td {border:2px solid DarkOrchid;  border-collapse:collapse; }
                 <!--여기부터 컨텐츠내용 작업시작-->
 
 
-<table>
+<table class="table-type01">
   <h2>read</h2>
   	<tr>
 	 <a href="/board/free/freeList"> 목록 </a>
@@ -48,7 +48,7 @@ table,td {border:2px solid DarkOrchid;  border-collapse:collapse; }
 	 </tr>
 	 <tr>	
 	 	<td>글 내용</td>
-	 	<td colspan="3" >${freeBoardVo.free_cont}</td>
+	 	<td colspan="3" class="h250">${freeBoardVo.free_cont}</td>
 	</tr>
  
 <!--  파일 목록 -->
@@ -64,9 +64,9 @@ table,td {border:2px solid DarkOrchid;  border-collapse:collapse; }
           </td>
 	</tr>
 
-</table><br>
+</table ><br>
 <!-- 댓글 목록 -->
-<table>
+<table class="table-type03">
 	<tr>
 		<td colspan="2">댓글 내용</td>
 		<td>작성자</td>
@@ -86,7 +86,7 @@ table,td {border:2px solid DarkOrchid;  border-collapse:collapse; }
 
 <!-- 댓글쓰기 -->
 <form action="/board/free/repWrite"  method="POST">
-<table>
+<table class="table-type01">
 	<tr>
  		<td>댓글쓰기</td>
  		<td>글번호</td>
@@ -95,7 +95,11 @@ table,td {border:2px solid DarkOrchid;  border-collapse:collapse; }
 			작성자: ${user_id}<input type="hidden" name="user_id"  value="${map.user_id}"/>
 	 		<textarea name="free_re_cont" rows="5" cols="15"></textarea> 
  		</td>
- 		<td><input type="submit" value="댓글쓰기"/></td>
+ 		<div class="form-group">
+              <div class="col-md-12 text-right">
+ 				<td><input type="submit" value="댓글쓰기"  class="btn btn-primary btn-lg" /></td>
+ 			   </div>
+ 		</div>
 	</tr>
 </table>
 </form>	

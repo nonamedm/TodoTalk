@@ -32,7 +32,7 @@
   </div>
   
 <div class="table-wrap">
-	<table class="table-type01">
+	<table class="table-type03">
       <colgroup>
           <col class="wp8">
           <col class="wauto">
@@ -66,9 +66,9 @@
         </tbody>
     </table>
  <!-- 페이징 영역   -->
-<div class="btn-paging btn-pageing-bg">
+<!-- <div class="btn-paging btn-pageing-bg"> -->
    <%@include file="/WEB-INF/views/board/Freepaging.jsp" %>
-</div>   	
+<!-- </div>    -->	
 </div>
    
  </table>
