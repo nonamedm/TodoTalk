@@ -4,12 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="AllSearch">
   <select id="GetTutorList" parameterType="hashmap" resultType="sjls.todotalk.user.vo.UserVo">
-  	SELECT	* FROM USER_INFO WHERE USER_NAME LIKE CONCAT('%',#{queryString},'%') AND REGISTER=2
+  	SELECT distinct	* FROM USER_INFO 
+    WHERE (USER_NAME LIKE CONCAT('%',#{queryString},'%') OR USER_ID LIKE CONCAT('%',#{queryString},'%')
+  	OR COUNTRY LIKE CONCAT('%',#{queryString},'%')) AND REGISTER=2
   </select>
   <select id="GetMentorList" parameterType="hashmap" resultType="sjls.todotalk.user.vo.UserVo">
-  	SELECT USER_IDX,USER_ID,USER_NAME,USER_PWD,USER_PHONE,USER_MAIL,COUNTRY,ADDRESS,REGDATE,REGISTER,INTRODUCE,RECOMMEND
-	  FROM USER_INFO AS UI, RELATION_LIST AS RL
- 	 WHERE UI.USER_NAME = RL.RECEIVER_NAME AND RL.RECEIVER_NAME LIKE CONCAT('%',#{queryString},'%') AND RL.PERMIT='Y' AND RL.MENTOR='Y'
+  	SELECT distinct USER_IDX,USER_ID,USER_NAME,USER_PWD,USER_PHONE,USER_MAIL,COUNTRY,ADDRESS,REGDATE,REGISTER,INTRODUCE,RECOMMEND
+	  FROM USER_INFO AS UI LEFT OUTER JOIN RELATION_LIST AS RL ON UI.USER_NAME = RL.RECEIVER_NAME
+	  WHERE (RL.RECEIVER_NAME LIKE CONCAT('%',#{queryString},'%') OR UI.USER_ID LIKE CONCAT('%',#{queryString},'%')
+ 	  OR UI.COUNTRY LIKE CONCAT('%',#{queryString},'%'))
+ 	  AND RL.PERMIT='Y' AND RL.MENTOR='Y'
   </select>
   <select id="GetBoardList" parameterType="hashmap" resultType="hashmap">
   	SELECT BOARD_NAME, NOTICE_IDX AS IDX, NOTICE_TITLE AS TITLE, NOTICE_CONT AS CONT, USER_IDX, USER_ID, NOTICE_REGDATE AS REGDATE, NOTICE_READCOUNT AS READCOUNT

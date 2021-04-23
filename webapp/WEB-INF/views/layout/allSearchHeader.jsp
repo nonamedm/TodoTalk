@@ -21,7 +21,7 @@
 				}
 			},
 			error : function (xhr) {
-				alert(xhr.status+" : "+xhr.statusText);
+				//alert(xhr.status+" : "+xhr.statusText);
 			}
 		});
 	}
@@ -63,9 +63,13 @@
 	function allSearch () {
 		var searchText = $('#search2-Text').val();
 		searchText1 = encodeURI(searchText);	// 한글 인코딩
-		//alert(searchText); //검색값+버튼액션 확인
-		var url = '/AllSearch?query='+searchText1;
-		$(location).attr('href',url);
+		if(searchText1.length==0){
+			alert('검색어를 입력해 주세요');
+		} else {
+			//alert(searchText); //검색값+버튼액션 확인
+			var url = '/AllSearch?query='+searchText1;
+			$(location).attr('href',url);
+		}
 	}
     var win;
     function createWindow(){
