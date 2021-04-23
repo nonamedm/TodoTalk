@@ -72,11 +72,11 @@
 			},
 			success : function(result){
 				//인사말의 길이가 10 이상이면 그 이후의 문자들을 "..." 처리
-				for(var i = 0; i < result.mentorList.length; i++){
-					if(result.mentorList[i].INTRODUCE.length >= 10){
-						result.mentorList[i].INTRODUCE = result.mentorList[i].INTRODUCE.substr(0, 10)+" ...";
-					}
-				}
+// 				for(var i = 0; i < result.mentorList.length; i++){
+// 					if(result.mentorList[i].INTRODUCE >= 10){
+// 						result.mentorList[i].INTRODUCE = result.mentorList[i].INTRODUCE.substr(0, 10)+" ...";
+// 					}
+// 				}
 				var data = result.mentorList;
 				var html = "";
 				if(data != ""){
@@ -109,6 +109,9 @@
 		})
 	}
 	
+	
+	//여기서 부터 번역기능 스크립트
+	//::드래그한 값 가져오기
 	function selectText(){
 		var selectionText = "";
 		if(document.getSelection){
@@ -119,7 +122,9 @@
 		return selectionText;
 	}
 	
+	//커서의 왼쪽이 누르고땟을때 
 	document.onmouseup = function(event){
+		//드래그한 값이 빈값이면 실행 중지
 		if(selectText() == ""){
 			$("#translationTxt").hide();
 			return false;
@@ -143,6 +148,8 @@
 		}
 	}
 	
+	
+	//번역글 보내기
 	function translationSend(){
 		var langOption1 = $("#srcLangText").val();
 		var langOption2 = $(".languages-box2").val();
@@ -171,6 +178,7 @@
 		})
 	}
 	
+	//자동언어감지 스크립트
 	function srcLangText(){
 		$.ajax({
 			url : '/srcLangText',
@@ -188,13 +196,16 @@
 				alert(xhr.status + ", " + xhr.statusText);
 			}
 		});
-	}
+	}//여기까지가 번역기능 스크립트 끝
 	
 </script>
     <div class="sub-main-wrap">
+    
+		<!-- 드래그 했을때 뜨는 번역하기 버튼 html -->
     	<div id="translationTxt" class="translation-txt">
         	<a href="javascript:translationTxt()" title="번역" id="btnTranslation">번역하기</a>
         </div>
+        
         <%@include file="../popup/translation.jsp"%>
         <%@include file="../layout/leftMenu.jsp"%>
         <div class="sub-container-wrap">
