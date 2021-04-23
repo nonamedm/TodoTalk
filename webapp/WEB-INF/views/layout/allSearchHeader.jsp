@@ -72,8 +72,8 @@
 		}
 	}
     var win;
-    function createWindow(){
-	    win = open('/rooms?loginId=${login.user_id}','TodoTalk','width=450,height=650');
+    function createWindow() {
+	    win = open('/rooms?loginId=${login.user_id}','TodoTalk','width=900,height=650');
     }
 
 </script>
