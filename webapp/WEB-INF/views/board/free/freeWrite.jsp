@@ -56,7 +56,7 @@ $(function(){
             <div class="form-group">
               <label class="col-md-3 control-label" >글 제목</label>
               <div class="col-md-9">
-                <input id="free_title" name="free_title" type="text" placeholder="제목을 입력하세요 " class="form-control" >
+                <input id="free_title" name="free_title" type="text" placeholder="제목을 입력하세요(필수입력) " class="form-control" >
 				<input type="hidden" name="user_id"  value="${user_id}"/>
               </div>
             </div>
@@ -64,7 +64,7 @@ $(function(){
             <div class="form-group">
               <label class="col-md-3 control-label" >글 내용 </label>
               <div class="col-md-9">
-                <textarea class="form-control" id="free_cont" name="free_cont" placeholder="글 내용 입력 " rows="30" cols="100"></textarea>
+                <textarea class="form-control" id="free_cont" name="free_cont" placeholder="글 내용 입력하세요(필수입력) " rows="30" cols="100"></textarea>
               </div>
             </div>
 			     
