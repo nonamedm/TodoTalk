@@ -8,7 +8,30 @@
 <title>Write</title>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+$(function(){
+	
+	$('#form1').on('submit', function() {		   
+		   // 제목   입력? db title : not null
+		   if ( $('#free_title').val() == '') {
+			   alert('제목을 입력하세요');
+			   $('#free_title').focus();
+			   return false;   // submit 이벤트를 중지
+		   } 			   
+		   // 내용   입력? db cont  : not null
+		    if ( $('#free_cont').val() == '') {
+			   alert('내용을 입력하세요');
+			   $('#free_cont').focus();
+			   return false;   // submit 이벤트를 중지
+		   } 	
+		   
+	     return true;
+	});
+	
+})
+
+</script>
 
 </head>
 <body>
@@ -27,26 +50,26 @@
             <h2 class="text-center">자유 게시판 글쓰기</h2>
         <div class="well well-sm">
 			
-          <form action="/board/free/freeWrite"  method="post" enctype="multipart/form-data" >
+         <form action="/board/free/freeWrite"  method="post" enctype="multipart/form-data" id="form1">
           <fieldset>
     
             <div class="form-group">
-              <label class="col-md-3 control-label" for="name">글 제목</label>
+              <label class="col-md-3 control-label" >글 제목</label>
               <div class="col-md-9">
-                <input id="name" name="free_title" type="text" placeholder="제목을 입력하세요 " class="form-control" >
+                <input id="free_title" name="free_title" type="text" placeholder="제목을 입력하세요 " class="form-control" >
 				<input type="hidden" name="user_id"  value="${user_id}"/>
               </div>
             </div>
     
             <div class="form-group">
-              <label class="col-md-3 control-label" for="message">글 내용 </label>
+              <label class="col-md-3 control-label" >글 내용 </label>
               <div class="col-md-9">
-                <textarea class="form-control" id="message" name="free_cont" placeholder="글 내용 입력 " rows="30" cols="100"></textarea>
+                <textarea class="form-control" id="free_cont" name="free_cont" placeholder="글 내용 입력 " rows="30" cols="100"></textarea>
               </div>
             </div>
 			     
             <div class="form-group">
-              <label class="col-md-3 control-label" for="email">파일 추가</label>
+              <label class="col-md-3 control-label" >파일 추가</label>
               <div class="col-md-9">
 				<input type="file" name="file_name" id="file_name" />
               </div>
