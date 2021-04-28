@@ -79,6 +79,11 @@ public class AllSearchDaoImpl implements AllSearchDao {
 		return relationCheck;
 	}
 
+	@Override
+	public void relationPermit(Map<String, Object> map) {
+		sqlSession.update("AllSearch.relationPermit",map);
+	}
+
 	
 	
 	

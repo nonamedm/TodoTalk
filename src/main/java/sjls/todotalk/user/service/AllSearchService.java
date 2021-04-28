@@ -27,4 +27,6 @@ public interface AllSearchService {
 
 	List<RelationVo> getRelationCheck(Map<String, Object> relationCheck);
 
+	void relationPermit(Map<String, Object> map);
+
 }

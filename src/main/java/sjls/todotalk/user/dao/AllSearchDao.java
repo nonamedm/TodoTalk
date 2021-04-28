@@ -27,6 +27,8 @@ public interface AllSearchDao {
 
 	List<RelationVo> getRelationCheck(Map<String, Object> require_id);
 
+	void relationPermit(Map<String, Object> map);
+
 	
 
 }

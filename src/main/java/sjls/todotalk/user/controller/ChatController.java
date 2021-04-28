@@ -86,6 +86,8 @@ public class ChatController {
 		System.out.println("친구 목록 : "+relationList);
 		System.out.println("친구 요청목록 : "+relationRequire);
 		model.addAttribute("loginId",loginId);
+		model.addAttribute("relationRequire",relationRequire);
+		model.addAttribute("relationList",relationList);
 		return "relationList";
 	}
 	@RequestMapping("/rooms")
@@ -182,5 +184,12 @@ public class ChatController {
 		mav.setViewName("/relationCreate");
 		return mav;
 	}
-	
+	@RequestMapping(value="/permitRelation",method=RequestMethod.POST)
+	public void permitRelation (HttpServletRequest request,HttpServletResponse response) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("require_id", request.getParameter("require_id"));
+		map.put("receiver_id", request.getParameter("receiver_id"));
+		allSearchService.relationPermit(map);
+		
+	}
 }

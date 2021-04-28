@@ -46,4 +46,7 @@
   <select id="GetRelationCheck" parameterType="hashmap" resultType="sjls.todotalk.user.vo.RelationVo">
   	SELECT * FROM RELATION_LIST WHERE RECEIVER_ID = #{receiver_id} AND REQUIRE_ID = #{require_id}
   </select>
+  <update id="relationPermit" parameterType="hashmap">
+  	UPDATE RELATION_LIST SET PERMIT='Y' WHERE REQUIRE_ID=#{require_id} AND RECEIVER_ID=#{receiver_id}
+  </update>
 </mapper>

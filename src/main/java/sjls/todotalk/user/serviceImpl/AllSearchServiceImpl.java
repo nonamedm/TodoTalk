@@ -71,4 +71,11 @@ public class AllSearchServiceImpl implements AllSearchService {
 		return relationCheck;
 	}
 
+	@Override
+	public void relationPermit(Map<String, Object> map) {
+		allSearchDao.relationPermit(map);
+		
+		
+	}
+
 }
