@@ -152,7 +152,7 @@
 				// 비밀번호가  '' 이면  false 
 				
 				if($('#user_pwd').val() ==''){
-					alert('-1');
+					/* alert('-1'); */
 					$('#user_pwd').focus();
 					return false;
 				}else{
@@ -162,8 +162,8 @@
 							return false;
 			   		 }else {
 			   			 
-						if($('#user_pwd').val().trim().length > 5 && $('#user_pwd').val().trim().length==$('#user_pwd2').val().trim().length ){
-							alert('체크 완료');
+						if($('#user_pwd').val().trim().length> 5 && $('#user_pwd').val().trim() == $('#user_pwd2').val().trim() ){
+						/* 	alert('체크 완료'); */
 							$("#pwd_check_result").html('<b class="blue">체크완료</b>');
 							return true;
 						}else{
@@ -193,7 +193,7 @@
 					}, 
 						type:'POST',
 						success: function(data){
-							alert('사용 가능한 아이디 입니다');
+						/* 	alert('사용 가능한 아이디 입니다'); */
 							$("#id_check_result").html(data.html);
 							console.log(data.html);
 						},
