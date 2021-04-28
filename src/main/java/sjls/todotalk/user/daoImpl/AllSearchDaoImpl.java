@@ -68,6 +68,12 @@ public class AllSearchDaoImpl implements AllSearchDao {
 	}
 
 	@Override
+	public List<RelationVo> getRelationList2(String loginId) {
+		List<RelationVo> relationList2 = sqlSession.selectList("AllSearch.GetRelationList2",loginId);
+		return relationList2;
+	}
+	
+	@Override
 	public List<RelationVo> getRelationRequire(String loginId) {
 		List<RelationVo> relationRequire = sqlSession.selectList("AllSearch.GetRelationRequire",loginId);
 		return relationRequire;

@@ -60,6 +60,12 @@ public class AllSearchServiceImpl implements AllSearchService {
 	}
 
 	@Override
+	public List<RelationVo> getRelationList2(String loginId) {
+		List<RelationVo> relationList2 = allSearchDao.getRelationList2(loginId);
+		return relationList2;
+	}
+	
+	@Override
 	public List<RelationVo> getRelationRequire(String loginId) {
 		List<RelationVo> relationRequire = allSearchDao.getRelationRequire(loginId);
 		return relationRequire;
@@ -77,5 +83,6 @@ public class AllSearchServiceImpl implements AllSearchService {
 		
 		
 	}
+
 
 }

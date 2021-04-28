@@ -46,10 +46,19 @@
         </tbody>
      </table>
      <table class = "table-type02">
-        <div class="chat-header"><h4>${loginId } 님의 멘토멘티 목록</h4></div> <hr>	
+        <div class="chat-header"><h4>${loginId } 님의 멘티 목록</h4></div> <hr>	
         	<c:forEach var="list" items="${ relationList }">
         	<tr><th>이름 : ${ list.require_name }(${ list.require_id })</th>
-        	<th></th>
+        	<th>구분 : 멘티</th>
+        	</tr>
+        	</c:forEach>
+        </tbody>
+    </table>
+     <table class = "table-type02">
+        <div class="chat-header"><h4>${loginId } 님의 멘토 목록</h4></div> <hr>	
+        	<c:forEach var="list2" items="${ relationList2 }">
+        	<tr><th>이름 : ${ list2.receiver_name }(${ list2.receiver_id })</th>
+        	<th>구분 : 멘토</th>
         	</tr>
         	</c:forEach>
         </tbody>

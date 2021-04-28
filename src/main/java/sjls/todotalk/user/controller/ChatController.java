@@ -82,12 +82,14 @@ public class ChatController {
 	@RequestMapping("/relationList")
 	public String relationList (String loginId,Model model) {
 		List<RelationVo> relationList = allSearchService.getRelationList(loginId);
+		List<RelationVo> relationList2 = allSearchService.getRelationList2(loginId);
 		List<RelationVo> relationRequire = allSearchService.getRelationRequire(loginId);
 		System.out.println("친구 목록 : "+relationList);
 		System.out.println("친구 요청목록 : "+relationRequire);
 		model.addAttribute("loginId",loginId);
 		model.addAttribute("relationRequire",relationRequire);
-		model.addAttribute("relationList",relationList);
+		model.addAttribute("relationList",relationList);	//내가 요청받은 목록 -> 멘티 리스트
+		model.addAttribute("relationList2",relationList2);  //내가 요청한 목록   -> 멘토 리스트
 		return "relationList";
 	}
 	@RequestMapping("/rooms")
@@ -132,7 +134,12 @@ public class ChatController {
 	@RequestMapping(value="/alertCount", method=RequestMethod.POST)
 	public ModelAndView alertCount (HttpServletRequest request) {
 		String loginId = request.getParameter("loginId");		//로그인 id 받아서, sql 조회 -> 메세지 수신 나인데 상태 1인거 다 가져오기
+		//새 메세지 수 조회
 		int alertCount = chatRoomService.alertCount(loginId);
+		//멘토 요청 수 조회
+		List<RelationVo> relationRequire = allSearchService.getRelationRequire(loginId);
+		alertCount += relationRequire.size();
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("alertCount",alertCount);
 		mav.setViewName("jsonView");

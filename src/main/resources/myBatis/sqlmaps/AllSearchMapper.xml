@@ -40,6 +40,9 @@
   <select id="GetRelationList" parameterType="String" resultType="sjls.todotalk.user.vo.RelationVo">
   	SELECT * FROM RELATION_LIST WHERE RECEIVER_ID = #{loginId} AND PERMIT='Y'
   </select>
+  <select id="GetRelationList2" parameterType="String" resultType="sjls.todotalk.user.vo.RelationVo">
+  	SELECT * FROM RELATION_LIST WHERE REQUIRE_ID = #{loginId} AND PERMIT='Y'
+  </select>
   <select id="GetRelationRequire" parameterType="String" resultType="sjls.todotalk.user.vo.RelationVo">
   	SELECT * FROM RELATION_LIST WHERE RECEIVER_ID = #{loginId} AND PERMIT='D'
   </select>

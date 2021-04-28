@@ -23,10 +23,13 @@ public interface AllSearchService {
 
 	List<RelationVo> getRelationList(String loginId);
 
+	List<RelationVo> getRelationList2(String loginId);
+	
 	List<RelationVo> getRelationRequire(String loginId);
 
 	List<RelationVo> getRelationCheck(Map<String, Object> relationCheck);
 
 	void relationPermit(Map<String, Object> map);
+
 
 }
