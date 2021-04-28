@@ -210,6 +210,10 @@
 			}
 		});
 	}//여기까지가 번역기능 스크립트 끝
+	function popup () {
+    	//alert(form);
+    	window.open('','relationOpen','toolbar=no, width=500,height=350');
+    }
 	
 </script>
     <div class="sub-main-wrap">
