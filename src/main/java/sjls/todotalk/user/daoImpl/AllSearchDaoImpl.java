@@ -3,12 +3,14 @@ package sjls.todotalk.user.daoImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import sjls.todotalk.user.dao.AllSearchDao;
+import sjls.todotalk.user.vo.RelationVo;
 import sjls.todotalk.user.vo.UserVo;
 
 @Repository("allSearchDao")
@@ -35,6 +37,30 @@ public class AllSearchDaoImpl implements AllSearchDao {
 	public List<HashMap<String, Object>> getBoardList(HashMap<String, Object> map) {
 		List<HashMap<String, Object>> boardAllSearch = sqlSession.selectList("AllSearch.GetBoardList",map);
 		return boardAllSearch;
+	}
+
+	@Override
+	public UserVo getUserList(String receiver_id) {
+		UserVo userVo = sqlSession.selectOne("AllSearch.GetUser", receiver_id);
+		return userVo;
+	}
+
+	@Override
+	public String getPhotoName(String receiver_id) {
+		String userPhoto = sqlSession.selectOne("AllSearch.GetPhoto",receiver_id);
+		return userPhoto;
+	}
+
+	@Override
+	public void relationCreate(Map<String, Object> map) {
+		sqlSession.insert("AllSearch.RelationCreate", map);
+		
+	}
+
+	@Override
+	public List<RelationVo> getRelationList(String loginId) {
+		List<RelationVo> relationList = sqlSession.selectList("AllSearch.GetRelationList",loginId);
+		return relationList;
 	}
 
 	

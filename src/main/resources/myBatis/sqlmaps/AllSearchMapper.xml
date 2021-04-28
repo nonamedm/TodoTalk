@@ -13,7 +13,7 @@
 	  FROM USER_INFO AS UI LEFT OUTER JOIN RELATION_LIST AS RL ON UI.USER_NAME = RL.RECEIVER_NAME
 	  WHERE (RL.RECEIVER_NAME LIKE CONCAT('%',#{queryString},'%') OR UI.USER_ID LIKE CONCAT('%',#{queryString},'%')
  	  OR UI.COUNTRY LIKE CONCAT('%',#{queryString},'%'))
- 	  AND RL.PERMIT='Y' AND RL.MENTOR='Y'
+ 	  
   </select>
   <select id="GetBoardList" parameterType="hashmap" resultType="hashmap">
   	SELECT BOARD_NAME, NOTICE_IDX AS IDX, NOTICE_TITLE AS TITLE, NOTICE_CONT AS CONT, USER_IDX, USER_ID, NOTICE_REGDATE AS REGDATE, NOTICE_READCOUNT AS READCOUNT
@@ -27,5 +27,17 @@
   	UNION
   	SELECT * FROM TUTOR_BOARD WHERE TUBO_TITLE LIKE CONCAT('%',#{queryString},'%') OR TUBO_CONT LIKE CONCAT('%',#{queryString},'%')
   </select>
-  
+  <select id="GetUser" parameterType="String" resultType="sjls.todotalk.user.vo.UserVo">
+    SELECT * FROM USER_INFO WHERE USER_ID=#{receiver_id}
+  </select>
+  <select id="GetPhoto" parameterType="String" resultType="String">
+    SELECT PHOTO_NAME FROM USER_PHOTO WHERE USER_ID=#{receiver_id}
+  </select>
+  <insert id="RelationCreate" parameterType="hashmap">
+    INSERT INTO RELATION_LIST (REQUIRE_ID, REQUIRE_NAME, RECEIVER_ID, RECEIVER_NAME, MENTOR, MENTEE, PERMIT)
+     VALUES (#{require_id}, #{require_name}, #{receiver_id}, #{receiver_name}, 'Y','D','D') 
+  </insert>
+  <select id="GetRelationList" parameterType="String" resultType="sjls.todotalk.user.vo.RelationVo">
+  	SELECT * FROM RELATION_LIST WHERE RECEIVER_ID = #{loginId}
+  </select>
 </mapper>

@@ -21,7 +21,20 @@
                 	<table class="table-type02" style="width:850px;">
                 	<thead></thead>
                 	<tbody>
-                	<tr><td>튜터 : ${ tutorVo.user_name }</td><td colspan="2">이메일 : ${ tutorVo.user_mail }</td></tr>
+                	<tr><td>튜터 : ${ tutorVo.user_name }</td><td>이메일 : ${ tutorVo.user_mail }</td>
+                	<c:choose>
+	                	<c:when test="${empty login.user_id}">
+	                	</c:when>
+	                	<c:otherwise>
+	                	<form action="/relation" method="POST" id="relation" target="relationOpen" onsubmit="popup();">
+		                	<input type="hidden" name="require_id" value="${ login.user_id }" />
+		                	<input type="hidden" name="require_name" value="${ login.user_name }" />
+		                	<input type="hidden" name="receiver_id" value="${ tutorVo.user_id }" />
+		                	<input type="hidden" name="receiver_name" value="${ tutorVo.user_name }" />
+		                	<th><input type="submit" value="멘토신청"  /></th></tr>
+	                	</form>
+	                	</c:otherwise>
+                	</c:choose>
                 	<tr><td>국적 : ${ tutorVo.country }</td><td>좋아요 ${ tutorVo.recommend }</td>
                 	<form action="/talk" method="POST" target="TodoTalk" onsubmit="createWindow();">
                 	<input type="hidden" name="loginId" value="${login.user_id}" />
@@ -35,9 +48,9 @@
 	                	</c:otherwise>
                 	</c:choose>
                 	</form>
+                	<tr><td colspan="3">${tutorVo.introduce }</td></tr>
                 	</tbody>
                 	</table>
-                	
                 <br>
                 </c:forEach>
                 </div>
@@ -45,13 +58,26 @@
                 <hr>
                 <br>
                 <div id="mentorSearch">
-                <h3>멘토 검색결과 - 총 ${ mentorVoSize }건</h3>
+                <h3>유저 검색결과 - 총 ${ mentorVoSize }건</h3>
                 <c:forEach var="mentorVo" items="${ mentorVo }">
                 <br>
                 	<table class="table-type02" style="width:850px;">
                 	<thead></thead>
                 	<tbody>
-                	<tr><td>멘토 : ${ mentorVo.user_name } </td><td colspan="2">이메일 : ${ mentorVo.user_mail } </td></tr>
+                	<tr><td>이름 : ${ mentorVo.user_name } </td><td>이메일 : ${ mentorVo.user_mail } </td>
+                	<c:choose>
+	                	<c:when test="${empty login.user_id}">
+	                	</c:when>
+	                	<c:otherwise>
+	                	<form action="/relation" method="POST" id="relation" target="relationOpen" onsubmit="popup();">
+		                	<input type="hidden" name="require_id" value="${ login.user_id }" />
+		                	<input type="hidden" name="require_name" value="${ login.user_name }" />
+		                	<input type="hidden" name="receiver_id" value="${ mentorVo.user_id }" />
+		                	<input type="hidden" name="receiver_name" value="${ mentorVo.user_name }" />
+		                	<th><input type="submit" value="멘토신청"  /></th></tr>
+	                	</form>
+	                	</c:otherwise>
+                	</c:choose>
                 	<tr><td>국적 : ${ mentorVo.country }</td><td>좋아요 ${ mentorVo.recommend }</td>
                 	<form action="/talk" method="POST" target="TodoTalk" onsubmit="createWindow();">
                 	<input type="hidden" name="loginId" value="${login.user_id}" />
@@ -65,6 +91,7 @@
 	                	</c:otherwise>
                 	</c:choose>
                 	</form>
+                	<tr><td colspan="3">${mentorVo.introduce }</td></tr>
                 	</tbody>
                 	</table>
                 <br>
@@ -100,6 +127,15 @@
         <!--//sub-container-wrap-->
     </div>
     <!--//sub-main-wrap-->
+    <script>
+    function popup () {
+    	//alert(form);
+    	window.open('','relationOpen','toolbar=no, width=500,height=350');
+    }
+    $(function(){
+    	
+    });
+    </script>
 </body>
 
 </html>

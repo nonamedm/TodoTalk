@@ -75,6 +75,10 @@
     function createWindow() {
 	    win = open('/rooms?loginId=${login.user_id}','TodoTalk','width=900,height=650');
     }
+    function createWindow2() {
+	    win = open('/relationList?loginId=${login.user_id}','RelationList','width=900,height=650');
+    }
+    
 
 </script>
 <div class="header-wrap">
@@ -129,6 +133,7 @@
                             <ul>
                             	<li><a href="/attendanceCheckFm" title="출석체크">출석체크</a></li>
                             	<li><a title="대화방" onclick="createWindow();">대화방 목록</a></li>
+                            	<li><a title="멘토신청" onclick="createWindow2();">멘토신청 목록</a></li>
                             	<li><a href="#" title="개인정보 수정" class="pw-change">개인정보 수정</a></li>
                                 <li><a href="/LogOut" title="로그아웃" onclick="return confirm('로그아웃 하시겠습니까?');">로그아웃</a></li>
                             </ul>

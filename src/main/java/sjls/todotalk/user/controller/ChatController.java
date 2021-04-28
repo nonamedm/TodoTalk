@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import sjls.todotalk.user.service.AllSearchService;
 import sjls.todotalk.user.service.ChatRoomService;
 import sjls.todotalk.user.vo.MessageVo;
+import sjls.todotalk.user.vo.RelationVo;
 import sjls.todotalk.user.vo.RoomVo;
 import sjls.todotalk.user.vo.UserVo;
 
@@ -78,7 +79,13 @@ public class ChatController {
 		model.addAttribute("receiverId",receiverId);
 		return "room";
 	}
-	
+	@RequestMapping("/relationList")
+	public String relationList (String loginId,Model model) {
+		List<RelationVo> relationList = allSearchService.getRelationList(loginId);
+		System.out.println("친구목록 : "+relationList);
+		model.addAttribute("loginId",loginId);
+		return "relationList";
+	}
 	@RequestMapping("/rooms")
 	public String rooms (String loginId,Model model) {
 		Object chatRooms = new HashMap<String,RoomVo>();
@@ -125,6 +132,43 @@ public class ChatController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("alertCount",alertCount);
 		mav.setViewName("jsonView");
+		return mav;
+	}
+	@RequestMapping(value="/relation", method= RequestMethod.POST) 
+	public ModelAndView relation (HttpServletRequest request,HttpServletResponse response){
+		String require_id = request.getParameter("require_id");
+		String require_name = request.getParameter("require_name");
+		String receiver_id = request.getParameter("receiver_id");
+		//System.out.println("넘어온값"+require_id+require_name+receiver_id+receiver_name);
+		//튜터 검색결과 반환
+		UserVo userVo = allSearchService.getUserList(receiver_id);
+		String userPhoto = allSearchService.getPhotoName(receiver_id);
+		//System.out.println("receiver 정보 : "+userVo);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("require_id",require_id);
+		mav.addObject("require_name",require_name);
+		mav.addObject("receiver",userVo);
+		mav.addObject("photo_name",userPhoto);
+		mav.setViewName("/relation");
+		return mav;
+	}
+	@RequestMapping(value="/relationCreate", method= RequestMethod.POST) 
+	public ModelAndView relationCreate (HttpServletRequest request,HttpServletResponse response){
+		ModelAndView mav = new ModelAndView();
+		String require_id = request.getParameter("require_id");
+		String require_name = request.getParameter("require_name");
+		String receiver_id = request.getParameter("receiver_id");
+		String receiver_name = request.getParameter("receiver_name");
+		//System.out.println("넘어온값확인 : "+require_id+require_name+receiver_id+receiver_name);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("require_id", require_id);
+		map.put("require_name", require_name);
+		map.put("receiver_id", receiver_id);
+		map.put("receiver_name", receiver_name);
+		allSearchService.relationCreate(map);
+		mav.addObject("receiver_id",receiver_id);
+		mav.addObject("receiver_name",receiver_name);
+		mav.setViewName("/relationCreate");
 		return mav;
 	}
 	
