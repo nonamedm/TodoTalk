@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="lnb-wrap">
             <div class="lnb-top-cont">
                 <h1><a href="/" title="홈으로가기"><img src="img/common/logo.png" alt="홈바로가기"></a></h1>
@@ -38,15 +39,19 @@
                             <li><a href="/board/comm/commList" title="커뮤니티" class="">멘티 멘토 소통 커뮤니티</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#" title="관리자 메뉴" class="lnb-dep1">관리자 메뉴</a>
-                        <ul class="lnb-dep2">
-                            <li><a href="#" title="2dep menu 1" class="">2dep menu 1</a></li>
-                            <li><a href="#" title="2dep menu 2" class="">2dep menu 2</a></li>
-                            <li><a href="#" title="2dep menu 3" class="">2dep menu 3</a></li>
-                            <li><a href="#" title="2dep menu 4" class="">2dep menu 4</a></li>
-                        </ul>
-                    </li>
+                    <c:choose>
+                    	<c:when test="${user_register == 0}">
+                    		<li>
+		                        <a href="#" title="관리자 메뉴" class="lnb-dep1">관리자 메뉴</a>
+		                        <ul class="lnb-dep2">
+		                            <li><a href="#" title="2dep menu 1" class="">2dep menu 1</a></li>
+		                            <li><a href="#" title="2dep menu 2" class="">2dep menu 2</a></li>
+		                            <li><a href="#" title="2dep menu 3" class="">2dep menu 3</a></li>
+		                            <li><a href="#" title="2dep menu 4" class="">2dep menu 4</a></li>
+		                        </ul>
+		                    </li>
+                    	</c:when>
+                    </c:choose>
                 </ul>
             </div>
             <div class="lnb-menu lnb-menu2" style="display: none">

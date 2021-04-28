@@ -1,7 +1,18 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../layout/header.jsp"%>
-
+<style>
+	input[type="submit"] {display: block;
+    padding: 8px 40px;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    background-color: #1EDA69;
+    color: #fff;
+    border-radius: 2px;
+    border: 1px solid #1EDA69;
+    cursor: pointer;}
+</style>
 <script>
 	$(function(){
 		$("#getText").keyup(function(){
@@ -53,6 +64,8 @@
 					$("#mentor_recommend").html(result.mentorInfo.RECOMMEND);
 					$("#mentor_address").html(result.mentorInfo.ADDRESS);
 					$("#mentor_introduce").html(result.mentorInfo.INTRODUCE);
+					$("#receiver_id").val(result.mentorInfo.USER_ID);
+					$("#receiver_name").val(result.mentorInfo.USER_NAME);
 				},
 				error : function(xhr){
 					alert(xhr.status + ", " + xhr.statusText);
@@ -239,8 +252,14 @@
                     <a href="#" title="닫기" class="btn-close" id="btn-close"></a>
                 </div>
                 <div class="modal-contents">
+                 <form action="/relation" method="POST" id="relation" target="relationOpen" onsubmit="popup();">
                     <div class="modal-contents-box">
                         <div class="table-wrap">
+		                	<input type="hidden" name="require_id" value="${user_id}" />
+		                	<input type="hidden" name="require_name" value="${user_name}" />
+		                	<input type="hidden" name="receiver_id" id="receiver_id"/>
+		                	<input type="hidden" name="receiver_name" id="receiver_name" />
+	                	
                             <table class="table-type02">
                                 <caption>멘토정보 테이블</caption>
                                 <colgroup>
@@ -278,15 +297,20 @@
                                 	</tr>
                                 </tbody>
                             </table>
+                            
                         </div>
                     </div>
                     <div class="modal-btn-box">
                         <ul>
+                        	<li>
+                        		<input type="submit" value="멘토신청"  />
+                        	</li>
                             <li>
                                 <a href="#" title="취소" class="btn-cancel" id="btn-cancel">닫기</a>
                             </li>
                         </ul>
                     </div>
+                    </form>
                 </div>
             </div>
         </div> <!-- //modal-picture-->
