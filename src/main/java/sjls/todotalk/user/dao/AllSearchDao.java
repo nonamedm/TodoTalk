@@ -22,6 +22,14 @@ public interface AllSearchDao {
 	void relationCreate(Map<String, Object> map);
 
 	List<RelationVo> getRelationList(String loginId);
+	
+	List<RelationVo> getRelationList2(String loginId);
+
+	List<RelationVo> getRelationRequire(String loginId);
+
+	List<RelationVo> getRelationCheck(Map<String, Object> require_id);
+
+	void relationPermit(Map<String, Object> map);
 
 	
 

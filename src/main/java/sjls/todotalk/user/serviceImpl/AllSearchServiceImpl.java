@@ -59,4 +59,30 @@ public class AllSearchServiceImpl implements AllSearchService {
 		return relationList;
 	}
 
+	@Override
+	public List<RelationVo> getRelationList2(String loginId) {
+		List<RelationVo> relationList2 = allSearchDao.getRelationList2(loginId);
+		return relationList2;
+	}
+	
+	@Override
+	public List<RelationVo> getRelationRequire(String loginId) {
+		List<RelationVo> relationRequire = allSearchDao.getRelationRequire(loginId);
+		return relationRequire;
+	}
+
+	@Override
+	public List<RelationVo> getRelationCheck(Map<String,Object> require_id) {
+		List<RelationVo> relationCheck = allSearchDao.getRelationCheck(require_id);
+		return relationCheck;
+	}
+
+	@Override
+	public void relationPermit(Map<String, Object> map) {
+		allSearchDao.relationPermit(map);
+		
+		
+	}
+
+
 }

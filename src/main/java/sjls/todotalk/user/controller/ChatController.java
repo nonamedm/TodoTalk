@@ -82,8 +82,14 @@ public class ChatController {
 	@RequestMapping("/relationList")
 	public String relationList (String loginId,Model model) {
 		List<RelationVo> relationList = allSearchService.getRelationList(loginId);
-		System.out.println("친구목록 : "+relationList);
+		List<RelationVo> relationList2 = allSearchService.getRelationList2(loginId);
+		List<RelationVo> relationRequire = allSearchService.getRelationRequire(loginId);
+		System.out.println("친구 목록 : "+relationList);
+		System.out.println("친구 요청목록 : "+relationRequire);
 		model.addAttribute("loginId",loginId);
+		model.addAttribute("relationRequire",relationRequire);
+		model.addAttribute("relationList",relationList);	//내가 요청받은 목록 -> 멘티 리스트
+		model.addAttribute("relationList2",relationList2);  //내가 요청한 목록   -> 멘토 리스트
 		return "relationList";
 	}
 	@RequestMapping("/rooms")
@@ -128,7 +134,12 @@ public class ChatController {
 	@RequestMapping(value="/alertCount", method=RequestMethod.POST)
 	public ModelAndView alertCount (HttpServletRequest request) {
 		String loginId = request.getParameter("loginId");		//로그인 id 받아서, sql 조회 -> 메세지 수신 나인데 상태 1인거 다 가져오기
+		//새 메세지 수 조회
 		int alertCount = chatRoomService.alertCount(loginId);
+		//멘토 요청 수 조회
+		List<RelationVo> relationRequire = allSearchService.getRelationRequire(loginId);
+		alertCount += relationRequire.size();
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("alertCount",alertCount);
 		mav.setViewName("jsonView");
@@ -165,11 +176,27 @@ public class ChatController {
 		map.put("require_name", require_name);
 		map.put("receiver_id", receiver_id);
 		map.put("receiver_name", receiver_name);
-		allSearchService.relationCreate(map);
-		mav.addObject("receiver_id",receiver_id);
-		mav.addObject("receiver_name",receiver_name);
+		// 신청 중복 체크
+		Map<String, Object> relationCheck = new HashMap<String, Object>();
+		relationCheck.put("require_id", require_id);
+		relationCheck.put("receiver_id", receiver_id);
+		List<RelationVo> checkResult = allSearchService.getRelationCheck(relationCheck);	
+		//System.out.println("중복체크 : "+checkResult);
+		if(checkResult.size()>=1) {
+		} else {
+			allSearchService.relationCreate(map);
+			mav.addObject("receiver_id",receiver_id);
+			mav.addObject("receiver_name",receiver_name);
+		}
 		mav.setViewName("/relationCreate");
 		return mav;
 	}
-	
+	@RequestMapping(value="/permitRelation",method=RequestMethod.POST)
+	public void permitRelation (HttpServletRequest request,HttpServletResponse response) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("require_id", request.getParameter("require_id"));
+		map.put("receiver_id", request.getParameter("receiver_id"));
+		allSearchService.relationPermit(map);
+		
+	}
 }

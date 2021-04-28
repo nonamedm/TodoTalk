@@ -53,7 +53,11 @@ public class AllSearchDaoImpl implements AllSearchDao {
 
 	@Override
 	public void relationCreate(Map<String, Object> map) {
-		sqlSession.insert("AllSearch.RelationCreate", map);
+		try {
+			sqlSession.insert("AllSearch.RelationCreate", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -61,6 +65,29 @@ public class AllSearchDaoImpl implements AllSearchDao {
 	public List<RelationVo> getRelationList(String loginId) {
 		List<RelationVo> relationList = sqlSession.selectList("AllSearch.GetRelationList",loginId);
 		return relationList;
+	}
+
+	@Override
+	public List<RelationVo> getRelationList2(String loginId) {
+		List<RelationVo> relationList2 = sqlSession.selectList("AllSearch.GetRelationList2",loginId);
+		return relationList2;
+	}
+	
+	@Override
+	public List<RelationVo> getRelationRequire(String loginId) {
+		List<RelationVo> relationRequire = sqlSession.selectList("AllSearch.GetRelationRequire",loginId);
+		return relationRequire;
+	}
+
+	@Override
+	public List<RelationVo> getRelationCheck(Map<String, Object> check) {
+		List<RelationVo> relationCheck = sqlSession.selectList("AllSearch.GetRelationCheck",check);
+		return relationCheck;
+	}
+
+	@Override
+	public void relationPermit(Map<String, Object> map) {
+		sqlSession.update("AllSearch.relationPermit",map);
 	}
 
 	

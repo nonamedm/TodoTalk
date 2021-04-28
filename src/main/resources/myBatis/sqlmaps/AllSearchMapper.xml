@@ -38,6 +38,18 @@
      VALUES (#{require_id}, #{require_name}, #{receiver_id}, #{receiver_name}, 'Y','D','D') 
   </insert>
   <select id="GetRelationList" parameterType="String" resultType="sjls.todotalk.user.vo.RelationVo">
-  	SELECT * FROM RELATION_LIST WHERE RECEIVER_ID = #{loginId}
+  	SELECT * FROM RELATION_LIST WHERE RECEIVER_ID = #{loginId} AND PERMIT='Y'
   </select>
+  <select id="GetRelationList2" parameterType="String" resultType="sjls.todotalk.user.vo.RelationVo">
+  	SELECT * FROM RELATION_LIST WHERE REQUIRE_ID = #{loginId} AND PERMIT='Y'
+  </select>
+  <select id="GetRelationRequire" parameterType="String" resultType="sjls.todotalk.user.vo.RelationVo">
+  	SELECT * FROM RELATION_LIST WHERE RECEIVER_ID = #{loginId} AND PERMIT='D'
+  </select>
+  <select id="GetRelationCheck" parameterType="hashmap" resultType="sjls.todotalk.user.vo.RelationVo">
+  	SELECT * FROM RELATION_LIST WHERE RECEIVER_ID = #{receiver_id} AND REQUIRE_ID = #{require_id}
+  </select>
+  <update id="relationPermit" parameterType="hashmap">
+  	UPDATE RELATION_LIST SET PERMIT='Y' WHERE REQUIRE_ID=#{require_id} AND RECEIVER_ID=#{receiver_id}
+  </update>
 </mapper>

@@ -36,8 +36,16 @@
 <div class = "talbe-wrap">
     <table class = "table-type02">
         <tbody>
-        <tr><th colspan="2" >${ receiver_name } (${ receiver_id }) 님에게 멘토를 신청했습니다.</th>
-        </tr>   
+        <c:choose>
+        	<c:when test="${empty receiver_name}"> 
+	        <tr><th colspan="2" >이미 멘토를 신청했습니다.</th>
+	        </tr>   
+	        </c:when>
+	        <c:otherwise>
+		        <tr><th colspan="2" >${ receiver_name } (${ receiver_id }) 님에게 멘토를 신청했습니다.</th>
+			    </tr>
+		    </c:otherwise>
+	    </c:choose>
         <tr>
         <th colspan="2" >
        		<input type="button" value="닫기" onclick="window.close()"/>
