@@ -15,19 +15,8 @@
     <table class = "table-type02">
         <div class="chat-header"><h4>${loginId } 님의 멘토요청 목록</h4></div> <hr>
         <tbody>
-        <c:forEach var="list" items="${list }" varStatus="status">
-        <%-- 방번호 : ${list.roomId }<br> --%>
-        <tr><th>대화상대 : ${list.sender }</th>
-        <!-- 새 메세지 몇개 -->
-        <th>새 메시지 : ${newList[status.index] } 건<th></tr>   
-        <tr><th colspan="2"><form action="/talk" method="POST" >
-                	<input type="hidden" name="loginId" value="${loginId}" />
-                	<input type="hidden" name="receiverId" value="${list.sender }" />
-                	<input type="hidden" name="requireId" value="${loginId }" />
-                	<input type="submit" value="대화시작"/>
-               	</form></th>
-         </tr>
-        </c:forEach>
+        	
+        	
         </tbody>
     </table>
 </div>

@@ -23,6 +23,10 @@ public interface AllSearchDao {
 
 	List<RelationVo> getRelationList(String loginId);
 
+	List<RelationVo> getRelationRequire(String loginId);
+
+	List<RelationVo> getRelationCheck(Map<String, Object> require_id);
+
 	
 
 }

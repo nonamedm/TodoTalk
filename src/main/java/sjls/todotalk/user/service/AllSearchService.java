@@ -23,4 +23,8 @@ public interface AllSearchService {
 
 	List<RelationVo> getRelationList(String loginId);
 
+	List<RelationVo> getRelationRequire(String loginId);
+
+	List<RelationVo> getRelationCheck(Map<String, Object> relationCheck);
+
 }
