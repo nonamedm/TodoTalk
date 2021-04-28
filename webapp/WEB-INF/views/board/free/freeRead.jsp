@@ -10,7 +10,9 @@
 <title>read</title>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+</script>
 </head>
 <body>
     <div class="sub-main-wrap">
@@ -68,16 +70,16 @@
 <!-- 댓글 목록 -->
 <table class="table-type03">
 	<tr>
-		<td colspan="2">댓글 내용</td>
-		<td>작성자</td>
-		<td>작성일</td>
+		<td colspan="2"><h3>댓글 내용</h3></td>
+		<td><h3>작성자</h3></td>
+		<td><h3>작성일</h3></td>
 	</tr>
 	  <c:forEach var="list" items="${repList}" >
 		<tr>
 		 <td><c:out value="${list.free_re_cont}" /></td>
      	 <td><a href="/board/free/repDelete?free_idx=${list.free_idx}&free_re_idx=${list.free_re_idx}"> 삭제 </a></td>
      	 <!-- <td>대댓</td> -->
-	     <td><c:out value="${user_id}" /></td>
+	     <td><c:out value="${list.user_id}" /></td>
 	     <td><c:out value="${list.free_re_regdate}" /></td>
 		</tr>	
       </c:forEach> 

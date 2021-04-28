@@ -6,12 +6,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Update</title>
-<style>
-table,td {border:2px solid DarkOrchid; border-collapse:collapse; }
- th,td {padding:10px;}
-</style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
+$(function(){
+	
+	$('#form1').on('submit', function() {		   
+		   if ( $('#free_title').val() == '') {
+			   alert('제목을 입력하세요');
+			   $('#free_title').focus();
+			   return false;   // submit 이벤트를 중지
+		   } 			   
+		    if ( $('#free_cont').val() == '') {
+			   alert('내용을 입력하세요');
+			   $('#free_cont').focus();
+			   return false;   // submit 이벤트를 중지
+		   } 	
+		   
+	     return true;
+	});
+	
+})
 </script>
 </head>
 <body>
@@ -22,19 +36,19 @@ table,td {border:2px solid DarkOrchid; border-collapse:collapse; }
             <div class="middle-content-wrap2 mentorMenteePage">
                 <!--여기부터 컨텐츠내용 작업시작-->
 
-<form action="/board/free/freeUpdate" method="post">
-<table>
+<form action="/board/free/freeUpdate" method="post"  id="form1">
+<table class="table-type02">
 <h2>QnA Update</h2>
  
  <tr>
  	<td>글번호: ${freeBoardVo.free_idx}</td>
  	<input type="hidden" name="free_idx" value="${freeBoardVo.free_idx}" />
- 	<td>제목  <input type="text" name="free_title"/></td>
+ 	<td>제목  <input type="text" name="free_title" id="free_title" placeholder="제목을 입력하세요(필수입력) " /></td>
  	<td>작성자: ${user_id}<input type="hidden" name="user_id" value="${user_id}"/></td>
  </tr>
  <tr>
  	<td>내용</td>
- 	<td colspan="4"><textarea name="free_cont" rows="30" cols="80"></textarea> </td>
+ 	<td colspan="4"><textarea id="free_cont" name="free_cont" rows="30" cols="80"  placeholder="글 내용 입력하세요(필수입력) "></textarea> </td>
  </tr>
  
  
