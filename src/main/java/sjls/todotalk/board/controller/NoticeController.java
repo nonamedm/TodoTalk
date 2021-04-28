@@ -2,7 +2,8 @@ package sjls.todotalk.board.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,83 @@ public class NoticeController {
 		mav.addObject("pageMaker", pageMaker);
 		
 		mav.setViewName("/board/notice/noticeList");
+		return mav;
+	}
+	
+	@RequestMapping(value="/noticeWriteFm", method=RequestMethod.GET)
+	public ModelAndView noticeWriteFm() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("/board/notice/noticeWriteFm");
+		return mav;
+	}
+	
+	@RequestMapping(value="/noticeWrite", method=RequestMethod.POST)
+	public ModelAndView noticeWrite(@RequestParam HashMap<String, Object> map) {
+		ModelAndView mav = new ModelAndView();
+		
+		String notice_cont2 = (String)map.get("notice_cont");
+		notice_cont2.replace("<", "&lt;");
+		notice_cont2.replace(">", "&gt;");
+		map.put("notice_cont", notice_cont2);
+		
+		System.out.println(map);
+		
+		noticeService.noticeWrite(map);
+		
+		mav.setViewName("redirect:/noticeFm");
+		return mav;
+	}
+	
+	@RequestMapping(value="/noticeRead", method=RequestMethod.GET)
+	public ModelAndView noticeRead(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		
+		int idx = Integer.parseInt(req.getParameter("idx"));
+		
+		noticeService.updateReadCount(idx);
+		HashMap<String, Object> getViewRead = noticeService.getNoticeRead(idx);
+		
+		mav.addObject("getViewRead", getViewRead);
+		mav.setViewName("/board/notice/noticeReadFm");
+		return mav;
+	}
+	
+	@RequestMapping(value="/noticeUpdateFm", method=RequestMethod.GET)
+	public ModelAndView noticeUpdateFm(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		
+		int idx = Integer.parseInt(req.getParameter("idx"));
+		
+		
+		HashMap<String, Object> getViewRead = noticeService.getNoticeRead(idx);
+		
+		mav.addObject("getViewRead", getViewRead);
+		mav.setViewName("/board/notice/noticeUpdateFm");
+		return mav;
+	}
+	
+	@RequestMapping(value="/noticeUpdate", method=RequestMethod.POST)
+	public ModelAndView noticeUpdate(@RequestParam HashMap<String, Object> map){
+		ModelAndView mav = new ModelAndView();
+		
+		Object idx = map.get("notice_idx");
+		
+		noticeService.noticeUpdate(map);
+		
+		mav.setViewName("redirect:/noticeRead?idx="+idx);
+		return mav;
+	}
+	
+	@RequestMapping(value="/noticeDelete", method=RequestMethod.GET)
+	public ModelAndView noticeDelete(HttpServletRequest req){
+		ModelAndView mav = new ModelAndView();
+		
+		int idx = Integer.parseInt(req.getParameter("idx"));
+		
+		noticeService.noticeDelete(idx);
+		
+		mav.setViewName("redirect:/noticeFm");
 		return mav;
 	}
 	

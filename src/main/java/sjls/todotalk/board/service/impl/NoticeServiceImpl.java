@@ -1,5 +1,6 @@
 package sjls.todotalk.board.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,4 +30,35 @@ public class NoticeServiceImpl implements NoticeService {
 		return result;
 	}
 
+	@Override
+	public void noticeWrite(HashMap<String, Object> map) {
+		noticeDao.noticeWrite(map);
+		
+	}
+
+	@Override
+	public HashMap<String, Object> getNoticeRead(int idx) {
+		HashMap<String, Object> listOne = noticeDao.getNoticeRead(idx);
+		return listOne;
+	}
+
+	@Override
+	public void updateReadCount(int idx) {
+		noticeDao.updateReadCount(idx);
+		
+	}
+
+	@Override
+	public void noticeUpdate(HashMap<String, Object> map) {
+		noticeDao.noticeUpdate(map);
+		
+	}
+
+	@Override
+	public void noticeDelete(int idx) {
+		noticeDao.noticeDelete(idx);
+		
+	}
+
+	
 }

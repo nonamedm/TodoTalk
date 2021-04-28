@@ -40,10 +40,10 @@
                                         <c:forEach var="getNoticeList" items="${getNoticeList}">
                                         	<tr>
                                         		<td>${getNoticeList.NOTICE_IDX}</td>
-                                        		<td>${getNoticeList.NOTICE_TITLE}</td>
+                                        		<td><a href="/noticeRead?idx=${getNoticeList.NOTICE_IDX}">${getNoticeList.NOTICE_TITLE}</a></td>
                                         		<td>${getNoticeList.USER_ID}</td>
-                                        		<td>${getNoticeList.NOTICE_NOTICE_REGDATE}</td>
-                                        		<td>${getNoticeList.NOTICE_NOTICE_READCOUNT}</td>
+                                        		<td>${getNoticeList.NOTICE_REGDATE}</td>
+                                        		<td>${getNoticeList.NOTICE_READCOUNT}</td>
                                         	</tr>
                                         </c:forEach>
                                     </tbody>
@@ -69,11 +69,16 @@
 								</ul>
 							</div>
                         </section>
-                        <div class="btn-box">
-			                    <ul>
-			                        <li><a href="#" title="글쓰기" class="bg-blue">글쓰기</a></li>
-			                    </ul>
-			                </div>
+                        <c:choose>
+                        	<c:when test="${user_register == 0}">
+                        		<div class="btn-box">
+				                    <ul>
+				                        <li><a href="/noticeWriteFm" title="글쓰기" class="bg-blue">글쓰기</a></li>
+				                    </ul>
+				                </div>
+                        	</c:when>
+                        </c:choose>
+                        
                     </div>
                 </div>
             </div>

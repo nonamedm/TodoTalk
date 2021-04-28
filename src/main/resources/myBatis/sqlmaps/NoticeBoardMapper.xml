@@ -3,9 +3,16 @@
 
 <mapper namespace="notice">
 	<select id="getNoticeList" resultType="hashmap">
-		select * 
+		select 
+			NOTICE_IDX,
+			NOTICE_TITLE,
+			USER_ID,
+			DATE_FORMAT(NOTICE_REGDATE, '%Y-%m-%d') as NOTICE_REGDATE,
+			NOTICE_READCOUNT
 		from NOTICE_BOARD
+		order by NOTICE_IDX desc
 		limit #{pageStart}, #{perPageNum}
+		
 	</select>
 	
 	<select id="getNoticeCount" resultType="int">
@@ -13,4 +20,40 @@
 		  count(*) 
 		 from NOTICE_BOARD
 	</select>
+	
+	<insert id="noticeWrite" parameterType="map">
+		insert into NOTICE_BOARD
+			(NOTICE_TITLE, NOTICE_CONT, USER_ID, NOTICE_REGDATE)
+		values(#{notice_title}, #{notice_cont}, #{notice_user}, now())
+	</insert>
+	
+	<update id="updateReadCount" parameterType="int">
+		UPDATE NOTICE_BOARD set 
+			NOTICE_READCOUNT = NOTICE_READCOUNT+1
+		WHERE NOTICE_IDX = #{idx}
+	</update>
+	
+	<select id="getNoticeRead" parameterType="int" resultType="map">
+		SELECT 
+			NOTICE_IDX,
+			NOTICE_TITLE ,
+			NOTICE_CONT,
+			USER_ID,
+			DATE_FORMAT(NOTICE_REGDATE, '%Y-%m-%d') as NOTICE_REGDATE,
+			NOTICE_READCOUNT
+		from NOTICE_BOARD
+		where NOTICE_IDX = #{idx}
+	</select>
+	
+	<update id="noticeUpdate" parameterType="map">
+		update NOTICE_BOARD set
+			NOTICE_TITLE = #{notice_title},
+			NOTICE_CONT  = #{notice_cont}
+		where NOTICE_IDX = #{notice_idx} 
+	</update>
+	
+	<delete id="noticeDelete" parameterType="int">
+		delete from NOTICE_BOARD
+		where NOTICE_IDX = #{idx}
+	</delete>
 </mapper>
