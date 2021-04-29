@@ -10,10 +10,24 @@
 <script	 src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
    $(function() {
-			 $('form').on('submit',function(e) {
-				 idCheck(); 
-			
-			 })  
+	 $('form').on('submit',function(e) {
+		 var user_id = $('#user_id').val();
+		 var user_pwd = $('#user_pwd').val();
+		 
+		 if(user_id == ""){
+			 alert("아이디를 입력하십시오.");
+			 $('#user_id').focus();
+			 return false;
+		 }
+		 if(user_pwd == ""){
+			 alert("비밀번호를 입력하십시오.");
+			 $('#user_pwd').focus();
+			 return false;
+		 }
+		 
+		 idCheck(); 
+	
+	 })  
    });
 	//var result = '';
     function idCheck() {
