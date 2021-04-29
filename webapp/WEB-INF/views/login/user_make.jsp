@@ -119,7 +119,7 @@
 					return false;
 				} 
 				// 
-				else if(($('#pws_check_result').children().attr('class') != 'blue')){
+				else if(($('#pwd_check_result').children().attr('class') != 'blue')){
 					alert('암호 체크바랍니다');
 					$('#pwd_check_result').focus();
 					return false;
