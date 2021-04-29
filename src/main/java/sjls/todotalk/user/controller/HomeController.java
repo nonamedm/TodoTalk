@@ -196,7 +196,7 @@ public class HomeController {
 		@RequestMapping("/Check_id2")
 		public  ModelAndView check_id2(@RequestParam HashMap<String, Object> map){
 			ModelAndView mav = new ModelAndView();
-			String result = "";
+			int result = 0;
 			System.out.println(map);
 		/* UserVo vo = userService.getid2(map); */
 			UserVo vo = userService.getUser(map);
@@ -206,33 +206,27 @@ public class HomeController {
 			String  check = (String) map.get("user_pwd");
 			System.out.println("비밀번호 값 "+check);
 			Sha256 sha = new Sha256();
+			
 			try {
 				String check2 = sha.encrypt(check);
 				String vocheck = vo.getUser_pwd();  // vo
 				if(vo != null) {
 					if(vocheck.equals(check)) {  // 암호화가 되어있지 않은 로그인
-						result = "1";
-						System.out.println("1번"+result);
-						mav.addObject("result1",result);
-						mav.setViewName("jsonView");
+						result = 1;
+						System.out.println("1번 : "+ result);
 					}else if(vocheck.equals(check2)){  // 암화화가 되어있는 비밀번호
-						result = "1";
-						System.out.println("2번"+result);
-						mav.addObject("result1", result);
-						mav.setViewName("jsonView");
+						result = 1;
+						System.out.println("2번 : "+ result);
 					}else {
-						result = "0";
-						System.out.println("3번"+result);
-//							mav.addObject("result1", result);
-//							mav.setViewName("jsonView");
+						result = 0;
+						System.out.println("3번 : "+ result);
+
 					}
-					
 				}
 			} catch (Exception e) {
+				//NullPointerInception 이 뜨면 회원이아닌걸로 확인 후 jsp단으로 값 넘김
 				System.out.println("error : " + e);
-				result = "-1";
-				mav.addObject("result", result);
-				mav.setViewName("jsonView");
+				result = -1;
 			}
 			
 			mav.addObject("result", result);

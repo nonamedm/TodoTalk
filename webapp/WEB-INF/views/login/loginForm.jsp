@@ -28,15 +28,15 @@
 			type:'POST',
 			success:function(data){
 				 
-				if(data.result == '-1'){
+				if(data.result == -1){
 					alert("회원이 아닙니다.\n회원가입을 해주세요.");
 				}
 				
-				if(data.result == '0'){
+				if(data.result == 0){
 					alert("아이디혹은 비밀번호가  틀렸습니다.");
 				}
 				
-				if(data.result == '1'){
+				if(data.result == 1){
 					alert('로그인성공');
 				}
 				
