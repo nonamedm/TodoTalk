@@ -31,9 +31,10 @@ public class NoticeDaoImpl implements NoticeDao {
 	}
 
 	@Override
-	public void noticeWrite(HashMap<String, Object> map) {
+	public HashMap<String,Object> noticeWrite(HashMap<String, Object> map) {
 		sqlSession.insert("notice.noticeWrite", map);
-		
+		HashMap<String, Object> vo = sqlSession.selectOne("notice.getNotice_idx", map);
+		return vo;
 	}
 
 	@Override
@@ -58,6 +59,11 @@ public class NoticeDaoImpl implements NoticeDao {
 	public void noticeDelete(int idx) {
 		sqlSession.delete("notice.noticeDelete", idx);
 		
+	}
+
+	@Override
+	public void fileWrite(HashMap<String, Object> map) {
+		sqlSession.insert("notice.fileWrite", map);
 	}
 
 }

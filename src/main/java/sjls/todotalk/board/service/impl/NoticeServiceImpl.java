@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +33,22 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public void noticeWrite(HashMap<String, Object> map) {
-		noticeDao.noticeWrite(map);
+	public void noticeWrite(HashMap<String, Object> map, HttpServletRequest req) {
 		
+		//파일 업로드
+		PdsFile_QnA.save(map, req);
+		
+		//게시글 쓰기
+		HashMap<String, Object> vo = noticeDao.noticeWrite(map);
+		
+		int notice_idx = (int) vo.get("NOTICE_IDX");
+		
+		System.out.println("service : "+ map);
+		System.out.println("notice_idx : "+ notice_idx);
+		map.put("notice_idx", notice_idx);
+		
+		//파일쓰기
+		noticeDao.fileWrite(map);
 	}
 
 	@Override

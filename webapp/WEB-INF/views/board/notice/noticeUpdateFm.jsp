@@ -31,12 +31,14 @@ $(function() {
 		}
 		return true;
 	 })
+	 
+	 $('#summernote').summernote({
+			tabsize : 2,
+			height : 300
+		});
 });
 
-$('#summernote').summernote({
-	tabsize : 2,
-	height : 300
-});
+
 
 </script>
  <div class="sub-main-wrap">
@@ -71,7 +73,7 @@ $('#summernote').summernote({
 	                                      <tr>
 	                                        <th>내용</th>
 	                                        <td>
-	                                        	<textarea id="summernote" name="notice_cont" style="width:100%; height:500px; padding: 10px;">${getViewRead.NOTICE_CONT}</textarea>
+	                                        	<textarea id="summernote" name="notice_cont">${getViewRead.NOTICE_CONT}</textarea>
 	                                        </td>
 	                                      </tr>
 	                                    </tbody>

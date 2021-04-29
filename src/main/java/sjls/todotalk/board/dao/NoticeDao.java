@@ -16,7 +16,7 @@ public interface NoticeDao {
 	public int getNoticeListCount();
 	
 	//공지사항 글쓰기
-	public void noticeWrite(HashMap<String, Object> map);
+	public HashMap<String, Object> noticeWrite(HashMap<String, Object> map);
 	
 	//공지사항 글 읽기
 	public HashMap<String, Object> getNoticeRead(int idx);
@@ -29,6 +29,9 @@ public interface NoticeDao {
 	
 	//공지사항 글 삭제
 	public void noticeDelete(int idx);
+	
+	//파일쓰기
+	public void fileWrite(HashMap<String, Object> map);
 	
 	
 }

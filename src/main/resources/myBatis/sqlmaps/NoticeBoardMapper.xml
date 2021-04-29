@@ -27,6 +27,12 @@
 		values(#{notice_title}, #{notice_cont}, #{notice_user}, now())
 	</insert>
 	
+	<select id="getNotice_idx" parameterType="hashmap" resultType="hashmap">
+		SELECT 
+			(MAX(NOTICE_IDX)) as NOTICE_IDX
+		FROM NOTICE_BOARD
+	</select>
+	
 	<update id="updateReadCount" parameterType="int">
 		UPDATE NOTICE_BOARD set 
 			NOTICE_READCOUNT = NOTICE_READCOUNT+1
@@ -35,14 +41,17 @@
 	
 	<select id="getNoticeRead" parameterType="int" resultType="map">
 		SELECT 
-			NOTICE_IDX,
-			NOTICE_TITLE ,
-			NOTICE_CONT,
-			USER_ID,
-			DATE_FORMAT(NOTICE_REGDATE, '%Y-%m-%d') as NOTICE_REGDATE,
-			NOTICE_READCOUNT
-		from NOTICE_BOARD
-		where NOTICE_IDX = #{idx}
+			nb.NOTICE_IDX as NOTICE_IDX,
+			nb.NOTICE_TITLE as NOTICE_TITLE,
+			nb.NOTICE_CONT as NOTICE_CONT,
+			nb.USER_ID as USER_ID,
+			DATE_FORMAT(nb.NOTICE_REGDATE, '%Y-%m-%d') as NOTICE_REGDATE,
+			nb.NOTICE_READCOUNT as NOTICE_READCOUNT,
+			nf.FILE_NAME as FILE_NAME
+		from NOTICE_BOARD nb
+		left outer join NOTICE_FILES nf
+		on nb.NOTICE_IDX = nf.NOTICE_IDX
+		where nb.NOTICE_IDX = #{idx}
 	</select>
 	
 	<update id="noticeUpdate" parameterType="map">
@@ -56,4 +65,11 @@
 		delete from NOTICE_BOARD
 		where NOTICE_IDX = #{idx}
 	</delete>
+	
+	<insert id="fileWrite" parameterType="hashmap">
+		insert into NOTICE_FILES
+			(FILE_NAME, FILE_EXT, SFILE_NAME, NOTICE_IDX)
+		values(#{file_name}, #{file_ext}, #{sfile_name}, #{notice_idx})
+	</insert>
+	
 </mapper>

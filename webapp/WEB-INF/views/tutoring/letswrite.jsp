@@ -43,7 +43,7 @@ h1 {
 	<c:forEach var="tuboVo"  items="${ tuboList }">
 		<div class="row">
 	 		 <div class="leftcolumn">
-			    <div class="card">
+			    <div class="card2">
 			      <h5>${tuboVo.user_id}, ${tuboVo.tubo_regdate}</h5>
 			      <p><a href="/tutoringwrite/view?tubo_idx=${ tuboVo.tubo_idx }&user_id=${tuboVo.user_id}&tubo_regdate=${tuboVo.tubo_regdate}&tubo_title=${tuboVo.tubo_title}">${tuboVo.tubo_cont}</a></p>
 			    </div> 

@@ -61,6 +61,16 @@
 	                                        <td>${getViewRead.NOTICE_READCOUNT}</td>
 	                                      </tr>
 	                                      <tr>
+	                                      	<th>첨부파일</th>
+	                                      	<td colspan="3">
+	                                      		<a href="#">${getViewRead.FILE_NAME}</a>
+	                                      		
+<%-- 	                                      		<c:forEach var="file" items="${getViewRead}"> --%>
+<%-- 	                                      			<a href="#">${file.FILE_NAME}</a> --%>
+<%-- 	                                      		</c:forEach> --%>
+	                                      	</td>
+	                                      </tr>
+	                                      <tr>
 	                                        <th>내용</th>
 	                                        <td colspan="3" style="width:100%; height:500px;">${getViewRead.NOTICE_CONT}</td>
 	                                      </tr>
@@ -81,11 +91,17 @@
 					                    <ul>
 					                        <li><a href="/noticeFm" title="목록으로" class="">목록으로</a></li>
 					                        <li><a href="/noticeUpdateFm?idx=${getViewRead.NOTICE_IDX}" title="수정" class="">수정</a></li>
-<%-- 					                        <li><a href="/noticeDelete?idx=${getViewRead.NOTICE_IDX}" title="삭제" class="bg-blue">삭제</a></li> --%>
 					                        <li><a href="javascript:noticeDelete()" title="삭제" class="bg-blue">삭제</a></li>
 					                    </ul>
 					                </div>
 	                        	</c:when>
+	                        	<c:otherwise>
+	                        		<div class="btn-box">
+					                    <ul>
+					                        <li><a href="/noticeFm" title="목록으로" class="">목록으로</a></li>
+					                    </ul>
+					                </div>
+	                        	</c:otherwise>
 	                        </c:choose>
                         </form>
                     </div>

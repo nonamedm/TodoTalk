@@ -51,7 +51,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="/noticeWrite", method=RequestMethod.POST)
-	public ModelAndView noticeWrite(@RequestParam HashMap<String, Object> map) {
+	public ModelAndView noticeWrite(@RequestParam HashMap<String, Object> map, HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		
 		String notice_cont2 = (String)map.get("notice_cont");
@@ -59,9 +59,7 @@ public class NoticeController {
 		notice_cont2.replace(">", "&gt;");
 		map.put("notice_cont", notice_cont2);
 		
-		System.out.println(map);
-		
-		noticeService.noticeWrite(map);
+		noticeService.noticeWrite(map, req);
 		
 		mav.setViewName("redirect:/noticeFm");
 		return mav;
@@ -89,6 +87,8 @@ public class NoticeController {
 		
 		
 		HashMap<String, Object> getViewRead = noticeService.getNoticeRead(idx);
+		
+		System.out.println(getViewRead);
 		
 		mav.addObject("getViewRead", getViewRead);
 		mav.setViewName("/board/notice/noticeUpdateFm");

@@ -96,7 +96,7 @@ h2 {
 	<c:forEach var="Question"  items="${ tuboListOfQuestion1 }">	
 		<div class="row">
 	 		 <div class="leftcolumn">
-			    <div class="card">
+			    <div class="card2">
 			      <h5>${Question.user_id}, ${Question.tubo_regdate}</h5>
 			      <p><a href="/tutoringwrite/view?tubo_idx=${ Question.tubo_idx }&user_id=${Question.user_id}&tubo_regdate=${Question.tubo_regdate}&tubo_title=${Question.tubo_title}">${Question.tubo_cont}</a></p>
 			    </div> 
@@ -107,7 +107,7 @@ h2 {
 	<c:forEach var="Question"  items="${ tuboListOfQuestion2 }">	
 		<div class="row">
 	 		 <div class="leftcolumn">
-			    <div class="card">
+			    <div class="card2">
 			      <h5>${Question.user_id}, ${Question.tubo_regdate}</h5>
 			      <p><a href="/tutoringwrite/view?tubo_idx=${ Question.tubo_idx }&user_id=${Question.user_id}&tubo_regdate=${Question.tubo_regdate}&tubo_title=${Question.tubo_title}">${Question.tubo_cont}</a></p>
 			    </div> 

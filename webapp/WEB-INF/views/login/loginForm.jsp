@@ -90,11 +90,11 @@
                                        
 										   		<tr>
 										   			<th>아이디</th>
-											   		<td><input type="text" name="user_id" id="user_id" value="11" class="wp30" /><span id=id_check_result></span></td>
+											   		<td><input type="text" name="user_id" id="user_id"  class="wp30" /><span id=id_check_result></span></td>
 										   		</tr>
 										   		<tr>
 										   			<th>비번</th>
-											   		<td><input type="password" name="user_pwd" id="user_pwd" value="11" class="wp30" /></td>
+											   		<td><input type="password" name="user_pwd" id="user_pwd"  class="wp30" /></td>
 										   		</tr>
 										   		<tr>
 											   		<td  class="wp30">

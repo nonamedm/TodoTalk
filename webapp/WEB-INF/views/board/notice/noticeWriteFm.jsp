@@ -31,11 +31,14 @@ $(function() {
 		}
 		return true;
 	 })
+	 
+	 $('#summernote').summernote({
+			tabsize : 1,
+			height: 500
+	});
 });
 
-$('#summernote').summernote({
-	tabsize : 2
-});
+
 
 </script>
  <div class="sub-main-wrap">
@@ -70,12 +73,11 @@ $('#summernote').summernote({
 	                                      <tr>
 	                                        <th>내용</th>
 	                                        <td>
-	                                        	<textarea id="summernote" name="notice_cont" style="width:100%; height:500px; padding: 10px;"></textarea>
+	                                        	<textarea id="summernote" name="notice_cont"></textarea>
 	                                        </td>
 	                                      </tr>
 	                                      <tr>
-	                                        <td colspan="2"><input type="file"/></td>
-<!-- 	                                        name="notice_file" -->
+	                                        <td colspan="2"><input type="file" name="notice_file"/></td>
 	                                      </tr>
 	                                    </tbody>
 	                                </table>

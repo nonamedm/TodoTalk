@@ -46,7 +46,7 @@ section .section-tit h3{font-size: 18px; font-weight: 800;}
 
 .lnb-menu {height: calc(100% - 126px);}
 .lnb-menu ul {width:100%;}
-.lnb-menu ul li a {display:inline-block; padding: 8px 10px 7px 0px; width:100%; font-size: 15px;}
+.lnb-menu ul li a {display:inline-block; padding: 8px 10px 7px 0px; width:100%; font-size: 15px; color: #333;}
 .lnb-menu ul li.on > a{color:#3b79b6; font-weight: 800;}
 .lnb-menu ul li a.lnb-dep1{background: url(../img/common/ico-down-arrow.png)#fff no-repeat 90% 50%; display: inline-block; width:100%; padding: 14px 22px 13px 20px; color: #333; font-size:15px; font-weight: 600; border-bottom: 1px solid #dcdcdc;}
 .lnb-menu ul.lnb-dep2 { padding-left:30px; padding-top:7px; display:none; background: #f8f8f8; border-bottom: 1px solid #dcdcdc;}

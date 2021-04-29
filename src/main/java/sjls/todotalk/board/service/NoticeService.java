@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Service;
 
 import sjls.todotalk.board.vo.NoticeBoard;
@@ -19,7 +21,7 @@ public interface NoticeService {
 	public int getNoticeListCount();
 	
 	//공지사항 글쓰기
-	public void noticeWrite(HashMap<String, Object> map);
+	public void noticeWrite(HashMap<String, Object> map, HttpServletRequest req);
 	
 	//공지사항 글 읽기
 	public HashMap<String, Object> getNoticeRead(int idx);
