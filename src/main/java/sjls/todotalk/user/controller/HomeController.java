@@ -224,7 +224,7 @@ public class HomeController {
 					}
 				}
 			} catch (Exception e) {
-				//NullPointerInception 이 뜨면 회원이아닌걸로 확인 후 jsp단으로 값 넘김
+				//NullPointerException 이 뜨면 회원이아닌걸로 확인 후 jsp단으로 값 넘김
 				System.out.println("error : " + e);
 				result = -1;
 			}
