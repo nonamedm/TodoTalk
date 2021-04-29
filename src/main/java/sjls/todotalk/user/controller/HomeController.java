@@ -2,6 +2,7 @@ package sjls.todotalk.user.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -193,7 +194,7 @@ public class HomeController {
 		}
 		//로그인시  아이디 중복확인
 		@RequestMapping("/Check_id2")
-		public  ModelAndView check_id2(@RequestParam HashMap<String, Object> map) throws IOException {
+		public  ModelAndView check_id2(@RequestParam HashMap<String, Object> map){
 			ModelAndView mav = new ModelAndView();
 			String result = "";
 			System.out.println(map);
@@ -205,31 +206,38 @@ public class HomeController {
 			String  check = (String) map.get("user_pwd");
 			System.out.println("비밀번호 값 "+check);
 			Sha256 sha = new Sha256();
-			String check2 = sha.encrypt(check);
-			String vocheck = vo.getUser_pwd();  // vo
-			if(vo != null) {
-				if(vocheck.equals(check)) {  // 암호화가 되어있지 않은 로그인
-					result = "1";
-					System.out.println("1번"+result);
-					mav.addObject("result1",result);
-					mav.setViewName("jsonView");
-				}else if(vocheck.equals(check2)){  // 암화화가 되어있는 비밀번호
-					result = "1";
-					System.out.println("2번"+result);
-					mav.addObject("result1", result);
-					mav.setViewName("jsonView");
-				}else {
-					result = "0";
-					System.out.println("3번"+result);
-//					mav.addObject("result1", result);
-//					mav.setViewName("jsonView");
+			try {
+				String check2 = sha.encrypt(check);
+				String vocheck = vo.getUser_pwd();  // vo
+				if(vo != null) {
+					if(vocheck.equals(check)) {  // 암호화가 되어있지 않은 로그인
+						result = "1";
+						System.out.println("1번"+result);
+						mav.addObject("result1",result);
+						mav.setViewName("jsonView");
+					}else if(vocheck.equals(check2)){  // 암화화가 되어있는 비밀번호
+						result = "1";
+						System.out.println("2번"+result);
+						mav.addObject("result1", result);
+						mav.setViewName("jsonView");
+					}else {
+						result = "0";
+						System.out.println("3번"+result);
+//							mav.addObject("result1", result);
+//							mav.setViewName("jsonView");
+					}
+					
 				}
-				
+			} catch (Exception e) {
+				System.out.println("error : " + e);
+				result = "-1";
+				mav.addObject("result", result);
+				mav.setViewName("jsonView");
 			}
-				
+			
 			mav.addObject("result", result);
 			mav.setViewName("jsonView");
-			return mav;
+			return mav;	
 		}
 		
 		// 비밀번호 체크 

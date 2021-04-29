@@ -24,7 +24,7 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	@RequestMapping(value="/noticeFm", method=RequestMethod.GET)
-	public ModelAndView noticeFm(@RequestParam HashMap<String, Object> map,Criteria cri) {
+	public ModelAndView noticeFm(@RequestParam HashMap<String, Object> map,Criteria cri) throws Throwable{
 		
 		ModelAndView mav = new ModelAndView();
 		//Criteria cri = new Criteria();

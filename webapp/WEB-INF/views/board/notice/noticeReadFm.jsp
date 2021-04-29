@@ -63,7 +63,7 @@
 	                                      <tr>
 	                                      	<th>첨부파일</th>
 	                                      	<td colspan="3">
-	                                      		<a href="#">${getViewRead.FILE_NAME}</a>
+	                                      		<a href="${getViewRead.FILE_NAME}">${getViewRead.FILE_NAME}</a>
 	                                      		
 <%-- 	                                      		<c:forEach var="file" items="${getViewRead}"> --%>
 <%-- 	                                      			<a href="#">${file.FILE_NAME}</a> --%>
