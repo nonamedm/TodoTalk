@@ -10,6 +10,7 @@ import sjls.todotalk.user.dao.TutoringDao;
 import sjls.todotalk.user.service.TutoringService;
 import sjls.todotalk.user.vo.TuboVo;
 import sjls.todotalk.user.vo.TureVo;
+import sjls.todotalk.util.Criteria;
 
 @Service
 public class TutoringServiceImpl implements TutoringService {
@@ -23,8 +24,8 @@ public class TutoringServiceImpl implements TutoringService {
 	}
 
 	@Override
-	public List<TuboVo> getWritingList(HashMap<String, Object> map) {
-		List<TuboVo> writingList = tutoringDao.getWritingList(map);
+	public List<TuboVo> getWritingList(HashMap<String, Object> map, Criteria cri) {
+		List<TuboVo> writingList = tutoringDao.getWritingList(map, cri);
 		return writingList;
 	}
 
@@ -59,6 +60,12 @@ public class TutoringServiceImpl implements TutoringService {
 	public void insertReply(TureVo tureVo) {
 		tutoringDao.insertReply(tureVo);
 		
+	}
+
+	@Override
+	public int getListCount() {
+		int result = tutoringDao.getListCount();
+		return result;
 	}
 
 	

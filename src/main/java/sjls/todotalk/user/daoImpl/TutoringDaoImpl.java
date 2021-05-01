@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import sjls.todotalk.user.dao.TutoringDao;
 import sjls.todotalk.user.vo.TuboVo;
 import sjls.todotalk.user.vo.TureVo;
+import sjls.todotalk.util.Criteria;
 
 @Repository
 public class TutoringDaoImpl implements TutoringDao {
@@ -23,8 +24,8 @@ public class TutoringDaoImpl implements TutoringDao {
 	}
  
 	@Override
-	public List<TuboVo> getWritingList(HashMap<String, Object> map) {
-		List <TuboVo> writingList = sqlSession.selectList("tutoring.TutoringList", map);
+	public List<TuboVo> getWritingList(HashMap<String, Object> map, Criteria cri) {
+		List <TuboVo> writingList = sqlSession.selectList("tutoring.TutoringList", cri);
 		return writingList;
 	}
 
@@ -62,6 +63,12 @@ public class TutoringDaoImpl implements TutoringDao {
 	public void insertReply(TureVo tureVo) {
 		sqlSession.insert("tutoring.InsertReply", tureVo);
 		
+	}
+
+	@Override
+	public int getListCount() {
+		int result = sqlSession.selectOne("tutoring.getCount");
+		return result;
 	}
 
 

@@ -4,22 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import sjls.todotalk.user.service.TutoringService;
 import sjls.todotalk.user.vo.TuboVo;
 import sjls.todotalk.user.vo.TureVo;
+import sjls.todotalk.util.Criteria;
+import sjls.todotalk.util.PageMaker;
 
 @Controller
 public class TutoringController {
@@ -29,20 +25,23 @@ public class TutoringController {
 
 	// 튜터링 게시판 이동
 	@RequestMapping(value = "/tutoringwrite", method = RequestMethod.GET)
-	public ModelAndView letsWrite(@RequestParam HashMap<String, Object> map) {
+	public ModelAndView letsWrite(@RequestParam HashMap<String, Object> map, Criteria cri) {
 
-		List<TuboVo> tuboList = tutoringService.getWritingList(map);
+		System.out.println("Criteria cri = " + cri);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(tutoringService.getListCount());
+		
+		List<TuboVo> tuboList = tutoringService.getWritingList(map,cri);
 		ArrayList<String> questionList = new ArrayList<String>();
 		questionList.add("질문1");
 		questionList.add("질문2");
-		questionList.add("질문3");
-		questionList.add("질문4");
-		questionList.add("질문5");
-		questionList.add("질문6");
+
 
 		ModelAndView mav = new ModelAndView();
 		// HashMap<String, Object> map = new HashMap<String, Object>();
 		mav.addObject("tuboList", tuboList);
+		mav.addObject("pageMaker", pageMaker);
 		mav.addObject("questionList", questionList);
 
 		mav.setViewName("/tutoring/letswrite");

@@ -98,6 +98,8 @@ h1 {
 			</div><!-- <div class="rightcolumn"> -->
 	  	</div><!-- <div class="row"> -->
 	</c:forEach>
+	
+   <%@include file="/WEB-INF/views/tutoring/Freepaging.jsp" %>
 
 
 <!-- 		여기까지가 보으니가 쓴거 -->

@@ -3,24 +3,6 @@
 <%@include file="../layout/header.jsp"%>
 <%@taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"  %>    
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<!-- <script>
-	window.onload = function(){
-		var selectedCont = $('#cont').text();
-		var contArray = selectedCont.split(' ');
-		
-		$.each(contArray, function (i, el){
-			contArray[i] = $.trim(el);
-		});
-		
-		$('#reply-list p').each(function(){
-			if ($.inArray ($.trim ($(this).text()), 
-					contArray) != 1) {
-				$(this).addClass('highlight');
-			}
-		});
-		
-	};
-</script> -->
 <script> 
 	$(document).ready(function(){
 
@@ -73,6 +55,21 @@
 		  	});
  		
 		}); //function
+		
+		
+		var selectedCont = $('#cont').text();
+		var contArray = selectedCont.split(' ');
+		
+		$.each(contArray, function (i, el){
+			contArray[i] = $.trim(el);
+		});
+		
+		$('#reply-list p').each(function(){
+			if ($.inArray ($.trim ($(this).text()), 
+					contArray) != 1) {
+				$(this).addClass('highlight');
+			}
+		});
 		
 	}); //document.ready
 </script>

@@ -7,13 +7,20 @@
        INSERT INTO TUTOR_BOARD (TUBO_TITLE, TUBO_CONT, USER_IDX, USER_ID)
         VALUES (#{tubo_title}, #{tubo_cont}, #{user_idx}, #{user_id})
     </insert>
+    
 	 <insert id="InsertReply">
        INSERT INTO TUTOR_REPLY (TUBO_IDX, TB_REPCONT, USER_IDX, USER_ID)
         VALUES (#{tubo_idx}, #{tb_repcont}, #{user_idx}, #{user_id})
     </insert>
     
+       <!-- 총 게시글 수 -->
+	   <select id="getCount" resultType="int">
+		SELECT count(*) 
+		FROM TUTOR_BOARD
+	  </select>
+    
     <select id="TutoringList" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TuboVo">
-    	SELECT	* FROM TUTOR_BOARD ORDER BY TUBO_REGDATE DESC;
+    	SELECT	* FROM TUTOR_BOARD ORDER BY TUBO_REGDATE DESC LIMIT #{pageStart}, #{perPageNum};
     </select>
     
     <select id="ViewReply" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TureVo">
@@ -31,6 +38,5 @@
     <select id="Question2List" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TuboVo">
     	SELECT	* FROM TUTOR_BOARD WHERE tubo_title = 'Question2' ORDER BY TUBO_REGDATE DESC;
     </select>
-
 
 </mapper>
