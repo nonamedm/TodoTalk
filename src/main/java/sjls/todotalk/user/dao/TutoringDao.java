@@ -4,13 +4,15 @@ package sjls.todotalk.user.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import sjls.todotalk.user.vo.TuboVo;
 import sjls.todotalk.user.vo.TureVo;
 import sjls.todotalk.util.Criteria;
 
 public interface TutoringDao {
 	
-	void insertWriting(TuboVo vo);
+	TuboVo insertWriting(HashMap<String, Object> map);
  
 	List<TuboVo> getWritingList(HashMap<String, Object> map, Criteria cri);
 
@@ -25,5 +27,7 @@ public interface TutoringDao {
 	List<TuboVo> getQuestion2List(HashMap<String, Object> map);
 
 	int getListCount();
+
+	void fileWrite(HashMap<String, Object> map);
 
 }

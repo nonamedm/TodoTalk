@@ -3,6 +3,8 @@ package sjls.todotalk.user.daoImpl;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,9 +20,12 @@ public class TutoringDaoImpl implements TutoringDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	@Override 
-	public void insertWriting(TuboVo vo) {
-		sqlSession.insert("tutoring.InsertWriting", vo);
+	@Override
+	public TuboVo insertWriting(HashMap<String, Object> map) {
+		sqlSession.insert("tutoring.InsertWriting", map);
+		TuboVo vo = sqlSession.selectOne("tutoring.tubo_idx", map);
+		return vo;
+		
 	}
  
 	@Override
@@ -70,6 +75,13 @@ public class TutoringDaoImpl implements TutoringDao {
 		int result = sqlSession.selectOne("tutoring.getCount");
 		return result;
 	}
+
+
+	@Override
+	public void fileWrite(HashMap<String, Object> map) {
+		sqlSession.insert("tutoring.fileWrite", map);
+	}
+
 
 
 

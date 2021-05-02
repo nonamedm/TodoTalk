@@ -3,20 +3,20 @@
 <%@taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"  %>    
 <%@include file="../layout/header.jsp"%>
 
-<script>
-	function openForm() {
-	  document.getElementById("myForm").style.display = "block";
-	}
-	function closeForm() {
-	  document.getElementById("myForm").style.display = "none";
-	}
-</script>
+
 <script>
    $(function() {
 	   $('input[type=submit]').on('click', function(event) {
 		   alert("저장되었습니다!");
 		 })
    });
+   
+	function openForm() {
+		document.getElementById("myForm").style.display = "block";
+		}
+	function closeForm() {
+		document.getElementById("myForm").style.display = "none";
+		}
 </script>
 <style>
 h1 {
@@ -52,7 +52,7 @@ h1 {
 		  <div class="rightcolumn">
 			<button class="open-button" onclick="openForm()">Do exercise!</button>
 				<div class="form-popup" id="myForm">
-					<form action="<c:url value="/postwriting"/>" method="POST" id="postwriting">
+					<form action="<c:url value="/postwriting"/>" method="POST" enctype="multipart/form-data" id="postwriting">
 			   		<input type="hidden" name="user_idx"         value="${sessionScope.login.user_idx}" />     
 
 					   <table id="writeTable">
@@ -83,7 +83,12 @@ h1 {
 						    		</tr>
 								    <tr>
 								      <td><textarea rows="20" cols="50" name="tubo_cont" id="tubo_cont" placeholder="예쁜말 고운말"></textarea></td>
-								    </tr> 
+								    </tr>
+								    <tr>
+								      <td><input type="file" name="file_name" id="file_name"/></td>
+								      <!-- <td><input type="hidden" name="file_ext" id="file_ext" value=".jpg"></td> -->
+								      <%-- <td><input type="hidden" name="sfile_name" id="sfile_name" value="${file_name}"></td> --%>
+								    </tr>
 								    <tr>      
 								      <td colspan="2">
 								        <input type="submit" value="확인" />

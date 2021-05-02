@@ -3,6 +3,8 @@ package sjls.todotalk.user.service;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import sjls.todotalk.user.vo.TuboVo;
 import sjls.todotalk.user.vo.TureVo;
 import sjls.todotalk.util.Criteria;
@@ -10,7 +12,7 @@ import sjls.todotalk.util.Criteria;
 public interface TutoringService {
 	
 	//글쓰기 
-	void insertWriting(TuboVo vo);
+	void insertWriting(HashMap<String, Object> map, HttpServletRequest request);
 
 	List<TuboVo> getQuestion1List(HashMap<String, Object> map);
 

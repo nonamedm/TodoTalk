@@ -34,9 +34,20 @@
     <select id="Question1List" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TuboVo">
     	SELECT	* FROM TUTOR_BOARD WHERE tubo_title = 'Question1' ORDER BY TUBO_REGDATE DESC;
     </select>
-    
+     
     <select id="Question2List" parameterType="hashmap" resultType="sjls.todotalk.user.vo.TuboVo">
     	SELECT	* FROM TUTOR_BOARD WHERE tubo_title = 'Question2' ORDER BY TUBO_REGDATE DESC;
     </select>
+    
+    <select id="tubo_idx" resultType="sjls.todotalk.user.vo.TuboVo" parameterType="hashmap">
+    	SELECT (MAX(TUBO_IDX)) TUBO_IDX
+    	FROM TUTOR_BOARD
+    </select>
+    
+    <insert id="fileWrite">
+    	INSERT INTO TUTOR_FILES
+    	(TUBOFILE_NAME, TUBOFILE_EXT, TUBOSFILE_NAME, TUBO_IDX)
+    	VALUES ( #{file_name}, #{file_ext}, #{sfile_name}, #{tubo_idx} ) 
+    </insert>
 
 </mapper>

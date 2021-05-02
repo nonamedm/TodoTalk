@@ -3,9 +3,12 @@ package sjls.todotalk.user.serviceImpl;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sjls.todotalk.board.service.impl.PdsFile_Free;
 import sjls.todotalk.user.dao.TutoringDao;
 import sjls.todotalk.user.service.TutoringService;
 import sjls.todotalk.user.vo.TuboVo;
@@ -19,8 +22,18 @@ public class TutoringServiceImpl implements TutoringService {
 	private TutoringDao tutoringDao;
 
 	@Override
-	public void insertWriting(TuboVo vo) {
-		tutoringDao.insertWriting(vo);
+	public void insertWriting(HashMap<String, Object> map, HttpServletRequest request) {
+		
+		PdsFile_Free.save(map, request);
+		
+		TuboVo vo = tutoringDao.insertWriting(map);	
+		
+		int tubo_idx = vo.getTubo_idx();
+		map.put("tubo_idx", tubo_idx);
+		
+		tutoringDao.fileWrite(map);
+
+
 	}
 
 	@Override
@@ -67,6 +80,7 @@ public class TutoringServiceImpl implements TutoringService {
 		int result = tutoringDao.getListCount();
 		return result;
 	}
+
 
 	
 

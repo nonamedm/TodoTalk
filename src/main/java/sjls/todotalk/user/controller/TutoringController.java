@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +29,6 @@ public class TutoringController {
 	@RequestMapping(value = "/tutoringwrite", method = RequestMethod.GET)
 	public ModelAndView letsWrite(@RequestParam HashMap<String, Object> map, Criteria cri) {
 
-		System.out.println("Criteria cri = " + cri);
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(tutoringService.getListCount());
@@ -37,25 +38,26 @@ public class TutoringController {
 		questionList.add("질문1");
 		questionList.add("질문2");
 
-
 		ModelAndView mav = new ModelAndView();
 		// HashMap<String, Object> map = new HashMap<String, Object>();
 		mav.addObject("tuboList", tuboList);
 		mav.addObject("pageMaker", pageMaker);
 		mav.addObject("questionList", questionList);
-
 		mav.setViewName("/tutoring/letswrite");
 		return mav;
 	}
 
 	// 튜터링 게시판에서 글썼을때
 	@RequestMapping(value = "/postwriting", method = RequestMethod.POST)
-	public String postWriting(TuboVo tuboVo) {
+	public ModelAndView postWriting(@RequestParam HashMap<String,Object> map, HttpServletRequest request) {
 
+		tutoringService.insertWriting(map, request);
 		ModelAndView mv = new ModelAndView();
-		tutoringService.insertWriting(tuboVo);
+		System.out.println("글썼을때 map : " + map);
+		System.out.println("글썼을때 request : " + request);
+		mv.setViewName("redirect:/tutoringwrite");
 
-		return "redirect:/tutoringwrite";
+		return mv;
 	}
 
 	// 튜터링 첫번째 게시판에서 첫번째 질문 클릭했을때
