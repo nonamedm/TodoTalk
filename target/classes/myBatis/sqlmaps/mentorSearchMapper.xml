@@ -22,7 +22,7 @@
 	</select>
 	
 	<select id="getMentorInfo" parameterType="String" resultType="hashmap">
-		select 
+		select distinct
 			ui.USER_ID as USER_ID,
 			ui.USER_NAME as USER_NAME,
 			ui.USER_PHONE as USER_PHONE,
